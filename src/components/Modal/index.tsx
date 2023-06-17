@@ -8,6 +8,7 @@ type ComponentProps = {
   isOpen: boolean;
   closeModal: () => void;
   children: React.ReactNode;
+  className?: string;
 };
 
 export const Modal = ({
@@ -15,12 +16,13 @@ export const Modal = ({
   height,
   isOpen,
   closeModal,
-  children
+  children,
+  className
 }: ComponentProps) => {
   if (isOpen) {
     return (
       <S.Overlay>
-        <S.Container width={width} height={height}>
+        <S.Container width={width} height={height} className={className}>
           {children}
           <S.CloseButton onClick={closeModal}>Fechar</S.CloseButton>
         </S.Container>

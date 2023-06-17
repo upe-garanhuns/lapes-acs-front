@@ -1,5 +1,6 @@
 import { colors } from '../../styles/colors';
 import { ActiveLink } from '../ActiveLink';
+import { Modal } from '../Modal';
 
 import styled from 'styled-components';
 
@@ -45,14 +46,23 @@ export const LogoSpan = styled.span`
 `;
 
 export const Menu = styled.ul`
+  position: relative;
   display: flex;
   align-items: center;
   gap: 1rem;
 `;
 
-export const Link = styled(ActiveLink)``;
+export const Link = styled(ActiveLink)`
+  cursor: pointer;
+
+  &:hover {
+    color: ${colors.red.logo};
+    transition: 0.2s;
+  }
+`;
 
 export const MenuPerfil = styled.div`
+  position: relative;
   display: flex;
   align-items: center;
   padding: 0.4rem;
@@ -69,5 +79,33 @@ export const MenuPerfil = styled.div`
   &:active {
     background-color: ${colors.blueGrey[300]};
     transition: 0.2s;
+  }
+`;
+
+export const Dropdown = styled.div<{ isOpen: boolean }>`
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 5vh;
+  right: 0;
+  min-width: 8rem;
+  padding: 0.4rem;
+  background-color: ${colors.grey[50]};
+  visibility: ${({ isOpen }) => (isOpen ? 'visible' : 'hidden')};
+  border-radius: 0.4rem;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.4);
+`;
+
+export const DropdownItem = styled(ActiveLink)`
+  width: 100%;
+  cursor: pointer;
+  font-size: 1rem;
+  text-decoration: none;
+  border-bottom: 2px solid ${colors.grey[200]};
+  text-transform: capitalize;
+
+  &:last-child {
+    border-bottom: none;
+    color: ${colors.red.logo};
   }
 `;

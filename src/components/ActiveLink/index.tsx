@@ -6,15 +6,21 @@ import * as S from './styles';
 
 type ActiveLinkProps = {
   children: ReactNode;
+  className?: string;
 } & LinkProps &
   AnchorHTMLAttributes<HTMLAnchorElement>;
 
-export const ActiveLink = ({ href, children, ...rest }: ActiveLinkProps) => {
+export const ActiveLink = ({
+  href,
+  children,
+  className,
+  ...rest
+}: ActiveLinkProps) => {
   const pathName = usePathname();
   const isCurrentPath = pathName === href;
 
   return (
-    <S.Anchor href={href} isCurrentPath={isCurrentPath}>
+    <S.Anchor href={href} isCurrentPath={isCurrentPath} className={className}>
       {children}
     </S.Anchor>
   );
