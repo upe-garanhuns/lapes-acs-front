@@ -15,13 +15,15 @@ type TableProps = {
   onClickRow?: (item: unknown) => void;
   options?: ReactNode;
   pageSize?: number;
+  addButton?: ReactNode;
 };
 
 export default function Table({
   data,
   onClickRow,
   options,
-  pageSize = 10
+  pageSize = 10,
+  addButton
 }: TableProps) {
   const { searchText, setSearchText, isSearch, setIsSearch } = useSearchText();
   const { sortConfig, setSortConfig } = useSortConfig();
@@ -55,6 +57,7 @@ export default function Table({
   return (
     <>
       <S.Container>
+        {addButton && addButton}
         <Input
           onChange={handleSearch}
           value={searchText}

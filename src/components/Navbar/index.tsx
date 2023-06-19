@@ -3,7 +3,6 @@
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 
-import { Modal } from '../Modal';
 import * as S from './styles';
 
 import { User } from '@phosphor-icons/react';
@@ -25,7 +24,7 @@ export default function Navbar() {
       </S.LogoLapes>
       <S.Menu>
         <S.Link href="/axios">inicio</S.Link>
-        <S.Link href="/table">requisições</S.Link>
+        <S.Link href="/lista-requisicoes">requisições</S.Link>
         <S.Link href="/dashboard">dashboard</S.Link>
         <S.Link href="/ajuda">ajuda</S.Link>
         <S.MenuPerfil onClick={toggleDropdown}>

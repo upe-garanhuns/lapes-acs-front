@@ -1,6 +1,5 @@
 import { colors } from '../../styles/colors';
 import { ActiveLink } from '../ActiveLink';
-import { Modal } from '../Modal';
 
 import styled from 'styled-components';
 
@@ -12,6 +11,7 @@ export const Container = styled.nav`
   align-items: center;
   padding: 0.4rem;
   color: ${colors.white};
+  margin-bottom: 2rem;
 `;
 
 export const LogoLapes = styled.div`
@@ -20,6 +20,7 @@ export const LogoLapes = styled.div`
   flex-direction: column;
   align-items: center;
   cursor: default;
+  margin-left: 0.5rem;
 `;
 
 export const LogoTypeUser = styled.span`
