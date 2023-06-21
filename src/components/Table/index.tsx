@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ChangeEvent, ReactNode } from 'react';
 
 import { filterData, sortData } from '../../functions';
 import { Input } from '../Input';
@@ -11,8 +11,8 @@ import { useSortConfig } from './useSortConfig';
 import { ArrowDown, ArrowUp, MagnifyingGlass } from '@phosphor-icons/react';
 
 type TableProps = {
-  data: Array<unknown>;
-  onClickRow?: (item: unknown) => void;
+  data: Array<object>;
+  onClickRow?: (item: object) => void;
   options?: ReactNode;
   pageSize?: number;
   addButton?: ReactNode;
@@ -34,8 +34,8 @@ export default function Table({
   );
 
   const sortedData = sortData(
-    currentData,
-    sortConfig.key,
+    currentData as Array<object>,
+    sortConfig.key as keyof object,
     sortConfig.direction
   );
 
@@ -47,7 +47,7 @@ export default function Table({
     setSortConfig({ key, direction });
   };
 
-  const handleSearch = (e) => {
+  const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchText(e.target.value);
     e.target.value == '' ? setIsSearch(false) : setIsSearch(true);
   };
@@ -90,8 +90,11 @@ export default function Table({
             </S.TableHead>
             <S.TableBody>
               {!isSearch
-                ? sortedData.map((item: unknown, index: number) => (
-                    <S.TableRow key={index} onClick={() => onClickRow(item)}>
+                ? sortedData.map((item: object, index: number) => (
+                    <S.TableRow
+                      key={index}
+                      {...(onClickRow && { onClick: () => onClickRow(item) })}
+                    >
                       {Object.values(item).map((value) => (
                         <S.TableDataCell key={value}>
                           <S.SpanCell>{value}</S.SpanCell>
@@ -100,8 +103,11 @@ export default function Table({
                       {options && <S.TableDataCell>{options}</S.TableDataCell>}
                     </S.TableRow>
                   ))
-                : filteredData.map((item: unknown, index: number) => (
-                    <S.TableRow key={index} onClick={() => onClickRow(item)}>
+                : filteredData.map((item: object, index: number) => (
+                    <S.TableRow
+                      key={index}
+                      {...(onClickRow && { onClick: () => onClickRow(item) })}
+                    >
                       {Object.values(item).map((value) => (
                         <S.TableDataCell key={value}>
                           <S.SpanCell>{value}</S.SpanCell>

@@ -16,7 +16,7 @@ export const Pagination = ({
   onPageChange,
   pageSize,
   totalCount,
-  siblingCount
+  siblingCount = 10
 }: PaginationProps) => {
   const paginationRange = usePagination({
     currentPage,
@@ -24,6 +24,8 @@ export const Pagination = ({
     siblingCount,
     pageSize
   });
+
+  if (paginationRange === undefined) return null;
 
   if (currentPage === 0 || paginationRange.length < 2) {
     return null;

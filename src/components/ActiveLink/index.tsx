@@ -1,4 +1,4 @@
-import Link, { LinkProps } from 'next/link';
+import { LinkProps } from 'next/link';
 import { usePathname } from 'next/navigation';
 import { AnchorHTMLAttributes, ReactNode } from 'react';
 
@@ -10,12 +10,7 @@ type ActiveLinkProps = {
 } & LinkProps &
   AnchorHTMLAttributes<HTMLAnchorElement>;
 
-export const ActiveLink = ({
-  href,
-  children,
-  className,
-  ...rest
-}: ActiveLinkProps) => {
+export const ActiveLink = ({ href, children, className }: ActiveLinkProps) => {
   const pathName = usePathname();
   const isCurrentPath = pathName === href;
 

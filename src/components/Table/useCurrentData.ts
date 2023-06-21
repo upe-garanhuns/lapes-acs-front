@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 
-export const useCurrentData = (data: unknown[], pageSize: number) => {
+export const useCurrentData = (data: object[], pageSize: number) => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [currentData] = useMemo(() => {
     const firstPageIndex = (currentPage - 1) * pageSize;

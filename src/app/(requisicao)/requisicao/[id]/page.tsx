@@ -1,3 +1,3 @@
 export default function Page({ params }: { params: { id: string } }) {
-  return <div>{params.id}</div>;
+  return <div>{params.id} Página específica de requisição</div>;
 }
