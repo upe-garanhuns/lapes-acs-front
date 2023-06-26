@@ -1,4 +1,5 @@
 import Button from '../Button';
+import { Input } from '../Input';
 
 import styled from 'styled-components';
 
@@ -40,13 +41,24 @@ export const RegisterTitle = styled.p<{ $principal?: boolean }>`
   font-weight: bold;
 `;
 
+export const TitleDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+`;
+
+export const InputDiv = styled.div``;
+
+export const RegisterInput = styled(Input)``;
+
 export const RegisterButton = styled(Button)`
   background: #253555;
   color: #fff;
   border-radius: 45px;
   width: 250px;
   height: 50px;
-  text-align: center;
   font-size: 20px;
   font-weight: bold;
 `;
