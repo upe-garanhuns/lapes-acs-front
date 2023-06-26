@@ -21,7 +21,6 @@ export default function RootLayout({
       <body className={inter.className}>
         <StyledComponentRegistry>
           <Providers>
-            <Navbar />
             <main>{children}</main>
           </Providers>
         </StyledComponentRegistry>
