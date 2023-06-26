@@ -19,7 +19,7 @@ export function Register() {
           <S.RegisterTitle>Endereco:</S.RegisterTitle>
         </S.Div>
         <S.Div>
-          <Button label="Cadastrar" />
+          <S.RegisterButton label="Cadastrar" />
         </S.Div>
       </S.RegisterContainer>
     </S.Container>

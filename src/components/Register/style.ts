@@ -1,3 +1,5 @@
+import Button from '../Button';
+
 import styled from 'styled-components';
 
 export const Container = styled.div`
@@ -35,5 +37,16 @@ export const Line = styled.hr`
 export const RegisterTitle = styled.p<{ $principal?: boolean }>`
   color: #253451;
   font-size: ${(props) => (props.$principal ? '30px' : '25px')};
+  font-weight: bold;
+`;
+
+export const RegisterButton = styled(Button)`
+  background: #253555;
+  color: #fff;
+  border-radius: 45px;
+  width: 250px;
+  height: 50px;
+  text-align: center;
+  font-size: 20px;
   font-weight: bold;
 `;
