@@ -61,25 +61,28 @@ export function Register() {
           </S.TitleDiv>
           <S.InputDiv>
             <S.InsideDiv>
-              <S.RegisterInput label="CEP:" />
+              <S.RegisterInput label="CEP:" placeholder="_____-___" />
             </S.InsideDiv>
             <S.InsideDiv>
-              <S.RegisterInput label="Cidade:" />
+              <S.RegisterInput label="Cidade:" placeholder="cidade" />
             </S.InsideDiv>
             <S.InsideDiv>
-              <S.RegisterInput label="UF:" />
+              <S.RegisterInput label="UF:" placeholder="Estado" />
             </S.InsideDiv>
             <S.InsideDiv>
-              <S.RegisterInput label="Bairro:" />
+              <S.RegisterInput label="Bairro:" placeholder="Bairro" />
             </S.InsideDiv>
             <S.InsideDiv>
-              <S.RegisterInput label="Rua:" />
+              <S.RegisterInput label="Rua:" placeholder="Rua" />
             </S.InsideDiv>
             <S.InsideDiv>
-              <S.RegisterInput label="Número:" />
+              <S.RegisterInput label="Número:" placeholder="Número" />
             </S.InsideDiv>
             <S.InsideDiv $col="span 3 / span 3">
-              <S.RegisterInput label="Complemento:" />
+              <S.RegisterInput
+                label="Complemento:"
+                placeholder="Ex: Apartamento 10"
+              />
             </S.InsideDiv>
           </S.InputDiv>
         </S.Div>

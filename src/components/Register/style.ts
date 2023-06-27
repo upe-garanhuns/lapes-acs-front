@@ -9,6 +9,7 @@ export const Container = styled.div`
   gap: 8px;
   width: 100%;
   height: 100%;
+  background: #eaeaea;
 `;
 
 export const BlueBarContainer = styled.div`
@@ -47,7 +48,6 @@ export const TitleDiv = styled.div`
   display: flex;
   flex-direction: row;
   width: 100%;
-  justify-content: center;
   align-items: center;
   align-self: flex-start;
   gap: 8px;
@@ -66,12 +66,14 @@ export const InsideDiv = styled.div<{ $col?: string }>`
 export const RegisterInput = styled(Input)`
   border-radius: 20px;
   background: #d9d9d9;
-  color: #aaa;
-
+  height: 40px;
   box-shadow: inset 0 4px 4px 0 rgb(0 0 0 / 0.15);
-
-  &::plaplaceholder {
+  padding-left: 10px;
+  &::placeholder {
+    font-size: 16px;
     color: #544d4f;
+    padding-left: 5px;
+    margin-top: 5px;
   }
 `;
 
