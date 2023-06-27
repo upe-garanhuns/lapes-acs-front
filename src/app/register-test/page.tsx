@@ -4,6 +4,7 @@ import { useState } from 'react';
 
 import { Modal } from '../../components/Modal';
 import { Register } from '../../components/Register';
+import * as S from './style';
 
 export default function RegistePageTest() {
   const [OpenRegister, setOpenRegister] = useState(false);
@@ -21,12 +22,14 @@ export default function RegistePageTest() {
   return (
     <div>
       <button onClick={registerOpen}>Cadastrar</button>
-      <Modal
+      <S.ModalContainer
         isOpen={OpenRegister}
         closeModal={registerClose}
+        width={1067}
+        height={906}
         // eslint-disable-next-line react/no-children-prop
         children={<Register></Register>}
-      ></Modal>
+      ></S.ModalContainer>
     </div>
   );
 }

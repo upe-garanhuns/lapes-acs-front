@@ -7,8 +7,8 @@ export const Container = styled.div`
   display: flex;
   flex-direction: row;
   gap: 8px;
-  width: 1067px;
-  height: max-content;
+  width: 100%;
+  height: 100%;
 `;
 
 export const BlueBarContainer = styled.div`
@@ -20,6 +20,8 @@ export const BlueBarContainer = styled.div`
 export const RegisterContainer = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: space-evenly;
+  align-content: space-around;
   align-items: center;
   width: 100%;
   margin-left: 32px;
@@ -31,7 +33,6 @@ export const Div = styled.div``;
 export const Line = styled.hr`
   border: none;
   border-top: 1px solid #253555;
-  margin: 20px 0;
   width: 100%;
 `;
 
