@@ -20,28 +20,37 @@ export function Register() {
           </S.TitleDiv>
           <S.InputDiv>
             <S.InsideDiv $col="span 2 / span 2">
-              <S.RegisterInput label="Nome Completo:" />
+              <S.RegisterInput
+                label="Nome Completo:"
+                placeholder="Nome Completo"
+              />
             </S.InsideDiv>
             <S.InsideDiv>
-              <S.RegisterInput label="CPF:" />
+              <S.RegisterInput label="CPF:" placeholder="___.___.___.___" />
             </S.InsideDiv>
             <S.InsideDiv>
-              <S.RegisterInput label="Telefone:" />
+              <S.RegisterInput label="Telefone:" placeholder="(__) ____-____" />
             </S.InsideDiv>
             <S.InsideDiv>
-              <S.RegisterInput label="Curso:" />
+              <S.RegisterInput label="Curso:" placeholder="Curso" />
             </S.InsideDiv>
             <S.InsideDiv>
-              <S.RegisterInput label="Período:" />
+              <S.RegisterInput label="Período:" placeholder="Período" />
             </S.InsideDiv>
             <S.InsideDiv $col="span 2 / span 2">
-              <S.RegisterInput label="E-mail:" />
+              <S.RegisterInput
+                label="E-mail:"
+                placeholder="Ex: exemplo@upe.br"
+              />
             </S.InsideDiv>
             <S.InsideDiv>
-              <S.RegisterInput label="Senha:" />
+              <S.RegisterInput label="Senha:" placeholder="Senha" />
             </S.InsideDiv>
             <S.InsideDiv>
-              <S.RegisterInput label="Confirme Sua Senha:" />
+              <S.RegisterInput
+                label="Confirme Sua Senha:"
+                placeholder="Senha"
+              />
             </S.InsideDiv>
           </S.InputDiv>
         </S.Div>

@@ -25,8 +25,6 @@ export default function RegistePageTest() {
       <S.ModalContainer
         isOpen={OpenRegister}
         closeModal={registerClose}
-        width={1067}
-        height={906}
         // eslint-disable-next-line react/no-children-prop
         children={<Register></Register>}
       ></S.ModalContainer>

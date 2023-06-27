@@ -26,6 +26,7 @@ export const RegisterContainer = styled.div`
   width: 100%;
   margin-left: 32px;
   margin-right: 32px;
+  padding: 20px 40px;
 `;
 
 export const Div = styled.div``;
@@ -45,8 +46,10 @@ export const RegisterTitle = styled.p<{ $principal?: boolean }>`
 export const TitleDiv = styled.div`
   display: flex;
   flex-direction: row;
+  width: 100%;
   justify-content: center;
   align-items: center;
+  align-self: flex-start;
   gap: 8px;
 `;
 
@@ -60,7 +63,17 @@ export const InsideDiv = styled.div<{ $col?: string }>`
   grid-column: ${(props) => props.$col || 'auto'};
 `;
 
-export const RegisterInput = styled(Input)``;
+export const RegisterInput = styled(Input)`
+  border-radius: 20px;
+  background: #d9d9d9;
+  color: #aaa;
+
+  box-shadow: inset 0 4px 4px 0 rgb(0 0 0 / 0.15);
+
+  &::plaplaceholder {
+    color: #544d4f;
+  }
+`;
 
 export const RegisterButton = styled(Button)`
   background: #253555;
