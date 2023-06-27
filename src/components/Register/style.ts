@@ -49,7 +49,15 @@ export const TitleDiv = styled.div`
   gap: 8px;
 `;
 
-export const InputDiv = styled.div``;
+export const InputDiv = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-gap: 10px;
+`;
+
+export const InsideDiv = styled.div<{ $col?: string }>`
+  grid-column: ${(props) => props.$col || 'auto'};
+`;
 
 export const RegisterInput = styled(Input)``;
 
