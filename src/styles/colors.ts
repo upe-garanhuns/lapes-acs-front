@@ -250,7 +250,8 @@ export const colors = {
 
   figmaColors: {
     50: '#EDEDED',
-    100: '#D9D9D9'
+    100: '#D9D9D9',
+    200: '#253555'
   },
 
   black: '#000000',
