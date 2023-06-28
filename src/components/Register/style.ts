@@ -68,13 +68,20 @@ export const RegisterInput = styled(Input)`
   background: #d9d9d9;
   height: 40px;
   box-shadow: inset 0 4px 4px 0 rgb(0 0 0 / 0.15);
-  padding-left: 10px;
+  padding: 0px 10px;
   &::placeholder {
     font-size: 16px;
     color: #544d4f;
     padding-left: 5px;
     margin-top: 5px;
   }
+`;
+
+export const ButtonDiv = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  margin: 20px 0px;
 `;
 
 export const RegisterButton = styled(Button)`
@@ -85,4 +92,5 @@ export const RegisterButton = styled(Button)`
   height: 50px;
   font-size: 20px;
   font-weight: bold;
+  align-items: center;
 `;

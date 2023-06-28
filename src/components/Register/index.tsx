@@ -1,8 +1,22 @@
+import { useState } from 'react';
+
+import { colors } from '../../styles/colors';
 import * as S from './style';
 
 import { MapPin, User } from '@phosphor-icons/react';
 
 export function Register() {
+  const [error, setError] = useState<boolean>(false);
+  const [userName, setUserName] = useState<string>('');
+
+  function checkName(): boolean {
+    return userName.length < 2 || userName.length > 80;
+  }
+
+  function registerUser() {
+    setError(checkName());
+  }
+
   return (
     <S.Container>
       <S.BlueBarContainer />
@@ -23,13 +37,25 @@ export function Register() {
               <S.RegisterInput
                 label="Nome Completo:"
                 placeholder="Nome Completo"
+                onChange={(e: React.ChangeEvent<HTMLInputElement>): void => {
+                  setUserName(e.target.value);
+                }}
+              />
+              {error && <p>adicionar nome entre 2 e 80 caracteres</p>}
+            </S.InsideDiv>
+            <S.InsideDiv>
+              <S.RegisterInput
+                label="CPF:"
+                placeholder="___.___.___.__"
+                type="number"
               />
             </S.InsideDiv>
             <S.InsideDiv>
-              <S.RegisterInput label="CPF:" placeholder="___.___.___.___" />
-            </S.InsideDiv>
-            <S.InsideDiv>
-              <S.RegisterInput label="Telefone:" placeholder="(__) ____-____" />
+              <S.RegisterInput
+                label="Telefone:"
+                placeholder="(__) ____-____"
+                type="number"
+              />
             </S.InsideDiv>
             <S.InsideDiv>
               <S.RegisterInput label="Curso:" placeholder="Curso" />
@@ -41,6 +67,7 @@ export function Register() {
               <S.RegisterInput
                 label="E-mail:"
                 placeholder="Ex: exemplo@upe.br"
+                type="email"
               />
             </S.InsideDiv>
             <S.InsideDiv>
@@ -86,8 +113,9 @@ export function Register() {
             </S.InsideDiv>
           </S.InputDiv>
         </S.Div>
-
-        <S.RegisterButton label="Cadastrar" />
+        <S.ButtonDiv>
+          <S.RegisterButton label="Cadastrar" onClick={registerUser} />
+        </S.ButtonDiv>
       </S.RegisterContainer>
     </S.Container>
   );
