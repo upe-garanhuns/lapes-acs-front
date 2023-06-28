@@ -1,7 +1,9 @@
 import { useState } from 'react';
 
 import { checkCPF } from './functions/checkCpf';
+import { checkEmail } from './functions/checkEmail';
 import { checkGrade } from './functions/checkGrade';
+import { checkName } from './functions/checkName';
 import { checkNumber } from './functions/checkNumber';
 import * as S from './style';
 
@@ -20,22 +22,14 @@ export function Register() {
   const [userGrade, setUserGrade] = useState<string>('');
   const [userEmail, setUserEmail] = useState<string>('');
 
-  function checkName(): boolean {
-    return userName.length < 2 || userName.length > 80;
-  }
-
-  function checkEmail(): boolean {
-    return userEmail.length < 20;
-  }
-
   console.log('antes chama a funcçao' + errorCpf);
 
   function registerUser() {
-    setErrorName(checkName());
+    setErrorName(checkName(userName));
     setErrorCpf(checkCPF(userCpf));
     setErrorNumber(checkNumber(userNumber));
     setErrorGrade(checkGrade(parseInt(userGrade)));
-    setErrorEmail(checkEmail());
+    setErrorEmail(checkEmail(userEmail));
   }
 
   return (
@@ -109,7 +103,7 @@ export function Register() {
                   setUserEmail(e.target.value);
                 }}
               />
-              {errorEmail && <p>Insira um email válido</p>}
+              {!errorEmail && <p>Insira um email válido</p>}
             </S.InsideDiv>
             <S.InsideDiv>
               <S.RegisterInput label="Senha:" placeholder="Senha" />
