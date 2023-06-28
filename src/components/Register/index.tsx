@@ -22,10 +22,8 @@ export function Register() {
   const [userGrade, setUserGrade] = useState<string>('');
   const [userEmail, setUserEmail] = useState<string>('');
 
-  console.log('antes chama a funcçao' + errorCpf);
-
   function registerUser() {
-    setErrorName(checkName(userName));
+    setErrorName(!checkName(userName));
     setErrorCpf(checkCPF(userCpf));
     setErrorNumber(checkNumber(userNumber));
     setErrorGrade(checkGrade(parseInt(userGrade)));
@@ -57,7 +55,11 @@ export function Register() {
                   setUserName(e.target.value);
                 }}
               />
-              {errorName && <p>adicionar nome entre 2 e 80 caracteres</p>}
+              {!errorName && (
+                <S.ErroMessage>
+                  *Insira um nome entre 2 e 80 letras
+                </S.ErroMessage>
+              )}
             </S.InsideDiv>
             <S.InsideDiv>
               <S.RegisterInput
@@ -67,7 +69,9 @@ export function Register() {
                   setUserCpf(e.target.value);
                 }}
               />
-              {!errorCpf && <p>Insira um cpf válido</p>}
+              {!errorCpf && (
+                <S.ErroMessage>*Insira um CPF válido</S.ErroMessage>
+              )}
             </S.InsideDiv>
             <S.InsideDiv>
               <S.RegisterInput
@@ -78,7 +82,9 @@ export function Register() {
                   setUserNumber(e.target.value);
                 }}
               />
-              {!errorNumber && <p>Insira um Número válido</p>}
+              {!errorNumber && (
+                <S.ErroMessage>*Insira um telefone brasileiro</S.ErroMessage>
+              )}
             </S.InsideDiv>
             <S.InsideDiv>
               <S.RegisterInput label="Curso:" placeholder="Curso" />
@@ -92,7 +98,9 @@ export function Register() {
                   setUserGrade(e.target.value);
                 }}
               />
-              {!errorGrade && <p>Insira um período válido</p>}
+              {!errorGrade && (
+                <S.ErroMessage>*Insira um período válido</S.ErroMessage>
+              )}
             </S.InsideDiv>
             <S.InsideDiv $col="span 2 / span 2">
               <S.RegisterInput
@@ -103,7 +111,11 @@ export function Register() {
                   setUserEmail(e.target.value);
                 }}
               />
-              {!errorEmail && <p>Insira um email válido</p>}
+              {!errorEmail && (
+                <S.ErroMessage>
+                  *Insira um email de domínio da upe
+                </S.ErroMessage>
+              )}
             </S.InsideDiv>
             <S.InsideDiv>
               <S.RegisterInput label="Senha:" placeholder="Senha" />

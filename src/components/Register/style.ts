@@ -94,3 +94,11 @@ export const RegisterButton = styled(Button)`
   font-weight: bold;
   align-items: center;
 `;
+
+export const ErroMessage = styled.p`
+  color: red;
+  font-size: 12px;
+  width: 100%;
+
+  margin: 0px 10px;
+`;
