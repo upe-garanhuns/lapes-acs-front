@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 
-import { Modal } from '../../components/Modal';
 import { Register } from '../../components/Register';
 import * as S from './style';
 
@@ -16,8 +15,6 @@ export default function RegistePageTest() {
   function registerClose() {
     setOpenRegister(false);
   }
-
-  console.log(OpenRegister);
 
   return (
     <div>
