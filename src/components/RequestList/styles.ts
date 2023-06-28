@@ -11,11 +11,11 @@ export const Card = styled.div<{ cardColor: boolean }>`
   background-color: ${({ cardColor }) =>
     cardColor ? colors.figmaColors[50] : colors.figmaColors[100]};
   border-radius: 20px;
-  margin-bottom: 18px;
+  margin: 20px;
   padding: 7px;
   align-items: center;
 
-  @media (max-width: 650px) {
+  @media (max-width: 680px) {
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   }
 `;
