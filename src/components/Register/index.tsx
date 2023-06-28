@@ -87,7 +87,14 @@ export function Register() {
               )}
             </S.InsideDiv>
             <S.InsideDiv>
-              <S.RegisterInput label="Curso:" placeholder="Curso" />
+              <S.SelectContainer>
+                <S.SelectLabel>Cursos:</S.SelectLabel>
+                <S.RegisterSelect>
+                  <S.SelectOption>Cursos</S.SelectOption>
+                  <S.SelectOption>Engenharia de softare</S.SelectOption>
+                  <S.SelectOption>Licenciatura de computação</S.SelectOption>
+                </S.RegisterSelect>
+              </S.SelectContainer>
             </S.InsideDiv>
             <S.InsideDiv>
               <S.RegisterInput

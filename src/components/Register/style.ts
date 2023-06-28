@@ -77,6 +77,26 @@ export const RegisterInput = styled(Input)`
   }
 `;
 
+export const SelectContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+`;
+
+export const RegisterSelect = styled.select`
+  border-radius: 20px;
+  background: #d9d9d9;
+  height: 40px;
+  box-shadow: inset 0 4px 4px 0 rgb(0 0 0 / 0.15);
+  padding: 0px 10px;
+  border: none;
+  color: #544d4f;
+`;
+
+export const SelectOption = styled.option``;
+
+export const SelectLabel = styled.label``;
+
 export const ButtonDiv = styled.div`
   display: flex;
   justify-content: flex-end;
