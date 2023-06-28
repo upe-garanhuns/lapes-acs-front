@@ -10,12 +10,12 @@ export const GlobalStyle = createGlobalStyle`
     padding: 0;
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
-    background-color: #eee;
+    background-color: #fff;
   }
 
   main {
     margin: 0 auto;
-    max-width: 90vw;
+    max-width: 100vw;
     min-height: 80vh;
   }
 
