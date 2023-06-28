@@ -2,21 +2,20 @@ import { InputHTMLAttributes, ReactNode, useId } from 'react';
 
 import * as S from './styles';
 
-type InputProps = {
+type LoginInputProps = {
   label?: string;
   startAdornment?: ReactNode;
   endAdornment?: ReactNode;
 } & InputHTMLAttributes<HTMLInputElement>;
 
-//TODO: Add password visibility toggle
-export const Input = ({
+export const LoginInput = ({
   label = '',
   name = '',
   type = 'text',
   startAdornment,
   endAdornment,
   ...rest
-}: InputProps) => {
+}: LoginInputProps) => {
   const labelId = useId();
 
   return (

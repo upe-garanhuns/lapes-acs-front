@@ -3,8 +3,8 @@
 import Image from 'next/image';
 import { useState } from 'react';
 
-import Button from '../Button';
-import { Input } from '../Input';
+import LoginButton from '../LoginButton';
+import { LoginInput } from '../LoginInput';
 import * as S from './styles';
 
 import { Eye, EyeSlash, LockSimple, User } from '@phosphor-icons/react';
@@ -51,7 +51,7 @@ export default function LoginForm() {
       />
       <S.InputContainer>
         <div>
-          <Input
+          <LoginInput
             placeholder="E-mail"
             startAdornment={<User size={20} />}
             onChange={(ev) => setEmail(ev.target.value)}
@@ -65,7 +65,7 @@ export default function LoginForm() {
           )}
         </div>
         <div>
-          <Input
+          <LoginInput
             placeholder="Senha"
             type={!isPasswordVisible ? 'password' : 'text'}
             startAdornment={<LockSimple size={20} />}
@@ -82,7 +82,7 @@ export default function LoginForm() {
         </div>
       </S.InputContainer>
       <S.ButtonContainer>
-        <Button label="Entrar" type="submit" />
+        <LoginButton label="Entrar" type="submit" />
         <S.LinkContainer>
           <S.PasswordRecovery href="">Esqueceu a senha?</S.PasswordRecovery>
           <S.SignUp href="">Cadastrar</S.SignUp>

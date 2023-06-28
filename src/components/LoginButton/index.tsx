@@ -4,7 +4,7 @@ import { ButtonHTMLAttributes, ReactNode } from 'react';
 
 import * as S from './styles';
 
-type ButtonProps = {
+type LoginButtonProps = {
   label?: string;
   startAdornment?: ReactNode;
   endAdornment?: ReactNode;
@@ -12,14 +12,14 @@ type ButtonProps = {
   onClick?: () => void;
 } & ButtonHTMLAttributes<HTMLButtonElement>;
 
-export default function Button({
+export default function LoginButton({
   label,
   startAdornment,
   endAdornment,
   className,
   onClick,
   ...rest
-}: ButtonProps) {
+}: LoginButtonProps) {
   return (
     <S.Button onClick={onClick} className={className} {...rest}>
       {startAdornment && <span>{startAdornment}</span>}
