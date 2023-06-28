@@ -6,6 +6,8 @@ import { checkEmail } from './functions/checkEmail';
 import { checkGrade } from './functions/checkGrade';
 import { checkName } from './functions/checkName';
 import { checkNumber } from './functions/checkNumber';
+import { checkPassWord } from './functions/checkPassword';
+import { checkSamePass } from './functions/checkSamePass';
 import * as S from './style';
 
 import { MapPin, User } from '@phosphor-icons/react';
@@ -17,6 +19,8 @@ export function Register() {
   const [errorGrade, setErrorGrade] = useState<boolean>(false);
   const [errorEmail, setErrorEmail] = useState<boolean>(false);
   const [errorCourse, setErrorCourse] = useState<boolean>(false);
+  const [errorPass, setErrorPass] = useState<boolean>(false);
+  const [errorSamePass, setErrorSamePass] = useState<boolean>(false);
 
   const [userName, setUserName] = useState<string>('');
   const [userCpf, setUserCpf] = useState<string>('');
@@ -24,8 +28,9 @@ export function Register() {
   const [userGrade, setUserGrade] = useState<string>('');
   const [userEmail, setUserEmail] = useState<string>('');
   const [userCourse, setUserCourse] = useState<string>('');
+  const [userPass, setUserPass] = useState<string>('');
+  const [userSamePass, setUserSamePass] = useState<string>('');
 
-  console.log(userCourse);
   function registerUser() {
     setErrorName(!checkName(userName));
     setErrorCpf(checkCPF(userCpf));
@@ -33,6 +38,8 @@ export function Register() {
     setErrorGrade(checkGrade(parseInt(userGrade)));
     setErrorEmail(checkEmail(userEmail));
     setErrorCourse(checkCourse(userCourse));
+    setErrorPass(checkPassWord(userPass));
+    setErrorSamePass(checkSamePass(userPass, userSamePass));
   }
 
   return (
@@ -139,13 +146,32 @@ export function Register() {
               )}
             </S.InsideDiv>
             <S.InsideDiv>
-              <S.RegisterInput label="Senha:" placeholder="Senha" />
+              <S.RegisterInput
+                label="Senha:"
+                placeholder="Senha"
+                type="password"
+                onChange={(e: React.ChangeEvent<HTMLInputElement>): void => {
+                  setUserPass(e.target.value);
+                }}
+              />
+              {!errorPass && (
+                <S.ErroMessage>
+                  *Insira uma senha entre 8 e 16 caracteres
+                </S.ErroMessage>
+              )}
             </S.InsideDiv>
             <S.InsideDiv>
               <S.RegisterInput
                 label="Confirme Sua Senha:"
                 placeholder="Senha"
+                type="password"
+                onChange={(e: React.ChangeEvent<HTMLInputElement>): void => {
+                  setUserSamePass(e.target.value);
+                }}
               />
+              {!errorSamePass && (
+                <S.ErroMessage>*Insira a mesma senha</S.ErroMessage>
+              )}
             </S.InsideDiv>
           </S.InputDiv>
         </S.Div>
