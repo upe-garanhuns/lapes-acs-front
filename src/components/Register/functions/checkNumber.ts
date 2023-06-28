@@ -2,8 +2,8 @@ export function checkNumber(numero: string): boolean {
   // Remove caracteres não numéricos
   numero = numero.replace(/[^\d]/g, '');
 
-  // Verifica se o número possui 11 dígitos
-  if (numero.length !== 11) {
+  // Verifica se o número possui 10 dígitos
+  if (numero.length !== 10) {
     return false;
   }
 

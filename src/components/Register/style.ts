@@ -1,3 +1,5 @@
+import InputMask from 'react-input-mask';
+
 import Button from '../Button';
 import { Input } from '../Input';
 
@@ -77,7 +79,21 @@ export const RegisterInput = styled(Input)`
   }
 `;
 
-export const SelectContainer = styled.div`
+export const RegisterInputMask = styled(InputMask)`
+  border-radius: 20px;
+  background: #d9d9d9;
+  height: 40px;
+  box-shadow: inset 0 4px 4px 0 rgb(0 0 0 / 0.15);
+  padding: 0px 10px;
+  &::placeholder {
+    font-size: 16px;
+    color: #544d4f;
+    padding-left: 5px;
+    margin-top: 5px;
+  }
+`;
+
+export const ComponentsContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -96,7 +112,7 @@ export const RegisterSelect = styled.select`
 
 export const SelectOption = styled.option``;
 
-export const SelectLabel = styled.label``;
+export const Label = styled.label``;
 
 export const ButtonDiv = styled.div`
   display: flex;

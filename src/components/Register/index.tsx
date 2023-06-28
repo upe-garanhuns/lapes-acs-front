@@ -8,10 +8,9 @@ import { checkName } from './functions/checkName';
 import { checkNumber } from './functions/checkNumber';
 import { checkPassWord } from './functions/checkPassword';
 import { checkSamePass } from './functions/checkSamePass';
-import { cpfMask } from './functions/cpfMask';
 import * as S from './style';
 
-import { MapPin, User } from '@phosphor-icons/react';
+import { MapPin, User, Eye, EyeSlash } from '@phosphor-icons/react';
 
 export function Register() {
   const [errorName, setErrorName] = useState<boolean>(false);
@@ -32,22 +31,22 @@ export function Register() {
   const [userPass, setUserPass] = useState<string>('');
   const [userSamePass, setUserSamePass] = useState<string>('');
 
+  const [visibility, setVisibility] = useState<boolean>(false);
+
   const handleChangeName = (e) => {
     const { value } = e.target;
     setUserName(value);
-    setErrorName(!checkName(userName));
   };
 
   const handleChangeCpf = (e) => {
     const { value } = e.target;
-    setErrorCpf(checkCPF(userCpf));
-    setUserCpf(cpfMask(value));
+
+    setUserCpf(value);
   };
 
   const handleChangeNumber = (e) => {
     const { value } = e.target;
     setUserNumber(value);
-    setErrorNumber(checkNumber(userNumber));
   };
 
   const handleChangeGrade = (e) => {
@@ -59,23 +58,30 @@ export function Register() {
   const handleChangeEmail = (e) => {
     const { value } = e.target;
     setUserEmail(value);
-    setErrorEmail(checkEmail(userEmail));
   };
 
   const handleChangePass = (e) => {
     const { value } = e.target;
     setUserPass(value);
-    setErrorPass(checkPassWord(userPass));
   };
 
   const handleChangeSamePass = (e) => {
     const { value } = e.target;
     setUserSamePass(value);
-    setErrorSamePass(checkSamePass(userPass, userSamePass));
+  };
+
+  const handleTogglePassVisibility = () => {
+    setVisibility(!visibility);
   };
 
   function registerUser() {
+    setErrorName(!checkName(userName));
     setErrorCourse(checkCourse(userCourse));
+    setErrorCpf(checkCPF(userCpf));
+    setErrorNumber(checkNumber(userNumber));
+    setErrorEmail(checkEmail(userEmail));
+    setErrorPass(checkPassWord(userPass));
+    setErrorSamePass(checkSamePass(userPass, userSamePass));
   }
 
   return (
@@ -101,34 +107,41 @@ export function Register() {
                 placeholder="Nome Completo"
                 onChange={handleChangeName}
               />
-              {errorName && (
+              {!errorName && (
                 <S.ErroMessage>
                   *Insira um nome entre 2 e 80 letras
                 </S.ErroMessage>
               )}
             </S.InsideDiv>
             <S.InsideDiv>
-              <S.RegisterInput
-                label="CPF:"
-                placeholder="___.___.___.__"
-                onChange={handleChangeCpf}
-              />
-              {errorCpf && <S.ErroMessage>*Insira um CPF válido</S.ErroMessage>}
+              <S.ComponentsContainer>
+                <S.Label>Cpf:</S.Label>
+                <S.RegisterInputMask
+                  mask="999.999.999-99"
+                  placeholder="___.___.___.__"
+                  onChange={handleChangeCpf}
+                />
+                {!errorCpf && (
+                  <S.ErroMessage>*Insira um CPF válido</S.ErroMessage>
+                )}
+              </S.ComponentsContainer>
             </S.InsideDiv>
             <S.InsideDiv>
-              <S.RegisterInput
-                label="Telefone:"
-                placeholder="(__) ____-____"
-                type="number"
-                onChange={handleChangeNumber}
-              />
-              {errorNumber && (
-                <S.ErroMessage>*Insira um telefone brasileiro</S.ErroMessage>
-              )}
+              <S.ComponentsContainer>
+                <S.Label>Telefone:</S.Label>
+                <S.RegisterInputMask
+                  mask="(99) 9999-9999"
+                  placeholder="(__) ____-____"
+                  onChange={handleChangeNumber}
+                />
+                {!errorNumber && (
+                  <S.ErroMessage>*Insira um telefone brasileiro</S.ErroMessage>
+                )}
+              </S.ComponentsContainer>
             </S.InsideDiv>
             <S.InsideDiv>
-              <S.SelectContainer>
-                <S.SelectLabel>Cursos:</S.SelectLabel>
+              <S.ComponentsContainer>
+                <S.Label>Cursos:</S.Label>
                 <S.RegisterSelect
                   onChange={(e) => setUserCourse(e.target.value)}
                 >
@@ -140,8 +153,8 @@ export function Register() {
                     Licenciatura de computação
                   </S.SelectOption>
                 </S.RegisterSelect>
-              </S.SelectContainer>
-              {errorCourse && (
+              </S.ComponentsContainer>
+              {!errorCourse && (
                 <S.ErroMessage>*Selecione um curso</S.ErroMessage>
               )}
             </S.InsideDiv>
@@ -152,7 +165,7 @@ export function Register() {
                 type="number"
                 onChange={handleChangeGrade}
               />
-              {errorGrade && (
+              {!errorGrade && (
                 <S.ErroMessage>*Insira um período válido</S.ErroMessage>
               )}
             </S.InsideDiv>
@@ -163,7 +176,7 @@ export function Register() {
                 type="email"
                 onChange={handleChangeEmail}
               />
-              {errorEmail && (
+              {!errorEmail && (
                 <S.ErroMessage>
                   *Insira um email de domínio da upe
                 </S.ErroMessage>
@@ -173,10 +186,15 @@ export function Register() {
               <S.RegisterInput
                 label="Senha:"
                 placeholder="Senha"
-                type="password"
+                type={visibility ? 'text' : 'password'}
                 onChange={handleChangePass}
+                endAdornment={
+                  <button onClick={handleTogglePassVisibility}>
+                    {visibility ? <Eye size={32} /> : <EyeSlash size={32} />}
+                  </button>
+                }
               />
-              {errorPass && (
+              {!errorPass && (
                 <S.ErroMessage>
                   *Insira uma senha entre 8 e 16 caracteres
                 </S.ErroMessage>
@@ -188,8 +206,13 @@ export function Register() {
                 placeholder="Senha"
                 type="password"
                 onChange={handleChangeSamePass}
+                endAdornment={
+                  <button onClick={handleTogglePassVisibility}>
+                    {visibility ? <Eye size={32} /> : <EyeSlash size={32} />}
+                  </button>
+                }
               />
-              {errorSamePass && (
+              {!errorSamePass && (
                 <S.ErroMessage>*Insira a mesma senha</S.ErroMessage>
               )}
             </S.InsideDiv>
@@ -197,7 +220,6 @@ export function Register() {
         </S.Div>
 
         <S.Div>
-          {' '}
           {/* Registro do endereço*/}
           <S.TitleDiv>
             <MapPin size={32} weight="bold" />
