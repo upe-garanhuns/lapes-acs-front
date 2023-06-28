@@ -8,6 +8,7 @@ import { checkName } from './functions/checkName';
 import { checkNumber } from './functions/checkNumber';
 import { checkPassWord } from './functions/checkPassword';
 import { checkSamePass } from './functions/checkSamePass';
+import { cpfMask } from './functions/cpfMask';
 import * as S from './style';
 
 import { MapPin, User } from '@phosphor-icons/react';
@@ -31,15 +32,50 @@ export function Register() {
   const [userPass, setUserPass] = useState<string>('');
   const [userSamePass, setUserSamePass] = useState<string>('');
 
-  function registerUser() {
+  const handleChangeName = (e) => {
+    const { value } = e.target;
+    setUserName(value);
     setErrorName(!checkName(userName));
+  };
+
+  const handleChangeCpf = (e) => {
+    const { value } = e.target;
     setErrorCpf(checkCPF(userCpf));
+    setUserCpf(cpfMask(value));
+  };
+
+  const handleChangeNumber = (e) => {
+    const { value } = e.target;
+    setUserNumber(value);
     setErrorNumber(checkNumber(userNumber));
+  };
+
+  const handleChangeGrade = (e) => {
+    const { value } = e.target;
+    setUserGrade(value);
     setErrorGrade(checkGrade(parseInt(userGrade)));
+  };
+
+  const handleChangeEmail = (e) => {
+    const { value } = e.target;
+    setUserEmail(value);
     setErrorEmail(checkEmail(userEmail));
-    setErrorCourse(checkCourse(userCourse));
+  };
+
+  const handleChangePass = (e) => {
+    const { value } = e.target;
+    setUserPass(value);
     setErrorPass(checkPassWord(userPass));
+  };
+
+  const handleChangeSamePass = (e) => {
+    const { value } = e.target;
+    setUserSamePass(value);
     setErrorSamePass(checkSamePass(userPass, userSamePass));
+  };
+
+  function registerUser() {
+    setErrorCourse(checkCourse(userCourse));
   }
 
   return (
@@ -63,11 +99,9 @@ export function Register() {
               <S.RegisterInput
                 label="Nome Completo:"
                 placeholder="Nome Completo"
-                onChange={(e: React.ChangeEvent<HTMLInputElement>): void => {
-                  setUserName(e.target.value);
-                }}
+                onChange={handleChangeName}
               />
-              {!errorName && (
+              {errorName && (
                 <S.ErroMessage>
                   *Insira um nome entre 2 e 80 letras
                 </S.ErroMessage>
@@ -77,24 +111,18 @@ export function Register() {
               <S.RegisterInput
                 label="CPF:"
                 placeholder="___.___.___.__"
-                onChange={(e: React.ChangeEvent<HTMLInputElement>): void => {
-                  setUserCpf(e.target.value);
-                }}
+                onChange={handleChangeCpf}
               />
-              {!errorCpf && (
-                <S.ErroMessage>*Insira um CPF válido</S.ErroMessage>
-              )}
+              {errorCpf && <S.ErroMessage>*Insira um CPF válido</S.ErroMessage>}
             </S.InsideDiv>
             <S.InsideDiv>
               <S.RegisterInput
                 label="Telefone:"
                 placeholder="(__) ____-____"
                 type="number"
-                onChange={(e: React.ChangeEvent<HTMLInputElement>): void => {
-                  setUserNumber(e.target.value);
-                }}
+                onChange={handleChangeNumber}
               />
-              {!errorNumber && (
+              {errorNumber && (
                 <S.ErroMessage>*Insira um telefone brasileiro</S.ErroMessage>
               )}
             </S.InsideDiv>
@@ -113,7 +141,7 @@ export function Register() {
                   </S.SelectOption>
                 </S.RegisterSelect>
               </S.SelectContainer>
-              {!errorCourse && (
+              {errorCourse && (
                 <S.ErroMessage>*Selecione um curso</S.ErroMessage>
               )}
             </S.InsideDiv>
@@ -122,11 +150,9 @@ export function Register() {
                 label="Período:"
                 placeholder="Período"
                 type="number"
-                onChange={(e: React.ChangeEvent<HTMLInputElement>): void => {
-                  setUserGrade(e.target.value);
-                }}
+                onChange={handleChangeGrade}
               />
-              {!errorGrade && (
+              {errorGrade && (
                 <S.ErroMessage>*Insira um período válido</S.ErroMessage>
               )}
             </S.InsideDiv>
@@ -135,11 +161,9 @@ export function Register() {
                 label="E-mail:"
                 placeholder="Ex: exemplo@upe.br"
                 type="email"
-                onChange={(e: React.ChangeEvent<HTMLInputElement>): void => {
-                  setUserEmail(e.target.value);
-                }}
+                onChange={handleChangeEmail}
               />
-              {!errorEmail && (
+              {errorEmail && (
                 <S.ErroMessage>
                   *Insira um email de domínio da upe
                 </S.ErroMessage>
@@ -150,11 +174,9 @@ export function Register() {
                 label="Senha:"
                 placeholder="Senha"
                 type="password"
-                onChange={(e: React.ChangeEvent<HTMLInputElement>): void => {
-                  setUserPass(e.target.value);
-                }}
+                onChange={handleChangePass}
               />
-              {!errorPass && (
+              {errorPass && (
                 <S.ErroMessage>
                   *Insira uma senha entre 8 e 16 caracteres
                 </S.ErroMessage>
@@ -165,11 +187,9 @@ export function Register() {
                 label="Confirme Sua Senha:"
                 placeholder="Senha"
                 type="password"
-                onChange={(e: React.ChangeEvent<HTMLInputElement>): void => {
-                  setUserSamePass(e.target.value);
-                }}
+                onChange={handleChangeSamePass}
               />
-              {!errorSamePass && (
+              {errorSamePass && (
                 <S.ErroMessage>*Insira a mesma senha</S.ErroMessage>
               )}
             </S.InsideDiv>
