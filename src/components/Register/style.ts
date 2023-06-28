@@ -81,6 +81,7 @@ export const SelectContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 6px;
+  margin-bottom: 7px;
 `;
 
 export const RegisterSelect = styled.select`

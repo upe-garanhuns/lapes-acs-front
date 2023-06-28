@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+import { checkCourse } from './functions/checkCourse';
 import { checkCPF } from './functions/checkCpf';
 import { checkEmail } from './functions/checkEmail';
 import { checkGrade } from './functions/checkGrade';
@@ -15,12 +16,14 @@ export function Register() {
   const [errorNumber, setErrorNumber] = useState<boolean>(false);
   const [errorGrade, setErrorGrade] = useState<boolean>(false);
   const [errorEmail, setErrorEmail] = useState<boolean>(false);
+  const [errorCourse, setErrorCourse] = useState<boolean>(false);
 
   const [userName, setUserName] = useState<string>('');
   const [userCpf, setUserCpf] = useState<string>('');
   const [userNumber, setUserNumber] = useState<string>('');
   const [userGrade, setUserGrade] = useState<string>('');
   const [userEmail, setUserEmail] = useState<string>('');
+  const [userCourse, setUserCourse] = useState<string>('');
 
   function registerUser() {
     setErrorName(!checkName(userName));
@@ -28,6 +31,7 @@ export function Register() {
     setErrorNumber(checkNumber(userNumber));
     setErrorGrade(checkGrade(parseInt(userGrade)));
     setErrorEmail(checkEmail(userEmail));
+    setErrorCourse(checkCourse(userCourse));
   }
 
   return (
@@ -90,11 +94,18 @@ export function Register() {
               <S.SelectContainer>
                 <S.SelectLabel>Cursos:</S.SelectLabel>
                 <S.RegisterSelect>
-                  <S.SelectOption>Cursos</S.SelectOption>
-                  <S.SelectOption>Engenharia de softare</S.SelectOption>
-                  <S.SelectOption>Licenciatura de computação</S.SelectOption>
+                  <S.SelectOption value="">Cursos</S.SelectOption>
+                  <S.SelectOption value="es">
+                    Engenharia de softare
+                  </S.SelectOption>
+                  <S.SelectOption value="lc">
+                    Licenciatura de computação
+                  </S.SelectOption>
                 </S.RegisterSelect>
               </S.SelectContainer>
+              {!errorCourse && (
+                <S.ErroMessage>*Selecione um curso</S.ErroMessage>
+              )}
             </S.InsideDiv>
             <S.InsideDiv>
               <S.RegisterInput
