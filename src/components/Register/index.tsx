@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import { checkCPF } from './functions/checkCpf';
+import { checkGrade } from './functions/checkGrade';
 import { checkNumber } from './functions/checkNumber';
 import * as S from './style';
 
@@ -10,22 +11,19 @@ export function Register() {
   const [errorName, setErrorName] = useState<boolean>(false);
   const [errorCpf, setErrorCpf] = useState<boolean>(false);
   const [errorNumber, setErrorNumber] = useState<boolean>(false);
-  const [errorCouser, setErrorCouser] = useState<boolean>(false);
+  const [errorGrade, setErrorGrade] = useState<boolean>(false);
   const [errorEmail, setErrorEmail] = useState<boolean>(false);
 
   const [userName, setUserName] = useState<string>('');
   const [userCpf, setUserCpf] = useState<string>('');
   const [userNumber, setUserNumber] = useState<string>('');
-  const [userCouser, setUserCouser] = useState<string>('');
+  const [userGrade, setUserGrade] = useState<string>('');
   const [userEmail, setUserEmail] = useState<string>('');
 
   function checkName(): boolean {
     return userName.length < 2 || userName.length > 80;
   }
 
-  function checkCouser(): boolean {
-    return userCouser.length < 12;
-  }
   function checkEmail(): boolean {
     return userEmail.length < 20;
   }
@@ -33,12 +31,10 @@ export function Register() {
   console.log('antes chama a funcçao' + errorCpf);
 
   function registerUser() {
-    //acionada pelo botão de cadastro
     setErrorName(checkName());
     setErrorCpf(checkCPF(userCpf));
-    //console.log('quando chama a funcçao' + errorCpf);
     setErrorNumber(checkNumber(userNumber));
-    setErrorCouser(checkCouser());
+    setErrorGrade(checkGrade(parseInt(userGrade)));
     setErrorEmail(checkEmail());
   }
 
@@ -97,11 +93,12 @@ export function Register() {
               <S.RegisterInput
                 label="Período:"
                 placeholder="Período"
+                type="number"
                 onChange={(e: React.ChangeEvent<HTMLInputElement>): void => {
-                  setUserCouser(e.target.value);
+                  setUserGrade(e.target.value);
                 }}
               />
-              {errorCouser && <p>Insira um período válido</p>}
+              {!errorGrade && <p>Insira um período válido</p>}
             </S.InsideDiv>
             <S.InsideDiv $col="span 2 / span 2">
               <S.RegisterInput
