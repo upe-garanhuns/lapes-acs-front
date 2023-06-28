@@ -25,6 +25,7 @@ export function Register() {
   const [userEmail, setUserEmail] = useState<string>('');
   const [userCourse, setUserCourse] = useState<string>('');
 
+  console.log(userCourse);
   function registerUser() {
     setErrorName(!checkName(userName));
     setErrorCpf(checkCPF(userCpf));
@@ -93,10 +94,12 @@ export function Register() {
             <S.InsideDiv>
               <S.SelectContainer>
                 <S.SelectLabel>Cursos:</S.SelectLabel>
-                <S.RegisterSelect>
+                <S.RegisterSelect
+                  onChange={(e) => setUserCourse(e.target.value)}
+                >
                   <S.SelectOption value="">Cursos</S.SelectOption>
                   <S.SelectOption value="es">
-                    Engenharia de softare
+                    Engenharia de software
                   </S.SelectOption>
                   <S.SelectOption value="lc">
                     Licenciatura de computação
