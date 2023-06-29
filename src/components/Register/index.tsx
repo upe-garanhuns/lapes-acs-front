@@ -7,6 +7,7 @@ import { checkGrade } from './functions/checkGrade';
 import { checkName } from './functions/checkName';
 import { checkNumber } from './functions/checkNumber';
 import { checkPassWord } from './functions/checkPassword';
+import { checkPhone } from './functions/checkPhone';
 import { checkSamePass } from './functions/checkSamePass';
 import * as S from './style';
 
@@ -15,21 +16,24 @@ import { MapPin, User, Eye, EyeSlash } from '@phosphor-icons/react';
 export function Register() {
   const [errorName, setErrorName] = useState<boolean>(false);
   const [errorCpf, setErrorCpf] = useState<boolean>(false);
-  const [errorNumber, setErrorNumber] = useState<boolean>(false);
+  const [errorPhone, setErrorPhone] = useState<boolean>(false);
   const [errorGrade, setErrorGrade] = useState<boolean>(false);
   const [errorEmail, setErrorEmail] = useState<boolean>(false);
   const [errorCourse, setErrorCourse] = useState<boolean>(false);
   const [errorPass, setErrorPass] = useState<boolean>(false);
   const [errorSamePass, setErrorSamePass] = useState<boolean>(false);
+  const [errorNumber, setErrorNumber] = useState<boolean>(false);
 
   const [userName, setUserName] = useState<string>('');
   const [userCpf, setUserCpf] = useState<string>('');
-  const [userNumber, setUserNumber] = useState<string>('');
+  const [userPhone, setUserPhone] = useState<string>('');
   const [userGrade, setUserGrade] = useState<string>('');
   const [userEmail, setUserEmail] = useState<string>('');
   const [userCourse, setUserCourse] = useState<string>('');
   const [userPass, setUserPass] = useState<string>('');
   const [userSamePass, setUserSamePass] = useState<string>('');
+  const [userNumber, setUserNumber] = useState<string>('');
+  const [userCep, setUserCep] = useState<string>('');
 
   const [visibility, setVisibility] = useState<boolean>(false);
 
@@ -44,9 +48,9 @@ export function Register() {
     setUserCpf(value);
   };
 
-  const handleChangeNumber = (e) => {
+  const handleChangePhone = (e) => {
     const { value } = e.target;
-    setUserNumber(value);
+    setUserPhone(value);
   };
 
   const handleChangeGrade = (e) => {
@@ -70,6 +74,16 @@ export function Register() {
     setUserSamePass(value);
   };
 
+  const handleChangeNumber = (e) => {
+    const { value } = e.target;
+    setUserNumber(value);
+  };
+
+  const handleChangeCEP = (e) => {
+    const { value } = e.target;
+    setUserCep(value);
+  };
+
   const handleTogglePassVisibility = () => {
     setVisibility(!visibility);
   };
@@ -78,10 +92,12 @@ export function Register() {
     setErrorName(!checkName(userName));
     setErrorCourse(checkCourse(userCourse));
     setErrorCpf(checkCPF(userCpf));
-    setErrorNumber(checkNumber(userNumber));
+    setErrorPhone(checkPhone(userPhone));
     setErrorEmail(checkEmail(userEmail));
+    setErrorGrade(checkGrade(parseInt(userGrade)));
     setErrorPass(checkPassWord(userPass));
     setErrorSamePass(checkSamePass(userPass, userSamePass));
+    setErrorNumber(checkNumber(parseInt(userNumber)));
   }
 
   return (
@@ -132,9 +148,9 @@ export function Register() {
                 <S.RegisterInputMask
                   mask="(99) 9999-9999"
                   placeholder="(__) ____-____"
-                  onChange={handleChangeNumber}
+                  onChange={handleChangePhone}
                 />
-                {!errorNumber && (
+                {!errorPhone && (
                   <S.ErroMessage>*Insira um telefone brasileiro</S.ErroMessage>
                 )}
               </S.ComponentsContainer>
@@ -204,7 +220,7 @@ export function Register() {
               <S.RegisterInput
                 label="Confirme Sua Senha:"
                 placeholder="Senha"
-                type="password"
+                type={visibility ? 'text' : 'password'}
                 onChange={handleChangeSamePass}
                 endAdornment={
                   <button onClick={handleTogglePassVisibility}>
@@ -227,13 +243,40 @@ export function Register() {
           </S.TitleDiv>
           <S.InputDiv>
             <S.InsideDiv>
-              <S.RegisterInput label="CEP:" placeholder="_____-___" />
+              <S.ComponentsContainer>
+                <S.Label>CEP:</S.Label>
+                <S.RegisterInputMask
+                  mask="99999-999"
+                  placeholder="_____-___"
+                  onChange={handleChangeCEP}
+                />
+              </S.ComponentsContainer>
             </S.InsideDiv>
             <S.InsideDiv>
-              <S.RegisterInput label="Cidade:" placeholder="cidade" />
+              <S.ComponentsContainer>
+                <S.Label>Cidade:</S.Label>
+                <S.RegisterSelect
+                  onChange={(e) => setUserCourse(e.target.value)}
+                >
+                  <S.SelectOption value="">Cidade</S.SelectOption>
+                  <S.SelectOption value="ga">Garanhuns</S.SelectOption>
+                  <S.SelectOption value="re">Recife</S.SelectOption>
+                  <S.SelectOption value="ca">Caruaru</S.SelectOption>
+                </S.RegisterSelect>
+              </S.ComponentsContainer>
             </S.InsideDiv>
             <S.InsideDiv>
-              <S.RegisterInput label="UF:" placeholder="Estado" />
+              <S.ComponentsContainer>
+                <S.Label>UF:</S.Label>
+                <S.RegisterSelect
+                  onChange={(e) => setUserCourse(e.target.value)}
+                >
+                  <S.SelectOption value="">Estado</S.SelectOption>
+                  <S.SelectOption value="pe">PE</S.SelectOption>
+                  <S.SelectOption value="pb">PB</S.SelectOption>
+                  <S.SelectOption value="ba">BA</S.SelectOption>
+                </S.RegisterSelect>
+              </S.ComponentsContainer>
             </S.InsideDiv>
             <S.InsideDiv>
               <S.RegisterInput label="Bairro:" placeholder="Bairro" />
@@ -242,7 +285,14 @@ export function Register() {
               <S.RegisterInput label="Rua:" placeholder="Rua" />
             </S.InsideDiv>
             <S.InsideDiv>
-              <S.RegisterInput label="Número:" placeholder="Número" />
+              <S.RegisterInput
+                label="Número:"
+                placeholder="Número"
+                onChange={handleChangeNumber}
+              />
+              {!errorNumber && (
+                <S.ErroMessage>*Insira um número valido</S.ErroMessage>
+              )}
             </S.InsideDiv>
             <S.InsideDiv $col="span 3 / span 3">
               <S.RegisterInput
