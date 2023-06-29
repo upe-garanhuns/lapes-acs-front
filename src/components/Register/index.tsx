@@ -98,6 +98,7 @@ export function Register() {
     setErrorPass(checkPassWord(userPass));
     setErrorSamePass(checkSamePass(userPass, userSamePass));
     setErrorNumber(checkNumber(parseInt(userNumber)));
+    console.log(userCep);
   }
 
   return (
@@ -257,6 +258,7 @@ export function Register() {
                 <S.Label>Cidade:</S.Label>
                 <S.RegisterSelect
                   onChange={(e) => setUserCourse(e.target.value)}
+                  disabled={true}
                 >
                   <S.SelectOption value="">Cidade</S.SelectOption>
                   <S.SelectOption value="ga">Garanhuns</S.SelectOption>
@@ -270,6 +272,7 @@ export function Register() {
                 <S.Label>UF:</S.Label>
                 <S.RegisterSelect
                   onChange={(e) => setUserCourse(e.target.value)}
+                  disabled={true}
                 >
                   <S.SelectOption value="">Estado</S.SelectOption>
                   <S.SelectOption value="pe">PE</S.SelectOption>
@@ -279,10 +282,14 @@ export function Register() {
               </S.ComponentsContainer>
             </S.InsideDiv>
             <S.InsideDiv>
-              <S.RegisterInput label="Bairro:" placeholder="Bairro" />
+              <S.RegisterInput
+                label="Bairro:"
+                placeholder="Bairro"
+                disabled={true}
+              />
             </S.InsideDiv>
             <S.InsideDiv>
-              <S.RegisterInput label="Rua:" placeholder="Rua" />
+              <S.RegisterInput label="Rua:" placeholder="Rua" disabled={true} />
             </S.InsideDiv>
             <S.InsideDiv>
               <S.RegisterInput

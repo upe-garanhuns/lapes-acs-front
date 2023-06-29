@@ -59,10 +59,24 @@ export const InputDiv = styled.div`
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   grid-gap: 10px;
+
+  @media screen and (max-width: 767px) {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 `;
 
 export const InsideDiv = styled.div<{ $col?: string }>`
   grid-column: ${(props) => props.$col || 'auto'};
+  @media screen and (max-width: 767px) {
+    grid-column: auto;
+  }
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+    grid-column: ${(props) => props.$col || 'auto'};
+  }
 `;
 
 export const RegisterInput = styled(Input)`
