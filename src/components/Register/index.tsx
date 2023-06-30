@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
-import { fetchCep } from '../../services/cep';
+import { fetchWrapper } from '../../services/api';
+import { Endereco } from '../../services/cep/types';
 import { checkCourse } from './functions/checkCourse';
 import { checkCPF } from './functions/checkCpf';
 import { checkEmail } from './functions/checkEmail';
@@ -35,8 +36,21 @@ export function Register() {
   const [userSamePass, setUserSamePass] = useState<string>('');
   const [userNumber, setUserNumber] = useState<string>('');
   const [userCep, setUserCep] = useState<string>('');
+  const [userCity, setUserCity] = useState<string>('');
+  const [userBlock, setUserBlock] = useState<string>('');
+  const [userUf, setUserUf] = useState<string>('');
+  const [userStreet, setUserStreet] = useState<string>('');
+  const [userComplement, setUserComplement] = useState<string>('');
 
   const [visibility, setVisibility] = useState<boolean>(false);
+
+  const [cityLock, setCityLock] = useState<boolean>(true);
+
+  const [ufLock, setUfLock] = useState<boolean>(true);
+
+  const [blockLock, setBlockLock] = useState<boolean>(true);
+
+  const [streetLock, setStreetLock] = useState<boolean>(true);
 
   const handleChangeName = (e) => {
     const { value } = e.target;
@@ -89,6 +103,49 @@ export function Register() {
     setVisibility(!visibility);
   };
 
+  const fetchCep = async (cep: string): Promise<void> => {
+    await fetchWrapper<Endereco>(`api/endereco/${cep}`)
+      .then((data) => {
+        console.log(data);
+        checkCity(data.cidade);
+        checkBlock(data.bairro);
+        checkStreet(data.rua);
+        checkUf(data.uf);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const checkCity = (name: string) => {
+    if (name === '') {
+      setCityLock(false);
+      setUserCity(null);
+    }
+    setUserCity(name);
+  };
+
+  const checkUf = (name: string) => {
+    if (name === '') {
+      setUfLock(false);
+      setUserUf(null);
+    }
+    setUserUf(name);
+  };
+
+  const checkBlock = (name: string) => {
+    if (name === '') {
+      setBlockLock(false);
+      setUserBlock(null);
+    }
+    setUserBlock(name);
+  };
+  const checkStreet = (name: string) => {
+    if (name === '') {
+      setStreetLock(false);
+      setUserStreet(null);
+    }
+    setUserStreet(name);
+  };
+
   function registerUser() {
     setErrorName(!checkName(userName));
     setErrorCourse(checkCourse(userCourse));
@@ -99,7 +156,6 @@ export function Register() {
     setErrorPass(checkPassWord(userPass));
     setErrorSamePass(checkSamePass(userPass, userSamePass));
     setErrorNumber(checkNumber(parseInt(userNumber)));
-
     fetchCep(userCep);
   }
 
@@ -256,42 +312,41 @@ export function Register() {
               </S.ComponentsContainer>
             </S.InsideDiv>
             <S.InsideDiv>
-              <S.ComponentsContainer>
-                <S.Label>Cidade:</S.Label>
-                <S.RegisterSelect
-                  onChange={(e) => setUserCourse(e.target.value)}
-                  disabled={true}
-                >
-                  <S.SelectOption value="">Cidade</S.SelectOption>
-                  <S.SelectOption value="ga">Garanhuns</S.SelectOption>
-                  <S.SelectOption value="re">Recife</S.SelectOption>
-                  <S.SelectOption value="ca">Caruaru</S.SelectOption>
-                </S.RegisterSelect>
-              </S.ComponentsContainer>
+              <S.RegisterInput
+                label="Cidade:"
+                placeholder="Cidade"
+                disabled={cityLock}
+                value={userCity}
+                onChange={(e) => setUserCity(e.target.value)}
+              />
             </S.InsideDiv>
+
             <S.InsideDiv>
-              <S.ComponentsContainer>
-                <S.Label>UF:</S.Label>
-                <S.RegisterSelect
-                  onChange={(e) => setUserCourse(e.target.value)}
-                  disabled={true}
-                >
-                  <S.SelectOption value="">Estado</S.SelectOption>
-                  <S.SelectOption value="pe">PE</S.SelectOption>
-                  <S.SelectOption value="pb">PB</S.SelectOption>
-                  <S.SelectOption value="ba">BA</S.SelectOption>
-                </S.RegisterSelect>
-              </S.ComponentsContainer>
+              <S.RegisterInput
+                label="UF:"
+                placeholder="UF"
+                disabled={ufLock}
+                value={userUf}
+                onChange={(e) => setUserUf(e.target.value)}
+              />
             </S.InsideDiv>
             <S.InsideDiv>
               <S.RegisterInput
                 label="Bairro:"
                 placeholder="Bairro"
-                disabled={true}
+                disabled={blockLock}
+                value={userBlock}
+                onChange={(e) => setUserBlock(e.target.value)}
               />
             </S.InsideDiv>
             <S.InsideDiv>
-              <S.RegisterInput label="Rua:" placeholder="Rua" disabled={true} />
+              <S.RegisterInput
+                label="Rua:"
+                placeholder="Rua"
+                disabled={streetLock}
+                value={userStreet}
+                onChange={(e) => setUserStreet(e.target.value)}
+              />
             </S.InsideDiv>
             <S.InsideDiv>
               <S.RegisterInput
@@ -307,10 +362,12 @@ export function Register() {
               <S.RegisterInput
                 label="Complemento:"
                 placeholder="Ex: Apartamento 10"
+                onChange={(e) => setUserComplement(e.target.value)}
               />
             </S.InsideDiv>
           </S.InputDiv>
         </S.Div>
+
         <S.ButtonDiv>
           <S.RegisterButton label="Cadastrar" onClick={registerUser} />
         </S.ButtonDiv>

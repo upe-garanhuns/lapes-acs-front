@@ -31,7 +31,9 @@ export const RegisterContainer = styled.div`
   padding: 20px 40px;
 `;
 
-export const Div = styled.div``;
+export const Div = styled.div`
+  width: 100%;
+`;
 
 export const Line = styled.hr`
   border: none;
@@ -49,6 +51,7 @@ export const TitleDiv = styled.div`
   display: flex;
   flex-direction: row;
   width: 100%;
+
   align-items: center;
   align-self: flex-start;
   gap: 8px;
