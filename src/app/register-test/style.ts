@@ -7,4 +7,5 @@ export const ModalContainer = styled(Modal)`
   border-top-right-radius: 12px;
   border-bottom-right-radius: 12px;
   border-bottom-left-radius: 4px;
+  overflow: auto;
 `;

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+import { fetchCep } from '../../services/cep';
 import { checkCourse } from './functions/checkCourse';
 import { checkCPF } from './functions/checkCpf';
 import { checkEmail } from './functions/checkEmail';
@@ -98,7 +99,8 @@ export function Register() {
     setErrorPass(checkPassWord(userPass));
     setErrorSamePass(checkSamePass(userPass, userSamePass));
     setErrorNumber(checkNumber(parseInt(userNumber)));
-    console.log(userCep);
+
+    fetchCep(userCep);
   }
 
   return (

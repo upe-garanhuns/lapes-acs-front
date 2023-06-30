@@ -9,8 +9,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: row;
   gap: 8px;
-  width: 100%;
-  height: 100%;
+  height: max-content;
   background: #eaeaea;
 `;
 
