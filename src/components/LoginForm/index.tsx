@@ -5,9 +5,16 @@ import { useState } from 'react';
 
 import LoginButton from '../LoginButton';
 import { LoginInput } from '../LoginInput';
+import { Register } from '../Register';
 import * as S from './styles';
 
-import { Eye, EyeSlash, LockSimple, User } from '@phosphor-icons/react';
+import {
+  Eye,
+  EyeSlash,
+  LockSimple,
+  User,
+  XCircle
+} from '@phosphor-icons/react';
 
 export default function LoginForm() {
   const [isPasswordVisible, setIsPasswordVisibility] = useState(false);
@@ -15,6 +22,7 @@ export default function LoginForm() {
   const [isValidEmail, setIsValidEmail] = useState<boolean>(true);
   const [isValidPassword, setIsValidPassword] = useState<boolean>(true);
   const [password, setPassword] = useState('');
+  const [OpenRegister, setOpenRegister] = useState(false);
 
   const iconEye = isPasswordVisible ? (
     <Eye size={20} onClick={handlePasswordVisibility} />
@@ -24,6 +32,14 @@ export default function LoginForm() {
 
   function handlePasswordVisibility() {
     setIsPasswordVisibility(!isPasswordVisible);
+  }
+
+  function registerOpen() {
+    setOpenRegister(true);
+  }
+
+  function registerClose() {
+    setOpenRegister(false);
   }
 
   function handleLogin(ev: React.FormEvent<EventTarget>) {
@@ -85,7 +101,14 @@ export default function LoginForm() {
         <LoginButton label="Entrar" type="submit" />
         <S.LinkContainer>
           <S.PasswordRecovery href="">Esqueceu a senha?</S.PasswordRecovery>
-          <S.SignUp href="">Cadastrar</S.SignUp>
+          <S.SignUp onClick={registerOpen}>Cadastrar</S.SignUp>
+          <S.ModalContainer
+            isOpen={OpenRegister}
+            closeModal={registerClose}
+            // eslint-disable-next-line react/no-children-prop
+            children={<Register></Register>}
+            closeText={<XCircle size={32} />}
+          ></S.ModalContainer>
         </S.LinkContainer>
       </S.ButtonContainer>
     </S.Container>

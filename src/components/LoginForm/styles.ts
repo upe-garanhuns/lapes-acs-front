@@ -1,3 +1,5 @@
+import { Modal } from '../Modal';
+
 import styled from 'styled-components';
 
 export const Container = styled.form`
@@ -36,7 +38,16 @@ export const PasswordRecovery = styled.a`
   font-size: 12px;
 `;
 
-export const SignUp = styled.a`
+export const SignUp = styled.button`
   font-weight: 700;
   font-size: 12px;
+`;
+
+export const ModalContainer = styled(Modal)`
+  border-top-left-radius: 4px;
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+  border-bottom-left-radius: 4px;
+  height: 100%;
+  overflow: auto;
 `;
