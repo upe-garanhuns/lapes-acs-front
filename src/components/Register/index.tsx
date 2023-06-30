@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import { fetchWrapper } from '../../services/api';
 import { Endereco } from '../../services/cep/types';
+import { checkCep } from './functions/checkCep';
 import { checkCourse } from './functions/checkCourse';
 import { checkCPF } from './functions/checkCpf';
 import { checkEmail } from './functions/checkEmail';
@@ -16,6 +17,7 @@ import * as S from './style';
 import { MapPin, User, Eye, EyeSlash } from '@phosphor-icons/react';
 
 export function Register() {
+  // hooks usados para setar mensagem de erros dos inputs - jamu
   const [errorName, setErrorName] = useState<boolean>(false);
   const [errorCpf, setErrorCpf] = useState<boolean>(false);
   const [errorPhone, setErrorPhone] = useState<boolean>(false);
@@ -25,7 +27,9 @@ export function Register() {
   const [errorPass, setErrorPass] = useState<boolean>(false);
   const [errorSamePass, setErrorSamePass] = useState<boolean>(false);
   const [errorNumber, setErrorNumber] = useState<boolean>(false);
+  const [errorCep, setErrorCep] = useState<boolean>(false);
 
+  // hooks para capturar os valores setados nos inputs - jamu
   const [userName, setUserName] = useState<string>('');
   const [userCpf, setUserCpf] = useState<string>('');
   const [userPhone, setUserPhone] = useState<string>('');
@@ -42,67 +46,107 @@ export function Register() {
   const [userStreet, setUserStreet] = useState<string>('');
   const [userComplement, setUserComplement] = useState<string>('');
 
+  //hook para o botão de visualizar senha - jamu
   const [visibility, setVisibility] = useState<boolean>(false);
 
+  //hooks para ativar e desativar inputs - jamu
   const [cityLock, setCityLock] = useState<boolean>(true);
-
   const [ufLock, setUfLock] = useState<boolean>(true);
-
   const [blockLock, setBlockLock] = useState<boolean>(true);
-
   const [streetLock, setStreetLock] = useState<boolean>(true);
 
+  //funções de handle para captar os valores dos input - jamu
   const handleChangeName = (e) => {
     const { value } = e.target;
     setUserName(value);
+    setErrorName(!checkName(value));
   };
 
   const handleChangeCpf = (e) => {
     const { value } = e.target;
-
     setUserCpf(value);
+    setErrorCpf(checkCPF(value));
   };
 
   const handleChangePhone = (e) => {
     const { value } = e.target;
     setUserPhone(value);
+    setErrorPhone(checkPhone(value));
   };
 
   const handleChangeGrade = (e) => {
     const { value } = e.target;
     setUserGrade(value);
-    setErrorGrade(checkGrade(parseInt(userGrade)));
+    setErrorGrade(checkGrade(parseInt(value)));
   };
 
   const handleChangeEmail = (e) => {
     const { value } = e.target;
     setUserEmail(value);
+    setErrorEmail(checkEmail(value));
   };
 
   const handleChangePass = (e) => {
     const { value } = e.target;
     setUserPass(value);
+    setErrorPass(checkPassWord(value));
   };
 
   const handleChangeSamePass = (e) => {
     const { value } = e.target;
     setUserSamePass(value);
+    setErrorSamePass(checkSamePass(userPass, value));
   };
 
   const handleChangeNumber = (e) => {
     const { value } = e.target;
     setUserNumber(value);
+    setErrorNumber(checkNumber(parseInt(value)));
+  };
+
+  const handleChangeCourser = (e) => {
+    const { value } = e.target;
+    setUserCourse(value);
+    setErrorCourse(checkCourse(value));
   };
 
   const handleChangeCEP = (e) => {
     const { value } = e.target;
     setUserCep(value);
+    setErrorCep(checkCep(value));
+
+    if (checkCep(value)) {
+      fetchCep(value);
+    }
+  };
+
+  const handleChangeCity = (e) => {
+    const { value } = e.target;
+    setUserCity(value);
+  };
+  const handleChangeUf = (e) => {
+    const { value } = e.target;
+    setUserUf(value);
+  };
+  const handleChangeBlock = (e) => {
+    const { value } = e.target;
+    setUserBlock(value);
+  };
+  const handleChangeStreet = (e) => {
+    const { value } = e.target;
+    setUserStreet(value);
+  };
+
+  const handleChangeComplement = (e) => {
+    const { value } = e.target;
+    setUserComplement(value);
   };
 
   const handleTogglePassVisibility = () => {
     setVisibility(!visibility);
   };
 
+  //chamada da api do cep - jamu
   const fetchCep = async (cep: string): Promise<void> => {
     await fetchWrapper<Endereco>(`api/endereco/${cep}`)
       .then((data) => {
@@ -114,6 +158,8 @@ export function Register() {
       })
       .catch((err) => console.log(err));
   };
+
+  //Funções de check da resposta da api do cep para cada campo - jamu
 
   const checkCity = (name: string) => {
     if (name === '') {
@@ -146,29 +192,25 @@ export function Register() {
     setUserStreet(name);
   };
 
+  //função disparda quando botão cadastrar é acionado - jamu
+
   function registerUser() {
-    setErrorName(!checkName(userName));
-    setErrorCourse(checkCourse(userCourse));
-    setErrorCpf(checkCPF(userCpf));
-    setErrorPhone(checkPhone(userPhone));
-    setErrorEmail(checkEmail(userEmail));
-    setErrorGrade(checkGrade(parseInt(userGrade)));
-    setErrorPass(checkPassWord(userPass));
-    setErrorSamePass(checkSamePass(userPass, userSamePass));
-    setErrorNumber(checkNumber(parseInt(userNumber)));
-    fetchCep(userCep);
+    console.log(
+      `Nome: ${userName}, cpf: ${userCpf}, telefone: ${userPhone}, curso: ${userCourse}, periodo: ${userGrade}, email: ${userEmail}, senha: ${userPass}, senha2: ${userSamePass}, cep: ${userCep}, cidade: ${userCity}, uf: ${userUf},bairro: ${userBlock}, rua: ${userStreet}, numero: ${userNumber}, complemento: ${userComplement}`
+    );
   }
 
   return (
     <S.Container>
-      <S.BlueBarContainer />
+      {/* container principal */}
+      <S.BlueBarContainer /> {/* barra azul lateral */}
+      {/* constainer com o regsitro inteiro*/}
       <S.RegisterContainer>
+        {/* */}
         <S.Div>
           <S.RegisterTitle $principal>Cadastro</S.RegisterTitle>
         </S.Div>
-
         <S.Line />
-
         <S.Div>
           {/* Registro do usuário*/}
           <S.TitleDiv>
@@ -217,9 +259,7 @@ export function Register() {
             <S.InsideDiv>
               <S.ComponentsContainer>
                 <S.Label>Cursos:</S.Label>
-                <S.RegisterSelect
-                  onChange={(e) => setUserCourse(e.target.value)}
-                >
+                <S.RegisterSelect onChange={handleChangeCourser}>
                   <S.SelectOption value="">Cursos</S.SelectOption>
                   <S.SelectOption value="es">
                     Engenharia de software
@@ -293,7 +333,6 @@ export function Register() {
             </S.InsideDiv>
           </S.InputDiv>
         </S.Div>
-
         <S.Div>
           {/* Registro do endereço*/}
           <S.TitleDiv>
@@ -309,6 +348,9 @@ export function Register() {
                   placeholder="_____-___"
                   onChange={handleChangeCEP}
                 />
+                {!errorCep && (
+                  <S.ErroMessage>*Insira um cep valido</S.ErroMessage>
+                )}
               </S.ComponentsContainer>
             </S.InsideDiv>
             <S.InsideDiv>
@@ -317,7 +359,7 @@ export function Register() {
                 placeholder="Cidade"
                 disabled={cityLock}
                 value={userCity}
-                onChange={(e) => setUserCity(e.target.value)}
+                onChange={handleChangeCity}
               />
             </S.InsideDiv>
 
@@ -327,7 +369,7 @@ export function Register() {
                 placeholder="UF"
                 disabled={ufLock}
                 value={userUf}
-                onChange={(e) => setUserUf(e.target.value)}
+                onChange={handleChangeUf}
               />
             </S.InsideDiv>
             <S.InsideDiv>
@@ -336,7 +378,7 @@ export function Register() {
                 placeholder="Bairro"
                 disabled={blockLock}
                 value={userBlock}
-                onChange={(e) => setUserBlock(e.target.value)}
+                onChange={handleChangeBlock}
               />
             </S.InsideDiv>
             <S.InsideDiv>
@@ -345,7 +387,7 @@ export function Register() {
                 placeholder="Rua"
                 disabled={streetLock}
                 value={userStreet}
-                onChange={(e) => setUserStreet(e.target.value)}
+                onChange={handleChangeStreet}
               />
             </S.InsideDiv>
             <S.InsideDiv>
@@ -362,12 +404,11 @@ export function Register() {
               <S.RegisterInput
                 label="Complemento:"
                 placeholder="Ex: Apartamento 10"
-                onChange={(e) => setUserComplement(e.target.value)}
+                onChange={handleChangeComplement}
               />
             </S.InsideDiv>
           </S.InputDiv>
         </S.Div>
-
         <S.ButtonDiv>
           <S.RegisterButton label="Cadastrar" onClick={registerUser} />
         </S.ButtonDiv>

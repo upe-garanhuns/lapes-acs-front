@@ -2,6 +2,7 @@ export function checkCPF(cpf: string): boolean {
   cpf = cpf.replace(/[^\d]/g, ''); // Remove caracteres não numéricos
 
   if (cpf.length !== 11) {
+    console.log('false');
     return false;
   }
 
