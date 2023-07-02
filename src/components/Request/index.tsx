@@ -49,17 +49,22 @@ export const Modal = ({
           <S.CloseButton onClick={closeModal}>Fechar</S.CloseButton>
           <S.Title>Etapa 1 de 2 - Anexar certificados</S.Title>
           <S.Subtitle>Barema</S.Subtitle>
-          <S.FileInput type="file" onChange={handleFileUpload} multiple />
-          <S.FileList>
-            {uploadedFiles.map((file, index) => (
-              <S.FileItem key={index}>
-                <S.FileName>{file.name}</S.FileName>
-                <S.FileRemoveButton onClick={() => handleRemoveFile(index)}>
-                  x
-                </S.FileRemoveButton>
-              </S.FileItem>
-            ))}
-          </S.FileList>
+          <S.FileInputContainer>
+            <S.FileInput type="file" onChange={handleFileUpload} multiple />
+          </S.FileInputContainer>
+          <S.FileListContainer>
+            <S.FileList>
+              {uploadedFiles.map((file, index) => (
+                <S.FileItem key={index}>
+                  <S.FileName>{file.name}</S.FileName>
+                  <S.FileRemoveButton onClick={() => handleRemoveFile(index)}>
+                    x
+                  </S.FileRemoveButton>
+                </S.FileItem>
+              ))}
+            </S.FileList>
+          </S.FileListContainer>
+
           <S.ButtonsContainer>
             <S.CancelButton onClick={handleCancel}>Cancelar</S.CancelButton>
             <S.NextButton onClick={handleNext}>Próximo</S.NextButton>

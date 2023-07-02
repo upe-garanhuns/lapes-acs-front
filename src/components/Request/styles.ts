@@ -19,6 +19,8 @@ export const Container = styled.div`
   border-radius: 4px;
   padding: 20px;
   position: relative;
+  border-radius: 20px;
+  border: 2px solid #253555;
 `;
 
 export const CloseButton = styled.button`
@@ -43,7 +45,24 @@ export const Subtitle = styled.h3`
   margin-bottom: 10px;
 `;
 
+export const FileInputContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+`;
+
 export const FileInput = styled.input`
+  width: 544px;
+  height: 227px;
+  color: #4a4747;
+  background-color: #d9d9d9;
+  border-radius: 15px;
+`;
+
+export const FileListContainer = styled.div`
+  max-height: 200px;
+  overflow-y: auto;
   margin-bottom: 10px;
 `;
 
@@ -59,21 +78,19 @@ export const FileItem = styled.li`
   align-items: center;
   margin-right: 10px;
   margin-bottom: 10px;
+  background-color: #264382;
+  color: #fff;
+  border-radius: 20px;
 `;
 
 export const FileName = styled.span`
   font-size: 14px;
   margin-right: 5px;
   padding: 5px 10px;
-  background-color: #264382;
-  color: #fff;
-  border-radius: 20px;
 `;
 
 export const FileRemoveButton = styled.button`
   color: #fff;
-  background-color: #264382;
-  border-radius: 20px;
   padding: 2px 8px;
   border: none;
   cursor: pointer;
