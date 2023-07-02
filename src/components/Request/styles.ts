@@ -33,8 +33,9 @@ export const CloseButton = styled.button`
 `;
 
 export const Title = styled.h2`
-  font-size: 18px;
+  font-size: 14px;
   margin-bottom: 10px;
+  color: #1c3c78;
 `;
 
 export const Subtitle = styled.h3`
