@@ -398,7 +398,9 @@ export function Register() {
               />
               {!errorPass && (
                 <S.ErroMessage>
-                  *Insira uma senha entre 8 e 16 caracteres
+                  *Insira uma senha entre 8 e 16 caracteres, que possua pelo
+                  menos um número, uma letra maiúscula, uma minúsucla e um
+                  símbolo{' (!@#$%^&*()_+-)'}
                 </S.ErroMessage>
               )}
             </S.InsideDiv>
