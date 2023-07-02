@@ -2,6 +2,8 @@ import { useState } from 'react';
 
 import { fetchWrapper } from '../../services/api';
 import { Endereco } from '../../services/cep/types';
+import { createUser } from '../../services/signUp';
+import { CreateUser } from '../../services/signUp/types';
 import { checkCep } from './functions/checkCep';
 import { checkCourse } from './functions/checkCourse';
 import { checkCPF } from './functions/checkCpf';
@@ -192,9 +194,34 @@ export function Register() {
     setUserStreet(name);
   };
 
+  const signUpData: CreateUser = {
+    nomeCompleto: userName,
+    cpf: userCpf,
+    matricula: '',
+    periodo: parseInt(userGrade),
+    telefone: userPhone,
+    email: userEmail,
+    senha: userPass,
+    cep: userCep,
+    rua: userStreet,
+    bairro: userBlock,
+    cidade: userCity,
+    numero: parseInt(userNumber),
+    cursoId: parseInt(userCourse),
+    uf: userUf
+  };
+
   //função disparda quando botão cadastrar é acionado - jamu
 
-  function registerUser() {
+  async function registerUser() {
+    try {
+      await createUser(signUpData);
+      alert('Acesse o e-mail cadastrado para verificar a sua conta!');
+    } catch (error) {
+      alert('Houve algum erro ao tentar se cadastrar!');
+      console.log(error);
+    }
+
     console.log(
       `Nome: ${userName}, cpf: ${userCpf}, telefone: ${userPhone}, curso: ${userCourse}, periodo: ${userGrade}, email: ${userEmail}, senha: ${userPass}, senha2: ${userSamePass}, cep: ${userCep}, cidade: ${userCity}, uf: ${userUf},bairro: ${userBlock}, rua: ${userStreet}, numero: ${userNumber}, complemento: ${userComplement}`
     );
@@ -261,10 +288,10 @@ export function Register() {
                 <S.Label>Cursos:</S.Label>
                 <S.RegisterSelect onChange={handleChangeCourser}>
                   <S.SelectOption value="">Cursos</S.SelectOption>
-                  <S.SelectOption value="es">
+                  <S.SelectOption value="1">
                     Engenharia de software
                   </S.SelectOption>
-                  <S.SelectOption value="lc">
+                  <S.SelectOption value="2">
                     Licenciatura de computação
                   </S.SelectOption>
                 </S.RegisterSelect>
