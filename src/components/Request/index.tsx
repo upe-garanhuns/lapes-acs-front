@@ -58,7 +58,7 @@ export const Modal = ({
                 <S.FileItem key={index}>
                   <S.FileName>{file.name}</S.FileName>
                   <S.FileRemoveButton onClick={() => handleRemoveFile(index)}>
-                    x
+                    X
                   </S.FileRemoveButton>
                 </S.FileItem>
               ))}
