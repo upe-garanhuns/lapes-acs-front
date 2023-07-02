@@ -288,11 +288,71 @@ export function Register() {
                 <S.Label>Cursos:</S.Label>
                 <S.RegisterSelect onChange={handleChangeCourser}>
                   <S.SelectOption value="">Cursos</S.SelectOption>
-                  <S.SelectOption value="1">
+                  <S.SelectOption value="1">Ciências Biológicas</S.SelectOption>
+                  <S.SelectOption value="2">Ciências Sociais</S.SelectOption>
+                  <S.SelectOption value="3">Computação</S.SelectOption>
+                  <S.SelectOption value="4">Educação Física</S.SelectOption>
+                  <S.SelectOption value="5">Geografia</S.SelectOption>
+                  <S.SelectOption value="6">História</S.SelectOption>
+                  <S.SelectOption value="7">
+                    Letras com habilitação em língua portuguesa e espanhola
+                  </S.SelectOption>
+                  <S.SelectOption value="8">
+                    Letras com habilitação em língua portuguesa e inglesa
+                  </S.SelectOption>
+                  <S.SelectOption value="9">
+                    Letras com habilitação em língua portuguesa e suas
+                    literaturas
+                  </S.SelectOption>
+                  <S.SelectOption value="10">Matemática</S.SelectOption>
+                  <S.SelectOption value="11">Pedagogia</S.SelectOption>
+                  <S.SelectOption value="12">Administração</S.SelectOption>
+                  <S.SelectOption value="13">
+                    Ciências biológicas
+                  </S.SelectOption>
+                  <S.SelectOption value="14">Direito</S.SelectOption>
+                  <S.SelectOption value="15">Educação Física</S.SelectOption>
+                  <S.SelectOption value="16">Enfermagem</S.SelectOption>
+                  <S.SelectOption value="17">Engenharia civil</S.SelectOption>
+                  <S.SelectOption value="18">
+                    Engenharia da computação
+                  </S.SelectOption>
+                  <S.SelectOption value="19">
+                    Engenharia de controle e automação
+                  </S.SelectOption>
+                  <S.SelectOption value="20">
                     Engenharia de software
                   </S.SelectOption>
-                  <S.SelectOption value="2">
-                    Licenciatura de computação
+                  <S.SelectOption value="21">
+                    Engenharia elétrica de telecomunicações
+                  </S.SelectOption>
+                  <S.SelectOption value="22">
+                    Engenharia elétrica eletrônica
+                  </S.SelectOption>
+                  <S.SelectOption value="23">
+                    Engenharia elétrica eletrotécnica
+                  </S.SelectOption>
+                  <S.SelectOption value="24">
+                    Engenharia mecânica
+                  </S.SelectOption>
+                  <S.SelectOption value="25">
+                    Física de materiais
+                  </S.SelectOption>
+                  <S.SelectOption value="26">Fisioterapia</S.SelectOption>
+                  <S.SelectOption value="27">Medicina</S.SelectOption>
+                  <S.SelectOption value="28">Nutrição</S.SelectOption>
+                  <S.SelectOption value="29">Odontologia</S.SelectOption>
+                  <S.SelectOption value="30">Psicologia</S.SelectOption>
+                  <S.SelectOption value="31">Saúde coletiva</S.SelectOption>
+                  <S.SelectOption value="32">Serviço social</S.SelectOption>
+                  <S.SelectOption value="33">
+                    Sistemas de informação
+                  </S.SelectOption>
+                  <S.SelectOption value="34">
+                    Terapia ocupacional
+                  </S.SelectOption>
+                  <S.SelectOption value="35">
+                    Tecnologia em logística
                   </S.SelectOption>
                 </S.RegisterSelect>
               </S.ComponentsContainer>
