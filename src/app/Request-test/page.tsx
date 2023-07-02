@@ -21,8 +21,8 @@ export default function RegistePageTest() {
     <div>
       <button onClick={openModal}>Cadastrar</button>
       <Modal
-        width={400}
-        height={300}
+        width={800}
+        height={700}
         isOpen={isOpen}
         closeModal={closeModal}
         className="register-modal"

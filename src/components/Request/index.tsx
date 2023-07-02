@@ -26,6 +26,14 @@ export const Modal = ({
     }
   };
 
+  const handleCancel = () => {
+    closeModal();
+  };
+
+  const handleNext = () => {
+    // Lógica para avançar para a próxima etapa
+  };
+
   if (isOpen) {
     return (
       <S.Overlay>
@@ -39,6 +47,10 @@ export const Modal = ({
               <S.FileName key={index}>{file.name}</S.FileName>
             ))}
           </S.FileList>
+          <S.ButtonsContainer>
+            <S.CancelButton onClick={handleCancel}>Cancelar</S.CancelButton>
+            <S.NextButton onClick={handleNext}>Próximo</S.NextButton>
+          </S.ButtonsContainer>
         </S.Container>
       </S.Overlay>
     );
@@ -46,3 +58,5 @@ export const Modal = ({
 
   return null;
 };
+
+export default Modal;

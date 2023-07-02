@@ -18,13 +18,13 @@ export const Container = styled.div`
   background-color: #fff;
   border-radius: 4px;
   padding: 20px;
-  position: relative; /* Adicionado */
+  position: relative;
 `;
 
 export const CloseButton = styled.button`
   position: absolute;
-  top: 10px; /* Posicionado no topo com margem de 10px */
-  right: 10px; /* Posicionado à direita com margem de 10px */
+  top: 10px;
+  right: 10px;
   background-color: transparent;
   border: none;
   cursor: pointer;
@@ -53,4 +53,31 @@ export const FileList = styled.ul`
 
 export const FileName = styled.li`
   font-size: 14px;
+`;
+export const ButtonsContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+`;
+
+export const CancelButton = styled.button`
+  color: #253555;
+  background-color: #ffffff;
+  border-radius: 20px;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  margin-right: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+`;
+
+export const NextButton = styled.button`
+  color: #ffffff;
+  background-color: #253555;
+  border-radius: 20px;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  margin-right: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 `;
