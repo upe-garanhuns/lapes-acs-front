@@ -22,8 +22,16 @@ export const Modal = ({
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
     if (files) {
-      setUploadedFiles(Array.from(files));
+      setUploadedFiles((prevFiles) => [...prevFiles, ...Array.from(files)]);
     }
+  };
+
+  const handleRemoveFile = (index: number) => {
+    setUploadedFiles((prevFiles) => {
+      const updatedFiles = [...prevFiles];
+      updatedFiles.splice(index, 1);
+      return updatedFiles;
+    });
   };
 
   const handleCancel = () => {
@@ -44,7 +52,12 @@ export const Modal = ({
           <S.FileInput type="file" onChange={handleFileUpload} multiple />
           <S.FileList>
             {uploadedFiles.map((file, index) => (
-              <S.FileName key={index}>{file.name}</S.FileName>
+              <S.FileItem key={index}>
+                <S.FileName>{file.name}</S.FileName>
+                <S.FileRemoveButton onClick={() => handleRemoveFile(index)}>
+                  x
+                </S.FileRemoveButton>
+              </S.FileItem>
             ))}
           </S.FileList>
           <S.ButtonsContainer>

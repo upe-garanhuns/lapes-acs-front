@@ -50,11 +50,35 @@ export const FileInput = styled.input`
 export const FileList = styled.ul`
   list-style-type: none;
   padding: 0;
+  display: flex;
+  flex-wrap: wrap;
 `;
 
-export const FileName = styled.li`
-  font-size: 14px;
+export const FileItem = styled.li`
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+  margin-bottom: 10px;
 `;
+
+export const FileName = styled.span`
+  font-size: 14px;
+  margin-right: 5px;
+  padding: 5px 10px;
+  background-color: #264382;
+  color: #fff;
+  border-radius: 20px;
+`;
+
+export const FileRemoveButton = styled.button`
+  color: #fff;
+  background-color: #264382;
+  border-radius: 20px;
+  padding: 2px 8px;
+  border: none;
+  cursor: pointer;
+`;
+
 export const ButtonsContainer = styled.div`
   display: flex;
   justify-content: center;
