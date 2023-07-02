@@ -42,15 +42,41 @@ export const Modal = ({
     // Lógica para avançar para a próxima etapa
   };
 
+  const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
+    event.preventDefault();
+  };
+
+  const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    const files = event.dataTransfer.files;
+    if (files && files.length > 0) {
+      setUploadedFiles((prevFiles) => [...prevFiles, ...Array.from(files)]);
+    }
+  };
+
   if (isOpen) {
     return (
       <S.Overlay>
-        <S.Container width={width} height={height} className={className}>
+        <S.Container
+          width={width}
+          height={height}
+          className={className}
+          onDragOver={handleDragOver}
+          onDrop={handleDrop}
+        >
           <S.CloseButton onClick={closeModal}>Fechar</S.CloseButton>
           <S.Title>Etapa 1 de 2 - Anexar certificados</S.Title>
           <S.Subtitle>Barema</S.Subtitle>
           <S.FileInputContainer>
-            <S.FileInput type="file" onChange={handleFileUpload} multiple />
+            <S.FileInputLabel htmlFor="selecao-arquivo">
+              Arraste aqui o(s) arquivo(s) desejado(s)
+            </S.FileInputLabel>
+            <S.FileInput
+              id="selecao-arquivo"
+              type="file"
+              onChange={handleFileUpload}
+              multiple
+            />
           </S.FileInputContainer>
           <S.FileListContainer>
             <S.FileList>

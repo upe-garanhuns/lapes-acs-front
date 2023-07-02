@@ -43,6 +43,13 @@ export const Title = styled.h2`
 export const Subtitle = styled.h3`
   font-size: 16px;
   margin-bottom: 10px;
+  margin-left: 110px;
+  background-color: #d9d9d9;
+  color: #1c3c78;
+  border-radius: 20px;
+  padding: 10px 20px;
+  border: none;
+  width: 151px;
 `;
 
 export const FileInputContainer = styled.div`
@@ -52,16 +59,25 @@ export const FileInputContainer = styled.div`
   margin-bottom: 10px;
 `;
 
-export const FileInput = styled.input`
-  width: 544px;
-  height: 227px;
+export const FileInputLabel = styled.label`
+  font-size: 14px;
   color: #4a4747;
   background-color: #d9d9d9;
   border-radius: 15px;
+  width: 544px;
+  height: 227px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+`;
+
+export const FileInput = styled.input`
+  display: none;
 `;
 
 export const FileListContainer = styled.div`
-  max-height: 200px;
+  max-height: 150px;
   overflow-y: auto;
   margin-bottom: 10px;
 `;
@@ -105,6 +121,8 @@ export const ButtonsContainer = styled.div`
 export const CancelButton = styled.button`
   color: #253555;
   background-color: #ffffff;
+  width: 156px;
+  font-size: 16px;
   border-radius: 20px;
   padding: 10px 20px;
   border: none;
@@ -116,6 +134,8 @@ export const CancelButton = styled.button`
 export const NextButton = styled.button`
   color: #ffffff;
   background-color: #253555;
+  width: 156px;
+  font-size: 16px;
   border-radius: 20px;
   padding: 10px 20px;
   border: none;
