@@ -1,3 +1,4 @@
+'use client';
 import SideNavBar from '../../components/sideNavBar';
 
 export default function navbar() {
