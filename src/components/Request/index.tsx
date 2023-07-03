@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 
 import * as S from './styles';
 
+import { XCircle, FileText, FilePlus } from '@phosphor-icons/react';
+
 type ComponentProps = {
   width?: number;
   height?: number;
@@ -64,12 +66,23 @@ export const Modal = ({
           onDragOver={handleDragOver}
           onDrop={handleDrop}
         >
-          <S.CloseButton onClick={closeModal}>Fechar</S.CloseButton>
+          <S.CloseButton onClick={closeModal}>
+            <XCircle color="#FF0000" size={30} />
+          </S.CloseButton>
+
           <S.Title>Etapa 1 de 2 - Anexar certificados</S.Title>
-          <S.Subtitle>Barema</S.Subtitle>
+          <S.Subtitle>
+            <FileText
+              size={24}
+              color="#1C3C78
+            "
+            />
+            Barema
+          </S.Subtitle>
           <S.FileInputContainer>
             <S.FileInputLabel htmlFor="selecao-arquivo">
               Arraste aqui o(s) arquivo(s) desejado(s)
+              <FilePlus size={41} color="#4A4747" />
             </S.FileInputLabel>
             <S.FileInput
               id="selecao-arquivo"
@@ -84,7 +97,7 @@ export const Modal = ({
                 <S.FileItem key={index}>
                   <S.FileName>{file.name}</S.FileName>
                   <S.FileRemoveButton onClick={() => handleRemoveFile(index)}>
-                    X
+                    <XCircle color="#FF0000" size={20} />
                   </S.FileRemoveButton>
                 </S.FileItem>
               ))}

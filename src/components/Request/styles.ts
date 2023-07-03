@@ -15,7 +15,7 @@ export const Overlay = styled.div`
 export const Container = styled.div`
   width: ${(props) => props.width}px;
   height: ${(props) => props.height}px;
-  background-color: #fff;
+  background-color: #eeeded;
   border-radius: 4px;
   padding: 20px;
   position: relative;
@@ -50,6 +50,14 @@ export const Subtitle = styled.h3`
   padding: 10px 20px;
   border: none;
   width: 151px;
+  height: 33px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 `;
 
 export const FileInputContainer = styled.div`
@@ -64,6 +72,8 @@ export const FileInputLabel = styled.label`
   color: #4a4747;
   background-color: #d9d9d9;
   border-radius: 15px;
+  flex-direction: column;
+  gap: 20px;
   width: 544px;
   height: 227px;
   display: flex;
@@ -97,6 +107,8 @@ export const FileItem = styled.li`
   background-color: #264382;
   color: #fff;
   border-radius: 20px;
+  height: 40px;
+  gap: 10px;
 `;
 
 export const FileName = styled.span`
