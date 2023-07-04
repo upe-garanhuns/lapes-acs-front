@@ -1,10 +1,12 @@
 'use client';
 import SideNavBar from '../../components/sideNavBar';
+import * as S from './style';
 
 export default function navbar() {
   return (
-    <div>
+    <S.Div>
       <SideNavBar></SideNavBar>
-    </div>
+      <h1>Tela de usuario</h1>
+    </S.Div>
   );
 }

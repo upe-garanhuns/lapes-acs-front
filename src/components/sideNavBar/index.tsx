@@ -1,16 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
-import { Input } from '../Input';
 import * as S from './style';
 
 import {
   UserCircle,
   MagnifyingGlass,
-  EnvelopeSimple,
-  CalendarBlank,
   Bell,
   Trash,
-  Cube,
   Sun,
   Moon,
   Power
@@ -74,6 +70,7 @@ export default function SideNavBar() {
               </S.LiInsideDiv>
             )}
           </S.LiItems>
+          {/*
           <S.LiItems>
             {!isOpen ? (
               <S.LiInsideDiv isOpen={isOpen} screen={screen}>
@@ -98,6 +95,7 @@ export default function SideNavBar() {
               </S.LiInsideDiv>
             )}
           </S.LiItems>
+          */}
           <S.LiItems>
             {!isOpen ? (
               <S.LiInsideDiv isOpen={isOpen} screen={screen}>
@@ -105,8 +103,10 @@ export default function SideNavBar() {
               </S.LiInsideDiv>
             ) : (
               <S.LiInsideDiv isOpen={isOpen} screen={screen}>
-                <Bell size={24} />
-                <p>notificacoes</p>
+                <S.navBarLink>
+                  <Bell size={24} />
+                  <S.PLink>notificação</S.PLink>
+                </S.navBarLink>
               </S.LiInsideDiv>
             )}
           </S.LiItems>
@@ -117,15 +117,20 @@ export default function SideNavBar() {
               </S.LiInsideDiv>
             ) : (
               <S.LiInsideDiv isOpen={isOpen} screen={screen}>
-                <Trash size={24} />
-                <p>lixeira</p>
+                <S.navBarLink>
+                  <Trash size={24} />
+                  <S.PLink>lixeira</S.PLink>
+                </S.navBarLink>
               </S.LiInsideDiv>
             )}
           </S.LiItems>
         </S.UlItems>
       </S.Div>
+      {/*
       <S.Line screen={screen} isOpen={isOpen} />
+      */}
       <S.Div>
+        {/*
         <S.ItemsCounter>Serviços:</S.ItemsCounter>
         <S.UlItems>
           <S.LiItems>
@@ -164,7 +169,7 @@ export default function SideNavBar() {
               </S.LiInsideDiv>
             )}
           </S.LiItems>
-        </S.UlItems>
+        </S.UlItems>*/}
       </S.Div>
       <S.Line screen={screen} isOpen={isOpen} />
       <S.Div>

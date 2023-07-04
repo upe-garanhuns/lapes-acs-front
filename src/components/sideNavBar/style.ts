@@ -73,8 +73,7 @@ export const LiInsideDiv = styled.div<navOpen>`
     `
     justify-content:flex-start; 
     width: max-content;
-    margin: 2px 6px 2px 2px;
-    padding: 0px 2px;
+    
 
    
     
@@ -82,10 +81,23 @@ export const LiInsideDiv = styled.div<navOpen>`
 
   &:hover {
     background: #f1f2f6;
-    ${({ isOpen }) => isOpen && `background: rgba(223, 228, 234,0.5);`}
+    ${({ screen }) => screen && `background: rgba(223, 228, 234,0.5);`}
   }
 `;
 
 export const NavInput = styled(Input)`
     background = red;
+`;
+
+export const navBarLink = styled.a`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+`;
+
+export const PLink = styled.p`
+  margin: 0px;
 `;
