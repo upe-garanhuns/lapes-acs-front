@@ -4,7 +4,6 @@ import styled from 'styled-components';
 
 interface navOpen {
   isOpen: boolean;
-  screen: boolean;
 }
 
 export const Container = styled.aside<navOpen>`
@@ -13,19 +12,16 @@ export const Container = styled.aside<navOpen>`
   padding: 10px;
   border-radius: 16px;
   margin: 8px;
-  position: fixed;
+  position: absolute;
+  background: #fff;
 
   ${({ isOpen }) => isOpen && `box-shadow: 0 25px 50px 12px rgb(0 0 0 / 0.25);`}
-
-  ${({ screen }) => screen && `background:#253555; color:#fff;`}
 `;
 
 export const Line = styled.hr<navOpen>`
   border: none;
   border-top: 1px solid #253555;
   width: 100%;
-
-  ${({ screen }) => screen && `border-top: 1px solid #fff;`}
 `;
 
 export const Div = styled.div``;
@@ -81,7 +77,6 @@ export const LiInsideDiv = styled.div<navOpen>`
 
   &:hover {
     background: #f1f2f6;
-    ${({ screen }) => screen && `background: rgba(223, 228, 234,0.5);`}
   }
 `;
 

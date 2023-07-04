@@ -14,7 +14,6 @@ import {
 
 export default function SideNavBar() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [screen, setScreen] = useState<boolean>(false);
 
   const openCloseNav = () => {
     if (isOpen == false) {
@@ -25,16 +24,8 @@ export default function SideNavBar() {
     console.log(isOpen);
   };
 
-  const dayNightScreen = () => {
-    if (screen == false) {
-      setScreen(true);
-    } else {
-      setScreen(false);
-    }
-  };
-
   return (
-    <S.Container screen={screen} isOpen={isOpen}>
+    <S.Container isOpen={isOpen}>
       <S.PerfilDiv>
         {!isOpen ? (
           <S.PerfilDivInside>
@@ -54,55 +45,30 @@ export default function SideNavBar() {
           </S.PerfilDivInside>
         )}
       </S.PerfilDiv>
-      <S.Line screen={screen} isOpen={isOpen} />
+      <S.Line isOpen={isOpen} />
       <S.Div>
         <S.ItemsCounter>Menu:</S.ItemsCounter>
         <S.UlItems id="ul1">
           <S.LiItems>
             {!isOpen ? (
-              <S.LiInsideDiv isOpen={isOpen} screen={screen}>
+              <S.LiInsideDiv isOpen={isOpen}>
                 <MagnifyingGlass size={24} />
               </S.LiInsideDiv>
             ) : (
-              <S.LiInsideDiv isOpen={isOpen} screen={screen}>
+              <S.LiInsideDiv isOpen={isOpen}>
                 <MagnifyingGlass size={24} />
                 <S.NavInput placeholder="buscar" />
               </S.LiInsideDiv>
             )}
           </S.LiItems>
-          {/*
+
           <S.LiItems>
             {!isOpen ? (
-              <S.LiInsideDiv isOpen={isOpen} screen={screen}>
-                <CalendarBlank size={24} />
-              </S.LiInsideDiv>
-            ) : (
-              <S.LiInsideDiv isOpen={isOpen} screen={screen}>
-                <CalendarBlank size={24} />
-                <p>calendario</p>
-              </S.LiInsideDiv>
-            )}
-          </S.LiItems>
-          <S.LiItems>
-            {!isOpen ? (
-              <S.LiInsideDiv isOpen={isOpen} screen={screen}>
-                <EnvelopeSimple size={24} />
-              </S.LiInsideDiv>
-            ) : (
-              <S.LiInsideDiv isOpen={isOpen} screen={screen}>
-                <EnvelopeSimple size={24} />
-                <p>requisicoes</p>
-              </S.LiInsideDiv>
-            )}
-          </S.LiItems>
-          */}
-          <S.LiItems>
-            {!isOpen ? (
-              <S.LiInsideDiv isOpen={isOpen} screen={screen}>
+              <S.LiInsideDiv isOpen={isOpen}>
                 <Bell size={24} />
               </S.LiInsideDiv>
             ) : (
-              <S.LiInsideDiv isOpen={isOpen} screen={screen}>
+              <S.LiInsideDiv isOpen={isOpen}>
                 <S.navBarLink>
                   <Bell size={24} />
                   <S.PLink>notificação</S.PLink>
@@ -112,11 +78,11 @@ export default function SideNavBar() {
           </S.LiItems>
           <S.LiItems>
             {!isOpen ? (
-              <S.LiInsideDiv isOpen={isOpen} screen={screen}>
+              <S.LiInsideDiv isOpen={isOpen}>
                 <Trash size={24} />
               </S.LiInsideDiv>
             ) : (
-              <S.LiInsideDiv isOpen={isOpen} screen={screen}>
+              <S.LiInsideDiv isOpen={isOpen}>
                 <S.navBarLink>
                   <Trash size={24} />
                   <S.PLink>lixeira</S.PLink>
@@ -126,71 +92,18 @@ export default function SideNavBar() {
           </S.LiItems>
         </S.UlItems>
       </S.Div>
-      {/*
-      <S.Line screen={screen} isOpen={isOpen} />
-      */}
-      <S.Div>
-        {/*
-        <S.ItemsCounter>Serviços:</S.ItemsCounter>
-        <S.UlItems>
-          <S.LiItems>
-            {!isOpen ? (
-              <S.LiInsideDiv isOpen={isOpen} screen={screen}>
-                <Cube size={24} />
-              </S.LiInsideDiv>
-            ) : (
-              <S.LiInsideDiv isOpen={isOpen} screen={screen}>
-                <Cube size={24} />
-                <p>notificacoes</p>
-              </S.LiInsideDiv>
-            )}
-          </S.LiItems>
-          <S.LiItems>
-            {!isOpen ? (
-              <S.LiInsideDiv isOpen={isOpen} screen={screen}>
-                <Cube size={24} />
-              </S.LiInsideDiv>
-            ) : (
-              <S.LiInsideDiv isOpen={isOpen} screen={screen}>
-                <Cube size={24} />
-                <p>notificacoes</p>
-              </S.LiInsideDiv>
-            )}
-          </S.LiItems>
-          <S.LiItems>
-            {!isOpen ? (
-              <S.LiInsideDiv isOpen={isOpen} screen={screen}>
-                <Cube size={24} />
-              </S.LiInsideDiv>
-            ) : (
-              <S.LiInsideDiv isOpen={isOpen} screen={screen}>
-                <Cube size={24} />
-                <p>notificacoes</p>
-              </S.LiInsideDiv>
-            )}
-          </S.LiItems>
-        </S.UlItems>*/}
-      </S.Div>
-      <S.Line screen={screen} isOpen={isOpen} />
+
+      <S.Line isOpen={isOpen} />
       <S.Div>
         <S.UlItems>
           <S.LiItems>
-            <S.LiInsideDiv
-              isOpen={isOpen}
-              screen={screen}
-              onClick={dayNightScreen}
-            >
-              {!screen ? <Sun size={24} /> : <Moon size={24} />}
-            </S.LiInsideDiv>
-          </S.LiItems>
-          <S.LiItems>
             {!isOpen ? (
-              <S.LiInsideDiv isOpen={isOpen} screen={screen}>
-                <Power size={24} color="#ff0000" />
+              <S.LiInsideDiv isOpen={isOpen}>
+                <Power size={24} />
               </S.LiInsideDiv>
             ) : (
-              <S.LiInsideDiv isOpen={isOpen} screen={screen}>
-                <Power size={24} color="#ff0000" />
+              <S.LiInsideDiv isOpen={isOpen}>
+                <Power size={24} />
                 <p>Sair</p>
               </S.LiInsideDiv>
             )}
