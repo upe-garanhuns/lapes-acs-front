@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import * as S from './style';
 
-import { UserCircle, Bell, Trash, Power } from '@phosphor-icons/react';
+import { User, Bell, Trash, Power } from '@phosphor-icons/react';
 
 export default function SideNavBar() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -21,15 +21,15 @@ export default function SideNavBar() {
       <S.PerfilDiv>
         {!isOpen ? (
           <S.PerfilDivInside>
-            <p onClick={openCloseNav}>
-              <UserCircle size={32} weight="bold" />
-            </p>
+            <S.PerfilIcon onClick={openCloseNav}>
+              <User size={24} weight="bold" color="#000" />
+            </S.PerfilIcon>
           </S.PerfilDivInside>
         ) : (
           <S.PerfilDivInside>
-            <p onClick={openCloseNav}>
-              <UserCircle size={32} weight="bold" />
-            </p>
+            <S.PerfilIcon onClick={openCloseNav}>
+              <User size={32} weight="bold" color="#000" />
+            </S.PerfilIcon>
             <S.Div>
               <p>Nome Aluno</p>
               <p>curso upe</p>
@@ -39,7 +39,6 @@ export default function SideNavBar() {
       </S.PerfilDiv>
       <S.Line isOpen={isOpen} />
       <S.Div>
-        <S.ItemsCounter>Menu:</S.ItemsCounter>
         <S.UlItems id="ul1">
           <S.LiItems>
             {!isOpen ? (
@@ -48,7 +47,7 @@ export default function SideNavBar() {
               </S.LiInsideDiv>
             ) : (
               <S.LiInsideDiv isOpen={isOpen}>
-                <S.navBarLink>
+                <S.navBarLink href="/">
                   <Bell size={24} />
                   <S.PLink>notificação</S.PLink>
                 </S.navBarLink>
@@ -62,7 +61,7 @@ export default function SideNavBar() {
               </S.LiInsideDiv>
             ) : (
               <S.LiInsideDiv isOpen={isOpen}>
-                <S.navBarLink>
+                <S.navBarLink href="/">
                   <Trash size={24} />
                   <S.PLink>lixeira</S.PLink>
                 </S.navBarLink>

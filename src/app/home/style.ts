@@ -11,5 +11,5 @@ export const NavDiv = styled.div``;
 
 export const ContentDiv = styled.div`
   width: 100%;
-  margin-left: 90px;
+  margin-left: 100px;
 `;
