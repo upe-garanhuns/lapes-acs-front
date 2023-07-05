@@ -13,7 +13,7 @@ export default function navbar() {
         <h1>Tela de usuario</h1>
         <h1>Tela de usuario</h1>
         <h1>Tela de usuario</h1>
-        <h1>Tela de usuario</h1>
+        <h1>Tela de home</h1>
       </S.ContentDiv>
     </S.Container>
   );
