@@ -1,3 +1,4 @@
+import { ActiveLink } from '../ActiveLink';
 import { Input } from '../Input';
 
 import styled from 'styled-components';
@@ -39,9 +40,22 @@ export const BlankDiv = styled.div`
 
 export const PerfilDiv = styled.div`
   width: 100%;
+  height: 100%;
+
   display: flex;
   flex-direction: row;
   justify-content: center;
+`;
+
+export const PerfilIcon = styled.span`
+  background: #fff;
+  width: max-content;
+  height: max-content;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px;
 `;
 
 export const PerfilDivInside = styled.div`
@@ -92,7 +106,7 @@ export const NavInput = styled(Input)`
     background = red;
 `;
 
-export const navBarLink = styled.a`
+export const navBarLink = styled(ActiveLink)`
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -100,6 +114,10 @@ export const navBarLink = styled.a`
   align-items: center;
   padding: 0px;
   cursor: pointer;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 400;
+  text-transform: lowercase;
 `;
 
 export const PLink = styled.p`
