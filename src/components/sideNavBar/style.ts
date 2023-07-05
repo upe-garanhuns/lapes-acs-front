@@ -9,22 +9,33 @@ interface navOpen {
 export const Container = styled.aside<navOpen>`
   width: max-content;
   box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  padding: 10px;
   border-radius: 16px;
-  margin: 8px;
+  margin: 4px 4px 4px 4px;
+  background: linear-gradient(135deg, rgba(37, 53, 85, 0.75) 50%, #253555 100%);
+  color: #fff;
+  backdrop-filter: blur(8px);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
   position: absolute;
-  background: #fff;
 
-  ${({ isOpen }) => isOpen && `box-shadow: 0 25px 50px 12px rgb(0 0 0 / 0.25);`}
+  ${({ isOpen }) =>
+    isOpen &&
+    ` box-shadow: 0 25px 50px 12px rgb(0 0 0 / 0.25); 
+    `};
 `;
 
 export const Line = styled.hr<navOpen>`
   border: none;
-  border-top: 1px solid #253555;
+  border-top: 1px solid #fff;
   width: 100%;
 `;
 
 export const Div = styled.div``;
+
+export const BlankDiv = styled.div`
+  height: 160px;
+`;
 
 export const PerfilDiv = styled.div`
   width: 100%;
@@ -38,6 +49,7 @@ export const PerfilDivInside = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  gap: 12px;
 `;
 
 export const ItemsCounter = styled.p`
@@ -69,14 +81,10 @@ export const LiInsideDiv = styled.div<navOpen>`
     `
     justify-content:flex-start; 
     width: max-content;
-    
-
-   
-    
   `}
 
   &:hover {
-    background: #f1f2f6;
+    background: rgba(223, 228, 234, 0.5);
   }
 `;
 
@@ -91,6 +99,7 @@ export const navBarLink = styled.a`
   justify-content: center;
   align-items: center;
   padding: 0px;
+  cursor: pointer;
 `;
 
 export const PLink = styled.p`

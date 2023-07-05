@@ -2,15 +2,7 @@ import { useState } from 'react';
 
 import * as S from './style';
 
-import {
-  UserCircle,
-  MagnifyingGlass,
-  Bell,
-  Trash,
-  Sun,
-  Moon,
-  Power
-} from '@phosphor-icons/react';
+import { UserCircle, Bell, Trash, Power } from '@phosphor-icons/react';
 
 export default function SideNavBar() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -52,19 +44,6 @@ export default function SideNavBar() {
           <S.LiItems>
             {!isOpen ? (
               <S.LiInsideDiv isOpen={isOpen}>
-                <MagnifyingGlass size={24} />
-              </S.LiInsideDiv>
-            ) : (
-              <S.LiInsideDiv isOpen={isOpen}>
-                <MagnifyingGlass size={24} />
-                <S.NavInput placeholder="buscar" />
-              </S.LiInsideDiv>
-            )}
-          </S.LiItems>
-
-          <S.LiItems>
-            {!isOpen ? (
-              <S.LiInsideDiv isOpen={isOpen}>
                 <Bell size={24} />
               </S.LiInsideDiv>
             ) : (
@@ -90,9 +69,16 @@ export default function SideNavBar() {
               </S.LiInsideDiv>
             )}
           </S.LiItems>
+          <S.BlankDiv></S.BlankDiv>
         </S.UlItems>
       </S.Div>
 
+      <S.Line isOpen={isOpen} />
+      <S.BlankDiv>
+        <S.UlItems>
+          <S.LiItems></S.LiItems>
+        </S.UlItems>
+      </S.BlankDiv>
       <S.Line isOpen={isOpen} />
       <S.Div>
         <S.UlItems>
