@@ -3,7 +3,7 @@
 import SideNavBar from '../../components/sideNavBar';
 import * as S from './style';
 
-export default function navbar() {
+export default function Home() {
   return (
     <S.Container>
       <S.NavDiv>
