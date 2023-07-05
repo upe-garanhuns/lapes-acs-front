@@ -44,4 +44,8 @@ export const GlobalStyle = createGlobalStyle`
     border: none;
     outline: none;
   }
+
+  p {
+    margin:0px;
+  }
 `;
