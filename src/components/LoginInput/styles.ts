@@ -3,8 +3,16 @@ import { colors } from '../../styles/colors';
 import styled from 'styled-components';
 
 export const Input = styled.input`
+  border: none;
+  outline: none;
+  background-color: transparent;
   height: 100%;
   width: 100%;
+  font-size: 15px;
+
+  &::placeholder {
+    color: ${colors.grey[400]};
+  }
 `;
 
 export const Label = styled.label``;
@@ -18,7 +26,11 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   gap: 4px;
-  padding: 6px 5px;
+  width: 22rem;
+  background-color: #ebeced;
+  border-radius: 45px;
+  box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25) inset;
+  padding: 1rem 1rem;
 
   &:focus-within {
     border-color: ${colors.blue[200]};

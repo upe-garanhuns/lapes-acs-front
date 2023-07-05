@@ -1,7 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
-  * {
+  *{
     box-sizing: border-box;
   }
 
@@ -10,12 +10,13 @@ export const GlobalStyle = createGlobalStyle`
     padding: 0;
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
-    background-color: #FFFFFF;
+    background-color: #fff;
+
   }
 
   main {
     margin: 0 auto;
-    max-width: 90vw;
+    max-width: 100vw;
     min-height: 80vh;
   }
 
@@ -43,5 +44,9 @@ export const GlobalStyle = createGlobalStyle`
   input, textarea {
     border: none;
     outline: none;
+  }
+
+  p {
+    margin:0px;
   }
 `;
