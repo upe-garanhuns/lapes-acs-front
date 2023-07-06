@@ -15,7 +15,8 @@ export default function middleware(request: NextRequest) {
   } else {
     if (
       request.nextUrl.pathname === '/:path*' ||
-      request.nextUrl.pathname === '/signin'
+      request.nextUrl.pathname === '/signin' ||
+      request.nextUrl.pathname === '/'
     ) {
       return NextResponse.redirect(homeUrl);
     }
