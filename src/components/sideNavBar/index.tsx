@@ -1,5 +1,6 @@
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 
 import * as S from './style';
 
@@ -21,6 +22,16 @@ export default function SideNavBar() {
 
   function handleLogOut() {
     Cookies.remove('token');
+    toast.error('Sua sessão expirou!', {
+      position: 'top-right',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'light'
+    });
     router.push('/signin');
   }
 

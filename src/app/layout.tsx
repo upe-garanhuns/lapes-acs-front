@@ -1,4 +1,6 @@
 import { Inter } from 'next/font/google';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { StyledComponentRegistry } from '../lib';
 
@@ -17,6 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
+        <ToastContainer />
         <StyledComponentRegistry>
           <main>{children}</main>
         </StyledComponentRegistry>
