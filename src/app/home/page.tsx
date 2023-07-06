@@ -4,6 +4,8 @@ import { RequestList } from '../../components/RequestList';
 import SideNavBar from '../../components/sideNavBar';
 import * as S from './style';
 
+import { FileText } from '@phosphor-icons/react';
+
 export default function Home() {
   return (
     <S.Container>
@@ -15,15 +17,18 @@ export default function Home() {
           <S.UserName>Bem vindo, Fulano!</S.UserName>
           <S.Line />
         </S.TitleDiv>
-        <div>
+        <S.FunctionContainer>
           <div>
             <p>Componente minhas horas</p>
           </div>
           <div>
-            <div>
-              <h2>Solicitacoes em andamento</h2>
-              <p>Barema</p>
-            </div>
+            <S.RequestDiv>
+              <h2>Solicitações em Andamento</h2>
+              <S.BaremaButton>
+                <FileText size={24} weight="bold" />
+                <p>Barema</p>
+              </S.BaremaButton>
+            </S.RequestDiv>
             <div>
               <p>Botao nova solicitacao</p>
               <p>input pesquisa</p>
@@ -39,7 +44,7 @@ export default function Home() {
               />
             </div>
           </div>
-        </div>
+        </S.FunctionContainer>
       </S.ContentDiv>
     </S.Container>
   );
