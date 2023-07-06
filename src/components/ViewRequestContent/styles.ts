@@ -22,8 +22,11 @@ export const Division = styled.hr`
 export const GridContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 2fr);
-  grid-column-gap: 5vw;
+  grid-column-gap: 10vw;
   max-width: 650px;
+  @media (max-width: 600px){
+    grid-column-gap: 5vw;
+  }
   }
 `;
 export const Content = styled.div`
@@ -44,13 +47,38 @@ export const Description = styled.p`
     font-size: 13px;
   }
 `;
+
+type CircleProps = {
+  status: string;
+};
+export const StatusCircle = styled.div<CircleProps>`
+  width: 20px;
+  height: 20px;
+  align-content: center;
+  margin-right: 11px;
+  margin-left: 5px;
+  display: flex;
+  border-radius: 50%;
+  background-color: ${(props) => {
+    switch (props.status) {
+      case 'Aceito':
+        return 'green';
+      case 'Negado':
+        return 'red';
+      case 'Em andamento':
+        return 'yellow';
+      default:
+        return 'gray';
+    }
+  }};
+`;
 export const Status = styled.div`
   display: flex;
   align-content: center;
+  align-items: center;
   color: #544d4f;
   flex-wrap: wrap;
-  width: 30vw;
-  max-width: 250px;
+  width: 100%;
   height: 40px;
   border-radius: 20px;
   background-color: #d9d9d9;
@@ -59,19 +87,36 @@ export const Status = styled.div`
 `;
 export const RequestDate = styled(Status)`
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
-  padding-left: 5px;
 `;
 export const HoursAmount = styled(Status)`
+  display: flex;
+  flex-direction: row;
   width: 80px;
   justify-content: center;
   padding-left: 0px;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
+`;
+
+export const HoursName = styled.div`
+  margin-left: 10px;
+`;
+
+export const RowAligner = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 `;
 export const CoordObservation = styled(Status)`
   padding: 10px;
   align-content: flex-start;
   width: 80vw;
   max-width: 650px;
-  height: 100px;
+  height: fit-content;
+  min-height: 40px;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
+`;
+
+export const Certification = styled(GridContainer)`
+  grid-template-columns: repeat(1, 2fr);
+  grid-template-rows: repeat(3, 2fr);
 `;

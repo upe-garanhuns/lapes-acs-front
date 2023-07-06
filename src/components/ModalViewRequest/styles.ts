@@ -6,7 +6,7 @@ export const ModalContainer = styled(Modal)`
   border-radius: 15px;
   height: 90vh;
   overflow: auto;
-  width: 60%;
+  width: 55%;
   padding-top: 15px;
   justify-content: center;
   display: flex;
