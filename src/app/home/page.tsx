@@ -4,7 +4,7 @@ import { RequestList } from '../../components/RequestList';
 import SideNavBar from '../../components/sideNavBar';
 import * as S from './style';
 
-import { FileText } from '@phosphor-icons/react';
+import { FileText, Funnel } from '@phosphor-icons/react';
 
 export default function Home() {
   return (
@@ -21,20 +21,24 @@ export default function Home() {
           <div>
             <p>Componente minhas horas</p>
           </div>
-          <div>
+          <S.Div>
             <S.RequestDiv>
-              <h2>Solicitações em Andamento</h2>
-              <S.BaremaButton>
+              <S.H2Title>Solicitações em Andamento</S.H2Title>
+              <S.IconButton>
                 <FileText size={24} weight="bold" />
-                <p>Barema</p>
-              </S.BaremaButton>
+                <S.Text>Barema</S.Text>
+              </S.IconButton>
             </S.RequestDiv>
-            <div>
-              <p>Botao nova solicitacao</p>
-              <p>input pesquisa</p>
-              <p>Botao filtro</p>
-            </div>
-            <div>
+            <S.NewRequestDiv>
+              <S.NewRequestButton label="Nova Solicitação" />
+              <S.InputRequestDiv>
+                <S.RegisterInput placeholder="Pesquisar" />
+                <S.IconButton>
+                  <Funnel size={28} weight="fill" />
+                </S.IconButton>
+              </S.InputRequestDiv>
+            </S.NewRequestDiv>
+            <S.Div>
               <RequestList
                 status={''}
                 isDraft={false}
@@ -42,8 +46,8 @@ export default function Home() {
                 initialDate={''}
                 hours={0}
               />
-            </div>
-          </div>
+            </S.Div>
+          </S.Div>
         </S.FunctionContainer>
       </S.ContentDiv>
     </S.Container>
