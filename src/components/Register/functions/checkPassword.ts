@@ -1,6 +1,8 @@
-export const checkPassWord = (passaword: string): boolean => {
-  if (passaword.length < 8 || passaword.length > 16) {
-    return false;
-  }
-  return true;
+export const checkPassWord = (password: string): boolean => {
+  const regex = new RegExp(
+    `^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*()_+\\-=[\\]{};':"|,.<>/?]).{8,16}$`,
+    'g'
+  );
+
+  return regex.test(password);
 };

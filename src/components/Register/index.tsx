@@ -2,6 +2,8 @@ import { useState } from 'react';
 
 import { fetchWrapper } from '../../services/api';
 import { Endereco } from '../../services/cep/types';
+import { createUser } from '../../services/signUp';
+import { CreateUser } from '../../services/signUp/types';
 import { checkCep } from './functions/checkCep';
 import { checkCourse } from './functions/checkCourse';
 import { checkCPF } from './functions/checkCpf';
@@ -192,9 +194,34 @@ export function Register() {
     setUserStreet(name);
   };
 
+  const signUpData: CreateUser = {
+    nomeCompleto: userName,
+    cpf: userCpf,
+    matricula: '',
+    periodo: parseInt(userGrade),
+    telefone: userPhone,
+    email: userEmail,
+    senha: userPass,
+    cep: userCep,
+    rua: userStreet,
+    bairro: userBlock,
+    cidade: userCity,
+    numero: parseInt(userNumber),
+    cursoId: parseInt(userCourse),
+    uf: userUf
+  };
+
   //função disparda quando botão cadastrar é acionado - jamu
 
-  function registerUser() {
+  async function registerUser() {
+    try {
+      await createUser(signUpData);
+      alert('Acesse o e-mail cadastrado para verificar a sua conta!');
+    } catch (error) {
+      alert('Houve algum erro ao tentar se cadastrar!');
+      console.log(error);
+    }
+
     console.log(
       `Nome: ${userName}, cpf: ${userCpf}, telefone: ${userPhone}, curso: ${userCourse}, periodo: ${userGrade}, email: ${userEmail}, senha: ${userPass}, senha2: ${userSamePass}, cep: ${userCep}, cidade: ${userCity}, uf: ${userUf},bairro: ${userBlock}, rua: ${userStreet}, numero: ${userNumber}, complemento: ${userComplement}`
     );
@@ -261,11 +288,71 @@ export function Register() {
                 <S.Label>Cursos:</S.Label>
                 <S.RegisterSelect onChange={handleChangeCourser}>
                   <S.SelectOption value="">Cursos</S.SelectOption>
-                  <S.SelectOption value="es">
+                  <S.SelectOption value="1">Ciências Biológicas</S.SelectOption>
+                  <S.SelectOption value="2">Ciências Sociais</S.SelectOption>
+                  <S.SelectOption value="3">Computação</S.SelectOption>
+                  <S.SelectOption value="4">Educação Física</S.SelectOption>
+                  <S.SelectOption value="5">Geografia</S.SelectOption>
+                  <S.SelectOption value="6">História</S.SelectOption>
+                  <S.SelectOption value="7">
+                    Letras com habilitação em língua portuguesa e espanhola
+                  </S.SelectOption>
+                  <S.SelectOption value="8">
+                    Letras com habilitação em língua portuguesa e inglesa
+                  </S.SelectOption>
+                  <S.SelectOption value="9">
+                    Letras com habilitação em língua portuguesa e suas
+                    literaturas
+                  </S.SelectOption>
+                  <S.SelectOption value="10">Matemática</S.SelectOption>
+                  <S.SelectOption value="11">Pedagogia</S.SelectOption>
+                  <S.SelectOption value="12">Administração</S.SelectOption>
+                  <S.SelectOption value="13">
+                    Ciências biológicas
+                  </S.SelectOption>
+                  <S.SelectOption value="14">Direito</S.SelectOption>
+                  <S.SelectOption value="15">Educação Física</S.SelectOption>
+                  <S.SelectOption value="16">Enfermagem</S.SelectOption>
+                  <S.SelectOption value="17">Engenharia civil</S.SelectOption>
+                  <S.SelectOption value="18">
+                    Engenharia da computação
+                  </S.SelectOption>
+                  <S.SelectOption value="19">
+                    Engenharia de controle e automação
+                  </S.SelectOption>
+                  <S.SelectOption value="20">
                     Engenharia de software
                   </S.SelectOption>
-                  <S.SelectOption value="lc">
-                    Licenciatura de computação
+                  <S.SelectOption value="21">
+                    Engenharia elétrica de telecomunicações
+                  </S.SelectOption>
+                  <S.SelectOption value="22">
+                    Engenharia elétrica eletrônica
+                  </S.SelectOption>
+                  <S.SelectOption value="23">
+                    Engenharia elétrica eletrotécnica
+                  </S.SelectOption>
+                  <S.SelectOption value="24">
+                    Engenharia mecânica
+                  </S.SelectOption>
+                  <S.SelectOption value="25">
+                    Física de materiais
+                  </S.SelectOption>
+                  <S.SelectOption value="26">Fisioterapia</S.SelectOption>
+                  <S.SelectOption value="27">Medicina</S.SelectOption>
+                  <S.SelectOption value="28">Nutrição</S.SelectOption>
+                  <S.SelectOption value="29">Odontologia</S.SelectOption>
+                  <S.SelectOption value="30">Psicologia</S.SelectOption>
+                  <S.SelectOption value="31">Saúde coletiva</S.SelectOption>
+                  <S.SelectOption value="32">Serviço social</S.SelectOption>
+                  <S.SelectOption value="33">
+                    Sistemas de informação
+                  </S.SelectOption>
+                  <S.SelectOption value="34">
+                    Terapia ocupacional
+                  </S.SelectOption>
+                  <S.SelectOption value="35">
+                    Tecnologia em logística
                   </S.SelectOption>
                 </S.RegisterSelect>
               </S.ComponentsContainer>
@@ -311,7 +398,9 @@ export function Register() {
               />
               {!errorPass && (
                 <S.ErroMessage>
-                  *Insira uma senha entre 8 e 16 caracteres
+                  *Insira uma senha entre 8 e 16 caracteres, que possua pelo
+                  menos um número, uma letra maiúscula, uma minúsucla e um
+                  símbolo{' (!@#$%^&*()_+-)'}
                 </S.ErroMessage>
               )}
             </S.InsideDiv>

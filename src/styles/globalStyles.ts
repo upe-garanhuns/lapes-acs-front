@@ -11,6 +11,7 @@ export const GlobalStyle = createGlobalStyle`
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
     background-color: #fff;
+
   }
 
   main {
@@ -43,5 +44,9 @@ export const GlobalStyle = createGlobalStyle`
   input, textarea {
     border: none;
     outline: none;
+  }
+
+  p {
+    margin:0px;
   }
 `;
