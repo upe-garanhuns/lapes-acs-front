@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const Title = styled.h1`
   color: #253451;
+  margin-bottom: 0px;
   margin-top: 10px;
   text-align: center;
   font-size: 1.8em;
@@ -116,7 +117,7 @@ export const CoordObservation = styled(Status)`
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
 `;
 
-export const Certification = styled(GridContainer)`
-  grid-template-columns: repeat(1, 2fr);
-  grid-template-rows: repeat(3, 2fr);
+export const PageSelection = styled.div`
+  margin-bottom: 10px;
+  padding-botton: 10px;
 `;

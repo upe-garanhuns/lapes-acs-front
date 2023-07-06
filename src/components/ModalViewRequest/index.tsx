@@ -9,7 +9,7 @@ import { XCircle } from '@phosphor-icons/react';
 import axios from 'axios';
 export default function ModalViewRequest() {
   const [IsOpen, setIsOpen] = useState(false);
-  const [requestData, setRequestData] = useState<ViewRequestProps>({
+  const [certificateData, setCertificateData] = useState<ViewRequestProps>({
     id: 0,
     name: '',
     date: '',
@@ -23,7 +23,7 @@ export default function ModalViewRequest() {
   const openModal = () => {
     setIsOpen(true);
     fetchData().then((data) => {
-      setRequestData(data);
+      setCertificateData(data);
     });
   };
   const fetchData = async () => {
@@ -42,7 +42,7 @@ export default function ModalViewRequest() {
         isOpen={IsOpen}
         closeModal={closeModal}
         // eslint-disable-next-line react/no-children-prop
-        children={<ViewRequest {...requestData} />}
+        children={<ViewRequest {...certificateData} />}
         closeText={<XCircle size={30} color="#FF0000" />}
       ></S.ModalContainer>
     </div>

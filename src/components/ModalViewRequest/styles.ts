@@ -14,7 +14,7 @@ export const ModalContainer = styled(Modal)`
   border: #253555 1px solid;
 
   @media (max-width: 1200px) {
-    width: 85%;
+    width: 95%;
   }
 `;
 
