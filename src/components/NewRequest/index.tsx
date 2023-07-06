@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import * as S from './styles';
+import * as S from './style';
 
 import { XCircle, FileText, FilePlus } from '@phosphor-icons/react';
 
