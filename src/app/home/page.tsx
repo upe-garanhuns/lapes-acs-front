@@ -1,12 +1,24 @@
 'use client';
 
+import { useState } from 'react';
+
+import { NewRequest } from '../../components/NewRequest';
 import { RequestList } from '../../components/RequestList';
 import SideNavBar from '../../components/sideNavBar';
 import * as S from './style';
 
-import { FileText, Funnel } from '@phosphor-icons/react';
+import { FileText, Funnel, XCircle } from '@phosphor-icons/react';
 
 export default function Home() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  function openNewRequestModal() {
+    setIsOpen(true);
+  }
+
+  function closeNewRequestModal() {
+    setIsOpen(false);
+  }
   return (
     <S.Container>
       <S.NavDiv>
@@ -30,7 +42,10 @@ export default function Home() {
               </S.IconButton>
             </S.RequestDiv>
             <S.NewRequestDiv>
-              <S.NewRequestButton label="Nova Solicitação" />
+              <S.NewRequestButton
+                label="Nova Solicitação"
+                onClick={openNewRequestModal}
+              />
               <S.InputRequestDiv>
                 <S.RegisterInput placeholder="Pesquisar" />
                 <S.IconButton>
@@ -46,6 +61,13 @@ export default function Home() {
                 initialDate={''}
                 hours={0}
               />
+              <S.NewRequestModal
+                isOpen={isOpen}
+                closeModal={closeNewRequestModal}
+                // eslint-disable-next-line react/no-children-prop
+                children={<NewRequest cancelRequest={closeNewRequestModal} />}
+                closeText={<XCircle size={32} color="#FF0000" />}
+              ></S.NewRequestModal>
             </S.Div>
           </S.Div>
         </S.FunctionContainer>

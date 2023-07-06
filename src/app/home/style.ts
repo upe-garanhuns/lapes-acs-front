@@ -1,5 +1,6 @@
 import Button from '../../components/Button';
 import { Input } from '../../components/Input';
+import { Modal } from '../../components/Modal';
 
 import styled from 'styled-components';
 
@@ -107,4 +108,8 @@ export const RegisterInput = styled(Input)`
     padding-left: 5px;
     margin-top: 5px;
   }
+`;
+
+export const NewRequestModal = styled(Modal)`
+  border-radius: 24px;
 `;
