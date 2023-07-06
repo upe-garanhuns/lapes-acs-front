@@ -27,7 +27,7 @@ export const Title = styled.h2`
 export const Subtitle = styled.h3`
   font-size: 16px;
   margin-bottom: 10px;
-  margin-left: 110px;
+
   background-color: #d9d9d9;
   color: #1c3c78;
   border-radius: 20px;
@@ -40,6 +40,7 @@ export const Subtitle = styled.h3`
   justify-content: center;
   align-items: center;
   align-self: flex-start;
+  text-align: left;
   gap: 8px;
 
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);

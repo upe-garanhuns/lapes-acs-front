@@ -1,5 +1,6 @@
 import { Inter } from 'next/font/google';
 
+import SideNavBar from '../components/sideNavBar';
 import { StyledComponentRegistry } from '../lib';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -18,6 +19,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <StyledComponentRegistry>
+          <SideNavBar />
           <main>{children}</main>
         </StyledComponentRegistry>
       </body>

@@ -4,7 +4,6 @@ import { useState } from 'react';
 
 import { NewRequest } from '../../components/NewRequest';
 import { RequestList } from '../../components/RequestList';
-import SideNavBar from '../../components/sideNavBar';
 import * as S from './style';
 
 import { FileText, Funnel, XCircle } from '@phosphor-icons/react';
@@ -21,9 +20,6 @@ export default function Home() {
   }
   return (
     <S.Container>
-      <S.NavDiv>
-        <SideNavBar />
-      </S.NavDiv>
       <S.ContentDiv>
         <S.TitleDiv>
           <S.UserName>Bem vindo, Fulano!</S.UserName>
@@ -31,7 +27,7 @@ export default function Home() {
         </S.TitleDiv>
         <S.FunctionContainer>
           <div>
-            <p>Componente minhas horas</p>
+            <p>Componente horas em breve...</p>
           </div>
           <S.Div>
             <S.RequestDiv>

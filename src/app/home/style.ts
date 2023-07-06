@@ -8,17 +8,15 @@ export const Container = styled.div`
   display: flex;
   flex-direction: row;
   width: 100%;
-  height: 100vw;
-  gap: 16px;
+  height: 100vh;
   background: #f1efef;
 `;
 
 export const NavDiv = styled.div``;
 
 export const ContentDiv = styled.div`
-  width: 100%;
+  width: 90%;
   margin-left: 100px;
-  margin-right: 40px;
 `;
 
 export const TitleDiv = styled.div`
@@ -42,8 +40,10 @@ export const Line = styled.hr`
 
 export const FunctionContainer = styled.div`
   background: #fff;
-  padding: 12px;
+  padding: 2vw;
   border-radius: 12px;
+  max-width: 90%;
+  margin: 0 auto;
 `;
 
 export const RequestDiv = styled.div`
@@ -60,7 +60,7 @@ export const IconButton = styled.span`
   background: #d9d9d9;
   width: max-content;
   color: #1c3c78;
-  padding: 4px 8px 4px 8px;
+  padding: 0.3em;
   border-radius: 12px;
   align-items: center;
   box-shadow: 0 2px 2px 3px rgb(180 180 180 / 0.75);
@@ -91,22 +91,22 @@ export const NewRequestButton = styled(Button)`
   color: #fff;
 
   border-radius: 32px;
-  width: 250px;
-  height: 40px;
+  width: 15vw;
+  height: 6vh;
   font-size: 16px;
 `;
 
 export const RegisterInput = styled(Input)`
   border-radius: 20px;
   background: #d9d9d9;
-  height: 40px;
+  height: 5.5vh;
   box-shadow: inset 0 4px 4px 0 rgb(0 0 0 / 0.15);
-  padding: 0px 10px;
+  padding: 0 0.5em;
   &::placeholder {
     font-size: 16px;
     color: #544d4f;
-    padding-left: 5px;
-    margin-top: 5px;
+    padding-left: 0.2em;
+    margin-top: 0.2em;
   }
 `;
 

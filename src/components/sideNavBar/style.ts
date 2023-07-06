@@ -11,11 +11,11 @@ export const Container = styled.aside<navOpen>`
   width: max-content;
   box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   border-radius: 16px;
-  margin: 4px 4px 4px 4px;
+  margin: 0.3rem;
   background: linear-gradient(135deg, rgba(37, 53, 85, 0.75) 50%, #253555 100%);
   color: #fff;
   backdrop-filter: blur(8px);
-  padding: 20px;
+  padding: 1.1rem;
   display: flex;
   flex-direction: column;
   position: absolute;
@@ -35,7 +35,7 @@ export const Line = styled.hr<navOpen>`
 export const Div = styled.div``;
 
 export const BlankDiv = styled.div`
-  height: 160px;
+  height: 20vh;
 `;
 
 export const PerfilDiv = styled.div`
@@ -55,7 +55,7 @@ export const PerfilIcon = styled.span`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 12px;
+  padding: 0.8em;
 `;
 
 export const PerfilDivInside = styled.div`
@@ -86,8 +86,8 @@ export const LiInsideDiv = styled.div<navOpen>`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin: 4px 0px;
-  padding: 6px;
+  margin: 0.3em 0;
+  padding: 0.4rem;
   border-radius: 32px;
 
   ${({ isOpen }) =>
@@ -102,9 +102,7 @@ export const LiInsideDiv = styled.div<navOpen>`
   }
 `;
 
-export const NavInput = styled(Input)`
-    background = red;
-`;
+export const NavInput = styled(Input)``;
 
 export const navBarLink = styled(ActiveLink)`
   width: 100%;
@@ -121,5 +119,5 @@ export const navBarLink = styled(ActiveLink)`
 `;
 
 export const PLink = styled.p`
-  margin: 0px;
+  margin: 0;
 `;
