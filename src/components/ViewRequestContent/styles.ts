@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Title = styled.h1`
+export const RequestTitle = styled.h1`
   color: #253451;
   margin-bottom: 0px;
   margin-top: 10px;
@@ -11,6 +11,15 @@ export const Title = styled.h1`
   }
   @media (max-width: 300px) {
     font-size: 1.3em;
+  }
+`;
+export const CertificateTitle = styled(RequestTitle)`
+  font-size: 1.5em;
+  @media (max-width: 370px) {
+    font-size: 1.2;
+  }
+  @media (max-width: 300px) {
+    font-size: 1em;
   }
 `;
 export const Division = styled.hr`
@@ -114,6 +123,10 @@ export const CoordObservation = styled(Status)`
   max-width: 650px;
   height: fit-content;
   min-height: 40px;
+  max-height: 100px;
+  overflow-y: auto;
+  word-break: break-all;
+  white-space: pre-wrap;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
 `;
 

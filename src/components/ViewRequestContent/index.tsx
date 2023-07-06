@@ -89,7 +89,7 @@ export default function ViewRequestContent(props: ViewRequestProps) {
   const displayedItems = certificateListData.slice(startIndex, endIndex);
   return (
     <div>
-      <S.Title>{name}Solicitação XXX</S.Title>
+      <S.RequestTitle>{name}Solicitação XXX</S.RequestTitle>
       <S.Division />
       <S.GridContainer>
         <S.Content>
@@ -112,11 +112,8 @@ export default function ViewRequestContent(props: ViewRequestProps) {
         </S.Content>
       </S.GridContainer>
       <S.Description>Observações do Coordenador:</S.Description>
-      <S.CoordObservation>
-        {note}Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-        gravida mi in convallis
-      </S.CoordObservation>
-      <S.Title>Certificados:</S.Title>
+      <S.CoordObservation>{note}</S.CoordObservation>
+      <S.CertificateTitle>Certificados:</S.CertificateTitle>
       <S.Division />
       {displayedItems.map((item, index) => (
         <CertificateList key={index} {...item} />
