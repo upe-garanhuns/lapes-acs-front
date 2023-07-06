@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-export default function middleware(request: NextRequest) {
+export const middleware = (request: NextRequest) => {
   const token = request.cookies.get('token')?.value;
 
   const signInUrl = new URL('/signin', request.url);
@@ -21,7 +21,7 @@ export default function middleware(request: NextRequest) {
       return NextResponse.redirect(homeUrl);
     }
   }
-}
+};
 
 export const config = {
   matcher: ['/home/:path*', '/signin', '/', '/lista-requisicoes']
