@@ -1,8 +1,11 @@
 'use client';
 
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
+import { login } from '../../services/signIn';
+import { Login } from '../../services/signIn/types';
 import LoginButton from '../LoginButton';
 import { LoginInput } from '../LoginInput';
 import { Register } from '../Register';
@@ -15,10 +18,14 @@ import {
   User,
   XCircle
 } from '@phosphor-icons/react';
+import Cookies from 'js-cookie';
 
 export default function LoginForm() {
+  const router = useRouter();
   const [isPasswordVisible, setIsPasswordVisibility] = useState(false);
   const [email, setEmail] = useState('');
+  const [isValidEmailAndPassword, setIsValidEmailAndPassword] =
+    useState<boolean>(true);
   const [isValidEmail, setIsValidEmail] = useState<boolean>(true);
   const [isValidPassword, setIsValidPassword] = useState<boolean>(true);
   const [password, setPassword] = useState('');
@@ -29,6 +36,11 @@ export default function LoginForm() {
   ) : (
     <EyeSlash size={20} onClick={handlePasswordVisibility} />
   );
+
+  const signInData: Login = {
+    email: email,
+    senha: password
+  };
 
   function handlePasswordVisibility() {
     setIsPasswordVisibility(!isPasswordVisible);
@@ -42,7 +54,7 @@ export default function LoginForm() {
     setOpenRegister(false);
   }
 
-  function handleLogin(ev: React.FormEvent<EventTarget>) {
+  async function handleLogin(ev: React.FormEvent<EventTarget>) {
     ev.preventDefault();
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -51,7 +63,19 @@ export default function LoginForm() {
     const isPasswordValid = password.length >= 8 && password.length <= 16;
 
     if (isValidEmail && isPasswordValid) {
-      console.log('Email: ' + email + ' senha: ' + password);
+      try {
+        const response = await login(signInData);
+        const tokenDuration = new Date(Date.now() + 1000 * 60 * 48); //48min
+
+        Cookies.set('token', response.token, {
+          expires: tokenDuration
+        });
+        setIsValidEmail(true);
+        router.push('/home');
+      } catch (error) {
+        setIsValidEmailAndPassword(false);
+      }
+      //console.log('Email: ' + email + ' senha: ' + password);
     } else {
       setIsValidPassword(false);
     }
@@ -65,6 +89,11 @@ export default function LoginForm() {
         width={180}
         height={180}
       />
+      {!isValidEmailAndPassword ? (
+        <S.ErrorSpan>Email e/ou senha inválidos</S.ErrorSpan>
+      ) : (
+        <></>
+      )}
       <S.InputContainer>
         <div>
           <LoginInput

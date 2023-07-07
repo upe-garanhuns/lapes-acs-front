@@ -1,12 +1,16 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 
 import * as S from './style';
 
 import { User, Bell, Trash, Power } from '@phosphor-icons/react';
+import Cookies from 'js-cookie';
 
 export default function SideNavBar() {
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const openCloseNav = () => {
@@ -17,6 +21,21 @@ export default function SideNavBar() {
     }
     console.log(isOpen);
   };
+
+  function handleLogOut() {
+    Cookies.remove('token');
+    toast.error('Sua sessão expirou!', {
+      position: 'top-right',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'light'
+    });
+    router.push('/signin');
+  }
 
   return (
     <S.Container isOpen={isOpen}>
@@ -86,11 +105,11 @@ export default function SideNavBar() {
           <S.LiItems>
             {!isOpen ? (
               <S.LiInsideDiv isOpen={isOpen}>
-                <Power size={24} />
+                <Power size={24} onClick={handleLogOut} />
               </S.LiInsideDiv>
             ) : (
               <S.LiInsideDiv isOpen={isOpen}>
-                <Power size={24} />
+                <Power size={24} onClick={handleLogOut} />
                 <p>Sair</p>
               </S.LiInsideDiv>
             )}
