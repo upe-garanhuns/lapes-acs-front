@@ -5,9 +5,10 @@ import React, { useState } from 'react';
 import ViewRequest, { ViewRequestProps } from '../ViewRequestContent';
 import * as S from './styles';
 
-import { XCircle } from '@phosphor-icons/react';
+import { Eye, XCircle } from '@phosphor-icons/react';
 import axios from 'axios';
 export default function ModalViewRequest() {
+  const iconSize = 24;
   const [IsOpen, setIsOpen] = useState(false);
   const [certificateData, setCertificateData] = useState<ViewRequestProps>({
     id: 0,
@@ -37,7 +38,9 @@ export default function ModalViewRequest() {
   };
   return (
     <div>
-      <S.OpenRequest onClick={openModal}>Visualizar</S.OpenRequest>
+      <S.OpenRequest onClick={openModal}>
+        <Eye size={iconSize} />
+      </S.OpenRequest>
       <S.ModalContainer
         isOpen={IsOpen}
         closeModal={closeModal}

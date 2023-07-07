@@ -1,5 +1,8 @@
 import styled from 'styled-components';
 
+export const Container = styled.div`
+  padding: 10px;
+`;
 export const RequestTitle = styled.h1`
   color: #253451;
   margin-bottom: 0px;
@@ -22,6 +25,7 @@ export const CertificateTitle = styled(RequestTitle)`
     font-size: 1em;
   }
 `;
+
 export const Division = styled.hr`
   border-color: #1c3c78;
   border-style: solid;

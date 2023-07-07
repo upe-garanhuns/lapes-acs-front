@@ -89,41 +89,43 @@ export default function ViewRequestContent(props: ViewRequestProps) {
   const displayedItems = certificateListData.slice(startIndex, endIndex);
   return (
     <div>
-      <S.RequestTitle>{name}Solicitação XXX</S.RequestTitle>
-      <S.Division />
-      <S.GridContainer>
-        <S.Content>
-          <S.Description>Status: </S.Description>
-          <S.Status>
-            <S.StatusCircle status={status}></S.StatusCircle>
-            {status}
-          </S.Status>
-        </S.Content>
-        <S.Content>
-          <S.Description>Data da Solicitação:</S.Description>
-          <S.RequestDate>{date}</S.RequestDate>
-        </S.Content>
-        <S.Content>
-          <S.Description>Quantidade de horas:</S.Description>
-          <S.RowAligner>
-            <S.HoursAmount>{hours}</S.HoursAmount>
-            <S.HoursName>hora(s)</S.HoursName>
-          </S.RowAligner>
-        </S.Content>
-      </S.GridContainer>
-      <S.Description>Observações do Coordenador:</S.Description>
-      <S.CoordObservation>{note}</S.CoordObservation>
-      <S.CertificateTitle>Certificados:</S.CertificateTitle>
-      <S.Division />
-      {displayedItems.map((item, index) => (
-        <CertificateList key={index} {...item} />
-      ))}
-      <Pagination
-        onPageChange={handlePageChange}
-        totalCount={certificateListData.length}
-        currentPage={currentPage}
-        pageSize={pageSize}
-      />
+      <S.Container>
+        <S.RequestTitle>{name}</S.RequestTitle>
+        <S.Division />
+        <S.GridContainer>
+          <S.Content>
+            <S.Description>Status: </S.Description>
+            <S.Status>
+              <S.StatusCircle status={status}></S.StatusCircle>
+              {status}
+            </S.Status>
+          </S.Content>
+          <S.Content>
+            <S.Description>Data da Solicitação:</S.Description>
+            <S.RequestDate>{date}</S.RequestDate>
+          </S.Content>
+          <S.Content>
+            <S.Description>Quantidade de horas:</S.Description>
+            <S.RowAligner>
+              <S.HoursAmount>{hours}</S.HoursAmount>
+              <S.HoursName>hora(s)</S.HoursName>
+            </S.RowAligner>
+          </S.Content>
+        </S.GridContainer>
+        <S.Description>Observações do Coordenador:</S.Description>
+        <S.CoordObservation>{note}</S.CoordObservation>
+        <S.CertificateTitle>Certificados:</S.CertificateTitle>
+        <S.Division />
+        {displayedItems.map((item, index) => (
+          <CertificateList key={index} {...item} />
+        ))}
+        <Pagination
+          onPageChange={handlePageChange}
+          totalCount={certificateListData.length}
+          currentPage={currentPage}
+          pageSize={pageSize}
+        />
+      </S.Container>
     </div>
   );
 }
