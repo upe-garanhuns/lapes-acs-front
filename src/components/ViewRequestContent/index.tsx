@@ -95,7 +95,7 @@ export default function ViewRequestContent(props: ViewRequestProps) {
         <S.Content>
           <S.Description>Status: </S.Description>
           <S.Status>
-            <S.StatusCircle status={'Aceito'}></S.StatusCircle>
+            <S.StatusCircle status={status}></S.StatusCircle>
             {status}
           </S.Status>
         </S.Content>
