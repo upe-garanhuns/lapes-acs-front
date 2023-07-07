@@ -1,6 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 
@@ -11,7 +12,9 @@ import Cookies from 'js-cookie';
 
 export default function SideNavBar() {
   const router = useRouter();
+  const pathName = usePathname();
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  if (pathName === '/signin') return null;
 
   const openCloseNav = () => {
     if (isOpen == false) {
