@@ -76,11 +76,11 @@ export const StatusCircle = styled.div<CircleProps>`
   background-color: ${(props) => {
     switch (props.status) {
       case 'Aceito':
-        return 'green';
+        return '#228B22';
       case 'Negado':
-        return 'red';
+        return '#D00909';
       case 'Em andamento':
-        return 'yellow';
+        return '#FFC700';
       default:
         return 'gray';
     }
