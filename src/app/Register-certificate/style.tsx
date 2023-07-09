@@ -4,13 +4,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   height: 100vh;
-`;
-
-export const Title = styled.h2`
-  font-size: 16px;
-  margin-bottom: 10px;
 `;
 
 export const FormContainer = styled.div`
@@ -20,16 +14,27 @@ export const FormContainer = styled.div`
   align-items: center;
 `;
 
+export const Title = styled.h2`
+  font-size: 16px;
+  margin-bottom: 10px;
+`;
+
 export const InputContainer = styled.div`
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   margin-bottom: 10px;
+`;
+
+export const InputGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-right: 10px;
 `;
 
 export const Label = styled.label`
   font-size: 14px;
-  margin-right: 10px;
-  width: 100px;
+  margin-bottom: 4px;
 `;
 
 export const Input = styled.input`
@@ -48,6 +53,7 @@ export const Select = styled.select`
 
 export const ButtonsContainer = styled.div`
   display: flex;
+  margin-top: 10px;
 `;
 
 export const SaveButton = styled.button`
