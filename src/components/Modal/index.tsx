@@ -7,6 +7,7 @@ type ComponentProps = {
   height?: number;
   isOpen: boolean;
   closeModal: () => void;
+  closeModalArea: () => void;
   children: React.ReactNode;
   className?: string;
   closeText?: ReactNode;
@@ -17,14 +18,25 @@ export const Modal = ({
   height,
   isOpen,
   closeModal,
+  closeModalArea,
   children,
   className,
   closeText = 'Fechar'
 }: ComponentProps) => {
+  const handleContainerClick = (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) => {
+    event.stopPropagation();
+  };
   if (isOpen) {
     return (
-      <S.Overlay>
-        <S.Container width={width} height={height} className={className}>
+      <S.Overlay onClick={closeModalArea}>
+        <S.Container
+          width={width}
+          height={height}
+          className={className}
+          onClick={handleContainerClick}
+        >
           {children}
           <S.CloseButton onClick={closeModal}>{closeText}</S.CloseButton>
         </S.Container>

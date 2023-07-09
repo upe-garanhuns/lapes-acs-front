@@ -132,6 +132,7 @@ export default function LoginForm() {
           <S.PasswordRecovery href="">Esqueceu a senha?</S.PasswordRecovery>
           <S.SignUp onClick={registerOpen}>Cadastrar</S.SignUp>
           <S.ModalContainer
+            closeModalArea={registerClose}
             isOpen={OpenRegister}
             closeModal={registerClose}
             // eslint-disable-next-line react/no-children-prop
