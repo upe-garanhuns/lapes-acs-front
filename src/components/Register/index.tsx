@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import { checkEmail } from '../../functions/checkEmail';
+import { checkPassWord } from '../../functions/checkPassword';
 import { fetchWrapper } from '../../services/api';
 import { Endereco } from '../../services/cep/types';
 import { createUser } from '../../services/signUp';
@@ -7,11 +9,9 @@ import { CreateUser } from '../../services/signUp/types';
 import { checkCep } from './functions/checkCep';
 import { checkCourse } from './functions/checkCourse';
 import { checkCPF } from './functions/checkCpf';
-import { checkEmail } from './functions/checkEmail';
 import { checkGrade } from './functions/checkGrade';
 import { checkName } from './functions/checkName';
 import { checkNumber } from './functions/checkNumber';
-import { checkPassWord } from './functions/checkPassword';
 import { checkPhone } from './functions/checkPhone';
 import { checkSamePass } from './functions/checkSamePass';
 import * as S from './style';
