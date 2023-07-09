@@ -11,7 +11,7 @@ import {
   CheckCircle
 } from '@phosphor-icons/react';
 
-type ComponentProps = {
+export type ComponentProps = {
   status: string;
   isDraft: boolean;
   label: string;
