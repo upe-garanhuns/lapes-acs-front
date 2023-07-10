@@ -1,7 +1,9 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  padding: 10px;
+  padding: 30px;
+  padding-top: 0px;
+  width: fit-content;
 `;
 export const RequestTitle = styled.h1`
   color: #253451;
@@ -38,8 +40,9 @@ export const GridContainer = styled.div`
   grid-template-columns: repeat(2, 2fr);
   grid-column-gap: 10vw;
   max-width: 650px;
-  @media (max-width: 600px){
+  @media (max-width: 426px){
     grid-column-gap: 5vw;
+    grid-template-columns: repeat(1, 2fr);
   }
   }
 `;
@@ -47,9 +50,9 @@ export const Content = styled.div`
   display: flex;
   flex-direction: column;
   margin: 0px;
-  @media (max-width: 480px) {
+  @media (max-width: 426px) {
     justify-content: flex-end;
-    width: 35vw;
+    width: 100%;
   }
 `;
 export const Description = styled.p`

@@ -1,17 +1,17 @@
 import React from 'react';
 
+import ModalViewRequest from '../ModalViewRequest';
 import * as S from './styles';
 
 import {
   Trash,
-  Eye,
   NotePencil,
   Clock,
   WarningCircle,
   CheckCircle
 } from '@phosphor-icons/react';
 
-export type ComponentProps = {
+type ComponentProps = {
   status: string;
   isDraft: boolean;
   label: string;
@@ -58,9 +58,7 @@ export const RequestList: React.FC<ComponentProps> = ({
           <S.Text>{hours} horas</S.Text>
         </S.Content>
         <S.IconsContainer>
-          <S.ActionIcon>
-            <Eye size={iconSize} />
-          </S.ActionIcon>
+          <ModalViewRequest />
           <S.ActionIcon>
             {!isDraft ? null : <Trash size={iconSize} />}
           </S.ActionIcon>

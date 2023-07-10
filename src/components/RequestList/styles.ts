@@ -15,8 +15,11 @@ export const Card = styled.div<{ cardColor: boolean }>`
   padding: 7px;
   align-items: center;
 
-  @media (max-width: 680px) {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  @media (max-width: 715px) {
+    grid-template-columns: repeat(2, minmax(150px, 1fr));
+  }
+  @media (max-width: 460px) {
+    grid-template-columns: repeat(1, minmax(150px, 1fr));
   }
 `;
 export const Content = styled.div`
@@ -48,7 +51,7 @@ export const ActionIcon = styled.span`
   }
   transition: transform 0.3s ease-in-out;
   &:hover {
-    transform: scale(1.1);
+    transform: scale(1.4);
   }
 `;
 

@@ -9,7 +9,7 @@ import { Eye, XCircle } from '@phosphor-icons/react';
 import axios from 'axios';
 export default function ModalViewRequest() {
   const iconSize = 24;
-  const [IsOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [certificateData, setCertificateData] = useState<ViewRequestProps>({
     id: 0,
     name: '',
@@ -36,13 +36,17 @@ export default function ModalViewRequest() {
       console.error('Error fetching data', error);
     }
   };
+  const closeModalArea = () => {
+    return null;
+  };
   return (
     <div>
       <S.OpenRequest onClick={openModal}>
         <Eye size={iconSize} />
       </S.OpenRequest>
       <S.ModalContainer
-        isOpen={IsOpen}
+        isOpen={isOpen}
+        closeModalArea={closeModalArea}
         closeModal={closeModal}
         // eslint-disable-next-line react/no-children-prop
         children={<ViewRequest {...certificateData} />}

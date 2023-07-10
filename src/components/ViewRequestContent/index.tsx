@@ -90,7 +90,7 @@ export default function ViewRequestContent(props: ViewRequestProps) {
   return (
     <div>
       <S.Container>
-        <S.RequestTitle>{name}</S.RequestTitle>
+        <S.RequestTitle>Solicitação {name}</S.RequestTitle>
         <S.Division />
         <S.GridContainer>
           <S.Content>

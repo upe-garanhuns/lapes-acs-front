@@ -55,6 +55,7 @@ export const ActionIcon = styled.span`
 export const IconsContainer = styled.div`
   display: flex;
   flex-direction: row;
+  width: fit-content;
   margin-right: 10px;
   justify-content: flex-end;
   @media (max-width: 680px) {
@@ -62,6 +63,6 @@ export const IconsContainer = styled.div`
   }
   transition: transform 0.3s ease-in-out;
   &:hover {
-    transform: scale(1.1);
+    transform: scale(1.4);
   }
 `;
