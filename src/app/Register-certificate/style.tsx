@@ -11,12 +11,12 @@ export const FormContainer = styled.div`
   margin-bottom: 20px;
   display: flex;
   flex-direction: column;
-  align-items: center;
 `;
 
 export const Title = styled.h2`
-  font-size: 16px;
+  font-size: 14px;
   margin-bottom: 10px;
+  color: #1c3c78;
 `;
 
 export const InputContainer = styled.div`
@@ -39,16 +39,20 @@ export const Label = styled.label`
 
 export const Input = styled.input`
   height: 30px;
-  border-radius: 4px;
+  border-radius: 20px;
   border: 1px solid #ccc;
   padding: 4px;
+  background-color: #d9d9d9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 `;
 
 export const Select = styled.select`
   height: 30px;
-  border-radius: 4px;
+  border-radius: 20px;
   border: 1px solid #ccc;
   padding: 4px;
+  background-color: #d9d9d9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 `;
 
 export const ButtonsContainer = styled.div`
@@ -79,8 +83,13 @@ export const ViewButton = styled.button`
 
 export const CertificatesContainer = styled.div`
   display: flex;
+  flex-direction: column;
+  align-self: flex-end;
+  max-width: 500px;
+  max-height: 500px;
+  overflow-y: auto;
   margin-top: 20px;
-  justify-content: center;
+  align-items: flex-end;
 `;
 
 export const CertificateItem = styled.div`
@@ -88,5 +97,6 @@ export const CertificateItem = styled.div`
   color: #1c3c78;
   border-radius: 4px;
   padding: 8px;
-  margin-right: 10px;
+  margin-bottom: 10px;
+  max-width: 300px;
 `;
