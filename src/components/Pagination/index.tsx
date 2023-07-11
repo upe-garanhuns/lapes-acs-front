@@ -34,17 +34,15 @@ export const Pagination = ({
   const onNext = () => {
     if (Math.ceil(totalCount / pageSize) == currentPage) {
       return null;
-    } else {
-      onPageChange(currentPage + 1);
     }
+    onPageChange(currentPage + 1);
   };
 
   const onPrevious = () => {
     if (currentPage - 1 < 1) {
       return null;
-    } else {
-      onPageChange(currentPage - 1);
     }
+    onPageChange(currentPage - 1);
   };
 
   return (

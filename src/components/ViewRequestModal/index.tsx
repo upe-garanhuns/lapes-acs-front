@@ -7,7 +7,7 @@ import * as S from './styles';
 
 import { Eye, XCircle } from '@phosphor-icons/react';
 import axios from 'axios';
-export default function ModalViewRequest() {
+export default function ViewRequestModal() {
   const iconSize = 24;
   const [isOpen, setIsOpen] = useState(false);
   const [certificateData, setCertificateData] = useState<ViewRequestProps>({
@@ -37,7 +37,7 @@ export default function ModalViewRequest() {
     }
   };
   const closeModalArea = () => {
-    return null;
+    setIsOpen(false);
   };
   return (
     <div>

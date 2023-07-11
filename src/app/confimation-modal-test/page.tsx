@@ -1,11 +1,13 @@
 'use client';
 
+import ConfirmationModal from '../../components/ConfirmationModal';
 import { RequestList } from '../../components/RequestList';
 
 export default function page() {
   return (
     <div style={{ paddingLeft: 100 }}>
       <h1>Teste modal confirmação</h1>
+      <ConfirmationModal />
       <RequestList
         status="Concluído"
         isDraft={false}

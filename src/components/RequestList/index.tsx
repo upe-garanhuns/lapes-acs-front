@@ -1,6 +1,6 @@
 import React from 'react';
 
-import ModalViewRequest from '../ModalViewRequest';
+import ViewRequestModal from '../ViewRequestModal';
 import * as S from './styles';
 
 import {
@@ -29,7 +29,7 @@ export const RequestList: React.FC<ComponentProps> = ({
   const iconSize = 24;
   return (
     <div>
-      <S.Card cardColor={isDraft}>
+      <S.Card cardcolor={isDraft}>
         <S.StatusIcon>
           {isDraft ? (
             <NotePencil size={iconSize} />
@@ -58,7 +58,7 @@ export const RequestList: React.FC<ComponentProps> = ({
           <S.Text>{hours} horas</S.Text>
         </S.Content>
         <S.IconsContainer>
-          <ModalViewRequest />
+          <ViewRequestModal />
           <S.ActionIcon>
             {!isDraft ? null : <Trash size={iconSize} />}
           </S.ActionIcon>
