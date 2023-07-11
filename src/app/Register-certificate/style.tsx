@@ -5,12 +5,13 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   height: 100vh;
+  background-color: #f1efef;
 `;
 
 export const FormContainer = styled.div`
   margin-bottom: 20px;
   display: flex;
-  flex-direction: column;
+  flex-direction: rown;
 `;
 
 export const Title = styled.h2`
@@ -25,16 +26,25 @@ export const InputContainer = styled.div`
   margin-bottom: 10px;
 `;
 
-export const InputGroup = styled.div`
+export const InputArea = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   margin-right: 10px;
 `;
 
+export const InputGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-right: 10px;
+  margin-top: 10px;
+`;
+
 export const Label = styled.label`
   font-size: 14px;
   margin-bottom: 4px;
+  color: #253555;
 `;
 
 export const Input = styled.input`
@@ -53,18 +63,18 @@ export const Select = styled.select`
   padding: 4px;
   background-color: #d9d9d9;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  width: 170px;
 `;
 
 export const ButtonsContainer = styled.div`
   display: flex;
-  margin-top: 10px;
 `;
 
 export const SaveButton = styled.button`
   color: #fff;
-  background-color: #253555;
+  background-color: #264382;
   font-size: 14px;
-  border-radius: 4px;
+  border-radius: 20px;
   padding: 8px 16px;
   border: none;
   cursor: pointer;
@@ -72,10 +82,10 @@ export const SaveButton = styled.button`
 `;
 
 export const ViewButton = styled.button`
-  color: #253555;
-  background-color: #ffffff;
+  color: #ffffff;
+  background-color: #b9b9b9;
   font-size: 14px;
-  border-radius: 4px;
+  border-radius: 20px;
   padding: 8px 16px;
   border: none;
   cursor: pointer;
@@ -90,12 +100,13 @@ export const CertificatesContainer = styled.div`
   overflow-y: auto;
   margin-top: 20px;
   align-items: flex-end;
+  background-color: #d9d9d9;
 `;
 
 export const CertificateItem = styled.div`
-  background-color: #d9d9d9;
-  color: #1c3c78;
-  border-radius: 4px;
+  background-color: #253555;
+  color: #ffffff;
+  border-radius: 20px;
   padding: 8px;
   margin-bottom: 10px;
   max-width: 300px;

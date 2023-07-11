@@ -17,26 +17,14 @@ export default function RegistePageTest() {
 
   return (
     <S.Container>
+      <S.Title>Etapa 2 de 3 - Preencher formulário</S.Title>
       <S.FormContainer>
-        <S.Title>Etapa 2 de 3 - Preencher formulário</S.Title>
-        <S.InputContainer>
+        <S.InputArea>
           <S.InputGroup>
             <S.Label>Titulo:</S.Label>
             <S.Input type="text" />
           </S.InputGroup>
 
-          <S.InputGroup>
-            <S.Label>Data inicial:</S.Label>
-            <S.Input type="date" />
-          </S.InputGroup>
-
-          <S.InputGroup>
-            <S.Label>Data final:</S.Label>
-            <S.Input type="date" />
-          </S.InputGroup>
-        </S.InputContainer>
-
-        <S.InputContainer>
           <S.InputGroup>
             <S.Label>Eixo de ensino:</S.Label>
             <S.Select value={selectedEixo} onChange={handleEixoChange}>
@@ -47,13 +35,6 @@ export default function RegistePageTest() {
             </S.Select>
           </S.InputGroup>
 
-          <S.InputGroup>
-            <S.Label>Quantidade de horas:</S.Label>
-            <S.Input type="number" />
-          </S.InputGroup>
-        </S.InputContainer>
-
-        <S.InputContainer>
           <S.InputGroup>
             <S.Label>Atividade:</S.Label>
             <S.Select
@@ -66,12 +47,35 @@ export default function RegistePageTest() {
               <option value="atividade3">Atividade 3</option>
             </S.Select>
           </S.InputGroup>
-        </S.InputContainer>
+        </S.InputArea>
 
-        <S.ButtonsContainer>
-          <S.SaveButton>Salvar certificado</S.SaveButton>
-          <S.ViewButton>Visualizar certificado</S.ViewButton>
-        </S.ButtonsContainer>
+        <S.InputArea>
+          <S.InputContainer>
+            <S.InputGroup>
+              <S.Label>Data inicial:</S.Label>
+              <S.Input type="date" />
+            </S.InputGroup>
+
+            <S.InputGroup>
+              <S.Label>Data final:</S.Label>
+              <S.Input type="date" />
+            </S.InputGroup>
+          </S.InputContainer>
+
+          <S.InputContainer>
+            <S.InputGroup>
+              <S.Label>Quantidade de horas:</S.Label>
+              <S.Input type="number" />
+            </S.InputGroup>
+          </S.InputContainer>
+
+          <S.InputContainer></S.InputContainer>
+
+          <S.ButtonsContainer>
+            <S.SaveButton>Salvar certificado</S.SaveButton>
+            <S.ViewButton>Visualizar certificado</S.ViewButton>
+          </S.ButtonsContainer>
+        </S.InputArea>
       </S.FormContainer>
 
       <S.CertificatesContainer>
