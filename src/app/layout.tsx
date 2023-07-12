@@ -4,6 +4,9 @@ import Navbar from '../components/Navbar';
 import { StyledComponentRegistry } from '../lib';
 import { Providers } from './providers';
 
+import 'primereact/resources/themes/saga-blue/theme.css';
+import 'primereact/resources/primereact.min.css';
+
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
