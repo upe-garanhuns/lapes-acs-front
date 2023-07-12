@@ -57,30 +57,6 @@ export default function ViewRequestContent(props: ViewRequestProps) {
       activity: 'Monitoria',
       educationAxis: 'Pesquisa',
       hours: 4
-    },
-    {
-      status: 'Aceito',
-      activity: 'Palestra',
-      educationAxis: 'Extensão',
-      hours: 2
-    },
-    {
-      status: 'Em Andamento',
-      activity: 'Curso',
-      educationAxis: 'Pesquisa',
-      hours: 6
-    },
-    {
-      status: 'Negado',
-      activity: 'Monitoria',
-      educationAxis: 'Ensino',
-      hours: 8
-    },
-    {
-      status: 'Aceito',
-      activity: 'Palestra',
-      educationAxis: 'Pesquisa',
-      hours: 1
     }
   ];
   const pageSize = 3;

@@ -9,8 +9,8 @@ export type ConfirmRequestProps = {
   title: string;
   educationAxis: string;
   activity: string;
-  initialDate: string;
-  finalDate: string;
+  initialDate: Date;
+  finalDate: Date;
   hours: number;
 };
 
@@ -23,49 +23,48 @@ export const ConfirmationContent: React.FC<ConfirmRequestProps> = ({
   finalDate,
   hours
 }) => {
+  const formattedInitialDate = initialDate.toLocaleDateString('en-GB');
+  const formattedFinalDate = finalDate.toLocaleDateString('en-GB');
   return (
     <div>
       <S.Container>
-        <S.StepConfirmation>Etapa 3 de 3 - Confirmação</S.StepConfirmation>
-        <S.Title> Confirmação de envio da Solicitação: {id}</S.Title>
         <S.Centered>
-          <S.Certificates>a</S.Certificates>
           <S.DetailsGrid>
             <S.Div1>
-              <S.Details>
+              <S.DetailsName>
                 Título:
-                <S.DetailsName>{title}</S.DetailsName>
-              </S.Details>
+                <S.Details>{title}</S.Details>
+              </S.DetailsName>
             </S.Div1>
             <S.Div2>
-              <S.Details>
+              <S.DetailsName>
                 Data Inicial
-                <S.DetailsName>{initialDate}</S.DetailsName>
-              </S.Details>
+                <S.Details>{formattedInitialDate}</S.Details>
+              </S.DetailsName>
             </S.Div2>
             <S.Div3>
-              <S.Details>
+              <S.DetailsName>
                 Data Final
-                <S.DetailsName>{finalDate}</S.DetailsName>
-              </S.Details>
+                <S.Details>{formattedFinalDate}</S.Details>
+              </S.DetailsName>
             </S.Div3>
             <S.Div4>
-              <S.Details>
+              <S.DetailsName>
                 Eixo de Ensino
-                <S.DetailsName>{educationAxis}</S.DetailsName>
-              </S.Details>
+                <S.Details>{educationAxis}</S.Details>
+              </S.DetailsName>
             </S.Div4>
             <S.Div5>
-              <S.Details>
+              <S.DetailsName>
                 Quantidade de Horas
-                <S.DetailsName>{hours}</S.DetailsName>
-              </S.Details>
+                <S.Details>{hours} hora(s)</S.Details>
+              </S.DetailsName>
             </S.Div5>
             <S.Div6>
-              <S.Details>
+              <S.DetailsName>
                 Atividade
-                <S.DetailsName>{activity}</S.DetailsName>
-              </S.Details>
+                <S.Details>{activity}</S.Details>
+              </S.DetailsName>
             </S.Div6>
           </S.DetailsGrid>
           <S.Buttons>

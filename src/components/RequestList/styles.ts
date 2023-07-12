@@ -2,18 +2,17 @@ import { colors } from '../../styles/colors';
 
 import styled from 'styled-components';
 
-export const Card = styled.div<{ cardColor: boolean }>`
+export const Card = styled.div<{ cardcolor: boolean }>`
   display: grid;
   grid-template-columns: auto 0.5fr minmax(200px, 1.5fr) 0.5fr 0.5fr 68px;
   gap: 5px;
   justify-content: center;
   align-items: center;
-  background-color: ${({ cardColor }) =>
-    cardColor ? colors.figmaColors[50] : colors.figmaColors[100]};
+  background-color: ${({ cardcolor }) =>
+    cardcolor ? colors.figmaColors[50] : colors.figmaColors[100]};
   border-radius: 20px;
   margin: 20px;
   padding: 7px;
-  align-items: center;
 
   @media (max-width: 715px) {
     grid-template-columns: repeat(2, minmax(150px, 1fr));

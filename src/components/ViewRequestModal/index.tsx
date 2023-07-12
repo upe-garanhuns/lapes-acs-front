@@ -18,15 +18,6 @@ export default function ViewRequestModal() {
     note: '',
     hours: 0
   });
-  const closeModal = () => {
-    setIsOpen(false);
-  };
-  const openModal = () => {
-    setIsOpen(true);
-    fetchData().then((data) => {
-      setCertificateData(data);
-    });
-  };
   const fetchData = async () => {
     try {
       const response = await axios.get('end-point'); // colocar o link do end-point aqui
@@ -35,6 +26,15 @@ export default function ViewRequestModal() {
     } catch (error) {
       console.error('Error fetching data', error);
     }
+  };
+  const closeModal = () => {
+    setIsOpen(false);
+  };
+  const openModal = () => {
+    setIsOpen(true);
+    fetchData().then((data) => {
+      setCertificateData(data);
+    });
   };
   const closeModalArea = () => {
     setIsOpen(false);

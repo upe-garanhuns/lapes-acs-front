@@ -2,10 +2,10 @@
 
 import React, { useState } from 'react';
 
-import { ConfirmationContent } from '../ConfirmationContent';
+import { ConfirmationPagination } from '../ConfirmationPagination';
 import * as S from './styles';
 
-import { Eye, XCircle } from '@phosphor-icons/react';
+import { XCircle } from '@phosphor-icons/react';
 
 export default function ConfirmationModal() {
   const [isOpen, setIsOpen] = useState(false);
@@ -26,17 +26,7 @@ export default function ConfirmationModal() {
         closeModalArea={closeModalArea}
         closeModal={closeModal}
         // eslint-disable-next-line react/no-children-prop
-        children={
-          <ConfirmationContent
-            id={42353}
-            title={'XXXX'}
-            educationAxis={'Ensino'}
-            activity={'Titulo da atividade'}
-            initialDate={'DD/MM/AA'}
-            finalDate={'DD/MM/AA'}
-            hours={0}
-          />
-        }
+        children={<ConfirmationPagination />}
         closeText={<XCircle size={30} color="#FF0000" />}
       ></S.ModalContainer>
     </div>

@@ -5,26 +5,13 @@ import styled from 'styled-components';
 export const Container = styled.div`
   padding: 1.8rem;
   padding-top: 1.1rem;
-  width: 73vw;
+  width: 55vw;
   @media (max-width: 768px) {
     padding: 0.5rem;
+    width: 100%;
   }
 `;
 
-export const StepConfirmation = styled.p`
-  color: #1c3c78;
-  font-size: 0.875rem
-  line-height: 1.5rem;
-`;
-export const Title = styled.h2`
-  color: #1c3c78;
-  font-size: 1.5;
-  font-weight: 400;
-  line-height: 1.5rem;
-  margin-top: 1.8rem;
-  margin-bottom: 3.7rem;
-  margin-left: 3.7rem;
-`;
 export const Certificates = styled.div`
   background-color: #d9d9d9;
   width: 80%;
@@ -40,29 +27,30 @@ export const Centered = styled.div`
   flex-direction: column;
 `;
 
-export const Details = styled.div`
+export const DetailsName = styled.div`
   display: flex;
   flex-direction: column;
   color: #253555;
   font-size: 1.25rem;
-  font-weight: 400;
   margin-top: 1.25rem;
   margin-bottom: 0.625rem;
 `;
 
-export const DetailsName = styled.div`
+export const Details = styled.div`
   color: rgba(84, 77, 79, 0.85);
   font-size: 1rem;
-  font-weight: 400;
 `;
 
 export const DetailsGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(3, 1fr);
-  grid-column-gap: 0px;
-  grid-row-gap: 0px;
+  grid-column-gap: 1rem;
   width: 80%;
+  @media (max-width: 768px) {
+    display: block;
+    width: 90%;
+  }
 `;
 export const Div1 = styled.div`
   grid-area: 1 / 1 / 2 / 3;
@@ -91,7 +79,7 @@ export const CancelConfirmButton = styled.button<{ buttonColor: boolean }>`
   height: 2.5rem;
   width: 10rem;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  font-weight: 400;
+  font-weight: 600;
   line-height: 1.5rem;
   font-style: normal;
   transition: transform 0.3s ease-in-out;
@@ -105,7 +93,7 @@ export const Buttons = styled.div`
   margin-top: 3rem;
   display: flex;
   flex-direction: row;
-  @media (max-width: 500px) {
+  @media (max-width: 826px) {
     flex-direction: column-reverse;
   }
 `;
