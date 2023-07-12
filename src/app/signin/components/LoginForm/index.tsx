@@ -4,10 +4,8 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
-import { checkEmail } from '../../functions/checkEmail';
-import { checkPassWord } from '../../functions/checkPassword';
-import { login } from '../../services/signIn';
-import { Login } from '../../services/signIn/types';
+import { login } from '../../../../services/signIn';
+import { Login } from '../../../../services/signIn/types';
 import LoginButton from '../LoginButton';
 import { LoginInput } from '../LoginInput';
 import { Register } from '../Register';
@@ -59,10 +57,10 @@ export default function LoginForm() {
   async function handleLogin(ev: React.FormEvent<EventTarget>) {
     ev.preventDefault();
 
-    setIsValidEmail(checkEmail(email));
-    setIsValidPassword(true);
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    setIsValidEmail(emailRegex.test(email));
 
-    const isPasswordValid = checkPassWord(password);
+    const isPasswordValid = password.length >= 8 && password.length <= 16;
 
     if (isValidEmail && isPasswordValid) {
       try {
@@ -104,7 +102,9 @@ export default function LoginForm() {
             onChange={(ev) => setEmail(ev.target.value)}
           />
           {!isValidEmail ? (
-            <S.ErrorSpan>E-mail inválido {'(Ex.: email@upe.br)'}</S.ErrorSpan>
+            <S.ErrorSpan>
+              E-mail inválido {'(Ex.: email@email.com)'}
+            </S.ErrorSpan>
           ) : (
             <></>
           )}
@@ -118,7 +118,9 @@ export default function LoginForm() {
             onChange={(ev) => setPassword(ev.target.value)}
           />
           {!isValidPassword ? (
-            <S.ErrorSpan>Senha inválida!</S.ErrorSpan>
+            <S.ErrorSpan>
+              Senha inválida! É necessário ter entre 8 e 16 dígitos
+            </S.ErrorSpan>
           ) : (
             <></>
           )}

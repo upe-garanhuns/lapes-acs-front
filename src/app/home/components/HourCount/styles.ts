@@ -1,3 +1,4 @@
+
 import styled from 'styled-components';
 
 export const Component = styled.div`
@@ -169,4 +170,5 @@ export const TotalBarEns = styled.div<TotalBarProps>`
   width: ${(props) => props.width};
   border-radius: 0px 10px 10px 0px;
 `;
+
 

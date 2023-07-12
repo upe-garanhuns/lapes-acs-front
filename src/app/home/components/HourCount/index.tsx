@@ -123,7 +123,7 @@ export default function HourCount() {
         Bem vindo(a), {nome}!
       </p>
       <hr style={{ border: '2px solid #E5E5E5', margin: '20px 0' }} />
-      <div style={{ textAlign: 'match-parent', minWidth: '1400px' }}>
+      <div style={{ textAlign: 'match-parent' }}>
         <span
           style={{
             display: 'inline-block',
@@ -209,10 +209,7 @@ export default function HourCount() {
             alignItems: 'center'
           }}
         >
-          Total:{' '}
-          <span style={{ marginLeft: '85%', minWidth: '85%' }}>
-            {totalHoras}/180
-          </span>
+          Total: <span style={{ marginLeft: '85%' }}>{totalHoras}/180</span>
         </p>
 
         <div
