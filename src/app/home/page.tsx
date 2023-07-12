@@ -2,9 +2,9 @@
 
 import { useState } from 'react';
 
-import HourCount from '../../components/HourCount';
-import { NewRequest } from '../../components/NewRequest';
-import { RequestList } from '../../components/RequestList';
+import HourCount from './components/HourCount';
+import { NewRequest } from './components/NewRequest';
+import { RequestList } from './components/RequestList';
 import * as S from './style';
 
 import { FileText, Funnel, XCircle } from '@phosphor-icons/react';
