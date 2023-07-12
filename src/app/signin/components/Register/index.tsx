@@ -1,9 +1,9 @@
 import { useState } from 'react';
 
-import { fetchWrapper } from '../../services/api';
-import { Endereco } from '../../services/cep/types';
-import { createUser } from '../../services/signUp';
-import { CreateUser } from '../../services/signUp/types';
+import { fetchWrapper } from '../../../../services/api';
+import { Endereco } from '../../../../services/cep/types';
+import { createUser } from '../../../../services/signUp';
+import { CreateUser } from '../../../../services/signUp/types';
 import { checkCep } from './functions/checkCep';
 import { checkCourse } from './functions/checkCourse';
 import { checkCPF } from './functions/checkCpf';
@@ -14,48 +14,86 @@ import { checkNumber } from './functions/checkNumber';
 import { checkPassWord } from './functions/checkPassword';
 import { checkPhone } from './functions/checkPhone';
 import { checkSamePass } from './functions/checkSamePass';
+import { useErrorInput } from './hooks/useErrorInput';
+import { useSetInput } from './hooks/useSetInput';
+import { useSetLock } from './hooks/useSetLock';
 import * as S from './style';
 
 import { MapPin, User, Eye, EyeSlash } from '@phosphor-icons/react';
 
 export function Register() {
   // hooks usados para setar mensagem de erros dos inputs - jamu
-  const [errorName, setErrorName] = useState<boolean>(false);
-  const [errorCpf, setErrorCpf] = useState<boolean>(false);
-  const [errorPhone, setErrorPhone] = useState<boolean>(false);
-  const [errorGrade, setErrorGrade] = useState<boolean>(false);
-  const [errorEmail, setErrorEmail] = useState<boolean>(false);
-  const [errorCourse, setErrorCourse] = useState<boolean>(false);
-  const [errorPass, setErrorPass] = useState<boolean>(false);
-  const [errorSamePass, setErrorSamePass] = useState<boolean>(false);
-  const [errorNumber, setErrorNumber] = useState<boolean>(false);
-  const [errorCep, setErrorCep] = useState<boolean>(false);
+  const {
+    errorName,
+    setErrorName,
+    errorCpf,
+    setErrorCpf,
+    errorPhone,
+    setErrorPhone,
+    errorGrade,
+    setErrorGrade,
+    errorEmail,
+    setErrorEmail,
+    errorCourse,
+    setErrorCourse,
+    errorPass,
+    setErrorPass,
+    errorSamePass,
+    setErrorSamePass,
+    errorNumber,
+    setErrorNumber,
+    errorCep,
+    setErrorCep
+  } = useErrorInput();
 
   // hooks para capturar os valores setados nos inputs - jamu
-  const [userName, setUserName] = useState<string>('');
-  const [userCpf, setUserCpf] = useState<string>('');
-  const [userPhone, setUserPhone] = useState<string>('');
-  const [userGrade, setUserGrade] = useState<string>('');
-  const [userEmail, setUserEmail] = useState<string>('');
-  const [userCourse, setUserCourse] = useState<string>('');
-  const [userPass, setUserPass] = useState<string>('');
-  const [userSamePass, setUserSamePass] = useState<string>('');
-  const [userNumber, setUserNumber] = useState<string>('');
-  const [userCep, setUserCep] = useState<string>('');
-  const [userCity, setUserCity] = useState<string>('');
-  const [userBlock, setUserBlock] = useState<string>('');
-  const [userUf, setUserUf] = useState<string>('');
-  const [userStreet, setUserStreet] = useState<string>('');
-  const [userComplement, setUserComplement] = useState<string>('');
+  const {
+    userName,
+    setUserName,
+    userCpf,
+    setUserCpf,
+    userPhone,
+    setUserPhone,
+    userGrade,
+    setUserGrade,
+    userEmail,
+    setUserEmail,
+    userCourse,
+    setUserCourse,
+    userPass,
+    setUserPass,
+    userSamePass,
+    setUserSamePass,
+    userNumber,
+    setUserNumber,
+    userCep,
+    setUserCep,
+    userCity,
+    setUserCity,
+    userBlock,
+    setUserBlock,
+    userUf,
+    setUserUf,
+    userStreet,
+    setUserStreet,
+    userComplement,
+    setUserComplement
+  } = useSetInput();
 
   //hook para o botão de visualizar senha - jamu
   const [visibility, setVisibility] = useState<boolean>(false);
 
   //hooks para ativar e desativar inputs - jamu
-  const [cityLock, setCityLock] = useState<boolean>(true);
-  const [ufLock, setUfLock] = useState<boolean>(true);
-  const [blockLock, setBlockLock] = useState<boolean>(true);
-  const [streetLock, setStreetLock] = useState<boolean>(true);
+  const {
+    cityLock,
+    setCityLock,
+    ufLock,
+    setUfLock,
+    blockLock,
+    setBlockLock,
+    streetLock,
+    setStreetLock
+  } = useSetLock();
 
   //funções de handle para captar os valores dos input - jamu
   const handleChangeName = (e) => {

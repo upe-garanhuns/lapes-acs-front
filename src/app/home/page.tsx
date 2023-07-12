@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 
+import HourCount from '../../components/HourCount';
 import { NewRequest } from '../../components/NewRequest';
 import { RequestList } from '../../components/RequestList';
 import * as S from './style';
@@ -27,7 +28,7 @@ export default function Home() {
         </S.TitleDiv>
         <S.FunctionContainer>
           <div>
-            <p>Componente horas em breve...</p>
+            <HourCount />
           </div>
           <S.Div>
             <S.RequestDiv>
@@ -58,6 +59,7 @@ export default function Home() {
                 hours={0}
               />
               <S.NewRequestModal
+                closeModalArea={closeNewRequestModal}
                 isOpen={isOpen}
                 closeModal={closeNewRequestModal}
                 // eslint-disable-next-line react/no-children-prop
