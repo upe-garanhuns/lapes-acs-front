@@ -13,29 +13,45 @@ import {
 
 export type ComponentProps = {
   status: string;
-  isDraft: boolean;
-  label: string;
+  label: number;
   initialDate: string;
   hours: number;
 };
 
 export const RequestList: React.FC<ComponentProps> = ({
   status,
-  isDraft,
   label,
   initialDate,
   hours
 }) => {
+  let isDraft = false;
+  if (status === 'RASCUNHO') {
+    isDraft = true;
+  }
   const iconSize = 24;
+  let statusDescription = '';
+  status === 'DEFERIDO'
+    ? (statusDescription = 'Concluído')
+    : status === 'ENCAMINHADO_COORDENACAO'
+    ? (statusDescription = 'Em análise')
+    : status === 'ENCAMINHADO_COMISSAO'
+    ? (statusDescription = 'Em análise')
+    : status === 'INDEFERIDO'
+    ? (statusDescription = 'Indeferido')
+    : status === 'RASCUNHO'
+    ? (statusDescription = 'Rascunho')
+    : (statusDescription = 'Sem status');
   return (
     <div>
       <S.Card cardColor={isDraft}>
         <S.StatusIcon>
           {isDraft ? (
             <NotePencil size={iconSize} />
-          ) : status === 'Concluído' ? (
+          ) : status === 'DEFERIDO' ? (
             <CheckCircle size={iconSize} />
-          ) : status === 'Em análise' ? (
+          ) : status === 'ENCAMINHADO_COORDENACAO' ? (
+            <Clock size={iconSize} />
+          ) : status === 'ENCAMINHADO_COMISSAO' ? (
             <Clock size={iconSize} />
           ) : (
             <WarningCircle size={iconSize} />
@@ -43,7 +59,7 @@ export const RequestList: React.FC<ComponentProps> = ({
         </S.StatusIcon>
         <S.Content>
           <S.Title>Status:</S.Title>
-          <S.Text>{status}</S.Text>
+          <S.Text>{statusDescription}</S.Text>
         </S.Content>
         <S.Content>
           <S.Title>Label:</S.Title>
