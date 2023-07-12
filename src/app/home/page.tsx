@@ -1,16 +1,30 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
+import { request } from '../../services/request';
 import HourCount from './components/HourCount';
 import { NewRequest } from './components/NewRequest';
 import { RequestList } from './components/RequestList';
 import * as S from './style';
 
 import { FileText, Funnel, XCircle } from '@phosphor-icons/react';
+import Cookies from 'js-cookie';
 
 export default function Home() {
   const [isOpen, setIsOpen] = useState(false);
+  const [requests, setRequests] = useState({});
+  const token = Cookies.get('token');
+
+  async function getRequests() {
+    const response = await request(token);
+    setRequests(response);
+  }
+
+  useEffect(() => {
+    getRequests();
+    console.log(requests);
+  }, []);
 
   function openNewRequestModal() {
     setIsOpen(true);

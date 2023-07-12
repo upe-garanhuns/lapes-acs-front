@@ -2,14 +2,12 @@ import { fetchWrapper } from '../api';
 import { RequestResponse } from './types';
 
 export const request = async (token: string): Promise<RequestResponse> => {
-  console.log(token);
-  const response = await fetchWrapper<RequestResponse>('api/certificado/1', {
+  const response = await fetchWrapper<RequestResponse>('api/aluno/requisicao', {
     method: 'GET',
     headers: {
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json'
     }
   });
-  console.log(response);
   return response;
 };
