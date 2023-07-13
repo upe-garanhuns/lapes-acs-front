@@ -1,7 +1,9 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  padding: 10px;
+  padding: 20px;
+  padding-top: 0px;
+  width: fit-content;
 `;
 export const RequestTitle = styled.h1`
   color: #253451;
@@ -38,8 +40,9 @@ export const GridContainer = styled.div`
   grid-template-columns: repeat(2, 2fr);
   grid-column-gap: 10vw;
   max-width: 650px;
-  @media (max-width: 600px){
+  @media (max-width: 426px){
     grid-column-gap: 5vw;
+    grid-template-columns: repeat(1, 2fr);
   }
   }
 `;
@@ -47,9 +50,9 @@ export const Content = styled.div`
   display: flex;
   flex-direction: column;
   margin: 0px;
-  @media (max-width: 480px) {
+  @media (max-width: 426px) {
     justify-content: flex-end;
-    width: 35vw;
+    width: 100%;
   }
 `;
 export const Description = styled.p`
@@ -95,20 +98,15 @@ export const Status = styled.div`
   width: 100%;
   height: 40px;
   border-radius: 20px;
-  background-color: #d9d9d9;
-  box-shadow: 0px 6px 7px -3px rgba(0, 0, 0, 0.3);
   padding-left: 10px;
 `;
-export const RequestDate = styled(Status)`
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
-`;
+export const RequestDate = styled(Status)``;
 export const HoursAmount = styled(Status)`
   display: flex;
   flex-direction: row;
   width: 80px;
   justify-content: center;
   padding-left: 0px;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
 `;
 
 export const HoursName = styled.div`
@@ -131,10 +129,25 @@ export const CoordObservation = styled(Status)`
   overflow-y: auto;
   word-break: break-all;
   white-space: pre-wrap;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
 `;
 
 export const PageSelection = styled.div`
   margin-bottom: 10px;
   padding-botton: 10px;
+`;
+
+export const PrintIcon = styled.div`
+  width: 3rem;
+  height: 3rem;
+  border-radius: 999px;
+  background-color: #253555;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+  &:hover {
+    transform: scale(1.3);
 `;

@@ -7,9 +7,9 @@ import * as S from './styles';
 
 import { Eye, XCircle } from '@phosphor-icons/react';
 import axios from 'axios';
-export default function ModalViewRequest() {
+export default function ViewRequestModal() {
   const iconSize = 24;
-  const [IsOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [certificateData, setCertificateData] = useState<ViewRequestProps>({
     id: 0,
     name: '',
@@ -18,15 +18,6 @@ export default function ModalViewRequest() {
     note: '',
     hours: 0
   });
-  const closeModal = () => {
-    setIsOpen(false);
-  };
-  const openModal = () => {
-    setIsOpen(true);
-    fetchData().then((data) => {
-      setCertificateData(data);
-    });
-  };
   const fetchData = async () => {
     try {
       const response = await axios.get('end-point'); // colocar o link do end-point aqui
@@ -36,13 +27,26 @@ export default function ModalViewRequest() {
       console.error('Error fetching data', error);
     }
   };
+  const closeModal = () => {
+    setIsOpen(false);
+  };
+  const openModal = () => {
+    setIsOpen(true);
+    fetchData().then((data) => {
+      setCertificateData(data);
+    });
+  };
+  const closeModalArea = () => {
+    setIsOpen(false);
+  };
   return (
     <div>
       <S.OpenRequest onClick={openModal}>
         <Eye size={iconSize} />
       </S.OpenRequest>
       <S.ModalContainer
-        isOpen={IsOpen}
+        isOpen={isOpen}
+        closeModalArea={closeModalArea}
         closeModal={closeModal}
         // eslint-disable-next-line react/no-children-prop
         children={<ViewRequest {...certificateData} />}

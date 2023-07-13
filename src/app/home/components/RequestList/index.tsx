@@ -1,26 +1,31 @@
 import React from 'react';
 
+
+import ViewRequestModal from '../../../../components/ViewRequestModal';
+
 import * as S from './styles';
 
 import {
   Trash,
-  Eye,
   NotePencil,
   Clock,
   WarningCircle,
-  CheckCircle
+  CheckCircle,
+  Printer,
+  Archive,
+  PencilSimpleLine
 } from '@phosphor-icons/react';
 
 export type ComponentProps = {
   status: string;
-  label: number;
+  id: number;
   initialDate: string;
   hours: number;
 };
 
 export const RequestList: React.FC<ComponentProps> = ({
   status,
-  label,
+  id,
   initialDate,
   hours
 }) => {
@@ -62,8 +67,8 @@ export const RequestList: React.FC<ComponentProps> = ({
           <S.Text>{statusDescription}</S.Text>
         </S.Content>
         <S.Content>
-          <S.Title>Label:</S.Title>
-          <S.Text>{label}</S.Text>
+          <S.Title>ID:</S.Title>
+          <S.Text>{id}</S.Text>
         </S.Content>
         <S.Content>
           <S.Title>Data da solicitação:</S.Title>
@@ -74,11 +79,27 @@ export const RequestList: React.FC<ComponentProps> = ({
           <S.Text>{hours} horas</S.Text>
         </S.Content>
         <S.IconsContainer>
-          <S.ActionIcon>
-            <Eye size={iconSize} />
-          </S.ActionIcon>
+          {isDraft ? (
+            <S.ActionIcon>
+              <PencilSimpleLine size={iconSize} />
+            </S.ActionIcon>
+          ) : (
+            <ViewRequestModal />
+          )}
           <S.ActionIcon>
             {!isDraft ? null : <Trash size={iconSize} />}
+            {(() => {
+              switch (status) {
+                case 'DEFERIDO':
+                case 'ENCAMINHADO_COORDENACAO':
+                case 'ENCAMINHADO_COMISSAO':
+                  return <Printer size={iconSize} />;
+                case 'INDEFERIDO':
+                  return <Archive size={iconSize} />;
+                default:
+                  return null;
+              }
+            })()}
           </S.ActionIcon>
         </S.IconsContainer>
       </S.Card>

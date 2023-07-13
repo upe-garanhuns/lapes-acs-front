@@ -6,6 +6,8 @@ import { CertificateList, ComponentProps } from '../CertificateList';
 import { Pagination } from '../Pagination';
 import * as S from './styles';
 
+import { Printer } from '@phosphor-icons/react';
+
 export type ViewRequestProps = {
   id?: number;
   name?: string;
@@ -21,6 +23,7 @@ export default function ViewRequestContent(props: ViewRequestProps) {
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
+  const iconSize = 24;
   const certificateListData: ComponentProps[] = [
     {
       status: 'Aceito',
@@ -57,30 +60,6 @@ export default function ViewRequestContent(props: ViewRequestProps) {
       activity: 'Monitoria',
       educationAxis: 'Pesquisa',
       hours: 4
-    },
-    {
-      status: 'Aceito',
-      activity: 'Palestra',
-      educationAxis: 'Extensão',
-      hours: 2
-    },
-    {
-      status: 'Em Andamento',
-      activity: 'Curso',
-      educationAxis: 'Pesquisa',
-      hours: 6
-    },
-    {
-      status: 'Negado',
-      activity: 'Monitoria',
-      educationAxis: 'Ensino',
-      hours: 8
-    },
-    {
-      status: 'Aceito',
-      activity: 'Palestra',
-      educationAxis: 'Pesquisa',
-      hours: 1
     }
   ];
   const pageSize = 3;
@@ -90,7 +69,7 @@ export default function ViewRequestContent(props: ViewRequestProps) {
   return (
     <div>
       <S.Container>
-        <S.RequestTitle>{name}</S.RequestTitle>
+        <S.RequestTitle>Solicitação {name}</S.RequestTitle>
         <S.Division />
         <S.GridContainer>
           <S.Content>
@@ -125,6 +104,9 @@ export default function ViewRequestContent(props: ViewRequestProps) {
           currentPage={currentPage}
           pageSize={pageSize}
         />
+        <S.PrintIcon>
+          <Printer size={iconSize} />
+        </S.PrintIcon>
       </S.Container>
     </div>
   );

@@ -2,21 +2,24 @@ import { colors } from '../../../../styles/colors';
 
 import styled from 'styled-components';
 
-export const Card = styled.div<{ cardColor: boolean }>`
+
+export const Card = styled.div<{ cardcolor: boolean }>`
   display: grid;
-  grid-template-columns: auto 0.5fr minmax(200px, 1.5fr) 0.5fr 0.5fr 68px;
+  grid-template-columns: auto 0.5fr minmax(200px, 1.5fr) 0.5fr 0.5fr auto;
   gap: 5px;
   justify-content: center;
   align-items: center;
-  background-color: ${({ cardColor }) =>
-    cardColor ? colors.figmaColors[50] : colors.figmaColors[100]};
+  background-color: ${({ cardcolor }) =>
+    cardcolor ? colors.figmaColors[50] : colors.figmaColors[100]};
   border-radius: 20px;
   margin: 20px;
   padding: 7px;
-  align-items: center;
 
-  @media (max-width: 680px) {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  @media (max-width: 715px) {
+    grid-template-columns: repeat(2, minmax(150px, 1fr));
+  }
+  @media (max-width: 460px) {
+    grid-template-columns: repeat(1, minmax(150px, 1fr));
   }
 `;
 export const Content = styled.div`
@@ -39,7 +42,9 @@ export const Text = styled.p`
   font-size: 16px;
 `;
 export const ActionIcon = styled.span`
-  margin-right: 10px;
+
+  margin-right: 5px;
+
   cursor: pointer;
   --icon-color: ${colors.figmaColors[200]};
 
@@ -48,7 +53,9 @@ export const ActionIcon = styled.span`
   }
   transition: transform 0.3s ease-in-out;
   &:hover {
-    transform: scale(1.1);
+
+    transform: scale(1.4);
+
   }
 `;
 

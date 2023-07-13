@@ -50,24 +50,29 @@ export const Pagination = ({
       <S.Arrow onClick={onPrevious}>
         <ArrowLineLeft />
       </S.Arrow>
-      {paginationRange.map((pageNumber, index) => {
-        if (pageNumber === DOTS) {
-          return <li key={index}>...</li>;
-        }
+      <S.PagesBackground>
+        {paginationRange.map((pageNumber, index) => {
+          if (pageNumber === DOTS) {
+            return <li key={index}>...</li>;
+          }
 
-        return (
-          <S.Page
-            key={index}
-            onClick={() => onPageChange(parseInt(pageNumber.toString()))}
-            isSelected={pageNumber === currentPage}
-          >
-            {pageNumber}
-          </S.Page>
-        );
-      })}
+          return (
+            <S.Page
+              key={index}
+              onClick={() => onPageChange(parseInt(pageNumber.toString()))}
+              isSelected={pageNumber === currentPage}
+            >
+              <S.CertificateName isSelected={pageNumber === currentPage}>
+                Certificado {pageNumber}
+              </S.CertificateName>
+            </S.Page>
+          );
+        })}
+      </S.PagesBackground>
       <S.Arrow onClick={onNext}>
         <ArrowLineRight />
       </S.Arrow>
     </S.Container>
   );
 };
+export default usePagination;
