@@ -28,6 +28,8 @@ export const Text = styled.p``;
 
 export const H2Title = styled.h2``;
 
+export const H3Title = styled.h3``;
+
 export const UserName = styled.h1`
   color: #1c3c78;
 `;
