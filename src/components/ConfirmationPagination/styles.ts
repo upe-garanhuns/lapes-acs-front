@@ -1,12 +1,11 @@
-import Button from '../Button';
-import { Pagination } from '../Pagination';
-
 import styled from 'styled-components';
+
 export const StepConfirmation = styled.p`
   color: #1c3c78;
   font-size: 0.875rem;
   margin: 1rem;
 `;
+
 export const Title = styled.h2`
   color: #1c3c78;
   font-weight: 400;
@@ -20,17 +19,7 @@ export const Title = styled.h2`
     text-align: center;
   }
 `;
-export const CertificatesPagination = styled(Pagination)`
-  ul {
-    display: flex;
-    justify-content: center;
-  }
-`;
-
-export const ButtonPagination = styled(Button)`
-  background: blue;
-
-  li {
-    bac
-  }
+export const Centered = styled.div`
+  display: flex;
+  justify-content: center;
 `;

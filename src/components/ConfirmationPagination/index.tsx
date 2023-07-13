@@ -1,12 +1,11 @@
 'use client';
 import React, { useState } from 'react';
 
-import Button from '../Button';
 import {
   ConfirmRequestProps,
   ConfirmationContent
 } from '../ConfirmationContent';
-import { Pagination } from '../Pagination';
+import { Pagination } from '../ConfirmationRequestPagination';
 import * as S from './styles';
 
 export function ConfirmationPagination() {
@@ -42,6 +41,15 @@ export function ConfirmationPagination() {
       initialDate: new Date('2022-06-01'),
       finalDate: new Date('2022-07-01'),
       hours: 80
+    },
+    {
+      id: 3,
+      title: 'Certificado de Conclusão de Curso',
+      educationAxis: 'Administração de Empresas',
+      activity: 'Gestão de Projetos',
+      initialDate: new Date('2022-06-01'),
+      finalDate: new Date('2022-07-01'),
+      hours: 80
     }
   ];
 
@@ -55,18 +63,14 @@ export function ConfirmationPagination() {
     <div>
       <S.StepConfirmation>Etapa 3 de 3 - Confirmação</S.StepConfirmation>
       <S.Title> Confirmação de envio da Solicitação: {requestId}</S.Title>
-      <Pagination
-        onPageChange={handlePageChange}
-        totalCount={mockData.length}
-        currentPage={currentPage}
-        pageSize={pageSize}
-      />
-      <S.CertificatesPagination
-        onPageChange={handlePageChange}
-        totalCount={mockData.length}
-        currentPage={currentPage}
-        pageSize={pageSize}
-      />
+      <S.Centered>
+        <Pagination
+          onPageChange={handlePageChange}
+          totalCount={mockData.length}
+          currentPage={currentPage}
+          pageSize={pageSize}
+        />
+      </S.Centered>
       {displayedItems.map((item, index) => (
         <ConfirmationContent key={index} {...item} />
       ))}
