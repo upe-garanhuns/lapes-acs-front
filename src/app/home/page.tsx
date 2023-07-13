@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from 'react';
 
+import { pagination } from '../../services/pagination';
+import { pageValue } from '../../services/pagination/types';
 import { request } from '../../services/request';
 import { UserRequest } from '../../services/request/types';
 import HourCount from './components/HourCount';
@@ -17,6 +19,7 @@ import moment from 'moment';
 export default function Home() {
   const [isOpen, setIsOpen] = useState(false);
   const [requests, setRequests] = useState<UserRequest[]>([]);
+  const [requestsPagination, setPaginationRequests] = useState<pageValue>();
   const token = Cookies.get('token');
 
   useEffect(() => {
@@ -25,7 +28,14 @@ export default function Home() {
       setRequests(requestResponse);
     };
 
+    const requestPagination = async () => {
+      const paginationResponse = await pagination(token, 0, 2);
+      console.log(paginationResponse);
+      setPaginationRequests(paginationResponse);
+    };
+
     userRequest();
+    requestPagination();
   }, [token]);
 
   function openNewRequestModal() {
@@ -45,8 +55,9 @@ export default function Home() {
         </S.TitleDiv>
         <S.FunctionContainer>
           <div>
-            <HourCount />
+            <HourCount gesHours={0} extHours={0} pesHours={0} ensHours={0} />
           </div>
+
           <S.Div>
             <S.RequestDiv>
               <S.H2Title>Solicitações em Andamento</S.H2Title>
@@ -67,6 +78,7 @@ export default function Home() {
                 </S.IconButton>
               </S.InputRequestDiv>
             </S.NewRequestDiv>
+
             <S.Div>
               {requests.length > 0 ? (
                 requests.map((item) => (
@@ -81,6 +93,7 @@ export default function Home() {
               ) : (
                 <S.H3Title>Nenhuma solicitação registrada...</S.H3Title>
               )}
+              <S.Div>{}</S.Div>
               <S.NewRequestModal
                 closeModalArea={closeNewRequestModal}
                 isOpen={isOpen}
