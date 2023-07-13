@@ -1,8 +1,6 @@
 import React from 'react';
 
-
 import ViewRequestModal from '../../../../components/ViewRequestModal';
-
 import * as S from './styles';
 
 import {
@@ -48,7 +46,7 @@ export const RequestList: React.FC<ComponentProps> = ({
     : (statusDescription = 'Sem status');
   return (
     <div>
-      <S.Card cardColor={isDraft}>
+      <S.Card cardcolor={isDraft}>
         <S.StatusIcon>
           {isDraft ? (
             <NotePencil size={iconSize} />

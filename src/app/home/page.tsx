@@ -45,7 +45,13 @@ export default function Home() {
         </S.TitleDiv>
         <S.FunctionContainer>
           <div>
-            <HourCount />
+            <HourCount
+              ensHours={5}
+              extHours={10}
+              gesHours={15}
+              name="Lucas"
+              pesHours={80}
+            />
           </div>
           <S.Div>
             <S.RequestDiv>
