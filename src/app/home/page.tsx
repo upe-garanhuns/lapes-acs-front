@@ -3,7 +3,7 @@
 import { useState } from 'react';
 
 import { NewRequest } from '../../components/NewRequest';
-import { RequestList } from '../../components/RequestList';
+import { RequestList } from './components/RequestList';
 import * as S from './style';
 
 import { FileText, Funnel, XCircle } from '@phosphor-icons/react';

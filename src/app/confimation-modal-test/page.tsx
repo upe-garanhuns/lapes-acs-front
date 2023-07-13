@@ -1,7 +1,7 @@
 'use client';
 
 import ConfirmationModal from '../../components/ConfirmationModal';
-import { RequestList } from '../../components/RequestList';
+import { RequestList } from '../home/components/RequestList';
 
 export default function page() {
   return (

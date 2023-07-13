@@ -1,7 +1,7 @@
 import React from 'react';
 import { Icons } from 'react-toastify';
 
-import ViewRequestModal from '../ViewRequestModal';
+import ViewRequestModal from '../../../../components/ViewRequestModal';
 import * as S from './styles';
 
 import {
