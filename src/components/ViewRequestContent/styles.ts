@@ -98,20 +98,15 @@ export const Status = styled.div`
   width: 100%;
   height: 40px;
   border-radius: 20px;
-  background-color: #d9d9d9;
-  box-shadow: 0px 6px 7px -3px rgba(0, 0, 0, 0.3);
   padding-left: 10px;
 `;
-export const RequestDate = styled(Status)`
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
-`;
+export const RequestDate = styled(Status)``;
 export const HoursAmount = styled(Status)`
   display: flex;
   flex-direction: row;
   width: 80px;
   justify-content: center;
   padding-left: 0px;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
 `;
 
 export const HoursName = styled.div`
@@ -134,7 +129,6 @@ export const CoordObservation = styled(Status)`
   overflow-y: auto;
   word-break: break-all;
   white-space: pre-wrap;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
 `;
 
 export const PageSelection = styled.div`
