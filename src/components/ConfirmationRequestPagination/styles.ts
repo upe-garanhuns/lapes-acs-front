@@ -9,14 +9,21 @@ export const Container = styled.ul`
   gap: 0.3rem;
   margin: 0;
   font-size: 12px;
-  width: 80%;
-  max-width: 600px;
+  width: 80vw;
+  max-width: 37rem;
+  min-width: 10rem;
 `;
 
 export const Arrow = styled.li`
   display: flex;
   align-items: center;
   cursor: pointer;
+  margin-bottom: 1rem;
+`;
+export const CertificateName = styled.span<{ isSelected: boolean }>`
+  color: #253555;
+  font-size: 16px;
+  color: ${({ isSelected }) => (isSelected ? '#FFF' : '#253555')};
 `;
 
 export const Page = styled.li<{ isSelected: boolean }>`
@@ -35,7 +42,6 @@ export const Page = styled.li<{ isSelected: boolean }>`
 `;
 export const PagesBackground = styled.div`
   display: flex;
-  border-radius: 15px;
   overflow-x: auto;
   &::-webkit-scrollbar {
     width: 0.5rem;
@@ -54,7 +60,4 @@ export const PagesBackground = styled.div`
     background-color: ${colors.grey[100]};
     border-radius: 15px;
   }
-`;
-export const CertificateName = styled.h4`
-  color: black;
 `;

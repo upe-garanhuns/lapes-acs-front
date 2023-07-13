@@ -62,8 +62,9 @@ export const Pagination = ({
               onClick={() => onPageChange(parseInt(pageNumber.toString()))}
               isSelected={pageNumber === currentPage}
             >
-              <span>Certificado </span>
-              {pageNumber}
+              <S.CertificateName isSelected={pageNumber === currentPage}>
+                Certificado {pageNumber}
+              </S.CertificateName>
             </S.Page>
           );
         })}
