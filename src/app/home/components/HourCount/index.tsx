@@ -1,4 +1,5 @@
 import React from 'react';
+
 import * as S from './styles';
 
 export type ComponentProps = {
@@ -14,10 +15,20 @@ const calculateTotalHours = (data: ComponentProps) => {
   return gesHours + extHours + pesHours + ensHours;
 };
 
-const HourCount: React.FC<ComponentProps> = ({ gesHours, extHours, pesHours, ensHours, name }) => {
-  
+const HourCount: React.FC<ComponentProps> = ({
+  gesHours,
+  extHours,
+  pesHours,
+  ensHours,
+  name
+}) => {
   const maxHours = 180;
-  const totalHours: number = calculateTotalHours({ gesHours, extHours, pesHours, ensHours });
+  const totalHours: number = calculateTotalHours({
+    gesHours,
+    extHours,
+    pesHours,
+    ensHours
+  });
   const gesWidth = `${(gesHours / maxHours) * 100}%`;
   const extWidth = `${(extHours / maxHours) * 100}%`;
   const pesWidth = `${(pesHours / maxHours) * 100}%`;
@@ -28,11 +39,9 @@ const HourCount: React.FC<ComponentProps> = ({ gesHours, extHours, pesHours, ens
   return (
     <div>
       <S.Component>
-        <S.Name>
-          Bem vindo(a), {name}!
-        </S.Name>
+        <S.Name>Bem vindo(a), {name}!</S.Name>
         <S.Hr />
-        
+
         <S.Container>
           <S.MinhasHorasString>Minhas Horas: </S.MinhasHorasString>
           <S.GesBar>Ges: {gesHours}h</S.GesBar>
@@ -41,41 +50,23 @@ const HourCount: React.FC<ComponentProps> = ({ gesHours, extHours, pesHours, ens
           <S.EnsBar>Ens: {ensHours}h</S.EnsBar>
         </S.Container>
         <S.TotalBarComponent>
-          
           <S.TotalHoursDatas>
-    <S.TotalString>Total:</S.TotalString>
-    <S.TotalBarLine>{totalHours}/180</S.TotalBarLine>
-    </S.TotalHoursDatas>
-  <S.TotalBarBackgroundColor>
-    <S.TotalBarGes width={gesWidth} />
-    <S.TotalBarExt width={extWidth} />
-    <S.TotalBarPes width={pesWidth} />
-    <S.TotalBarEns width={ensWidth} />
-  </S.TotalBarBackgroundColor>
-</S.TotalBarComponent>
-
+            <S.TotalString>Total:</S.TotalString>
+            <S.TotalBarLine>{totalHours}/180</S.TotalBarLine>
+          </S.TotalHoursDatas>
+          <S.TotalBarBackgroundColor>
+            <S.TotalBarGes width={gesWidth} />
+            <S.TotalBarExt width={extWidth} />
+            <S.TotalBarPes width={pesWidth} />
+            <S.TotalBarEns width={ensWidth} />
+          </S.TotalBarBackgroundColor>
+        </S.TotalBarComponent>
       </S.Component>
     </div>
   );
 };
 
 export default HourCount;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /*
 export default function HourCount() {

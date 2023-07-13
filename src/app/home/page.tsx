@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react';
 
-
 import { request } from '../../services/request';
 import { UserRequest } from '../../services/request/types';
 import HourCount from './components/HourCount';
@@ -73,7 +72,7 @@ export default function Home() {
                 requests.map((item) => (
                   <RequestList
                     status={item.requisicaoStatus}
-                    label={item.id}
+                    id={item.id}
                     initialDate={moment(item.data).format('DD/MM/YYYY')} //new Date(item.data).toLocaleDateString('pt-br')
                     hours={sumRequestHours(item.certificados)}
                     key={item.id}
