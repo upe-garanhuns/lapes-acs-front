@@ -6,6 +6,8 @@ import { CertificateList, ComponentProps } from '../CertificateList';
 import { Pagination } from '../Pagination';
 import * as S from './styles';
 
+import { Printer } from '@phosphor-icons/react';
+
 export type ViewRequestProps = {
   id?: number;
   name?: string;
@@ -21,6 +23,7 @@ export default function ViewRequestContent(props: ViewRequestProps) {
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
+  const iconSize = 24;
   const certificateListData: ComponentProps[] = [
     {
       status: 'Aceito',
@@ -101,6 +104,9 @@ export default function ViewRequestContent(props: ViewRequestProps) {
           currentPage={currentPage}
           pageSize={pageSize}
         />
+        <S.PrintIcon>
+          <Printer size={iconSize} />
+        </S.PrintIcon>
       </S.Container>
     </div>
   );

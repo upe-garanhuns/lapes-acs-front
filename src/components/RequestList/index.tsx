@@ -1,4 +1,5 @@
 import React from 'react';
+import { Icons } from 'react-toastify';
 
 import ViewRequestModal from '../ViewRequestModal';
 import * as S from './styles';
@@ -8,13 +9,16 @@ import {
   NotePencil,
   Clock,
   WarningCircle,
-  CheckCircle
+  CheckCircle,
+  Printer,
+  Archive,
+  PencilSimpleLine
 } from '@phosphor-icons/react';
 
 type ComponentProps = {
   status: string;
   isDraft: boolean;
-  label: string;
+  id: string;
   initialDate: string;
   hours: number;
 };
@@ -22,7 +26,7 @@ type ComponentProps = {
 export const RequestList: React.FC<ComponentProps> = ({
   status,
   isDraft,
-  label,
+  id,
   initialDate,
   hours
 }) => {
@@ -46,8 +50,8 @@ export const RequestList: React.FC<ComponentProps> = ({
           <S.Text>{status}</S.Text>
         </S.Content>
         <S.Content>
-          <S.Title>Label:</S.Title>
-          <S.Text>{label}</S.Text>
+          <S.Title>ID:</S.Title>
+          <S.Text>{id}</S.Text>
         </S.Content>
         <S.Content>
           <S.Title>Data da solicitação:</S.Title>
@@ -58,9 +62,26 @@ export const RequestList: React.FC<ComponentProps> = ({
           <S.Text>{hours} horas</S.Text>
         </S.Content>
         <S.IconsContainer>
-          <ViewRequestModal />
+          {isDraft ? (
+            <S.ActionIcon>
+              <PencilSimpleLine size={iconSize} />
+            </S.ActionIcon>
+          ) : (
+            <ViewRequestModal />
+          )}
           <S.ActionIcon>
             {!isDraft ? null : <Trash size={iconSize} />}
+            {(() => {
+              switch (status) {
+                case 'Concluído':
+                case 'Em análise':
+                  return <Printer size={iconSize} />;
+                case 'Indeferido':
+                  return <Archive size={iconSize} />;
+                default:
+                  return null;
+              }
+            })()}
           </S.ActionIcon>
         </S.IconsContainer>
       </S.Card>

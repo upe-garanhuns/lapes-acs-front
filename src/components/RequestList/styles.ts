@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 export const Card = styled.div<{ cardcolor: boolean }>`
   display: grid;
-  grid-template-columns: auto 0.5fr minmax(200px, 1.5fr) 0.5fr 0.5fr 68px;
+  grid-template-columns: auto 0.5fr minmax(200px, 1.5fr) 0.5fr 0.5fr auto;
   gap: 5px;
   justify-content: center;
   align-items: center;
@@ -41,7 +41,7 @@ export const Text = styled.p`
   font-size: 16px;
 `;
 export const ActionIcon = styled.span`
-  margin-right: 10px;
+  margin-right: 5px;
   cursor: pointer;
   --icon-color: ${colors.figmaColors[200]};
 

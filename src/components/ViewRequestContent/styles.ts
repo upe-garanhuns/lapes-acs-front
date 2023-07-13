@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  padding: 30px;
+  padding: 20px;
   padding-top: 0px;
   width: fit-content;
 `;
@@ -140,4 +140,20 @@ export const CoordObservation = styled(Status)`
 export const PageSelection = styled.div`
   margin-bottom: 10px;
   padding-botton: 10px;
+`;
+
+export const PrintIcon = styled.div`
+  width: 3rem;
+  height: 3rem;
+  border-radius: 999px;
+  background-color: #253555;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+  &:hover {
+    transform: scale(1.3);
 `;

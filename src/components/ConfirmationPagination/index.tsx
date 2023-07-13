@@ -20,7 +20,7 @@ export function ConfirmationPagination() {
       title: 'Certificado de Conclusão de Curso',
       educationAxis: 'Ciências da Computação',
       activity: 'Desenvolvimento Web',
-      initialDate: new Date('02-01-2024'),
+      initialDate: new Date('11-11-2024'),
       finalDate: new Date('3-2-2023'),
       hours: 40
     },
