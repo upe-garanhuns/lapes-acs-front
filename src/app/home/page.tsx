@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 
+import { Pagination } from '../../components/Pagination';
 import { pagination } from '../../services/pagination';
 import { pageValue } from '../../services/pagination/types';
 //import { request } from '../../services/request';
@@ -20,7 +21,7 @@ export default function Home() {
   const [isOpen, setIsOpen] = useState(false);
   //const [requests, setRequests] = useState<UserRequest[]>([]);
   const [requestsPag, setRequestsPag] = useState<pageValue>();
-
+  const [currentPage, setCurrentPage] = useState(1);
   const token = Cookies.get('token');
 
   useEffect(() => {
@@ -30,7 +31,7 @@ export default function Home() {
     };*/
 
     const requestPagination = async () => {
-      const paginationResponse = await pagination({ token, pag: 0, value: 2 });
+      const paginationResponse = await pagination({ token, pag: 0, value: 3 });
       setRequestsPag(paginationResponse);
     };
 
@@ -45,6 +46,10 @@ export default function Home() {
   function closeNewRequestModal() {
     setIsOpen(false);
   }
+
+  const handlePageChange = () => {
+    setCurrentPage(requestsPag.paginaAtual);
+  };
 
   return (
     <S.Container>
@@ -80,19 +85,44 @@ export default function Home() {
             </S.NewRequestDiv>
 
             <S.Div>
-              {requestsPag ? (
-                requestsPag.requisicoes.map((item) => (
-                  <RequestList
-                    status={item.requisicaoStatus}
-                    label={item.id}
-                    initialDate={moment(item.data).format('DD/MM/YYYY')} //new Date(item.data).toLocaleDateString('pt-br')
-                    hours={sumRequestHours(item.certificados)}
-                    key={item.id}
-                  />
-                ))
-              ) : (
-                <S.H3Title>Nenhuma solicitação registrada...</S.H3Title>
-              )}
+              <S.Div>
+                {requestsPag ? (
+                  <>
+                    {requestsPag.requisicoes.map((item) => (
+                      <RequestList
+                        status={item.requisicaoStatus}
+                        label={item.id}
+                        initialDate={moment(item.data).format('DD/MM/YYYY')} //new Date(item.data).toLocaleDateString('pt-br')
+                        hours={sumRequestHours(item.certificados)}
+                        key={item.id}
+                      />
+                    ))}
+                    <S.Div>
+                      <Pagination
+                        onPageChange={handlePageChange}
+                        totalCount={requestsPag.totalItens}
+                        currentPage={currentPage}
+                        pageSize={requestsPag.totalItens}
+                      />
+                    </S.Div>
+                  </>
+                ) : (
+                  <S.H3Title>Nenhuma solicitação registrada...</S.H3Title>
+                )}
+              </S.Div>
+              <S.Div>
+                {requestsPag && (
+                  <S.PaginationDiv>
+                    <p>Teste</p>
+                    <Pagination
+                      onPageChange={handlePageChange}
+                      totalCount={requestsPag.totalItens}
+                      currentPage={currentPage}
+                      pageSize={requestsPag.totalItens}
+                    />
+                  </S.PaginationDiv>
+                )}
+              </S.Div>
 
               <S.NewRequestModal
                 closeModalArea={closeNewRequestModal}

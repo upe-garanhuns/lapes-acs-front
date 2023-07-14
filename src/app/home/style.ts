@@ -115,3 +115,7 @@ export const RegisterInput = styled(Input)`
 export const NewRequestModal = styled(Modal)`
   border-radius: 24px;
 `;
+
+export const PaginationDiv = styled.div`
+  background: chocolate;
+`;
