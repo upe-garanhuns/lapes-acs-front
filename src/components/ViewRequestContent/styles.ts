@@ -40,10 +40,9 @@ export const GridContainer = styled.div`
   grid-template-columns: repeat(2, 2fr);
   grid-column-gap: 10vw;
   max-width: 650px;
-  @media (max-width: 426px){
+  @media (max-width: 426px) {
     grid-column-gap: 5vw;
     grid-template-columns: repeat(1, 2fr);
-  }
   }
 `;
 export const Content = styled.div`
@@ -78,11 +77,11 @@ export const StatusCircle = styled.div<CircleProps>`
   border-radius: 50%;
   background-color: ${(props) => {
     switch (props.status) {
-      case 'Aceito':
+      case 'Deferido':
         return '#228B22';
-      case 'Negado':
+      case 'Indeferido':
         return '#D00909';
-      case 'Em andamento':
+      case 'Em análise':
         return '#FFC700';
       default:
         return 'gray';
@@ -133,7 +132,7 @@ export const CoordObservation = styled(Status)`
 
 export const PageSelection = styled.div`
   margin-bottom: 10px;
-  padding-botton: 10px;
+  padding-bottom: 10px;
 `;
 
 export const PrintIcon = styled.div`
@@ -150,4 +149,5 @@ export const PrintIcon = styled.div`
   transition: transform 0.3s ease-in-out;
   &:hover {
     transform: scale(1.3);
+  }
 `;

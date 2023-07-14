@@ -5,37 +5,45 @@ import * as S from './styles';
 import { Eye } from '@phosphor-icons/react';
 
 export type ComponentProps = {
-  status: string;
-  activity: string;
-  educationAxis: string;
-  hours: number;
+  statusCertificado: string;
+  titulo: string;
+  horas: number;
 };
 
 export const CertificateList: React.FC<ComponentProps> = ({
-  status,
-  activity,
-  educationAxis,
-  hours
+  statusCertificado,
+  titulo,
+  horas
 }) => {
+  let statusDescription = '';
+  statusCertificado === 'DEFERIDO'
+    ? (statusDescription = 'Concluído')
+    : statusCertificado === 'ENCAMINHADO_COORDENACAO'
+    ? (statusDescription = 'Em análise')
+    : statusCertificado === 'ENCAMINHADO_COMISSAO'
+    ? (statusDescription = 'Em análise')
+    : statusCertificado === 'ENCAMINHADO_ESCOLARIDADE'
+    ? (statusDescription = 'Em análise')
+    : (statusDescription = 'Sem status');
   const iconSize = 24;
   return (
     <div>
       <S.Card>
         <S.Content>
           <S.Title>Status:</S.Title>
-          <S.Text>{status}</S.Text>
+          <S.Text>{statusDescription}</S.Text>
         </S.Content>
         <S.Content>
           <S.Title>Atividade:</S.Title>
-          <S.Text>{activity}</S.Text>
+          <S.Text>{titulo}</S.Text>
         </S.Content>
         <S.Content>
           <S.Title>Eixo de ensino:</S.Title>
-          <S.Text>{educationAxis}</S.Text>
+          <S.Text>{'Ensino'}</S.Text>
         </S.Content>
         <S.Content>
           <S.Title>Quantidade de horas:</S.Title>
-          <S.Text>{hours} horas</S.Text>
+          <S.Text>{horas} horas</S.Text>
         </S.Content>
         <S.IconsContainer>
           <Eye size={iconSize} />
