@@ -1,10 +1,14 @@
 import { fetchWrapper } from '../api';
 
-export const pagination = async (
-  token: string,
-  pag: number,
-  value: number
-): Promise<any> => {
+export const pagination = async ({
+  token,
+  pag,
+  value
+}: {
+  token: string;
+  pag: number;
+  value: number;
+}): Promise<any> => {
   try {
     const response = await fetchWrapper(
       `api/requisicao/paginacao?pagina=${pag}&quantidade=${value}`,

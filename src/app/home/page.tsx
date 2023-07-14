@@ -4,8 +4,8 @@ import { useEffect, useState } from 'react';
 
 import { pagination } from '../../services/pagination';
 import { pageValue } from '../../services/pagination/types';
-import { request } from '../../services/request';
-import { UserRequest } from '../../services/request/types';
+//import { request } from '../../services/request';
+//import { UserRequest } from '../../services/request/types';
 import HourCount from './components/HourCount';
 import { NewRequest } from './components/NewRequest';
 import { RequestList } from './components/RequestList';
@@ -18,23 +18,23 @@ import moment from 'moment';
 
 export default function Home() {
   const [isOpen, setIsOpen] = useState(false);
-  const [requests, setRequests] = useState<UserRequest[]>([]);
-  const [requestsPagination, setPaginationRequests] = useState<pageValue>();
+  //const [requests, setRequests] = useState<UserRequest[]>([]);
+  const [requestsPag, setRequestsPag] = useState<pageValue>();
+
   const token = Cookies.get('token');
 
   useEffect(() => {
-    const userRequest = async () => {
+    /*const userRequest = async () => {
       const requestResponse = await request(token);
       setRequests(requestResponse);
-    };
+    };*/
 
     const requestPagination = async () => {
-      const paginationResponse = await pagination(token, 0, 2);
-      console.log(paginationResponse);
-      setPaginationRequests(paginationResponse);
+      const paginationResponse = await pagination({ token, pag: 0, value: 2 });
+      setRequestsPag(paginationResponse);
     };
 
-    userRequest();
+    //userRequest();
     requestPagination();
   }, [token]);
 
@@ -80,8 +80,8 @@ export default function Home() {
             </S.NewRequestDiv>
 
             <S.Div>
-              {requests.length > 0 ? (
-                requests.map((item) => (
+              {requestsPag ? (
+                requestsPag.requisicoes.map((item) => (
                   <RequestList
                     status={item.requisicaoStatus}
                     label={item.id}
@@ -93,7 +93,7 @@ export default function Home() {
               ) : (
                 <S.H3Title>Nenhuma solicitação registrada...</S.H3Title>
               )}
-              <S.Div>{}</S.Div>
+
               <S.NewRequestModal
                 closeModalArea={closeNewRequestModal}
                 isOpen={isOpen}
