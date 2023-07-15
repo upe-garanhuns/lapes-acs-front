@@ -52,13 +52,13 @@ export default function Home() {
   }
 
   const handlePageChangeNext = () => {
-    if (currentPage < requestsPag.totalPaginas) {
+    if (currentPage < requestsPag.totalPaginas - 1) {
       setCurrentPage(currentPage + 1);
     }
   };
 
   const handlePageChangeBack = () => {
-    if (currentPage > 1) {
+    if (currentPage > 0) {
       setCurrentPage(currentPage - 1);
     }
   };
