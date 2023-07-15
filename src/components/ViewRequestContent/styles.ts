@@ -38,9 +38,8 @@ export const GridContainer = styled.div`
   grid-template-columns: repeat(2, 2fr);
   grid-column-gap: 10vw;
   max-width: 650px;
-  @media (max-width: 600px){
+  @media (max-width: 600px) {
     grid-column-gap: 5vw;
-  }
   }
 `;
 export const Content = styled.div`
@@ -136,5 +135,5 @@ export const CoordObservation = styled(Status)`
 
 export const PageSelection = styled.div`
   margin-bottom: 10px;
-  padding-botton: 10px;
+  padding-bottom: 10px;
 `;

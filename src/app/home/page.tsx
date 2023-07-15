@@ -2,11 +2,11 @@
 
 import { useEffect, useState } from 'react';
 
-import { Pagination } from '../../components/Pagination';
-import { pagination } from '../../services/pagination';
-import { pageValue } from '../../services/pagination/types';
 //import { request } from '../../services/request';
 //import { UserRequest } from '../../services/request/types';
+
+import { pagination } from '../../services/pagination';
+import { pageValue } from '../../services/pagination/types';
 import HourCount from './components/HourCount';
 import { NewRequest } from './components/NewRequest';
 import { RequestList } from './components/RequestList';
@@ -21,7 +21,8 @@ export default function Home() {
   const [isOpen, setIsOpen] = useState(false);
   //const [requests, setRequests] = useState<UserRequest[]>([]);
   const [requestsPag, setRequestsPag] = useState<pageValue>();
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState<number>(0);
+
   const token = Cookies.get('token');
 
   useEffect(() => {
@@ -29,15 +30,18 @@ export default function Home() {
       const requestResponse = await request(token);
       setRequests(requestResponse);
     };*/
-
-    const requestPagination = async () => {
-      const paginationResponse = await pagination({ token, pag: 0, value: 3 });
+    const requestPagination = async (page: number) => {
+      const paginationResponse = await pagination({
+        token,
+        pag: page,
+        value: 3
+      });
       setRequestsPag(paginationResponse);
     };
 
     //userRequest();
-    requestPagination();
-  }, [token]);
+    requestPagination(currentPage);
+  }, [token, currentPage]);
 
   function openNewRequestModal() {
     setIsOpen(true);
@@ -47,8 +51,16 @@ export default function Home() {
     setIsOpen(false);
   }
 
-  const handlePageChange = () => {
-    setCurrentPage(requestsPag.paginaAtual);
+  const handlePageChangeNext = () => {
+    if (currentPage < requestsPag.totalPaginas) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const handlePageChangeBack = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
   };
 
   return (
@@ -60,7 +72,7 @@ export default function Home() {
         </S.TitleDiv>
         <S.FunctionContainer>
           <div>
-            <HourCount gesHours={0} extHours={0} pesHours={0} ensHours={0} />
+            <HourCount gesHours={20} extHours={40} pesHours={10} ensHours={5} />
           </div>
 
           <S.Div>
@@ -97,14 +109,6 @@ export default function Home() {
                         key={item.id}
                       />
                     ))}
-                    <S.Div>
-                      <Pagination
-                        onPageChange={handlePageChange}
-                        totalCount={requestsPag.totalItens}
-                        currentPage={currentPage}
-                        pageSize={requestsPag.totalItens}
-                      />
-                    </S.Div>
                   </>
                 ) : (
                   <S.H3Title>Nenhuma solicitação registrada...</S.H3Title>
@@ -113,13 +117,22 @@ export default function Home() {
               <S.Div>
                 {requestsPag && (
                   <S.PaginationDiv>
-                    <p>Teste</p>
-                    <Pagination
-                      onPageChange={handlePageChange}
-                      totalCount={requestsPag.totalItens}
-                      currentPage={currentPage}
-                      pageSize={requestsPag.totalItens}
-                    />
+                    <div>
+                      <div>
+                        <button onClick={handlePageChangeBack}>voltar</button>
+                      </div>
+
+                      <div>
+                        <div>{requestsPag.paginaAtual + 1}</div>
+                      </div>
+                      <div>...</div>
+                      <div>
+                        <div>{requestsPag.totalPaginas}</div>
+                      </div>
+                      <div>
+                        <button onClick={handlePageChangeNext}>proximo</button>
+                      </div>
+                    </div>
                   </S.PaginationDiv>
                 )}
               </S.Div>
