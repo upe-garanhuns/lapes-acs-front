@@ -72,7 +72,7 @@ export default function Home() {
         </S.TitleDiv>
         <S.FunctionContainer>
           <div>
-            <HourCount gesHours={20} extHours={40} pesHours={10} ensHours={5} />
+            <HourCount gesHours={3} extHours={10} pesHours={30} ensHours={5} />
           </div>
 
           <S.Div>
@@ -117,22 +117,34 @@ export default function Home() {
               <S.Div>
                 {requestsPag && (
                   <S.PaginationDiv>
-                    <div>
-                      <div>
-                        <button onClick={handlePageChangeBack}>voltar</button>
-                      </div>
+                    <S.Div>
+                      <S.LeftArrow
+                        size={24}
+                        color="#6060ff"
+                        onClick={handlePageChangeBack}
+                      />
+                    </S.Div>
 
-                      <div>
-                        <div>{requestsPag.paginaAtual + 1}</div>
-                      </div>
-                      <div>...</div>
-                      <div>
-                        <div>{requestsPag.totalPaginas}</div>
-                      </div>
-                      <div>
-                        <button onClick={handlePageChangeNext}>proximo</button>
-                      </div>
-                    </div>
+                    <S.Div>
+                      <S.CurrentPageNumber>
+                        <S.PageNumber>
+                          {requestsPag.paginaAtual + 1}
+                        </S.PageNumber>
+                      </S.CurrentPageNumber>
+                    </S.Div>
+                    <S.Div>/</S.Div>
+                    <S.Div>
+                      <S.CurrentPageNumber>
+                        <S.PageNumber>{requestsPag.totalPaginas}</S.PageNumber>
+                      </S.CurrentPageNumber>
+                    </S.Div>
+                    <S.Div>
+                      <S.RightArrow
+                        size={24}
+                        color="#5555ff"
+                        onClick={handlePageChangeNext}
+                      />
+                    </S.Div>
                   </S.PaginationDiv>
                 )}
               </S.Div>
