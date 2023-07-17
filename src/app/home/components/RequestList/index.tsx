@@ -19,9 +19,11 @@ export type ComponentProps = {
   id: number;
   initialDate: string;
   hours: number;
+  token: string;
 };
 
 export const RequestList: React.FC<ComponentProps> = ({
+  token,
   status,
   id,
   initialDate,
@@ -82,7 +84,7 @@ export const RequestList: React.FC<ComponentProps> = ({
               <PencilSimpleLine size={iconSize} />
             </S.ActionIcon>
           ) : (
-            <ViewRequestModal />
+            <ViewRequestModal id={id} token={token} />
           )}
           <S.ActionIcon>
             {!isDraft ? null : <Trash size={iconSize} />}

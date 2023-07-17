@@ -3,6 +3,7 @@ export interface UserRequest {
   id: number;
   data: Date;
   requisicaoStatus: string;
+  observacao?: string;
 }
 
 export interface Certificate {

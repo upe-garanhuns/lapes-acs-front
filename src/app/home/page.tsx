@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 
-import { request } from '../../services/request';
+import { getRequests } from '../../services/request';
 import { UserRequest } from '../../services/request/types';
 import HourCount from './components/HourCount';
 import { NewRequest } from './components/NewRequest';
@@ -21,7 +21,7 @@ export default function Home() {
 
   useEffect(() => {
     const userRequest = async () => {
-      const requestResponse = await request(token);
+      const requestResponse = await getRequests(token);
       setRequests(requestResponse);
     };
 
@@ -82,6 +82,7 @@ export default function Home() {
                     initialDate={moment(item.data).format('DD/MM/YYYY')} //new Date(item.data).toLocaleDateString('pt-br')
                     hours={sumRequestHours(item.certificados)}
                     key={item.id}
+                    token={token}
                   />
                 ))
               ) : (
