@@ -11,7 +11,7 @@ export const pagination = async ({
 }): Promise<any> => {
   try {
     const response = await fetchWrapper(
-      `api/requisicao/paginacao?pagina=${pag}&quantidade=${value}`,
+      `api/aluno/requisicao/paginacao?pagina=${pag}&quantidade=${value}`,
       {
         method: 'GET',
         headers: {
