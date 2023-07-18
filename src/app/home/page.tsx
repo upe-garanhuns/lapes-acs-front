@@ -7,10 +7,11 @@ import { useEffect, useState } from 'react';
 
 import { pagination } from '../../services/pagination';
 import { pageValue } from '../../services/pagination/types';
+import { getUserHours } from '../../services/userHours';
+import { UserHours } from '../../services/userHours/types';
 import HourCount from './components/HourCount';
 import { NewRequest } from './components/NewRequest';
 import { RequestList } from './components/RequestList';
-import { sumRequestHours } from './functions/sumRequestHours';
 import * as S from './style';
 
 import { FileText, Funnel, XCircle } from '@phosphor-icons/react';
@@ -19,17 +20,18 @@ import moment from 'moment';
 
 export default function Home() {
   const [isOpen, setIsOpen] = useState(false);
-  //const [requests, setRequests] = useState<UserRequest[]>([]);
+  const [hours, setHours] = useState<UserHours>();
   const [requestsPag, setRequestsPag] = useState<pageValue>();
   const [currentPage, setCurrentPage] = useState<number>(0);
 
   const token = Cookies.get('token');
 
   useEffect(() => {
-    /*const userRequest = async () => {
-      const requestResponse = await request(token);
-      setRequests(requestResponse);
-    };*/
+    const userHours = async () => {
+      const userHoursResponse = await getUserHours(token);
+      setHours(userHoursResponse);
+    };
+
     const requestPagination = async (page: number) => {
       const paginationResponse = await pagination({
         token,
@@ -37,12 +39,9 @@ export default function Home() {
         value: 3
       });
       setRequestsPag(paginationResponse);
-
-      console.log(requestsPag.requisicoes);
     };
-
-    //userRequest();
     requestPagination(currentPage);
+    userHours();
   }, [token, currentPage]);
 
   function openNewRequestModal() {
@@ -74,7 +73,16 @@ export default function Home() {
         </S.TitleDiv>
         <S.FunctionContainer>
           <div>
-            <HourCount gesHours={3} extHours={10} pesHours={30} ensHours={5} />
+            {hours ? (
+              <HourCount
+                gesHours={hours.horasGestao}
+                extHours={hours.horasExtensao}
+                pesHours={hours.horasPesquisa}
+                ensHours={hours.horasEnsino}
+              />
+            ) : (
+              <HourCount gesHours={0} extHours={0} pesHours={0} ensHours={0} />
+            )}
           </div>
 
           <S.Div>
@@ -108,7 +116,7 @@ export default function Home() {
                         id={item.id}
                         initialDate={moment(item.dataDaSolicitacao).format(
                           'DD/MM/YYYY'
-                        )} //new Date(item.data).toLocaleDateString('pt-br')
+                        )}
                         hours={item.quantidadeDeHoras}
                         key={item.id}
                         token={token}
