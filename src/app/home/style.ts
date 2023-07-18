@@ -2,6 +2,7 @@ import Button from '../../components/Button';
 import { Input } from '../../components/Input';
 import { Modal } from '../../components/Modal';
 
+import { CaretCircleLeft, CaretCircleRight } from '@phosphor-icons/react';
 import styled from 'styled-components';
 
 export const Container = styled.div`
@@ -114,4 +115,25 @@ export const RegisterInput = styled(Input)`
 
 export const NewRequestModal = styled(Modal)`
   border-radius: 24px;
+`;
+
+export const PaginationDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  justify-content: flex-end;
+  align-items: center;
+`;
+
+export const LeftArrow = styled(CaretCircleLeft)`
+  cursor: pointer;
+`;
+export const RightArrow = styled(CaretCircleRight)`
+  cursor: pointer;
+`;
+
+export const CurrentPageNumber = styled.div``;
+export const PageNumber = styled.p`
+  font-size: 1em;
+  color: #5555ff;
 `;

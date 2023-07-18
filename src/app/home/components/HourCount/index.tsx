@@ -7,7 +7,6 @@ export type ComponentProps = {
   extHours: number;
   pesHours: number;
   ensHours: number;
-  name: string;
 };
 
 const calculateTotalHours = (data: ComponentProps) => {
@@ -19,8 +18,7 @@ const HourCount: React.FC<ComponentProps> = ({
   gesHours,
   extHours,
   pesHours,
-  ensHours,
-  name
+  ensHours
 }) => {
   const maxHours = 180;
   const totalHours: number = calculateTotalHours({
@@ -39,9 +37,6 @@ const HourCount: React.FC<ComponentProps> = ({
   return (
     <div>
       <S.Component>
-        <S.Name>Bem vindo(a), {name}!</S.Name>
-        <S.Hr />
-
         <S.Container>
           <S.MinhasHorasString>Minhas Horas: </S.MinhasHorasString>
           <S.GesBar>Ges: {gesHours}h</S.GesBar>
