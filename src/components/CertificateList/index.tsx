@@ -8,11 +8,14 @@ export type ComponentProps = {
   statusCertificado: string;
   titulo: string;
   horas: number;
+  eixoAtividade: string;
+  atividade: string;
 };
 
 export const CertificateList: React.FC<ComponentProps> = ({
+  eixoAtividade,
   statusCertificado,
-  titulo,
+  atividade,
   horas
 }) => {
   let statusDescription = '';
@@ -35,11 +38,11 @@ export const CertificateList: React.FC<ComponentProps> = ({
         </S.Content>
         <S.Content>
           <S.Title>Atividade:</S.Title>
-          <S.Text>{titulo}</S.Text>
+          <S.Text>{atividade}</S.Text>
         </S.Content>
         <S.Content>
           <S.Title>Eixo de ensino:</S.Title>
-          <S.Text>{'Ensino'}</S.Text>
+          <S.Text>{eixoAtividade}</S.Text>
         </S.Content>
         <S.Content>
           <S.Title>Quantidade de horas:</S.Title>
