@@ -98,7 +98,7 @@ export default function Home() {
 
             <S.Div>
               <S.Div>
-                {requestsPag ? (
+                {requestsPag && requestsPag.totalPaginas > 1 ? (
                   <>
                     {requestsPag.requisicoes.map((item) => (
                       <RequestList
@@ -116,7 +116,7 @@ export default function Home() {
                 )}
               </S.Div>
               <S.Div>
-                {requestsPag && (
+                {requestsPag && requestsPag.totalPaginas > 1 ? (
                   <S.PaginationDiv>
                     <S.Div>
                       <S.LeftArrow
@@ -147,6 +147,8 @@ export default function Home() {
                       />
                     </S.Div>
                   </S.PaginationDiv>
+                ) : (
+                  <S.Div></S.Div>
                 )}
               </S.Div>
 
