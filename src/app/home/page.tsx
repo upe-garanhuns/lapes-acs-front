@@ -37,6 +37,8 @@ export default function Home() {
         value: 3
       });
       setRequestsPag(paginationResponse);
+
+      console.log(requestsPag.requisicoes);
     };
 
     //userRequest();
@@ -102,10 +104,12 @@ export default function Home() {
                   <>
                     {requestsPag.requisicoes.map((item) => (
                       <RequestList
-                        status={item.requisicaoStatus}
+                        status={item.status}
                         id={item.id}
-                        initialDate={moment(item.data).format('DD/MM/YYYY')} //new Date(item.data).toLocaleDateString('pt-br')
-                        hours={sumRequestHours(item.certificados)}
+                        initialDate={moment(item.dataDaSolicitacao).format(
+                          'DD/MM/YYYY'
+                        )} //new Date(item.data).toLocaleDateString('pt-br')
+                        hours={item.quantidadeDeHoras}
                         key={item.id}
                         token={token}
                       />
