@@ -1,9 +1,9 @@
 'use client';
 import { useState } from 'react';
 
-import { Modal } from '../../components/Request';
+
 import * as S from './style';
-import HourCount from '../../components/HourCount';
+import { Register } from '../signin/components/Register';
 import { XCircle } from '@phosphor-icons/react';
 
 export default function RegistePageTest() {
@@ -40,6 +40,7 @@ export default function RegistePageTest() {
           <S.FileName>Nome do Arquivo 2</S.FileName>
         </S.FileList>
       </Modal>
+      
       
     </div>
   );

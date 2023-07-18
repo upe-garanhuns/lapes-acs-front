@@ -13,6 +13,7 @@ import { checkName } from './functions/checkName';
 import { checkNumber } from './functions/checkNumber';
 import { checkPassWord } from './functions/checkPassword';
 import { checkPhone } from './functions/checkPhone';
+import { checkRegistry } from './functions/checkRegistry';
 import { checkSamePass } from './functions/checkSamePass';
 import { useErrorInput } from './hooks/useErrorInput';
 import { useSetInput } from './hooks/useSetInput';
@@ -21,11 +22,7 @@ import * as S from './style';
 
 import { MapPin, User, Eye, EyeSlash } from '@phosphor-icons/react';
 
-type ComponentProps = {
-  closeRegisterModal: () => void;
-};
-
-export function Register({ closeRegisterModal }: ComponentProps) {
+export function Register() {
   // hooks usados para setar mensagem de erros dos inputs - jamu
   const {
     errorName,
@@ -47,7 +44,9 @@ export function Register({ closeRegisterModal }: ComponentProps) {
     errorNumber,
     setErrorNumber,
     errorCep,
-    setErrorCep
+    setErrorCep,
+    errorRegistry,
+    setErrorRegistry
   } = useErrorInput();
 
   // hooks para capturar os valores setados nos inputs - jamu
@@ -81,7 +80,9 @@ export function Register({ closeRegisterModal }: ComponentProps) {
     userStreet,
     setUserStreet,
     userComplement,
-    setUserComplement
+    setUserComplement,
+    userRegistry, 
+    setUserRegistry
   } = useSetInput();
 
   //hook para o botão de visualizar senha - jamu
@@ -146,6 +147,13 @@ export function Register({ closeRegisterModal }: ComponentProps) {
     const { value } = e.target;
     setUserNumber(value);
     setErrorNumber(checkNumber(parseInt(value)));
+  };
+
+  
+  const handleChangeRegistry = (e) => {
+    const { value } = e.target;
+    setUserRegistry(value);
+    setErrorRegistry(checkRegistry(value));
   };
 
   const handleChangeCourser = (e) => {
@@ -239,7 +247,7 @@ export function Register({ closeRegisterModal }: ComponentProps) {
   const signUpData: CreateUser = {
     nomeCompleto: userName,
     cpf: userCpf,
-    matricula: '',
+    matricula: userRegistry,
     periodo: parseInt(userGrade),
     telefone: userPhone,
     email: userEmail,
@@ -259,15 +267,13 @@ export function Register({ closeRegisterModal }: ComponentProps) {
     try {
       await createUser(signUpData);
       alert('Acesse o e-mail cadastrado para verificar a sua conta!');
-      closeRegisterModal();
     } catch (error) {
       alert('Houve algum erro ao tentar se cadastrar!');
       console.log(error);
-      closeRegisterModal();
     }
 
     console.log(
-      `Nome: ${userName}, cpf: ${userCpf}, telefone: ${userPhone}, curso: ${userCourse}, periodo: ${userGrade}, email: ${userEmail}, senha: ${userPass}, senha2: ${userSamePass}, cep: ${userCep}, cidade: ${userCity}, uf: ${userUf},bairro: ${userBlock}, rua: ${userStreet}, numero: ${userNumber}, complemento: ${userComplement}`
+      `Nome: ${userName}, cpf: ${userCpf}, telefone: ${userPhone}, curso: ${userCourse}, periodo: ${userGrade}, email: ${userEmail}, senha: ${userPass}, senha2: ${userSamePass},matricula:${userRegistry} ,cep: ${userCep}, cidade: ${userCity}, uf: ${userUf},bairro: ${userBlock}, rua: ${userStreet}, numero: ${userNumber}, complemento: ${userComplement}`
     );
   }
 
@@ -430,6 +436,23 @@ export function Register({ closeRegisterModal }: ComponentProps) {
             </S.InsideDiv>
             <S.InsideDiv>
               <S.RegisterInput
+                label="Matrícula:"
+                placeholder="Matrícula"
+                type='text'
+                onChange={handleChangeRegistry}
+                
+                
+
+              />
+              {!errorRegistry && (
+                <S.ErroMessage>
+                  *Insira um número de matrícula válido
+                </S.ErroMessage>
+              )}
+            </S.InsideDiv>
+
+            <S.InsideDiv>
+              <S.RegisterInput
                 label="Senha:"
                 placeholder="Senha"
                 type={visibility ? 'text' : 'password'}
@@ -448,6 +471,9 @@ export function Register({ closeRegisterModal }: ComponentProps) {
                 </S.ErroMessage>
               )}
             </S.InsideDiv>
+
+        
+
             <S.InsideDiv>
               <S.RegisterInput
                 label="Confirme Sua Senha:"
@@ -533,13 +559,7 @@ export function Register({ closeRegisterModal }: ComponentProps) {
                 <S.ErroMessage>*Insira um número valido</S.ErroMessage>
               )}
             </S.InsideDiv>
-            <S.InsideDiv $col="span 3 / span 3">
-              <S.RegisterInput
-                label="Complemento:"
-                placeholder="Ex: Apartamento 10"
-                onChange={handleChangeComplement}
-              />
-            </S.InsideDiv>
+            
           </S.InputDiv>
         </S.Div>
         <S.ButtonDiv>

@@ -16,6 +16,7 @@ export const useSetInput = () => {
   const [userUf, setUserUf] = useState<string>('');
   const [userStreet, setUserStreet] = useState<string>('');
   const [userComplement, setUserComplement] = useState<string>('');
+  const [userRegistry, setUserRegistry] = useState<string>('');
 
   return {
     userName,
@@ -47,6 +48,8 @@ export const useSetInput = () => {
     userStreet,
     setUserStreet,
     userComplement,
-    setUserComplement
+    setUserComplement, 
+    userRegistry, 
+    setUserRegistry
   };
 };

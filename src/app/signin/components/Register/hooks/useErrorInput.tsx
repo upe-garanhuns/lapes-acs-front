@@ -11,6 +11,9 @@ export const useErrorInput = () => {
   const [errorSamePass, setErrorSamePass] = useState<boolean>(false);
   const [errorNumber, setErrorNumber] = useState<boolean>(false);
   const [errorCep, setErrorCep] = useState<boolean>(false);
+  ;
+  const [errorRegistry, setErrorRegistry] = useState<boolean>(false);
+
 
   return {
     errorName,
@@ -32,6 +35,8 @@ export const useErrorInput = () => {
     errorNumber,
     setErrorNumber,
     errorCep,
-    setErrorCep
+    setErrorCep,
+    errorRegistry,
+    setErrorRegistry
   };
 };
