@@ -108,7 +108,7 @@ export default function Home() {
 
             <S.Div>
               <S.Div>
-                {requestsPag && requestsPag.totalPaginas > 1 ? (
+                {requestsPag && requestsPag.totalPaginas > 0 ? (
                   <>
                     {requestsPag.requisicoes.map((item) => (
                       <RequestList
