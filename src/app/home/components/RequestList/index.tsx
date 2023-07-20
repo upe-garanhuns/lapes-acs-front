@@ -1,10 +1,10 @@
 import React from 'react';
 
+import { DeleteRequest } from '../../../../components/DeleteRequest';
 import ViewRequestModal from '../../../../components/ViewRequestModal';
 import * as S from './styles';
 
 import {
-  Trash,
   NotePencil,
   Clock,
   WarningCircle,
@@ -87,7 +87,7 @@ export const RequestList: React.FC<ComponentProps> = ({
             <ViewRequestModal id={id} token={token} />
           )}
           <S.ActionIcon>
-            {!isDraft ? null : <Trash size={iconSize} />}
+            {!isDraft ? null : <DeleteRequest id={id} token={token} />}
             {(() => {
               switch (status) {
                 case 'DEFERIDO':

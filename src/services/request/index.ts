@@ -21,3 +21,16 @@ export const getRequest = async (id: number, token: string): Promise<any> => {
   });
   return response;
 };
+
+export const deleteRequest = async (
+  id: number,
+  token: string
+): Promise<any> => {
+  await fetchWrapper(`api/requisicao/rascunho/${id}`, {
+    method: 'DELETE',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    }
+  });
+};
