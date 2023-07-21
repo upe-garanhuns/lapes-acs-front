@@ -1,15 +1,48 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-import { NewRequest } from '../../components/NewRequest';
-import { RequestList } from '../../components/RequestList';
+//import { request } from '../../services/request';
+//import { UserRequest } from '../../services/request/types';
+
+import { pagination } from '../../services/pagination';
+import { pageValue } from '../../services/pagination/types';
+import { getUserHours } from '../../services/userHours';
+import { UserHours } from '../../services/userHours/types';
+import HourCount from './components/HourCount';
+import { NewRequest } from './components/NewRequest';
+import { RequestList } from './components/RequestList';
 import * as S from './style';
 
 import { FileText, Funnel, XCircle } from '@phosphor-icons/react';
+import Cookies from 'js-cookie';
+import moment from 'moment';
 
 export default function Home() {
   const [isOpen, setIsOpen] = useState(false);
+  const [hours, setHours] = useState<UserHours>();
+  const [requestsPag, setRequestsPag] = useState<pageValue>();
+  const [currentPage, setCurrentPage] = useState<number>(0);
+
+  const token = Cookies.get('token');
+
+  useEffect(() => {
+    const userHours = async () => {
+      const userHoursResponse = await getUserHours(token);
+      setHours(userHoursResponse);
+    };
+
+    const requestPagination = async (page: number) => {
+      const paginationResponse = await pagination({
+        token,
+        pag: page,
+        value: 3
+      });
+      setRequestsPag(paginationResponse);
+    };
+    requestPagination(currentPage);
+    userHours();
+  }, [token, currentPage]);
 
   function openNewRequestModal() {
     setIsOpen(true);
@@ -18,6 +51,19 @@ export default function Home() {
   function closeNewRequestModal() {
     setIsOpen(false);
   }
+
+  const handlePageChangeNext = () => {
+    if (currentPage < requestsPag.totalPaginas - 1) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const handlePageChangeBack = () => {
+    if (currentPage > 0) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
   return (
     <S.Container>
       <S.ContentDiv>
@@ -27,8 +73,18 @@ export default function Home() {
         </S.TitleDiv>
         <S.FunctionContainer>
           <div>
-            <p>Componente horas em breve...</p>
+            {hours ? (
+              <HourCount
+                gesHours={hours.horasGestao}
+                extHours={hours.horasExtensao}
+                pesHours={hours.horasPesquisa}
+                ensHours={hours.horasEnsino}
+              />
+            ) : (
+              <HourCount gesHours={0} extHours={0} pesHours={0} ensHours={0} />
+            )}
           </div>
+
           <S.Div>
             <S.RequestDiv>
               <S.H2Title>Solicitações em Andamento</S.H2Title>
@@ -49,15 +105,67 @@ export default function Home() {
                 </S.IconButton>
               </S.InputRequestDiv>
             </S.NewRequestDiv>
+
             <S.Div>
-              <RequestList
-                status={''}
-                isDraft={false}
-                label={''}
-                initialDate={''}
-                hours={0}
-              />
+              <S.Div>
+                {requestsPag && requestsPag.totalPaginas > 0 ? (
+                  <>
+                    {requestsPag.requisicoes.map((item) => (
+                      <RequestList
+                        status={item.status}
+                        id={item.id}
+                        initialDate={moment(item.dataDaSolicitacao).format(
+                          'DD/MM/YYYY'
+                        )}
+                        hours={item.quantidadeDeHoras}
+                        key={item.id}
+                        token={token}
+                      />
+                    ))}
+                  </>
+                ) : (
+                  <S.H3Title>Nenhuma solicitação registrada...</S.H3Title>
+                )}
+              </S.Div>
+              <S.Div>
+                {requestsPag && requestsPag.totalPaginas > 1 ? (
+                  <S.PaginationDiv>
+                    <S.Div>
+                      <S.LeftArrow
+                        size={24}
+                        color="#6060ff"
+                        onClick={handlePageChangeBack}
+                      />
+                    </S.Div>
+
+                    <S.Div>
+                      <S.CurrentPageNumber>
+                        <S.PageNumber>
+                          {requestsPag.paginaAtual + 1}
+                        </S.PageNumber>
+                      </S.CurrentPageNumber>
+                    </S.Div>
+                    <S.Div>/</S.Div>
+                    <S.Div>
+                      <S.CurrentPageNumber>
+                        <S.PageNumber>{requestsPag.totalPaginas}</S.PageNumber>
+                      </S.CurrentPageNumber>
+                    </S.Div>
+                    <S.Div>
+                      <S.RightArrow
+                        size={24}
+                        color="#5555ff"
+                        onClick={handlePageChangeNext}
+                      />
+                    </S.Div>
+                  </S.PaginationDiv>
+                ) : (
+                  <S.Div></S.Div>
+                )}
+              </S.Div>
+
               <S.NewRequestModal
+                closeModalArea={closeNewRequestModal}
                 isOpen={isOpen}
                 closeModal={closeNewRequestModal}
                 // eslint-disable-next-line react/no-children-prop

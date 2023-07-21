@@ -1,45 +1,50 @@
-import { colors } from '../../styles/colors';
+import { colors } from '../../../../styles/colors';
 
 import styled from 'styled-components';
 
-export const Card = styled.div`
+
+export const Card = styled.div<{ cardcolor: boolean }>`
   display: grid;
-  grid-template-columns: repeat(4, minmax(80px, 100%)) 1.5fr auto;
-  gap: 10px;
+  grid-template-columns: auto 0.5fr minmax(200px, 1.5fr) 0.5fr 0.5fr auto;
+  gap: 5px;
   justify-content: center;
   align-items: center;
-  background-color: ${colors.figmaColors[100]};
+  background-color: ${({ cardcolor }) =>
+    cardcolor ? colors.figmaColors[50] : colors.figmaColors[100]};
   border-radius: 20px;
-  margin: 10px;
-  padding: 10px;
-  padding-left: 20px;
-  align-items: center;
+  margin: 20px;
+  padding: 7px;
 
-  @media (max-width: 680px) {
-    grid-template-columns: repeat(auto-fit, 100%);
+  @media (max-width: 715px) {
+    grid-template-columns: repeat(2, minmax(150px, 1fr));
+  }
+  @media (max-width: 460px) {
+    grid-template-columns: repeat(1, minmax(150px, 1fr));
   }
 `;
 export const Content = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: left;
-  width: 100%;
 `;
 export const Title = styled.p`
   font-weight: bold;
   margin-bottom: 3px;
   margin-top: 3px;
-  font-size: 12px;
+  font-size: 13px;
 `;
 
 export const Text = styled.p`
+  margin-bottom: 3px;
+  margin-top: 3px;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
   font-size: 16px;
 `;
 export const ActionIcon = styled.span`
-  margin-right: 10px;
+
+  margin-right: 5px;
+
   cursor: pointer;
   --icon-color: ${colors.figmaColors[200]};
 
@@ -48,21 +53,19 @@ export const ActionIcon = styled.span`
   }
   transition: transform 0.3s ease-in-out;
   &:hover {
-    transform: scale(1.2);
+
+    transform: scale(1.4);
+
   }
 `;
 
 export const IconsContainer = styled.div`
   display: flex;
   flex-direction: row;
-  width: fit-content;
   margin-right: 10px;
-  justify-content: flex-end;
-  @media (max-width: 680px) {
-    justify-content: flex-start;
-  }
-  transition: transform 0.3s ease-in-out;
-  &:hover {
-    transform: scale(1.4);
-  }
+`;
+
+export const StatusIcon = styled.div`
+  margin-left: 5px;
+  margin-right: 10px;
 `;
