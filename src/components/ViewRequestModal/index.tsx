@@ -21,7 +21,7 @@ export default function ViewRequestModal(props: ViewRequestModalProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [certificateData, setCertificateData] = useState<ViewRequestProps>({
     id: 0,
-    data: '',
+    data: new Date(),
     requisicaoStatus: '',
     observacao: '',
     certificados: []

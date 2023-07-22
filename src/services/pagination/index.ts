@@ -1,4 +1,5 @@
 import { fetchWrapper } from '../api';
+import { PageValue } from './types';
 
 export const pagination = async ({
   token,
@@ -8,9 +9,9 @@ export const pagination = async ({
   token: string;
   pag: number;
   value: number;
-}): Promise<any> => {
+}): Promise<PageValue> => {
   try {
-    const response = await fetchWrapper(
+    const response: PageValue = await fetchWrapper(
       `api/aluno/requisicao/paginacao?pagina=${pag}&quantidade=${value}`,
       {
         method: 'GET',
