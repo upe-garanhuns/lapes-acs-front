@@ -1,10 +1,12 @@
 import React from 'react';
 
+import ArchiveRequest from '../../../../components/DeleteArchiveRequestModal';
 import { DeleteRequest } from '../../../../components/DeleteRequest';
 import ViewRequestModal from '../../../../components/ViewRequestModal';
 import * as S from './styles';
 
 import {
+  Trash,
   NotePencil,
   Clock,
   WarningCircle,
@@ -87,7 +89,16 @@ export const RequestList: React.FC<ComponentProps> = ({
             <ViewRequestModal id={id} token={token} />
           )}
           <S.ActionIcon>
-            {!isDraft ? null : <DeleteRequest id={id} token={token} />}
+            <Trash size={iconSize}>
+              {!isDraft ? null : (
+                <ArchiveRequest
+                  id={id}
+                  token={token}
+                  type={true}
+                  onArchive={function (): void {}}
+                />
+              )}
+            </Trash>
             {(() => {
               switch (status) {
                 case 'DEFERIDO':
@@ -95,7 +106,16 @@ export const RequestList: React.FC<ComponentProps> = ({
                 case 'ENCAMINHADO_COMISSAO':
                   return <Printer size={iconSize} />;
                 case 'INDEFERIDO':
-                  return <Archive size={iconSize} />;
+                  return (
+                    <Archive size={iconSize}>
+                      <ArchiveRequest
+                        id={id}
+                        token={token}
+                        type={true}
+                        onArchive={function (): void {}}
+                      />
+                    </Archive>
+                  );
                 default:
                   return null;
               }

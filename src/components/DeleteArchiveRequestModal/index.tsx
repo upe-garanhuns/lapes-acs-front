@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
 
+import { DeleteRequest } from '../DeleteArchiveRequest';
 import * as S from './styles';
-
 export type ComponentProps = {
-  title: string;
-  archiveButtonText: string;
+  type: boolean;
   onArchive: () => void;
+  token: string;
+  id: number;
 };
 
 const ArchiveRequest: React.FC<ComponentProps> = ({
-  title,
-  archiveButtonText,
-  onArchive
+  type,
+  onArchive,
+  id,
+  token
 }) => {
   const [isOpen, setIsOpen] = useState(true);
 
@@ -30,12 +32,10 @@ const ArchiveRequest: React.FC<ComponentProps> = ({
     <S.Overlay>
       <S.PopUpContainer>
         <S.CloseIcon onClick={handleClose} />
-        <h2>{title}</h2>
+        <h2>Deseja {type ? 'excluir' : 'arquivar'} essa solicitação?</h2>
         <S.ButtonContainer>
           <S.CloseButton onClick={handleClose}>Cancelar</S.CloseButton>
-          <S.ArchiveButton onClick={handleArchive}>
-            {archiveButtonText}
-          </S.ArchiveButton>
+          <DeleteRequest id={id} token={token} type={type} />
         </S.ButtonContainer>
       </S.PopUpContainer>
     </S.Overlay>

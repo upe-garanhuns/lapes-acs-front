@@ -1,13 +1,12 @@
 import { deleteRequest } from '../../services/request';
-
-import { Trash } from '@phosphor-icons/react';
+import * as S from './styles';
 export type DeleteRequestProps = {
   id: number;
   token: string;
+  type: boolean;
 };
 export function DeleteRequest(props: DeleteRequestProps) {
-  const { id, token } = props;
-  const iconSize = 24;
+  const { id, token, type } = props;
   const Delete = async () => {
     try {
       await deleteRequest(id, token);
@@ -15,5 +14,10 @@ export function DeleteRequest(props: DeleteRequestProps) {
       console.log(error);
     }
   };
-  return <Trash size={iconSize} onClick={Delete} />;
+
+  return (
+    <S.DeleteArchiveButton onClick={type ? Delete : null}>
+      {type ? 'Excluir' : 'Arquivar'}
+    </S.DeleteArchiveButton>
+  );
 }
