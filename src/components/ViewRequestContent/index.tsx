@@ -13,7 +13,7 @@ import moment from 'moment';
 
 export type ViewRequestProps = {
   id?: number;
-  data?: string;
+  data?: Date;
   requisicaoStatus?: string;
   observacao?: string;
   certificados?: Array<Certificate>;
@@ -70,12 +70,17 @@ export default function ViewRequestContent(props: ViewRequestProps) {
         </S.GridContainer>
         <S.Description>Observações do Coordenador:</S.Description>
         <S.CoordObservation>
-          {observacao === '' ? 'Sem observações na solicitação' : observacao}
+          {observacao === null ? 'Sem observações na solicitação' : observacao}
         </S.CoordObservation>
         <S.CertificateTitle>Certificados:</S.CertificateTitle>
         <S.Division />
         {displayedItems.map((certificado) => (
-          <CertificateList key={certificado.id} {...certificado} />
+          <CertificateList
+            eixoAtividade={''}
+            atividade={''}
+            key={certificado.id}
+            {...certificado}
+          />
         ))}
         <Pagination
           onPageChange={handlePageChange}

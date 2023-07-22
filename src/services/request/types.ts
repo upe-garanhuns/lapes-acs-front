@@ -2,9 +2,7 @@ export interface UserRequest {
   certificados?: Array<Certificate>;
   id: number;
   data: Date;
-  dataDaSolicitacao: Date;
-  quantidadeDeHoras: 15;
-  status: string;
+  quantidadeDeHoras: number;
   requisicaoStatus: string;
   observacao?: string;
 }
