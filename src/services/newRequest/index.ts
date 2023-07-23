@@ -1,9 +1,14 @@
 import { fetchWrapper } from '../api';
-import { RequestId } from './types';
 
-export const newRequest = async (): Promise<RequestId> => {
+export const newRequest = async (token: string): Promise<any> => {
   try {
-    const data: RequestId = await fetchWrapper<RequestId>(`api/requisicao`);
+    const data: any = await fetchWrapper<any>(`api/requisicao`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    });
     console.log(data);
     return data;
   } catch (error) {

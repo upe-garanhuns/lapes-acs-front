@@ -80,8 +80,7 @@ export function Register() {
     userStreet,
     setUserStreet,
     userComplement,
-    setUserComplement,
-    userRegistry, 
+    userRegistry,
     setUserRegistry
   } = useSetInput();
 
@@ -149,7 +148,6 @@ export function Register() {
     setErrorNumber(checkNumber(parseInt(value)));
   };
 
-  
   const handleChangeRegistry = (e) => {
     const { value } = e.target;
     setUserRegistry(value);
@@ -187,11 +185,6 @@ export function Register() {
   const handleChangeStreet = (e) => {
     const { value } = e.target;
     setUserStreet(value);
-  };
-
-  const handleChangeComplement = (e) => {
-    const { value } = e.target;
-    setUserComplement(value);
   };
 
   const handleTogglePassVisibility = () => {
@@ -438,11 +431,8 @@ export function Register() {
               <S.RegisterInput
                 label="Matrícula:"
                 placeholder="Matrícula"
-                type='text'
+                type="text"
                 onChange={handleChangeRegistry}
-                
-                
-
               />
               {!errorRegistry && (
                 <S.ErroMessage>
@@ -471,8 +461,6 @@ export function Register() {
                 </S.ErroMessage>
               )}
             </S.InsideDiv>
-
-        
 
             <S.InsideDiv>
               <S.RegisterInput
@@ -559,7 +547,6 @@ export function Register() {
                 <S.ErroMessage>*Insira um número valido</S.ErroMessage>
               )}
             </S.InsideDiv>
-            
           </S.InputDiv>
         </S.Div>
         <S.ButtonDiv>

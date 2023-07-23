@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 //import { request } from '../../services/request';
 //import { UserRequest } from '../../services/request/types';
 
+import { newRequest } from '../../services/newRequest';
 import { pagination } from '../../services/pagination';
 import { PageValue } from '../../services/pagination/types';
 import { getUserHours } from '../../services/userHours';
@@ -23,6 +24,7 @@ export default function Home() {
   const [hours, setHours] = useState<UserHours>();
   const [requestsPag, setRequestsPag] = useState<PageValue>();
   const [currentPage, setCurrentPage] = useState<number>(0);
+  const [requestId, setRequestId] = useState<number>();
 
   const token = Cookies.get('token');
 
@@ -44,8 +46,15 @@ export default function Home() {
     userHours();
   }, [token, currentPage]);
 
+  const fetchRequest = async () => {
+    const createNewRequest = await newRequest(token);
+    setRequestId(createNewRequest);
+    console.log(createNewRequest);
+  };
+
   function openNewRequestModal() {
     setIsOpen(true);
+    fetchRequest();
   }
 
   function closeNewRequestModal() {

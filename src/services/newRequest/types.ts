@@ -1,3 +1,3 @@
 export interface RequestId {
-  id: string;
+  id: number;
 }
