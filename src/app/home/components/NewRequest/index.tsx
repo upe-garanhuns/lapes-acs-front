@@ -1,14 +1,21 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
+import { newCertificate } from '../../../../services/newCertificate';
 import * as S from './style';
 
 import { XCircle, FileText, FilePlus } from '@phosphor-icons/react';
 
 type ComponentProps = {
   cancelRequest: () => void;
+  requestId: number;
+  token: string;
 };
 
-export const NewRequest = ({ cancelRequest }: ComponentProps) => {
+export const NewRequest = ({
+  cancelRequest,
+  requestId,
+  token
+}: ComponentProps) => {
   const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -41,6 +48,14 @@ export const NewRequest = ({ cancelRequest }: ComponentProps) => {
       setUploadedFiles((prevFiles) => [...prevFiles, ...Array.from(files)]);
     }
   };
+
+  useEffect(() => {
+    const fetchCertificate = async (userToken: string, id: number) => {
+      const addCertificate = await newCertificate(userToken, id, uploadedFiles);
+      console.log(addCertificate);
+    };
+    fetchCertificate(token, requestId);
+  }, [token, requestId, uploadedFiles]);
 
   return (
     <S.Container onDragOver={handleDragOver} onDrop={handleDrop}>

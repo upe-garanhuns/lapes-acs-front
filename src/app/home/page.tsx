@@ -24,6 +24,7 @@ export default function Home() {
   const [hours, setHours] = useState<UserHours>();
   const [requestsPag, setRequestsPag] = useState<PageValue>();
   const [currentPage, setCurrentPage] = useState<number>(0);
+  const [requestId, setRequestId] = useState<number>();
 
   const token = Cookies.get('token');
 
@@ -47,6 +48,8 @@ export default function Home() {
 
   const fetchRequest = async () => {
     const createNewRequest = await newRequest(token);
+    console.log(createNewRequest);
+    setRequestId(createNewRequest);
   };
 
   function openNewRequestModal() {
@@ -176,7 +179,13 @@ export default function Home() {
                 isOpen={isOpen}
                 closeModal={closeNewRequestModal}
                 // eslint-disable-next-line react/no-children-prop
-                children={<NewRequest cancelRequest={closeNewRequestModal} />}
+                children={
+                  <NewRequest
+                    cancelRequest={closeNewRequestModal}
+                    requestId={requestId}
+                    token={token}
+                  />
+                }
                 closeText={<XCircle size={32} color="#FF0000" />}
               ></S.NewRequestModal>
             </S.Div>
