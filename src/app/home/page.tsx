@@ -24,7 +24,6 @@ export default function Home() {
   const [hours, setHours] = useState<UserHours>();
   const [requestsPag, setRequestsPag] = useState<PageValue>();
   const [currentPage, setCurrentPage] = useState<number>(0);
-  const [requestId, setRequestId] = useState<number>();
 
   const token = Cookies.get('token');
 
@@ -48,8 +47,6 @@ export default function Home() {
 
   const fetchRequest = async () => {
     const createNewRequest = await newRequest(token);
-    setRequestId(createNewRequest);
-    console.log(createNewRequest);
   };
 
   function openNewRequestModal() {

@@ -1,8 +1,8 @@
 import { fetchWrapper } from '../api';
 
-export const newRequest = async (token: string): Promise<any> => {
+export const newRequest = async (token: string): Promise<void> => {
   try {
-    const data: any = await fetchWrapper<any>(`api/requisicao`, {
+    const data: void = await fetchWrapper<void>(`api/requisicao`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${token}`,
