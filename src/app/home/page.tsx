@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 //import { UserRequest } from '../../services/request/types';
 
 import { pagination } from '../../services/pagination';
-import { pageValue } from '../../services/pagination/types';
+import { PageValue } from '../../services/pagination/types';
 import { getUserHours } from '../../services/userHours';
 import { UserHours } from '../../services/userHours/types';
 import HourCount from './components/HourCount';
@@ -21,7 +21,7 @@ import moment from 'moment';
 export default function Home() {
   const [isOpen, setIsOpen] = useState(false);
   const [hours, setHours] = useState<UserHours>();
-  const [requestsPag, setRequestsPag] = useState<pageValue>();
+  const [requestsPag, setRequestsPag] = useState<PageValue>();
   const [currentPage, setCurrentPage] = useState<number>(0);
 
   const token = Cookies.get('token');
