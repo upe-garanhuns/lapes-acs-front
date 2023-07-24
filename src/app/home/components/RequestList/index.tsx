@@ -1,7 +1,6 @@
 import React from 'react';
 
-import ArchiveRequest from '../../../../components/DeleteArchiveRequestModal';
-import { DeleteRequest } from '../../../../components/DeleteRequest';
+import DeleteDraftModal from '../../../../components/DeleteDraft/DeleteDraftModal';
 import ViewRequestModal from '../../../../components/ViewRequestModal';
 import * as S from './styles';
 
@@ -88,17 +87,14 @@ export const RequestList: React.FC<ComponentProps> = ({
           ) : (
             <ViewRequestModal id={id} token={token} />
           )}
+          {!isDraft ? null : (
+            <DeleteDraftModal
+              type={true}
+              token={token}
+              id={id}
+            ></DeleteDraftModal>
+          )}
           <S.ActionIcon>
-            <Trash size={iconSize}>
-              {!isDraft ? null : (
-                <ArchiveRequest
-                  id={id}
-                  token={token}
-                  type={true}
-                  onArchive={function (): void {}}
-                />
-              )}
-            </Trash>
             {(() => {
               switch (status) {
                 case 'DEFERIDO':
@@ -106,16 +102,7 @@ export const RequestList: React.FC<ComponentProps> = ({
                 case 'ENCAMINHADO_COMISSAO':
                   return <Printer size={iconSize} />;
                 case 'INDEFERIDO':
-                  return (
-                    <Archive size={iconSize}>
-                      <ArchiveRequest
-                        id={id}
-                        token={token}
-                        type={true}
-                        onArchive={function (): void {}}
-                      />
-                    </Archive>
-                  );
+                  return <Archive size={iconSize}></Archive>;
                 default:
                   return null;
               }

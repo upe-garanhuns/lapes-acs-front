@@ -2,13 +2,13 @@ import styled from 'styled-components';
 
 export const DeleteArchiveButton = styled.button`
   padding: 10px;
+  width: 10rem;
+  height: 2.5rem;
   border-radius: 15px;
   background-color: #253555;
-  margin: 0 10px;
-  padding-left: 30px;
-  padding-right: 30px;
   color: white;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: regular;
-  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4);
+  font-weight: Bold;
+  border-radius: 20px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  margin: 0.6rem;
 `;
