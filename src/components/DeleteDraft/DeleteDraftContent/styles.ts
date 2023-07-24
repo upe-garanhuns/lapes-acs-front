@@ -12,6 +12,7 @@ export const Message = styled.h2`
   font-size: 22px;
   font-style: normal;
   line-height: normal;
+  font-weight: 400;
 `;
 
 export const Buttons = styled.div`

@@ -5,7 +5,6 @@ import ViewRequestModal from '../../../../components/ViewRequest/ViewRequestModa
 import * as S from './styles';
 
 import {
-  Trash,
   NotePencil,
   Clock,
   WarningCircle,
