@@ -47,12 +47,21 @@ export default function Home() {
   }, [token, currentPage]);
 
   const fetchRequest = async () => {
-    const createNewRequest = await newRequest(token);
-    setRequestId(createNewRequest);
+    try {
+      const createNewRequest = await newRequest(token);
+      setRequestId(createNewRequest);
+      setIsOpen(true);
+      alert('Rascunho criado com sucesso!');
+    } catch (error) {
+      alert(
+        `Houve erro ao iniciar uma requisicao, verificar se ja existem dois rascunhos`
+      );
+      setIsOpen(false);
+      console.error('error', error);
+    }
   };
 
   function openNewRequestModal() {
-    setIsOpen(true);
     fetchRequest();
   }
 

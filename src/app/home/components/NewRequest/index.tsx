@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import { newCertificate } from '../../../../services/newCertificate';
-import { newCertificateInterface } from '../../../../services/newCertificate/types';
 import * as S from './style';
 
 import { XCircle, FileText, FilePlus } from '@phosphor-icons/react';
