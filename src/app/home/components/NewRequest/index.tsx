@@ -37,17 +37,18 @@ export const NewRequest = ({
 
   const handleNext = () => {
     // Lógica para avançar para a próxima etapa
-    fetchCertificate(token, 155);
+    fetchCertificate(token, requestId);
   };
   console.log(token);
   const fetchCertificate = async (userToken: string, id: number) => {
-    const addCertificate = await newCertificate(
-      userToken,
-      id,
-      uploadedFiles[0]
-    );
-    console.log(userToken);
-    console.log(addCertificate);
+    for (let index = 0; index < uploadedFiles.length; index++) {
+      const addCertificate = await newCertificate(
+        userToken,
+        id,
+        uploadedFiles[index]
+      );
+      console.log(addCertificate);
+    }
   };
 
   const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
