@@ -8,7 +8,6 @@ export const newRequest = async (token: string): Promise<number> => {
       'Content-Type': 'application/json'
     }
   });
-  console.log(data);
 
   return data;
 };

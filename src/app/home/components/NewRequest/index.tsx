@@ -17,7 +17,6 @@ export const NewRequest = ({
   token
 }: ComponentProps) => {
   const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
-  console.log(uploadedFiles);
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
@@ -38,7 +37,7 @@ export const NewRequest = ({
     // Lógica para avançar para a próxima etapa
     fetchCertificate(token, requestId);
   };
-  console.log(token);
+
   const fetchCertificate = async (userToken: string, id: number) => {
     for (let index = 0; index < uploadedFiles.length; index++) {
       const addCertificate = await newCertificate(
