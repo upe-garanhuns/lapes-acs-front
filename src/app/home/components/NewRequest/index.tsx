@@ -17,6 +17,7 @@ export const NewRequest = ({
   token
 }: ComponentProps) => {
   const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
+  const [certificateId, setCertificateId] = useState<Array<number>>([]);
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
