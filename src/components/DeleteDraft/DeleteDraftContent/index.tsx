@@ -1,7 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 
-import { DeleteDraftButton } from '../../DeleteDraftButton/index';
+import { DeleteDraftButton } from '../DeleteDraftButton/index';
 import * as S from './styles';
 
 export type ComponentProps = {
@@ -22,7 +22,6 @@ const DeleteDraftContent: React.FC<ComponentProps> = ({
   const setWarningText = () => {
     setWarninig(true);
   };
-  console.log(warning);
   return (
     <S.Container>
       <S.Message>Deseja excluir essa solicitação?</S.Message>

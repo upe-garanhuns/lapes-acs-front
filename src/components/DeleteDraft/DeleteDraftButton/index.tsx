@@ -1,4 +1,4 @@
-import { deleteRequest } from '../../services/request';
+import { deleteRequest } from '../../../services/request';
 import * as S from './styles';
 export type DeleteRequestProps = {
   id: number;
