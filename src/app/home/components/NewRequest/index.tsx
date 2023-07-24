@@ -37,7 +37,7 @@ export const NewRequest = ({
 
   const handleNext = () => {
     // Lógica para avançar para a próxima etapa
-    fetchCertificate(token, 3);
+    fetchCertificate(token, 155);
   };
   console.log(token);
   const fetchCertificate = async (userToken: string, id: number) => {

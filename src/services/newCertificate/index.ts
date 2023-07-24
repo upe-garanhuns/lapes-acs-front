@@ -7,15 +7,9 @@ export const newCertificate = async (
   certificate: File
 ): Promise<newCertificateInterface> => {
   try {
-    const boundary = 'boundary_' + Date.now().toString(16);
-
-    // Construir o cabeçalho Content-Type com o limite
-    const contentType = `multipart/form-data; boundary=${boundary}`;
-
-    // Construir o corpo da solicitação com o limite e os dados do arquivo
     const formData = new FormData();
     formData.append('requisicaoId', String(id));
-    formData.append('certificate', certificate);
+    formData.append('certificado', certificate);
 
     // Realizar a solicitação usando o fetch
     const data = await fetchWrapper<newCertificateInterface>(
@@ -23,8 +17,7 @@ export const newCertificate = async (
       {
         method: 'POST',
         headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': contentType // Definir o cabeçalho Content-Type com o limite
+          Authorization: `Bearer ${token}`
         },
         body: formData // Usar o objeto FormData contendo os dados do arquivo e outros campos
       }
