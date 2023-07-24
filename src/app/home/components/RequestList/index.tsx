@@ -1,5 +1,6 @@
 import React from 'react';
 
+import DeleteDraftModal from '../../../../components/DeleteDraft/DeleteDraftModal';
 import ViewRequestModal from '../../../../components/ViewRequestModal';
 import * as S from './styles';
 
@@ -88,8 +89,14 @@ export const RequestList: React.FC<ComponentProps> = ({
           ) : (
             <ViewRequestModal id={id} token={token} />
           )}
+          {!isDraft ? null : (
+            <DeleteDraftModal
+              type={true}
+              token={token}
+              id={id}
+            ></DeleteDraftModal>
+          )}
           <S.ActionIcon>
-            {!isDraft ? null : <Trash size={iconSize} />}
             {(() => {
               switch (status) {
                 case 'DEFERIDO':
@@ -97,7 +104,7 @@ export const RequestList: React.FC<ComponentProps> = ({
                 case 'ENCAMINHADO_COMISSAO':
                   return <Printer size={iconSize} />;
                 case 'INDEFERIDO':
-                  return <Archive size={iconSize} />;
+                  return <Archive size={iconSize}></Archive>;
                 default:
                   return null;
               }
