@@ -1,7 +1,7 @@
 import React from 'react';
 
 import DeleteDraftModal from '../../../../components/DeleteDraft/DeleteDraftModal';
-import ViewRequestModal from '../../../../components/ViewRequestModal';
+import ViewRequestModal from '../../../../components/ViewRequest/ViewRequestModal';
 import * as S from './styles';
 
 import {

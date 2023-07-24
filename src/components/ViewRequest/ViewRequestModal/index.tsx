@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 
-import { getRequest } from '../../services/request';
+import { getRequest } from '../../../services/request';
 import ViewRequest, { ViewRequestProps } from '../ViewRequestContent';
 import * as S from './styles';
 
