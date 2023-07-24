@@ -1,6 +1,5 @@
 export interface newCertificateInterface {
-  id: number;
-  certificate: string;
+  certificate: File;
 }
 
 export interface createCertificate {

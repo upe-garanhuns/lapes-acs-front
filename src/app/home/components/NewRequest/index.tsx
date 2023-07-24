@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import { newCertificate } from '../../../../services/newCertificate';
+import { newCertificateInterface } from '../../../../services/newCertificate/types';
 import * as S from './style';
 
 import { XCircle, FileText, FilePlus } from '@phosphor-icons/react';
@@ -17,6 +18,7 @@ export const NewRequest = ({
   token
 }: ComponentProps) => {
   const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
+  console.log(uploadedFiles);
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
@@ -35,6 +37,17 @@ export const NewRequest = ({
 
   const handleNext = () => {
     // Lógica para avançar para a próxima etapa
+    fetchCertificate(token, 3);
+  };
+  console.log(token);
+  const fetchCertificate = async (userToken: string, id: number) => {
+    const addCertificate = await newCertificate(
+      userToken,
+      id,
+      uploadedFiles[0]
+    );
+    console.log(userToken);
+    console.log(addCertificate);
   };
 
   const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
@@ -48,14 +61,6 @@ export const NewRequest = ({
       setUploadedFiles((prevFiles) => [...prevFiles, ...Array.from(files)]);
     }
   };
-
-  useEffect(() => {
-    const fetchCertificate = async (userToken: string, id: number) => {
-      const addCertificate = await newCertificate(userToken, id, uploadedFiles);
-      console.log(addCertificate);
-    };
-    fetchCertificate(token, requestId);
-  }, [token, requestId, uploadedFiles]);
 
   return (
     <S.Container onDragOver={handleDragOver} onDrop={handleDrop}>
