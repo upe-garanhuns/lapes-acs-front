@@ -21,6 +21,7 @@ export type ComponentProps = {
   initialDate: string;
   hours: number;
   token: string;
+  isDraft: boolean;
 };
 
 export const RequestList: React.FC<ComponentProps> = ({
@@ -28,9 +29,10 @@ export const RequestList: React.FC<ComponentProps> = ({
   status,
   id,
   initialDate,
-  hours
+  hours,
+  isDraft
 }) => {
-  let isDraft = false;
+  isDraft = false;
   if (status === 'RASCUNHO') {
     isDraft = true;
   }
