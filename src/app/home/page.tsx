@@ -48,7 +48,6 @@ export default function Home() {
 
   const fetchRequest = async () => {
     const createNewRequest = await newRequest(token);
-    console.log(createNewRequest);
     setRequestId(createNewRequest);
   };
 

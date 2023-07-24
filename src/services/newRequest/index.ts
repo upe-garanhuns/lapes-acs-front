@@ -10,8 +10,12 @@ export const newRequest = async (token: string): Promise<number> => {
       }
     });
     console.log(data);
+    alert('Rascunho criado com sucesso!');
     return data;
   } catch (error) {
+    alert(
+      `${error} Houve erro ao iniciar uma requisicao, verificar se ja existem dois rascunhos`
+    );
     console.error('error', error);
   }
 };
