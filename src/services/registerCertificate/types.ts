@@ -1,6 +1,6 @@
 export interface CreateCertificate {
   titulo: string;
-  datainicial: string;
+  dataIncial: string;
   dataFinal: string;
   quantidadeDeHoras: number;
   atividadeId: number;

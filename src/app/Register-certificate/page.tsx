@@ -5,6 +5,8 @@ import { createCertificate } from '../../services/registerCertificate';
 import { CreateCertificate } from '../../services/registerCertificate/types';
 import * as S from './style';
 
+import moment from 'moment';
+
 export default function RegistePageTest() {
   const [selectedEixo, setSelectedEixo] = useState();
   const [selectedAtividade, setSelectedAtividade] = useState<number>();
@@ -43,10 +45,10 @@ export default function RegistePageTest() {
 
   const createCerificateData: CreateCertificate = {
     titulo: titulo,
-    datainicial: dataInicial,
-    dataFinal: dataFinal,
+    dataIncial: moment(dataInicial).format('MM/DD/YYYY'),
+    dataFinal: moment(dataFinal).format('MM/DD/YYYY'),
     quantidadeDeHoras: horas,
-    atividadeId: selectedAtividade
+    atividadeId: 36
   };
   console.log(titulo);
   console.log(dataInicial);
@@ -64,13 +66,12 @@ export default function RegistePageTest() {
       const fetchCertificate = await createCertificate(
         createCerificateData,
         103,
-        'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqYW11QHVwZS5iciIsImlhdCI6MTY5MDIzODg5MiwiZXhwIjoxNjkwMjQxNzcyfQ.PedE7V6--MXJXW48_Bke3E0HKTHIviIAC-aIRzYi-v8'
+        'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJleGVtcGxvMjlAdXBlLmJyIiwiaWF0IjoxNjkwMjQ1NTI4LCJleHAiOjE2OTAyNDg0MDh9.Reob7j1EO0f8lqx0X3USAbxupU_TcpYtAUGi8aYoJFA'
       );
       alert('certificado cadastrado!');
       console.log(fetchCertificate);
     } catch (error) {
       alert('Houve algum erro ao tentar cadastrar!');
-      console.log(error);
     }
   };
 
