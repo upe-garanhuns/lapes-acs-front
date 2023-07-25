@@ -90,17 +90,30 @@ export const ViewButton = styled.button`
   border: none;
   cursor: pointer;
 `;
-
 export const CertificatesContainer = styled.div`
+  /* Propriedades para fixar o container no lado direito */
+  position: fixed;
+  right: 0;
+  top: 0;
+  bottom: 0;
+
+  /* Estilo do container */
   display: flex;
   flex-direction: column;
-  align-self: flex-end;
-  max-width: 500px;
-  max-height: 500px;
-  overflow-y: auto;
-  margin-top: 20px;
   align-items: flex-end;
+  max-width: 500px;
+  overflow-y: auto;
   background-color: #d9d9d9;
+`;
+
+export const TitleAnexados = styled.h2`
+  font-size: 16px;
+  color: #253555;
+  text-align: center;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #253555;
+  padding-bottom: 8px;
+  width: 100%;
 `;
 
 export const CertificateItem = styled.div`
@@ -110,4 +123,43 @@ export const CertificateItem = styled.div`
   padding: 8px;
   margin-bottom: 10px;
   max-width: 300px;
+  min-width: 80px;
+`;
+
+export const ButtonsContainerCertificates = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+  max-width: 300px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  margin-top: 20px;
+`;
+
+export const Button = styled.button`
+  color: #253555;
+  background-color: #fff;
+  font-size: 14px;
+  border-radius: 20px;
+  padding: 8px 16px;
+  cursor: pointer;
+  min-width: 150px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+`;
+
+export const ButtonEnviar = styled.button`
+  color: #fff;
+  background-color: #253555;
+  font-size: 14px;
+  border-radius: 20px;
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+  min-width: 150px;
+  margin-bottom: 20px;
 `;
