@@ -1,5 +1,4 @@
-import { colors } from '../../styles/colors';
-import { Modal } from '../Modal';
+import { Modal } from '../../Modal';
 
 import styled from 'styled-components';
 export const ModalContainer = styled(Modal)`

@@ -1,10 +1,10 @@
 import React from 'react';
 
-import ViewRequestModal from '../../../../components/ViewRequestModal';
+import DeleteDraftModal from '../../../../components/DeleteDraft/DeleteDraftModal';
+import ViewRequestModal from '../../../../components/ViewRequest/ViewRequestModal';
 import * as S from './styles';
 
 import {
-  Trash,
   NotePencil,
   Clock,
   WarningCircle,
@@ -20,6 +20,7 @@ export type ComponentProps = {
   initialDate: string;
   hours: number;
   token: string;
+  isDraft: boolean;
 };
 
 export const RequestList: React.FC<ComponentProps> = ({
@@ -27,9 +28,10 @@ export const RequestList: React.FC<ComponentProps> = ({
   status,
   id,
   initialDate,
-  hours
+  hours,
+  isDraft
 }) => {
-  let isDraft = false;
+  isDraft = false;
   if (status === 'RASCUNHO') {
     isDraft = true;
   }
@@ -86,8 +88,14 @@ export const RequestList: React.FC<ComponentProps> = ({
           ) : (
             <ViewRequestModal id={id} token={token} />
           )}
+          {!isDraft ? null : (
+            <DeleteDraftModal
+              type={true}
+              token={token}
+              id={id}
+            ></DeleteDraftModal>
+          )}
           <S.ActionIcon>
-            {!isDraft ? null : <Trash size={iconSize} />}
             {(() => {
               switch (status) {
                 case 'DEFERIDO':
@@ -95,7 +103,7 @@ export const RequestList: React.FC<ComponentProps> = ({
                 case 'ENCAMINHADO_COMISSAO':
                   return <Printer size={iconSize} />;
                 case 'INDEFERIDO':
-                  return <Archive size={iconSize} />;
+                  return <Archive size={iconSize}></Archive>;
                 default:
                   return null;
               }

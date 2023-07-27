@@ -120,6 +120,7 @@ export default function Home() {
                         hours={item.quantidadeDeHoras}
                         key={item.id}
                         token={token}
+                        isDraft={false}
                       />
                     ))}
                   </>
