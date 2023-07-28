@@ -9,15 +9,16 @@ type ComponentProps = {
   cancelRequest: () => void;
   requestId: number;
   token: string;
+  nextScreen: () => void;
 };
 
 export const NewRequest = ({
   cancelRequest,
   requestId,
-  token
+  token,
+  nextScreen
 }: ComponentProps) => {
   const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
-  const [certificateId, setCertificateId] = useState<Array<number>>([]);
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
@@ -37,6 +38,7 @@ export const NewRequest = ({
   const handleNext = () => {
     // Lógica para avançar para a próxima etapa
     fetchCertificate(token, requestId);
+    nextScreen();
   };
 
   const fetchCertificate = async (userToken: string, id: number) => {

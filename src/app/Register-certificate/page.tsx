@@ -7,7 +7,7 @@ import * as S from './style';
 
 import moment from 'moment';
 
-export default function RegistePageTest() {
+export default function RegistePageTest(id: number, token: string) {
   const [selectedEixo, setSelectedEixo] = useState();
   const [selectedAtividade, setSelectedAtividade] = useState<number>();
   const [titulo, setTitulo] = useState('');
@@ -50,23 +50,13 @@ export default function RegistePageTest() {
     quantidadeDeHoras: horas,
     atividadeId: 36
   };
-  console.log(titulo);
-  console.log(dataInicial);
-  console.log(dataFinal);
-  console.log(horas);
-  console.log(selectedAtividade);
 
   const registerCertificate = async () => {
-    console.log(titulo);
-    console.log(dataInicial);
-    console.log(dataFinal);
-    console.log(horas);
-    console.log(selectedAtividade);
     try {
       const fetchCertificate = await createCertificate(
         createCerificateData,
-        103,
-        'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJleGVtcGxvMjlAdXBlLmJyIiwiaWF0IjoxNjkwMjQ1NTI4LCJleHAiOjE2OTAyNDg0MDh9.Reob7j1EO0f8lqx0X3USAbxupU_TcpYtAUGi8aYoJFA'
+        id,
+        token
       );
       alert('certificado cadastrado!');
       console.log(fetchCertificate);
