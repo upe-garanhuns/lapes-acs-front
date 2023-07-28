@@ -5,9 +5,11 @@ import { createCertificate } from '../../services/registerCertificate';
 import { CreateCertificate } from '../../services/registerCertificate/types';
 import * as S from './style';
 
+import Cookies from 'js-cookie';
 import moment from 'moment';
 
-export default function RegistePageTest(id: number, token: string) {
+export default function RegistePageTest() {
+  const token = Cookies.get('token');
   const [selectedEixo, setSelectedEixo] = useState();
   const [selectedAtividade, setSelectedAtividade] = useState<number>();
   const [titulo, setTitulo] = useState('');
@@ -55,7 +57,7 @@ export default function RegistePageTest(id: number, token: string) {
     try {
       const fetchCertificate = await createCertificate(
         createCerificateData,
-        id,
+        154,
         token
       );
       alert('certificado cadastrado!');
