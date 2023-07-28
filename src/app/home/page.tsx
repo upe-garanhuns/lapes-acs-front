@@ -24,7 +24,7 @@ export default function Home() {
   const [requestsPag, setRequestsPag] = useState<PageValue>();
   const [currentPage, setCurrentPage] = useState<number>(0);
 
-  const token = Cookies.get('token');
+  const token = Cookies.get('token') || '';
 
   useEffect(() => {
     const userHours = async () => {
@@ -53,8 +53,10 @@ export default function Home() {
   }
 
   const handlePageChangeNext = () => {
-    if (currentPage < requestsPag.totalPaginas - 1) {
-      setCurrentPage(currentPage + 1);
+    if (requestsPag !== undefined) {
+      if (currentPage < requestsPag.totalPaginas - 1) {
+        setCurrentPage(currentPage + 1);
+      }
     }
   };
 

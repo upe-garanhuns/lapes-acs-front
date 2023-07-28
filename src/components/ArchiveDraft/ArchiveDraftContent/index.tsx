@@ -12,7 +12,6 @@ export type ComponentProps = {
 };
 
 const ArchiveDraftContent: React.FC<ComponentProps> = ({
- 
   id,
   token,
   closeModal
@@ -33,7 +32,6 @@ const ArchiveDraftContent: React.FC<ComponentProps> = ({
         <ArchiveDraftButton
           id={id}
           token={token}
-          
           closeModal={closeModal}
           failureWarning={setWarningText}
         ></ArchiveDraftButton>
