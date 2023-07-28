@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 
-import Button from '../../../../components/Button';
 import { certificateData } from '../../../../services/certificateData';
 import { getCertificateInterface } from '../../../../services/certificateData/types';
 import { DataText } from './components/DataText';
 import * as S from './styles';
+
+import { DownloadSimple, File } from '@phosphor-icons/react';
 
 interface CertificateViewInterface {
   token: string;
@@ -31,34 +32,51 @@ export const CertificateView = ({ token }: CertificateViewInterface) => {
   }, [token]);
   return (
     <S.Container>
-      <div>
-        <p>Visualização Detalhada da Solicitação: {solicitacaoID}</p>
-      </div>
-      <S.DataDiv>
-        <S.DataRow>
-          <DataText title={'Titulo:'} content={certificate.titulo} />
-          <DataText title={'Data inicial:'} content={certificate.dataInicial} />
-          <DataText title={'Data final:'} content={certificate.dataFinal} />
-        </S.DataRow>
-        <S.DataRow>
-          <DataText
-            title={'Eixo de ensino:'}
-            content={certificate.eixoAtividade}
-          />
-          <DataText
-            title={'Quantidade de horas:'}
-            content={certificate.cargaHoraria}
-          />
-        </S.DataRow>
+      <S.RequestDiv>
+        <S.RequestId>
+          Visualização Detalhada da Solicitação: Id-{solicitacaoID}
+        </S.RequestId>
+      </S.RequestDiv>
+      {certificate && (
+        <S.DataDiv>
+          <S.DataRow>
+            <DataText title={'Titulo:'} content={certificate.titulo} />
+            <DataText
+              title={'Data inicial:'}
+              content={certificate.dataInicial}
+            />
+            <DataText title={'Data final:'} content={certificate.dataFinal} />
+          </S.DataRow>
+          <S.DataRow>
+            <DataText
+              title={'Eixo de ensino:'}
+              content={
+                certificate.eixoAtividade.charAt(0).toUpperCase() +
+                certificate.eixoAtividade.slice(1).toLowerCase()
+              }
+            />
+            <DataText
+              title={'Quantidade de horas:'}
+              content={`${certificate.cargaHoraria} hora(s)`}
+            />
+          </S.DataRow>
 
-        <S.DataRow>
-          <DataText title={'Atividade:'} content={certificate.atividade} />
-        </S.DataRow>
-      </S.DataDiv>
-      <div>
-        <Button />
-        <Button />
-      </div>
+          <S.DataRow>
+            <DataText title={'Atividade:'} content={certificate.atividade} />
+          </S.DataRow>
+        </S.DataDiv>
+      )}
+
+      <S.ButtonDiv>
+        <S.DownloadCertificate
+          label="Salvar certificado"
+          startAdornment={<DownloadSimple size={24} />}
+        />
+        <S.ViewCertificate
+          label="Visualizar Certificado"
+          startAdornment={<File size={24} />}
+        />
+      </S.ButtonDiv>
     </S.Container>
   );
 };
