@@ -24,5 +24,6 @@ export const pagination = async ({
     return response;
   } catch (error) {
     console.error('erro', error);
+    throw error;
   }
 };

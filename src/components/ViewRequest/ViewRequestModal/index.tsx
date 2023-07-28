@@ -49,8 +49,11 @@ export default function ViewRequestModal(props: ViewRequestModalProps) {
   };
   const openModal = () => {
     setIsOpen(true);
+
     fetchData().then((data) => {
-      setCertificateData(data);
+      if (data !== undefined) {
+        setCertificateData(data);
+      }
     });
   };
   const closeModalArea = () => {

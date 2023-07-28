@@ -21,7 +21,7 @@ export function DeleteDraftButton(props: DeleteRequestProps) {
   };
 
   return (
-    <S.DeleteArchiveButton onClick={type ? HandleDelete : null}>
+    <S.DeleteArchiveButton onClick={type ? HandleDelete : undefined}>
       {type ? 'Excluir' : 'Arquivar'}
     </S.DeleteArchiveButton>
   );
