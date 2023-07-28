@@ -5,7 +5,7 @@ import { getCertificateInterface } from '../../../../services/certificateData/ty
 import { DataText } from './components/DataText';
 import * as S from './styles';
 
-import { DownloadSimple, File } from '@phosphor-icons/react';
+import { DownloadSimple, File, FileText, Printer } from '@phosphor-icons/react';
 
 interface CertificateViewInterface {
   token: string;

@@ -1,6 +1,7 @@
 'use client';
 
 import { CertificateView } from './components/CertificateView';
+import { SideCertificateView } from './components/SideCertificateView';
 import * as S from './styles';
 
 import Cookies from 'js-cookie';
@@ -14,7 +15,7 @@ export default function VisualizarCertificado() {
           <CertificateView token={token} />
           <S.Div>previewe</S.Div>
         </S.PrincipalDiv>
-        <S.Div>side</S.Div>
+        <SideCertificateView />
       </S.ContentDiv>
     </S.Container>
   );
