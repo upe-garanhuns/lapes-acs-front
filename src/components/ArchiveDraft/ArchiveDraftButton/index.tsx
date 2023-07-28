@@ -21,8 +21,5 @@ export function ArchiveDraftButton(props: ArchiveRequestProps) {
     }
   };
 
-  return (
-    <S.ArchiveButton onClick={handleArchive}>
-      Arquivar
-    </S.ArchiveButton>
-  );}
+  return <S.ArchiveButton onClick={handleArchive}>Arquivar</S.ArchiveButton>;
+}
