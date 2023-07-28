@@ -131,8 +131,13 @@ export default function RegistePageTest() {
       </S.FormContainer>
 
       <S.CertificatesContainer>
+        <S.TitleAnexados>Anexados</S.TitleAnexados>
         <S.CertificateItem>Nome do Arquivo 1</S.CertificateItem>
         <S.CertificateItem>Nome do Arquivo 2</S.CertificateItem>
+        <S.ButtonsContainerCertificates>
+          <S.Button>Voltar</S.Button>
+          <S.ButtonEnviar>Enviar solicitação</S.ButtonEnviar>
+        </S.ButtonsContainerCertificates>
       </S.CertificatesContainer>
     </S.Container>
   );
