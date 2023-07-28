@@ -3,13 +3,15 @@
 import { CertificateView } from './components/CertificateView';
 import * as S from './styles';
 
-export default function SignIn() {
+import Cookies from 'js-cookie';
+
+export default function VisualizarCertificado() {
+  const token = Cookies.get('token');
   return (
     <S.Container>
       <S.ContentDiv>
         <S.PrincipalDiv>
-          <CertificateView />
-
+          <CertificateView token={token} />
           <S.Div>previewe</S.Div>
         </S.PrincipalDiv>
         <S.Div>side</S.Div>

@@ -2,7 +2,7 @@ import * as S from './styles';
 
 interface DataTextInterface {
   title: string;
-  content: string;
+  content: string | number;
 }
 
 export const DataText = ({ title, content }: DataTextInterface) => {
