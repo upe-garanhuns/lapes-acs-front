@@ -1,5 +1,6 @@
 'use client';
 
+import { CertificateView } from './components/CertificateView';
 import * as S from './styles';
 
 export default function SignIn() {
@@ -7,7 +8,9 @@ export default function SignIn() {
     <S.Container>
       <S.ContentDiv>
         <S.PrincipalDiv>
-          <S.Div>conteudo</S.Div>
+          <S.Div>
+            <CertificateView />
+          </S.Div>
           <S.Div>previewe</S.Div>
         </S.PrincipalDiv>
         <S.Div>side</S.Div>
