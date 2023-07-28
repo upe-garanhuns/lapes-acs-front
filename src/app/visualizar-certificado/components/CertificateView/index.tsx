@@ -8,21 +8,21 @@ export const CertificateView = () => {
       <div>
         <p>Visualização Detalhada da Solicitação: XXXXXXXXX</p>
       </div>
-      <div>
-        <div>
+      <S.DataDiv>
+        <S.DataRow>
           <DataText title={'Titulo:'} content={'exemplo'} />
           <DataText title={'Data inicial:'} content={'exemplo'} />
           <DataText title={'Data final:'} content={'exemplo'} />
-        </div>
-        <div>
+        </S.DataRow>
+        <S.DataRow>
           <DataText title={'Eixo de ensino:'} content={'exemplo'} />
           <DataText title={'Quantidade de horas:'} content={'exemplo'} />
-        </div>
+        </S.DataRow>
 
-        <div>
+        <S.DataRow>
           <DataText title={'Atividade:'} content={'exemplo'} />
-        </div>
-      </div>
+        </S.DataRow>
+      </S.DataDiv>
       <div>
         <Button />
         <Button />

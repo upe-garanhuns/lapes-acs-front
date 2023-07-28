@@ -16,7 +16,7 @@ export const ContentDiv = styled.div`
   justify-content: space-between;
 `;
 export const PrincipalDiv = styled.div`
-  width: 100%;
+  width: 80%;
   display: flex;
   flex-direction: column;
   align-items: center;

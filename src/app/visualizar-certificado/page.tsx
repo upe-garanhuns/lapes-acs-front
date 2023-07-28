@@ -8,9 +8,8 @@ export default function SignIn() {
     <S.Container>
       <S.ContentDiv>
         <S.PrincipalDiv>
-          <S.Div>
-            <CertificateView />
-          </S.Div>
+          <CertificateView />
+
           <S.Div>previewe</S.Div>
         </S.PrincipalDiv>
         <S.Div>side</S.Div>
