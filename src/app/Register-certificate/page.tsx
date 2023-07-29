@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useState } from 'react';
 
-import ConfirmationModal from '../../components/ConfirmationModal';
+import ConfirmationModal from '../../components/Confirmation/ConfirmationModal';
 import { createCertificate } from '../../services/registerCertificate';
 import { CreateCertificate } from '../../services/registerCertificate/types';
 import { getRequest } from '../../services/request';
@@ -12,53 +12,49 @@ import Cookies from 'js-cookie';
 import moment from 'moment';
 
 export default function RegistePageTest() {
-  const token = Cookies.get('token');
-  const requestId = parseInt(localStorage.getItem('requestId'));
-  const [selectedEixo, setSelectedEixo] = useState();
-  const [certificateData, setCertificateData] = useState<Certificate[]>();
-  const [selectedAtividade, setSelectedAtividade] = useState<number>();
+  const token = Cookies.get('token') ?? '';
+  const requestId = parseInt(localStorage.getItem('requestId') ?? '0');
+  const [selectedEixo, setSelectedEixo] = useState('');
+  const [certificateData, setCertificateData] = useState<Certificate[]>([]);
+  const [selectedAtividade, setSelectedAtividade] = useState<string>('');
   const [titulo, setTitulo] = useState('');
-  const [horas, setHoras] = useState<number>();
+  const [horas, setHoras] = useState<string>('0');
   const [dataInicial, setDataInicial] = useState('');
   const [dataFinal, setDataFinal] = useState('');
   const [index, setIndex] = useState(0);
-  // const [requestId, setRequestId] = useState(0);
 
   useEffect(() => {
-    // setRequestId(parseInt(localStorage.getItem('requestId')));
     const request = async () => {
       const requestResponse = await getRequest(requestId, token);
-      setCertificateData(requestResponse.certificados);
+      setCertificateData(requestResponse.certificados ?? []);
     };
-    // if (requestId != 0) {
     request();
-    // }
   }, [requestId, token]);
 
-  const handleEixoChange = (event) => {
-    setSelectedEixo(event.target.value);
+  const handleEixoChange = (e: { target: { value: string } }) => {
+    setSelectedEixo(e.target.value);
   };
 
-  const handleAtividadeChange = (event) => {
-    setSelectedAtividade(event.target.value);
+  const handleAtividadeChange = (e: { target: { value: string } }) => {
+    setSelectedAtividade(e.target.value);
   };
 
-  const handleChangeTitulo = (e) => {
+  const handleChangeTitulo = (e: { target: { value: string } }) => {
     const { value } = e.target;
     setTitulo(value);
   };
 
-  const handleChangeHoras = (e) => {
+  const handleChangeHoras = (e: { target: { value: string } }) => {
     const { value } = e.target;
     setHoras(value);
   };
 
-  const handleChangeDataInicial = (e) => {
+  const handleChangeDataInicial = (e: { target: { value: string } }) => {
     const { value } = e.target;
     setDataInicial(value);
   };
 
-  const handleChangeDataFinal = (e) => {
+  const handleChangeDataFinal = (e: { target: { value: string } }) => {
     const { value } = e.target;
     setDataFinal(value);
   };
@@ -67,7 +63,7 @@ export default function RegistePageTest() {
     titulo: titulo,
     dataIncial: moment(dataInicial).format('DD/MM/YYYY'),
     dataFinal: moment(dataFinal).format('DD/MM/YYYY'),
-    quantidadeDeHoras: horas,
+    quantidadeDeHoras: parseInt(horas),
     atividadeId: 36
   };
 
@@ -79,7 +75,7 @@ export default function RegistePageTest() {
         console.log('index antes: ' + index);
         await createCertificate(
           createCerificateData,
-          certificateData[index].id,
+          certificateData[index].id ?? 0,
           token
         );
         alert('certificado cadastrado!');

@@ -25,5 +25,6 @@ export const newCertificate = async (
     return data;
   } catch (error) {
     console.error('error', error);
+    throw error;
   }
 };

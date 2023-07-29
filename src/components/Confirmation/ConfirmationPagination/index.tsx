@@ -2,8 +2,8 @@
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 
-import { getRequest, submitRequest } from '../../services/request';
-import { Certificate } from '../../services/request/types';
+import { getRequest, submitRequest } from '../../../services/request';
+import { Certificate } from '../../../services/request/types';
 import { ConfirmationContent } from '../ConfirmationContent';
 import { Pagination } from '../ConfirmationRequestPagination';
 import * as S from './styles';
@@ -12,15 +12,15 @@ import Cookies from 'js-cookie';
 
 export function ConfirmationPagination() {
   const router = useRouter();
-  const token = Cookies.get('token');
-  const requestId = parseInt(localStorage.getItem('requestId'));
+  const token = Cookies.get('token') ?? '';
+  const requestId = parseInt(localStorage.getItem('requestId') ?? '0');
   const [currentPage, setCurrentPage] = useState(1);
   const [certificateData, setCertificateData] = useState<Certificate[]>([]);
 
   useEffect(() => {
     const request = async () => {
       const requestResponse = await getRequest(requestId, token);
-      setCertificateData(requestResponse.certificados);
+      setCertificateData(requestResponse.certificados ?? []);
     };
     request();
   }, [requestId, token]);
@@ -43,7 +43,7 @@ export function ConfirmationPagination() {
   const pageSize = 1;
   const startIndex = (currentPage - 1) * pageSize;
   const endIndex = startIndex + pageSize;
-  let displayedItems = [];
+  let displayedItems: Certificate[] = [];
 
   if (certificateData != undefined) {
     displayedItems = certificateData.slice(startIndex, endIndex);

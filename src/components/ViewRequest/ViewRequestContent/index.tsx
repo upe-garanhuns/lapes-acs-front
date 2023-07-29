@@ -80,9 +80,9 @@ export default function ViewRequestContent(props: ViewRequestProps) {
         <S.Division />
         {displayedItems.map((certificado) => (
           <CertificateList
-            eixoAtividade={''}
-            atividade={''}
             key={certificado.id}
+            horas={0}
+            statusCertificado=""
             {...certificado}
           />
         ))}
