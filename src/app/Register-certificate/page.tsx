@@ -1,8 +1,10 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { createCertificate } from '../../services/registerCertificate';
 import { CreateCertificate } from '../../services/registerCertificate/types';
+import { getRequest, submitRequest } from '../../services/request';
+import { Certificate } from '../../services/request/types';
 import * as S from './style';
 
 import Cookies from 'js-cookie';
@@ -10,12 +12,25 @@ import moment from 'moment';
 
 export default function RegistePageTest() {
   const token = Cookies.get('token');
+  const requestId = 494;
   const [selectedEixo, setSelectedEixo] = useState();
+  const [certificateData, setCertificateData] = useState<Certificate[]>();
   const [selectedAtividade, setSelectedAtividade] = useState<number>();
   const [titulo, setTitulo] = useState('');
   const [horas, setHoras] = useState<number>();
   const [dataInicial, setDataInicial] = useState('');
   const [dataFinal, setDataFinal] = useState('');
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const request = async () => {
+      const requestResponse = await getRequest(requestId, token);
+      setCertificateData(requestResponse.certificados);
+    };
+    request();
+  }, [token]);
+
+  console.log(certificateData);
 
   const handleEixoChange = (event) => {
     setSelectedEixo(event.target.value);
@@ -47,23 +62,43 @@ export default function RegistePageTest() {
 
   const createCerificateData: CreateCertificate = {
     titulo: titulo,
-    dataIncial: moment(dataInicial).format('MM/DD/YYYY'),
-    dataFinal: moment(dataFinal).format('MM/DD/YYYY'),
+    dataIncial: moment(dataInicial).format('DD/MM/YYYY'),
+    dataFinal: moment(dataFinal).format('DD/MM/YYYY'),
     quantidadeDeHoras: horas,
     atividadeId: 36
   };
 
   const registerCertificate = async () => {
+    console.log('index antes do if' + index);
+    if (certificateData.length > index) {
+      try {
+        console.log(createCerificateData);
+        console.log('index antes: ' + index);
+        await createCertificate(
+          createCerificateData,
+          certificateData[index].id,
+          token
+        );
+        alert('certificado cadastrado!');
+        setIndex(index + 1);
+        console.log('index depois: ' + index);
+        //console.log(certificateData[index]);
+      } catch (error) {
+        alert(error);
+        console.log(error);
+      }
+    } else {
+      alert('Todos os certificados já foram cadastrados');
+    }
+  };
+
+  const submit = async () => {
     try {
-      const fetchCertificate = await createCertificate(
-        createCerificateData,
-        154,
-        token
-      );
-      alert('certificado cadastrado!');
-      console.log(fetchCertificate);
+      await submitRequest(requestId, token);
+      alert('Requisição cadastrada com sucesso!');
     } catch (error) {
-      alert('Houve algum erro ao tentar cadastrar!');
+      alert('Ocorreu um erro ao cadastrar, tente novamente mais tarde!');
+      console.log(error);
     }
   };
 
@@ -136,7 +171,7 @@ export default function RegistePageTest() {
         <S.CertificateItem>Nome do Arquivo 2</S.CertificateItem>
         <S.ButtonsContainerCertificates>
           <S.Button>Voltar</S.Button>
-          <S.ButtonEnviar>Enviar solicitação</S.ButtonEnviar>
+          <S.ButtonEnviar onClick={submit}>Enviar solicitação</S.ButtonEnviar>
         </S.ButtonsContainerCertificates>
       </S.CertificatesContainer>
     </S.Container>

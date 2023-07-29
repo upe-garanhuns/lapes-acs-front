@@ -1,6 +1,5 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 //import { request } from '../../services/request';
@@ -21,7 +20,6 @@ import Cookies from 'js-cookie';
 import moment from 'moment';
 
 export default function Home() {
-  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [hours, setHours] = useState<UserHours>();
   const [requestsPag, setRequestsPag] = useState<PageValue>();
@@ -81,10 +79,6 @@ export default function Home() {
     if (currentPage > 0) {
       setCurrentPage(currentPage - 1);
     }
-  };
-
-  const nextCertificateScreen = () => {
-    router.push('/Register-certificate');
   };
 
   return (
@@ -198,7 +192,6 @@ export default function Home() {
                     cancelRequest={closeNewRequestModal}
                     requestId={requestId}
                     token={token}
-                    nextScreen={nextCertificateScreen}
                   />
                 }
                 closeText={<XCircle size={32} color="#FF0000" />}

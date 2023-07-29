@@ -1,3 +1,5 @@
+'use client';
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 
 import { newCertificate } from '../../../../services/newCertificate';
@@ -9,16 +11,16 @@ type ComponentProps = {
   cancelRequest: () => void;
   requestId: number;
   token: string;
-  nextScreen: () => void;
 };
 
 export const NewRequest = ({
   cancelRequest,
   requestId,
-  token,
-  nextScreen
+  token
 }: ComponentProps) => {
+  const router = useRouter();
   const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
+  const certifacatesId = [];
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
@@ -38,7 +40,7 @@ export const NewRequest = ({
   const handleNext = () => {
     // Lógica para avançar para a próxima etapa
     fetchCertificate(token, requestId);
-    nextScreen();
+    router.push('/Register-certificate');
   };
 
   const fetchCertificate = async (userToken: string, id: number) => {
@@ -48,8 +50,10 @@ export const NewRequest = ({
         id,
         uploadedFiles[index]
       );
-      console.log(addCertificate);
+      certifacatesId.push(addCertificate);
     }
+    console.log(requestId);
+    console.log(uploadedFiles);
   };
 
   const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
