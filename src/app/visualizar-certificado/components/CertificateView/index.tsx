@@ -5,13 +5,14 @@ import { getCertificateInterface } from '../../../../services/certificateData/ty
 import { DataText } from './components/DataText';
 import * as S from './styles';
 
-import { DownloadSimple, File, FileText, Printer } from '@phosphor-icons/react';
+import { DownloadSimple, File, FileText } from '@phosphor-icons/react';
 
 interface CertificateViewInterface {
   token: string;
+  id: number;
 }
 
-export const CertificateView = ({ token }: CertificateViewInterface) => {
+export const CertificateView = ({ token, id }: CertificateViewInterface) => {
   const [certificate, setCertificate] = useState<getCertificateInterface>();
   const solicitacaoID = 152;
 
@@ -19,7 +20,7 @@ export const CertificateView = ({ token }: CertificateViewInterface) => {
     const certificateFetch = async () => {
       try {
         const certificateResponse = await certificateData({
-          id: 202,
+          id: id,
           token: token
         });
         console.log(certificateResponse);
@@ -29,7 +30,7 @@ export const CertificateView = ({ token }: CertificateViewInterface) => {
       }
     };
     certificateFetch();
-  }, [token]);
+  }, [id, token]);
   return (
     <S.Container>
       <S.RequestDiv>
