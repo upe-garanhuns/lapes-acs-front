@@ -13,7 +13,10 @@ import moment from 'moment';
 
 export default function RegistePageTest() {
   const token = Cookies.get('token') ?? '';
-  const requestId = parseInt(localStorage.getItem('requestId') ?? '0');
+  const requestId =
+    typeof localStorage !== 'undefined'
+      ? parseInt(localStorage.getItem('requestId') ?? '0')
+      : 0;
   const [selectedEixo, setSelectedEixo] = useState('');
   const [certificateData, setCertificateData] = useState<Certificate[]>([]);
   const [selectedAtividade, setSelectedAtividade] = useState<string>('');
