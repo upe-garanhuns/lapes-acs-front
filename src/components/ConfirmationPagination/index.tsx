@@ -1,63 +1,53 @@
 'use client';
-import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import React, { useEffect, useState } from 'react';
 
-import {
-  ConfirmRequestProps,
-  ConfirmationContent
-} from '../ConfirmationContent';
+import { getRequest, submitRequest } from '../../services/request';
+import { Certificate } from '../../services/request/types';
+import { ConfirmationContent } from '../ConfirmationContent';
 import { Pagination } from '../ConfirmationRequestPagination';
 import * as S from './styles';
 
+import Cookies from 'js-cookie';
+
 export function ConfirmationPagination() {
+  const router = useRouter();
+  const token = Cookies.get('token');
+  const requestId = parseInt(localStorage.getItem('requestId'));
   const [currentPage, setCurrentPage] = useState(1);
+  const [certificateData, setCertificateData] = useState<Certificate[]>([]);
+
+  useEffect(() => {
+    const request = async () => {
+      const requestResponse = await getRequest(requestId, token);
+      setCertificateData(requestResponse.certificados);
+    };
+    request();
+  }, [requestId, token]);
+
+  const submit = async () => {
+    try {
+      await submitRequest(requestId, token);
+      alert('Requisição cadastrada com sucesso!');
+      router.push('/home');
+    } catch (error) {
+      alert('Ocorreu um erro ao cadastrar, tente novamente mais tarde!');
+      console.log(error);
+    }
+  };
+
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
 
-  const mockData: ConfirmRequestProps[] = [
-    {
-      id: 1,
-      title: 'Certificado de Conclusão de Curso',
-      educationAxis: 'Ciências da Computação',
-      activity: 'Desenvolvimento Web',
-      initialDate: new Date('11-11-2024'),
-      finalDate: new Date('3-2-2023'),
-      hours: 40
-    },
-    {
-      id: 2,
-      title: 'Certificado de Participação',
-      educationAxis: 'Engenharia Civil',
-      activity: 'Projeto de Estruturas',
-      initialDate: new Date('2022-03-15'),
-      finalDate: new Date('2022-04-15'),
-      hours: 60
-    },
-    {
-      id: 3,
-      title: 'Certificado de Conclusão de Curso',
-      educationAxis: 'Administração de Empresas',
-      activity: 'Gestão de Projetos',
-      initialDate: new Date('2022-06-01'),
-      finalDate: new Date('2022-07-01'),
-      hours: 80
-    },
-    {
-      id: 3,
-      title: 'Certificado de Conclusão de Curso',
-      educationAxis: 'Administração de Empresas',
-      activity: 'Gestão de Projetos',
-      initialDate: new Date('2022-06-01'),
-      finalDate: new Date('2022-07-01'),
-      hours: 80
-    }
-  ];
-
   const pageSize = 1;
   const startIndex = (currentPage - 1) * pageSize;
   const endIndex = startIndex + pageSize;
-  const displayedItems = mockData.slice(startIndex, endIndex);
-  const requestId = displayedItems[0].id;
+  let displayedItems = [];
+
+  if (certificateData != undefined) {
+    displayedItems = certificateData.slice(startIndex, endIndex);
+  }
 
   return (
     <div>
@@ -66,7 +56,7 @@ export function ConfirmationPagination() {
       <S.Centered>
         <Pagination
           onPageChange={handlePageChange}
-          totalCount={mockData.length}
+          totalCount={certificateData.length}
           currentPage={currentPage}
           pageSize={pageSize}
         />
@@ -74,6 +64,16 @@ export function ConfirmationPagination() {
       {displayedItems.map((item, index) => (
         <ConfirmationContent key={index} {...item} />
       ))}
+      <S.Centered>
+        <S.Buttons>
+          <S.CancelConfirmButton buttonColor={false}>
+            Cancelar
+          </S.CancelConfirmButton>
+          <S.CancelConfirmButton buttonColor={true} onClick={submit}>
+            Confirmar
+          </S.CancelConfirmButton>
+        </S.Buttons>
+      </S.Centered>
     </div>
   );
 }

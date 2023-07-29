@@ -52,7 +52,7 @@ export const NewRequest = ({
       );
       certifacatesId.push(addCertificate);
     }
-    console.log(requestId);
+    localStorage.setItem('requestId', String(requestId));
     console.log(uploadedFiles);
   };
 

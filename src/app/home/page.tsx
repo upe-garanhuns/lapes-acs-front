@@ -57,7 +57,6 @@ export default function Home() {
         `Houve erro ao iniciar uma requisicao, verificar se ja existem dois rascunhos`
       );
       setIsOpen(false);
-      console.error('error', error);
     }
   };
 

@@ -1,9 +1,10 @@
 'use client';
 import { useEffect, useState } from 'react';
 
+import ConfirmationModal from '../../components/ConfirmationModal';
 import { createCertificate } from '../../services/registerCertificate';
 import { CreateCertificate } from '../../services/registerCertificate/types';
-import { getRequest, submitRequest } from '../../services/request';
+import { getRequest } from '../../services/request';
 import { Certificate } from '../../services/request/types';
 import * as S from './style';
 
@@ -12,7 +13,7 @@ import moment from 'moment';
 
 export default function RegistePageTest() {
   const token = Cookies.get('token');
-  const requestId = 494;
+  const requestId = parseInt(localStorage.getItem('requestId'));
   const [selectedEixo, setSelectedEixo] = useState();
   const [certificateData, setCertificateData] = useState<Certificate[]>();
   const [selectedAtividade, setSelectedAtividade] = useState<number>();
@@ -21,16 +22,18 @@ export default function RegistePageTest() {
   const [dataInicial, setDataInicial] = useState('');
   const [dataFinal, setDataFinal] = useState('');
   const [index, setIndex] = useState(0);
+  // const [requestId, setRequestId] = useState(0);
 
   useEffect(() => {
+    // setRequestId(parseInt(localStorage.getItem('requestId')));
     const request = async () => {
       const requestResponse = await getRequest(requestId, token);
       setCertificateData(requestResponse.certificados);
     };
+    // if (requestId != 0) {
     request();
-  }, [token]);
-
-  console.log(certificateData);
+    // }
+  }, [requestId, token]);
 
   const handleEixoChange = (event) => {
     setSelectedEixo(event.target.value);
@@ -89,16 +92,6 @@ export default function RegistePageTest() {
       }
     } else {
       alert('Todos os certificados já foram cadastrados');
-    }
-  };
-
-  const submit = async () => {
-    try {
-      await submitRequest(requestId, token);
-      alert('Requisição cadastrada com sucesso!');
-    } catch (error) {
-      alert('Ocorreu um erro ao cadastrar, tente novamente mais tarde!');
-      console.log(error);
     }
   };
 
@@ -171,7 +164,7 @@ export default function RegistePageTest() {
         <S.CertificateItem>Nome do Arquivo 2</S.CertificateItem>
         <S.ButtonsContainerCertificates>
           <S.Button>Voltar</S.Button>
-          <S.ButtonEnviar onClick={submit}>Enviar solicitação</S.ButtonEnviar>
+          <ConfirmationModal />
         </S.ButtonsContainerCertificates>
       </S.CertificatesContainer>
     </S.Container>
