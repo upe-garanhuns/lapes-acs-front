@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 
-import { getRequest } from '../../services/request';
+import { getRequest } from '../../../services/request';
 import ViewRequest, { ViewRequestProps } from '../ViewRequestContent';
 import * as S from './styles';
 
@@ -49,8 +49,11 @@ export default function ViewRequestModal(props: ViewRequestModalProps) {
   };
   const openModal = () => {
     setIsOpen(true);
+
     fetchData().then((data) => {
-      setCertificateData(data);
+      if (data !== undefined) {
+        setCertificateData(data);
+      }
     });
   };
   const closeModalArea = () => {

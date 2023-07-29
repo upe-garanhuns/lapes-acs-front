@@ -2,10 +2,10 @@
 
 import React, { useState } from 'react';
 
-import { sumRequestHours } from '../../app/home/functions/sumRequestHours';
-import { Certificate } from '../../services/request/types';
-import { CertificateList } from '../CertificateList';
-import { Pagination } from '../Pagination';
+import { sumRequestHours } from '../../../app/home/functions/sumRequestHours';
+import { Certificate } from '../../../services/request/types';
+import { CertificateList } from '../../CertificateList';
+import { Pagination } from '../../Pagination';
 import * as S from './styles';
 
 import { Printer } from '@phosphor-icons/react';
@@ -63,7 +63,11 @@ export default function ViewRequestContent(props: ViewRequestProps) {
           <S.Content>
             <S.Description>Quantidade de horas:</S.Description>
             <S.RowAligner>
-              <S.HoursAmount>{sumRequestHours(certificados)}</S.HoursAmount>
+              <S.HoursAmount>
+                {certificados !== undefined
+                  ? sumRequestHours(certificados)
+                  : null}
+              </S.HoursAmount>
               <S.HoursName>hora(s)</S.HoursName>
             </S.RowAligner>
           </S.Content>

@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-import { Certificate } from '../../services/request/types';
+import { Certificate } from '../../../services/request/types';
 import * as S from './styles';
 
 import moment from 'moment';
