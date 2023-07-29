@@ -100,8 +100,9 @@ export const CertificatesContainer = styled.div`
   /* Estilo do container */
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  max-width: 500px;
+  align-items: center;
+  max-width: 16rem;
+  min-width: 11.5rem;
   overflow-y: auto;
   background-color: #d9d9d9;
 `;
@@ -116,6 +117,10 @@ export const TitleAnexados = styled.h2`
   width: 100%;
 `;
 
+export const ContainerCertificates = styled.div`
+  padding: 0px 10px;
+`;
+
 export const CertificateItem = styled.div`
   background-color: #253555;
   color: #ffffff;
@@ -123,7 +128,7 @@ export const CertificateItem = styled.div`
   padding: 8px;
   margin-bottom: 10px;
   max-width: 300px;
-  min-width: 80px;
+  min-width: 10rem;
 `;
 
 export const ButtonsContainerCertificates = styled.div`

@@ -29,6 +29,8 @@ export function ConfirmationPagination() {
     try {
       await submitRequest(requestId, token);
       alert('Requisição cadastrada com sucesso!');
+      localStorage.removeItem('requestId');
+      localStorage.removeItem('certificates');
       router.push('/home');
     } catch (error) {
       alert('Ocorreu um erro ao cadastrar, tente novamente mais tarde!');

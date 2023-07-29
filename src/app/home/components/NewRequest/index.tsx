@@ -21,6 +21,7 @@ export const NewRequest = ({
   const router = useRouter();
   const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
   const certifacatesId = [];
+  const certificateNames: string[] = [];
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
@@ -44,6 +45,7 @@ export const NewRequest = ({
   };
 
   const fetchCertificate = async (userToken: string, id: number) => {
+    console.log(uploadedFiles);
     for (let index = 0; index < uploadedFiles.length; index++) {
       const addCertificate = await newCertificate(
         userToken,
@@ -51,9 +53,10 @@ export const NewRequest = ({
         uploadedFiles[index]
       );
       certifacatesId.push(addCertificate);
+      certificateNames.push(uploadedFiles[index].name);
     }
     localStorage.setItem('requestId', String(requestId));
-    console.log(uploadedFiles);
+    localStorage.setItem('certificates', JSON.stringify(certificateNames));
   };
 
   const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {

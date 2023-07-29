@@ -1,19 +1,39 @@
 'use client';
 
 import React, { useState } from 'react';
+import { toast } from 'react-toastify';
 
 import { ConfirmationPagination } from '../ConfirmationPagination';
 import * as S from './styles';
 
 import { XCircle } from '@phosphor-icons/react';
 
-export default function ConfirmationModal() {
+type ComponentProps = {
+  handleIsCompleted: () => boolean;
+};
+export default function ConfirmationModal({
+  handleIsCompleted
+}: ComponentProps) {
   const [isOpen, setIsOpen] = useState(false);
   const closeModal = () => {
     setIsOpen(false);
   };
+  console.log(handleIsCompleted);
   const openModal = () => {
-    setIsOpen(true);
+    if (handleIsCompleted()) {
+      setIsOpen(true);
+    } else {
+      toast.warn('Você não preencheu os dados de todos os certificados!', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'light'
+      });
+    }
   };
   const closeModalArea = () => {
     setIsOpen(false);

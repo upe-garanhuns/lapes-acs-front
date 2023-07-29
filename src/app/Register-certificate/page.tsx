@@ -2,6 +2,8 @@
 import { useEffect, useState } from 'react';
 
 import ConfirmationModal from '../../components/Confirmation/ConfirmationModal';
+import { getActivities } from '../../services/activity';
+import { Activity } from '../../services/activity/types';
 import { createCertificate } from '../../services/registerCertificate';
 import { CreateCertificate } from '../../services/registerCertificate/types';
 import { getRequest } from '../../services/request';
@@ -17,9 +19,14 @@ export default function RegistePageTest() {
     typeof localStorage !== 'undefined'
       ? parseInt(localStorage.getItem('requestId') ?? '0')
       : 0;
+  const certificates =
+    typeof localStorage !== 'undefined'
+      ? JSON.parse(localStorage.getItem('certificates') as string)
+      : [];
   const [selectedEixo, setSelectedEixo] = useState('');
   const [certificateData, setCertificateData] = useState<Certificate[]>([]);
-  const [selectedAtividade, setSelectedAtividade] = useState<string>('');
+  const [activitiesData, setActivitiesData] = useState<Activity[]>([]);
+  const [selectedAtividade, setSelectedAtividade] = useState<string>('0');
   const [titulo, setTitulo] = useState('');
   const [horas, setHoras] = useState<string>('0');
   const [dataInicial, setDataInicial] = useState('');
@@ -29,17 +36,39 @@ export default function RegistePageTest() {
   useEffect(() => {
     const request = async () => {
       const requestResponse = await getRequest(requestId, token);
+      console.log(requestResponse.certificados);
       setCertificateData(requestResponse.certificados ?? []);
     };
-    request();
-  }, [requestId, token]);
 
-  const handleEixoChange = (e: { target: { value: string } }) => {
-    setSelectedEixo(e.target.value);
-  };
+    const activity = async () => {
+      const activityResponse = await getActivities(token);
+      if (Array.isArray(activityResponse)) {
+        setActivitiesData(activityResponse);
+      } else {
+        setActivitiesData([]);
+      }
+    };
+
+    request();
+    activity();
+
+    //console.log(activitiesData);
+  }, [requestId, token]);
 
   const handleAtividadeChange = (e: { target: { value: string } }) => {
     setSelectedAtividade(e.target.value);
+    if (e.target.value != '0') {
+      if (activitiesData != null) {
+        const selectedAxis: Activity | undefined = activitiesData.find(
+          (item) => item.id === parseInt(e.target.value)
+        );
+        if (selectedAxis !== undefined) {
+          setSelectedEixo(selectedAxis.eixo);
+        }
+      }
+    } else {
+      setSelectedEixo('');
+    }
   };
 
   const handleChangeTitulo = (e: { target: { value: string } }) => {
@@ -62,12 +91,20 @@ export default function RegistePageTest() {
     setDataFinal(value);
   };
 
+  const handleIsCompleted = (): boolean => {
+    if (certificateData.length > index) {
+      return false;
+    } else {
+      return true;
+    }
+  };
+
   const createCerificateData: CreateCertificate = {
     titulo: titulo,
     dataIncial: moment(dataInicial).format('DD/MM/YYYY'),
     dataFinal: moment(dataFinal).format('DD/MM/YYYY'),
     quantidadeDeHoras: parseInt(horas),
-    atividadeId: 36
+    atividadeId: parseInt(selectedAtividade)
   };
 
   const registerCertificate = async () => {
@@ -106,12 +143,7 @@ export default function RegistePageTest() {
 
           <S.InputGroup>
             <S.Label>Eixo de ensino:</S.Label>
-            <S.Select value={selectedEixo} onChange={handleEixoChange}>
-              <option value="">Selecione</option>
-              <option value="eixo1">Eixo 1</option>
-              <option value="eixo2">Eixo 2</option>
-              <option value="eixo3">Eixo 3</option>
-            </S.Select>
+            <S.Input type="text" disabled value={selectedEixo} />
           </S.InputGroup>
 
           <S.InputGroup>
@@ -120,8 +152,12 @@ export default function RegistePageTest() {
               value={selectedAtividade}
               onChange={handleAtividadeChange}
             >
-              <option value="">Selecione</option>
-              <option value="37">Cursos de capacitação profissional</option>
+              <option value="0">Selecione</option>
+              {activitiesData.map((item) => (
+                <option value={item.id} key={item.id}>
+                  {item.descricao}
+                </option>
+              ))}
             </S.Select>
           </S.InputGroup>
         </S.InputArea>
@@ -159,11 +195,14 @@ export default function RegistePageTest() {
 
       <S.CertificatesContainer>
         <S.TitleAnexados>Anexados</S.TitleAnexados>
-        <S.CertificateItem>Nome do Arquivo 1</S.CertificateItem>
-        <S.CertificateItem>Nome do Arquivo 2</S.CertificateItem>
+        <S.ContainerCertificates>
+          {certificates.map((item: string, index: number) => (
+            <S.CertificateItem key={index}>{item}</S.CertificateItem>
+          ))}
+        </S.ContainerCertificates>
         <S.ButtonsContainerCertificates>
           <S.Button>Voltar</S.Button>
-          <ConfirmationModal />
+          <ConfirmationModal handleIsCompleted={handleIsCompleted} />
         </S.ButtonsContainerCertificates>
       </S.CertificatesContainer>
     </S.Container>
