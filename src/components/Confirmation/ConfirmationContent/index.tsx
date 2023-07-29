@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 
 import * as S from './styles';
 
@@ -15,7 +15,6 @@ export type ConfirmRequestProps = {
 };
 
 export const ConfirmationContent: React.FC<ConfirmRequestProps> = ({
-  id,
   title,
   educationAxis,
   activity,

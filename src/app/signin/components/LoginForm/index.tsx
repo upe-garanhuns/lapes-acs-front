@@ -136,7 +136,7 @@ export default function LoginForm() {
             isOpen={OpenRegister}
             closeModal={registerClose}
             // eslint-disable-next-line react/no-children-prop
-            children={<Register closeRegisterModal={registerClose} />}
+            children={<Register />}
             closeText={<XCircle size={32} />}
           ></S.ModalContainer>
         </S.LinkContainer>

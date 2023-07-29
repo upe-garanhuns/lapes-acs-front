@@ -18,7 +18,7 @@ export const getRequest = async (
 export const deleteRequest = async (
   id: number,
   token: string
-): Promise<any> => {
+): Promise<void> => {
   await fetchWrapper(`api/requisicao/rascunho/${id}`, {
     method: 'DELETE',
     headers: {

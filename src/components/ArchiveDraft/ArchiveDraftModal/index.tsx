@@ -13,7 +13,7 @@ export type ComponentProps = {
   id: number;
 };
 
-export default function ArchiveDraftModal(props: ComponentProps) {
+export default function ArchiveDraftModal({ type, token, id }: ComponentProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   const closeModal = () => {
@@ -39,17 +39,15 @@ export default function ArchiveDraftModal(props: ComponentProps) {
         isOpen={isOpen}
         closeModalArea={closeModalArea}
         closeModal={closeModal}
-        
-        children={
-          <ArchiveDraftContent
-            type={props.type}
-            token={props.token}
-            id={props.id}
-            closeModal={closeModal}
-          />
-        }
         closeText={<XCircle size={30} color="#FF0000" />}
-      ></S.ModalContainer>
+      >
+        <ArchiveDraftContent
+          type={type}
+          token={token}
+          id={id}
+          closeModal={closeModal}
+        />
+      </S.ModalContainer>
     </div>
   );
 }
