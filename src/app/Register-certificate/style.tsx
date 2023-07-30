@@ -122,13 +122,16 @@ export const ContainerCertificates = styled.div`
 `;
 
 export const CertificateItem = styled.div`
-  background-color: #253555;
+  display: flex;
+  background-color: ${(props) => (props.color ? props.color : '#253555')};
+  font-size: 16px;
+  text-align: start;
   color: #ffffff;
   border-radius: 20px;
-  padding: 8px;
+  padding: 8px 12px;
   margin-bottom: 10px;
   max-width: 300px;
-  min-width: 10rem;
+  min-width: 150px;
 `;
 
 export const ButtonsContainerCertificates = styled.div`

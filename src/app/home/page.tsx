@@ -5,6 +5,8 @@ import { useEffect, useState } from 'react';
 //import { request } from '../../services/request';
 //import { UserRequest } from '../../services/request/types';
 
+import { errorToast } from '../../functions/errorToast';
+import { sucessToast } from '../../functions/sucessToast';
 import { newRequest } from '../../services/newRequest';
 import { pagination } from '../../services/pagination';
 import { PageValue } from '../../services/pagination/types';
@@ -51,10 +53,10 @@ export default function Home() {
       const createNewRequest = await newRequest(token);
       setRequestId(createNewRequest);
       setIsOpen(true);
-      alert('Rascunho criado com sucesso!');
+      sucessToast('Rascunho criado com sucesso');
     } catch (error) {
-      alert(
-        `Houve erro ao iniciar uma requisicao, verificar se ja existem dois rascunhos`
+      errorToast(
+        'Ocorreu um erro ao criar uma requisição, só é permitido criar dois rascunhos'
       );
       setIsOpen(false);
     }

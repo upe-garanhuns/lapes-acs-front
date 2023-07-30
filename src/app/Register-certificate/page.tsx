@@ -2,6 +2,8 @@
 import { useEffect, useState } from 'react';
 
 import ConfirmationModal from '../../components/Confirmation/ConfirmationModal';
+import { errorToast } from '../../functions/errorToast';
+import { sucessToast } from '../../functions/sucessToast';
 import { getActivities } from '../../services/activity';
 import { Activity } from '../../services/activity/types';
 import { createCertificate } from '../../services/registerCertificate';
@@ -28,10 +30,11 @@ export default function RegistePageTest() {
   const [activitiesData, setActivitiesData] = useState<Activity[]>([]);
   const [selectedAtividade, setSelectedAtividade] = useState<string>('0');
   const [titulo, setTitulo] = useState('');
-  const [horas, setHoras] = useState<string>('0');
+  const [horas, setHoras] = useState<string>('1');
   const [dataInicial, setDataInicial] = useState('');
   const [dataFinal, setDataFinal] = useState('');
-  const [index, setIndex] = useState(0);
+  const [certificateIndex, setCertificateIndex] = useState(0);
+  const [isReadyToSent, setIsReadyToSent] = useState(false);
 
   useEffect(() => {
     const request = async () => {
@@ -92,7 +95,7 @@ export default function RegistePageTest() {
   };
 
   const handleIsCompleted = (): boolean => {
-    if (certificateData.length > index) {
+    if (certificateData.length > certificateIndex) {
       return false;
     } else {
       return true;
@@ -108,26 +111,27 @@ export default function RegistePageTest() {
   };
 
   const registerCertificate = async () => {
-    console.log('index antes do if' + index);
-    if (certificateData.length > index) {
-      try {
-        console.log(createCerificateData);
-        console.log('index antes: ' + index);
-        await createCertificate(
-          createCerificateData,
-          certificateData[index].id ?? 0,
-          token
-        );
-        alert('certificado cadastrado!');
-        setIndex(index + 1);
-        console.log('index depois: ' + index);
-        //console.log(certificateData[index]);
-      } catch (error) {
-        alert(error);
-        console.log(error);
+    try {
+      await createCertificate(
+        createCerificateData,
+        certificateData[certificateIndex].id ?? 0,
+        token
+      );
+      sucessToast('Certificado cadastrado com sucesso!');
+      setSelectedAtividade('0');
+      setDataFinal('');
+      setDataInicial('');
+      setHoras('1');
+      setTitulo('');
+      setSelectedEixo('');
+      setCertificateIndex(certificateIndex + 1);
+      if (certificateData.length == certificateIndex + 1) {
+        setIsReadyToSent(true);
       }
-    } else {
-      alert('Todos os certificados já foram cadastrados');
+    } catch (error) {
+      errorToast(
+        'Ocorreu um erro ao criar um certificado! Tente novamente mais tarde!'
+      );
     }
   };
 
@@ -138,7 +142,12 @@ export default function RegistePageTest() {
         <S.InputArea>
           <S.InputGroup>
             <S.Label>Titulo:</S.Label>
-            <S.Input type="text" onChange={handleChangeTitulo} />
+            <S.Input
+              type="text"
+              onChange={handleChangeTitulo}
+              value={titulo}
+              disabled={isReadyToSent}
+            />
           </S.InputGroup>
 
           <S.InputGroup>
@@ -151,6 +160,7 @@ export default function RegistePageTest() {
             <S.Select
               value={selectedAtividade}
               onChange={handleAtividadeChange}
+              disabled={isReadyToSent}
             >
               <option value="0">Selecione</option>
               {activitiesData.map((item) => (
@@ -166,38 +176,63 @@ export default function RegistePageTest() {
           <S.InputContainer>
             <S.InputGroup>
               <S.Label>Data inicial:</S.Label>
-              <S.Input type="date" onChange={handleChangeDataInicial} />
+              <S.Input
+                type="date"
+                onChange={handleChangeDataInicial}
+                value={dataInicial}
+                disabled={isReadyToSent}
+              />
             </S.InputGroup>
 
             <S.InputGroup>
               <S.Label>Data final:</S.Label>
-              <S.Input type="date" onChange={handleChangeDataFinal} />
+              <S.Input
+                type="date"
+                onChange={handleChangeDataFinal}
+                value={dataFinal}
+                disabled={isReadyToSent}
+              />
             </S.InputGroup>
           </S.InputContainer>
 
           <S.InputContainer>
             <S.InputGroup>
               <S.Label>Quantidade de horas:</S.Label>
-              <S.Input type="number" onChange={handleChangeHoras} />
+              <S.Input
+                type="number"
+                min={1}
+                onChange={handleChangeHoras}
+                value={horas}
+                disabled={isReadyToSent}
+              />
             </S.InputGroup>
           </S.InputContainer>
 
           <S.InputContainer></S.InputContainer>
 
-          <S.ButtonsContainer>
-            <S.SaveButton onClick={registerCertificate}>
-              Salvar certificado
-            </S.SaveButton>
-            <S.ViewButton>Visualizar certificado</S.ViewButton>
-          </S.ButtonsContainer>
+          {!isReadyToSent ? (
+            <S.ButtonsContainer>
+              <S.SaveButton onClick={registerCertificate}>
+                Salvar certificado
+              </S.SaveButton>
+              <S.ViewButton>Visualizar certificado</S.ViewButton>
+            </S.ButtonsContainer>
+          ) : (
+            <></>
+          )}
         </S.InputArea>
       </S.FormContainer>
 
       <S.CertificatesContainer>
         <S.TitleAnexados>Anexados</S.TitleAnexados>
         <S.ContainerCertificates>
-          {certificates.map((item: string, index: number) => (
-            <S.CertificateItem key={index}>{item}</S.CertificateItem>
+          {certificateData.map((item, index) => (
+            <S.CertificateItem
+              key={item.id}
+              color={certificateIndex == index ? '#4B629C' : '#253555'}
+            >
+              {certificates[index]}
+            </S.CertificateItem>
           ))}
         </S.ContainerCertificates>
         <S.ButtonsContainerCertificates>

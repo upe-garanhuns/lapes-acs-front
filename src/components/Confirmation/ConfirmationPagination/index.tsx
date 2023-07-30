@@ -2,6 +2,8 @@
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 
+import { errorToast } from '../../../functions/errorToast';
+import { sucessToast } from '../../../functions/sucessToast';
 import { getRequest, submitRequest } from '../../../services/request';
 import { Certificate } from '../../../services/request/types';
 import { ConfirmationContent } from '../ConfirmationContent';
@@ -28,13 +30,12 @@ export function ConfirmationPagination() {
   const submit = async () => {
     try {
       await submitRequest(requestId, token);
-      alert('Requisição cadastrada com sucesso!');
       localStorage.removeItem('requestId');
       localStorage.removeItem('certificates');
+      sucessToast('Requisição enviada com sucesso!');
       router.push('/home');
     } catch (error) {
-      alert('Ocorreu um erro ao cadastrar, tente novamente mais tarde!');
-      console.log(error);
+      errorToast('Ocorreu um erro! Tente novamente mais tarde!');
     }
   };
 
