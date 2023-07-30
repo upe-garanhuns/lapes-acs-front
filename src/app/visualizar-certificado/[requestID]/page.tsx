@@ -2,26 +2,32 @@
 
 import { useEffect, useState } from 'react';
 
-import { getRequest } from '../../services/request';
-import { UserRequest } from '../../services/request/types';
-import { CertificateView } from './components/CertificateView';
-import { SideCertificateView } from './components/SideCertificateView';
+import { getRequest } from '../../../services/request';
+import { UserRequest } from '../../../services/request/types';
+import { CertificateView } from '../components/CertificateView';
+import { SideCertificateView } from '../components/SideCertificateView';
 import * as S from './styles';
 
 import Cookies from 'js-cookie';
 
-export default function VisualizarCertificado() {
+interface idProps {
+  params: { requestID: string };
+}
+
+export default function VisualizarCertificado({ params }: idProps) {
   const token = Cookies.get('token');
   const [selectId, setSelectId] = useState<UserRequest>();
+  const [requestIdSelect, setRequestIdSelect] = useState<number>();
   const [certificateId, setCertificateId] = useState<number>();
 
   useEffect(() => {
+    setRequestIdSelect(parseInt(params.requestID));
     const requestIdFetch = async () => {
-      const requestResponse = await getRequest(152, token);
+      const requestResponse = await getRequest(requestIdSelect, token);
       setSelectId(requestResponse);
     };
     requestIdFetch();
-  }, [setSelectId, token]);
+  }, [params, requestIdSelect, setSelectId, token]);
 
   const handleCertificateClick = (id: number) => {
     setCertificateId(id);
@@ -31,7 +37,11 @@ export default function VisualizarCertificado() {
     <S.Container>
       <S.ContentDiv>
         <S.PrincipalDiv>
-          <CertificateView token={token} id={certificateId} />
+          <CertificateView
+            token={token}
+            id={certificateId}
+            requestId={requestIdSelect}
+          />
           <S.Div>previewe</S.Div>
         </S.PrincipalDiv>
         {selectId && (

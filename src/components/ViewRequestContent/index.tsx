@@ -27,13 +27,11 @@ export default function ViewRequestContent(props: ViewRequestProps) {
   };
   const iconSize = 24;
   let statusDescription = '';
-  requisicaoStatus === 'DEFERIDO'
+  requisicaoStatus === 'ACEITO'
     ? (statusDescription = 'Concluído')
-    : requisicaoStatus === 'ENCAMINHADO_COORDENACAO'
+    : requisicaoStatus === 'TRANSITO'
     ? (statusDescription = 'Em análise')
-    : requisicaoStatus === 'ENCAMINHADO_COMISSAO'
-    ? (statusDescription = 'Em análise')
-    : requisicaoStatus === 'INDEFERIDO'
+    : requisicaoStatus === 'NEGADO'
     ? (statusDescription = 'Indeferido')
     : requisicaoStatus === 'RASCUNHO'
     ? (statusDescription = 'Rascunho')
@@ -76,9 +74,11 @@ export default function ViewRequestContent(props: ViewRequestProps) {
         <S.Division />
         {displayedItems.map((certificado) => (
           <CertificateList
+            requestId={id}
             eixoAtividade={''}
             atividade={''}
             key={certificado.id}
+            horas={certificado.horas}
             {...certificado}
           />
         ))}

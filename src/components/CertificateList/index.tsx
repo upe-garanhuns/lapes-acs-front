@@ -1,3 +1,4 @@
+import { useRouter } from 'next/navigation';
 import React from 'react';
 
 import * as S from './styles';
@@ -10,14 +11,17 @@ export type ComponentProps = {
   horas: number;
   eixoAtividade: string;
   atividade: string;
+  requestId: number;
 };
 
 export const CertificateList: React.FC<ComponentProps> = ({
   eixoAtividade,
   statusCertificado,
   atividade,
-  horas
+  horas,
+  requestId
 }) => {
+  const router = useRouter();
   let statusDescription = '';
   statusCertificado === 'DEFERIDO'
     ? (statusDescription = 'Concluído')
@@ -29,6 +33,10 @@ export const CertificateList: React.FC<ComponentProps> = ({
     ? (statusDescription = 'Em análise')
     : (statusDescription = 'Sem status');
   const iconSize = 24;
+
+  const nextCertificateScreen = () => {
+    router.push(`/visualizar-certificado/${requestId}`);
+  };
   return (
     <div>
       <S.Card>
@@ -49,7 +57,7 @@ export const CertificateList: React.FC<ComponentProps> = ({
           <S.Text>{horas} horas</S.Text>
         </S.Content>
         <S.IconsContainer>
-          <Eye size={iconSize} />
+          <Eye size={iconSize} onClick={nextCertificateScreen} />
         </S.IconsContainer>
       </S.Card>
     </div>
