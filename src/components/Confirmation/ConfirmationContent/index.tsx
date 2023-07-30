@@ -18,7 +18,7 @@ export const ConfirmationContent: React.FC<Certificate> = ({
   const formattedInitialDate = moment(dataInicial).format('DD/MM/YYYY');
   const formattedFinalDate = moment(dataFinal).format('DD/MM/YYYY');
   const formattedActivity =
-    atividade.length > 79 ? '${atividade.substring(0, 79)}...' : atividade;
+    atividade.length > 79 ? `${atividade.substring(0, 79)}...` : atividade;
   return (
     <div>
       <S.Container>
