@@ -1,3 +1,4 @@
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 import { Certificate } from '../../../../services/request/types';
@@ -14,11 +15,16 @@ export const SideCertificateView = ({
   certificate,
   onCertificateClick
 }: SideViewInterface) => {
+  const router = useRouter();
   const [certificates, setCertificates] = useState<Array<Certificate>>([]);
 
   useEffect(() => {
     setCertificates(certificate);
   }, [certificate, certificates]);
+
+  const backHomeScreen = () => {
+    router.push(`/home`);
+  };
 
   return (
     <S.Container>
@@ -44,7 +50,7 @@ export const SideCertificateView = ({
             startAdornment={<Printer size={20} />}
           />
 
-          <S.Back label="Voltar" />
+          <S.Back label="Voltar" onClick={backHomeScreen} />
         </S.ButtonDiv>
       </S.Content>
     </S.Container>
