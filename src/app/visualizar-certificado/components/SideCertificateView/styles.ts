@@ -1,6 +1,9 @@
 import Button from '../../../../components/Button';
 
 import styled from 'styled-components';
+interface CertificateSelectProps {
+  selected: boolean;
+}
 
 export const Container = styled.div`
   background: #d9d9d9;
@@ -35,8 +38,9 @@ export const Line = styled.hr`
 `;
 export const ListDiv = styled.div``;
 
-export const CertificateSelect = styled.div`
-  background: #253555;
+export const CertificateSelect = styled.div<CertificateSelectProps>`
+  background-color: ${(props) => (props.selected ? '#e74c3c' : '#253555')};
+  color: ${(props) => (props.selected ? 'white' : 'black')};
   padding: 0.8em;
   border-radius: 20px;
   font-size: 0.7em;

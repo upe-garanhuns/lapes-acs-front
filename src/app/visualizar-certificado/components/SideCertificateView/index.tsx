@@ -17,6 +17,9 @@ export const SideCertificateView = ({
 }: SideViewInterface) => {
   const router = useRouter();
   const [certificates, setCertificates] = useState<Array<Certificate>>([]);
+  const [selectedCertificate, setSelectedCertificate] = useState<number | null>(
+    null
+  );
 
   useEffect(() => {
     setCertificates(certificate);
@@ -24,6 +27,11 @@ export const SideCertificateView = ({
 
   const backHomeScreen = () => {
     router.push(`/home`);
+  };
+
+  const handleCertificateSelect = (id: number) => {
+    setSelectedCertificate(id);
+    onCertificateClick(id);
   };
 
   return (
@@ -38,7 +46,8 @@ export const SideCertificateView = ({
             certificates.map((certificado, index) => (
               <S.CertificateSelect
                 key={index}
-                onClick={() => onCertificateClick(certificado.id)}
+                onClick={() => handleCertificateSelect(certificado.id)}
+                selected={selectedCertificate === certificado.id}
               >
                 <S.Label>{`Certificado ${certificado.id}`}</S.Label>
               </S.CertificateSelect>
