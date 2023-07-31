@@ -31,7 +31,6 @@ export function ConfirmationPagination() {
     try {
       await submitRequest(requestId, token);
       localStorage.removeItem('requestId');
-      localStorage.removeItem('certificates');
       sucessToast('Requisição enviada com sucesso!');
       router.push('/home');
     } catch (error) {

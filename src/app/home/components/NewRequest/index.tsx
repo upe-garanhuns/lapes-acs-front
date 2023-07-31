@@ -21,7 +21,6 @@ export const NewRequest = ({
   const router = useRouter();
   const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
   const certifacatesId = [];
-  const certificateNames: string[] = [];
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
@@ -41,7 +40,7 @@ export const NewRequest = ({
   const handleNext = () => {
     // Lógica para avançar para a próxima etapa
     fetchCertificate(token, requestId);
-    router.push('/Register-certificate');
+    router.push(`/registrar-certificado/${requestId}`);
   };
 
   const fetchCertificate = async (userToken: string, id: number) => {
@@ -53,10 +52,8 @@ export const NewRequest = ({
         uploadedFiles[index]
       );
       certifacatesId.push(addCertificate);
-      certificateNames.push(uploadedFiles[index].name);
     }
     localStorage.setItem('requestId', String(requestId));
-    localStorage.setItem('certificates', JSON.stringify(certificateNames));
   };
 
   const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {

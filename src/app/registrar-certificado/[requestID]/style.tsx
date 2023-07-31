@@ -130,7 +130,7 @@ export const CertificateItem = styled.div`
   border-radius: 20px;
   padding: 8px 12px;
   margin-bottom: 10px;
-  max-width: 300px;
+  max-width: 16rem;
   min-width: 150px;
 `;
 
@@ -170,4 +170,11 @@ export const ButtonEnviar = styled.button`
   cursor: pointer;
   min-width: 150px;
   margin-bottom: 20px;
+`;
+
+export const ErrorSpan = styled.span`
+  color: red;
+  font-size: 10px;
+  margin-top: 6px;
+  margin-left: 5px;
 `;

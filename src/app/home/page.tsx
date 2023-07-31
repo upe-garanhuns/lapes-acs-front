@@ -55,9 +55,7 @@ export default function Home() {
       setIsOpen(true);
       sucessToast('Rascunho criado com sucesso');
     } catch (error) {
-      errorToast(
-        'Ocorreu um erro ao criar uma requisição, só é permitido criar dois rascunhos'
-      );
+      errorToast('Ocorreu um erro! Só é permitido possuir dois rascunhos');
       setIsOpen(false);
     }
   };

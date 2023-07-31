@@ -1,31 +1,37 @@
 'use client';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-import ConfirmationModal from '../../components/Confirmation/ConfirmationModal';
-import { errorToast } from '../../functions/errorToast';
-import { sucessToast } from '../../functions/sucessToast';
-import { getActivities } from '../../services/activity';
-import { Activity } from '../../services/activity/types';
-import { createCertificate } from '../../services/registerCertificate';
-import { CreateCertificate } from '../../services/registerCertificate/types';
-import { getRequest } from '../../services/request';
-import { Certificate } from '../../services/request/types';
+import ConfirmationModal from '../../../components/Confirmation/ConfirmationModal';
+import { errorToast } from '../../../functions/errorToast';
+import { sucessToast } from '../../../functions/sucessToast';
+import { getActivities } from '../../../services/activity';
+import { Activity } from '../../../services/activity/types';
+import { createCertificate } from '../../../services/registerCertificate';
+import { CreateCertificate } from '../../../services/registerCertificate/types';
+import { getRequest } from '../../../services/request';
+import { Certificate } from '../../../services/request/types';
+import { getMaxDate } from './functions/getMaxDate';
 import * as S from './style';
 
+import { Check } from '@phosphor-icons/react';
 import Cookies from 'js-cookie';
 import moment from 'moment';
 
-export default function RegistePageTest() {
+interface idProps {
+  params: { requestID: string };
+}
+
+export default function RegistePageTest({ params }: idProps) {
   const token = Cookies.get('token') ?? '';
-  const requestId =
-    typeof localStorage !== 'undefined'
-      ? parseInt(localStorage.getItem('requestId') ?? '0')
-      : 0;
-  const certificates =
-    typeof localStorage !== 'undefined'
-      ? JSON.parse(localStorage.getItem('certificates') as string)
-      : [];
+  const requestId = parseInt(params.requestID);
   const [selectedEixo, setSelectedEixo] = useState('');
+  const [errorSelectedAtividade, setErrorSelectedAtividade] =
+    useState<boolean>(false);
+  const [errorTitulo, setErrorTitulo] = useState<boolean>(false);
+  const [errorDataInicial, setErrorDataInicial] = useState<boolean>(false);
+  const [errorDataFinal, setErrorDataFinal] = useState<boolean>(false);
+  const [errorHoras, setErrorHoras] = useState<boolean>(false);
   const [certificateData, setCertificateData] = useState<Certificate[]>([]);
   const [activitiesData, setActivitiesData] = useState<Activity[]>([]);
   const [selectedAtividade, setSelectedAtividade] = useState<string>('0');
@@ -35,31 +41,39 @@ export default function RegistePageTest() {
   const [dataFinal, setDataFinal] = useState('');
   const [certificateIndex, setCertificateIndex] = useState(0);
   const [isReadyToSent, setIsReadyToSent] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     const request = async () => {
-      const requestResponse = await getRequest(requestId, token);
-      console.log(requestResponse.certificados);
-      setCertificateData(requestResponse.certificados ?? []);
+      try {
+        const requestResponse = await getRequest(requestId, token);
+        setCertificateData(requestResponse.certificados ?? []);
+      } catch (error) {
+        errorToast('Requisição não encontrada');
+        router.push('/home');
+      }
     };
 
     const activity = async () => {
-      const activityResponse = await getActivities(token);
-      if (Array.isArray(activityResponse)) {
-        setActivitiesData(activityResponse);
-      } else {
-        setActivitiesData([]);
+      try {
+        const activityResponse = await getActivities(token);
+        if (Array.isArray(activityResponse)) {
+          setActivitiesData(activityResponse);
+        } else {
+          setActivitiesData([]);
+        }
+      } catch (error) {
+        errorToast('Ocorreu um erro');
       }
     };
 
     request();
     activity();
-
-    //console.log(activitiesData);
-  }, [requestId, token]);
+  }, [requestId, router, token]);
 
   const handleAtividadeChange = (e: { target: { value: string } }) => {
     setSelectedAtividade(e.target.value);
+    setErrorSelectedAtividade(false);
     if (e.target.value != '0') {
       if (activitiesData != null) {
         const selectedAxis: Activity | undefined = activitiesData.find(
@@ -70,6 +84,7 @@ export default function RegistePageTest() {
         }
       }
     } else {
+      setErrorSelectedAtividade(true);
       setSelectedEixo('');
     }
   };
@@ -77,21 +92,25 @@ export default function RegistePageTest() {
   const handleChangeTitulo = (e: { target: { value: string } }) => {
     const { value } = e.target;
     setTitulo(value);
+    setErrorTitulo(false);
   };
 
   const handleChangeHoras = (e: { target: { value: string } }) => {
     const { value } = e.target;
     setHoras(value);
+    setErrorHoras(false);
   };
 
   const handleChangeDataInicial = (e: { target: { value: string } }) => {
     const { value } = e.target;
     setDataInicial(value);
+    setErrorDataInicial(false);
   };
 
   const handleChangeDataFinal = (e: { target: { value: string } }) => {
     const { value } = e.target;
     setDataFinal(value);
+    setErrorDataFinal(false);
   };
 
   const handleIsCompleted = (): boolean => {
@@ -108,6 +127,25 @@ export default function RegistePageTest() {
     dataFinal: moment(dataFinal).format('DD/MM/YYYY'),
     quantidadeDeHoras: parseInt(horas),
     atividadeId: parseInt(selectedAtividade)
+  };
+
+  const verifyInputs = () => {
+    setErrorSelectedAtividade(selectedAtividade === '0');
+    setErrorTitulo(titulo === '');
+    setErrorDataInicial(dataInicial === '');
+    setErrorDataFinal(dataFinal === '');
+    setErrorHoras(parseInt(horas) < 1 || horas === '');
+
+    const isValidInputs =
+      !errorSelectedAtividade &&
+      !errorTitulo &&
+      !errorDataInicial &&
+      !errorDataFinal &&
+      !errorHoras;
+
+    if (isValidInputs) {
+      registerCertificate();
+    }
   };
 
   const registerCertificate = async () => {
@@ -148,6 +186,7 @@ export default function RegistePageTest() {
               value={titulo}
               disabled={isReadyToSent}
             />
+            {errorTitulo ? <S.ErrorSpan>*Digite um título</S.ErrorSpan> : <></>}
           </S.InputGroup>
 
           <S.InputGroup>
@@ -169,6 +208,11 @@ export default function RegistePageTest() {
                 </option>
               ))}
             </S.Select>
+            {errorSelectedAtividade ? (
+              <S.ErrorSpan>*Selecione uma opção</S.ErrorSpan>
+            ) : (
+              <></>
+            )}
           </S.InputGroup>
         </S.InputArea>
 
@@ -181,7 +225,13 @@ export default function RegistePageTest() {
                 onChange={handleChangeDataInicial}
                 value={dataInicial}
                 disabled={isReadyToSent}
+                max={getMaxDate()}
               />
+              {errorDataInicial ? (
+                <S.ErrorSpan>*Selecione uma data</S.ErrorSpan>
+              ) : (
+                <></>
+              )}
             </S.InputGroup>
 
             <S.InputGroup>
@@ -191,7 +241,13 @@ export default function RegistePageTest() {
                 onChange={handleChangeDataFinal}
                 value={dataFinal}
                 disabled={isReadyToSent}
+                max={getMaxDate()}
               />
+              {errorDataFinal ? (
+                <S.ErrorSpan>*Selecione uma data</S.ErrorSpan>
+              ) : (
+                <></>
+              )}
             </S.InputGroup>
           </S.InputContainer>
 
@@ -205,14 +261,17 @@ export default function RegistePageTest() {
                 value={horas}
                 disabled={isReadyToSent}
               />
+              {errorHoras ? (
+                <S.ErrorSpan>*Entrada inválida</S.ErrorSpan>
+              ) : (
+                <></>
+              )}
             </S.InputGroup>
           </S.InputContainer>
 
-          <S.InputContainer></S.InputContainer>
-
           {!isReadyToSent ? (
             <S.ButtonsContainer>
-              <S.SaveButton onClick={registerCertificate}>
+              <S.SaveButton onClick={verifyInputs}>
                 Salvar certificado
               </S.SaveButton>
               <S.ViewButton>Visualizar certificado</S.ViewButton>
@@ -231,7 +290,9 @@ export default function RegistePageTest() {
               key={item.id}
               color={certificateIndex == index ? '#4B629C' : '#253555'}
             >
-              {certificates[index]}
+              {`Certificado ${item.id}`}
+              &nbsp;
+              {certificateIndex > index ? <Check /> : <></>}
             </S.CertificateItem>
           ))}
         </S.ContainerCertificates>
