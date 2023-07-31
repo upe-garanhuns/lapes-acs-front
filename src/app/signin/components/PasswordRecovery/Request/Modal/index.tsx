@@ -18,6 +18,7 @@ export default function PasswordRequestModal() {
   const closeModalArea = () => {
     setIsOpen(false);
   };
+
   return (
     <div>
       <S.OpenRequest onClick={openModal}>Esqueceu a senha?</S.OpenRequest>
@@ -26,9 +27,11 @@ export default function PasswordRequestModal() {
         closeModalArea={closeModalArea}
         closeModal={closeModal}
         // eslint-disable-next-line react/no-children-prop
-        children={<Content />}
+
         closeText={<XCircle size={30} color="#FF0000" />}
-      ></S.ModalContainer>
+      >
+        <Content />
+      </S.ModalContainer>
     </div>
   );
 }

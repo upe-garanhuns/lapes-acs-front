@@ -4,11 +4,11 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
-import PasswordRequestModal from '../../../../components/PasswordRecovery/Request/Modal';
 import { login } from '../../../../services/signIn';
 import { Login } from '../../../../services/signIn/types';
 import LoginButton from '../LoginButton';
 import { LoginInput } from '../LoginInput';
+import PasswordRequestModal from '../PasswordRecovery/Request/Modal/index';
 import { Register } from '../Register';
 import * as S from './styles';
 
@@ -130,9 +130,7 @@ export default function LoginForm() {
       <S.ButtonContainer>
         <LoginButton label="Entrar" type="submit" />
         <S.LinkContainer>
-          <S.PasswordRecovery href="">
-            <PasswordRequestModal />
-          </S.PasswordRecovery>
+          <PasswordRequestModal />
           <S.SignUp onClick={registerOpen}>Cadastrar</S.SignUp>
           <S.ModalContainer
             closeModalArea={registerClose}

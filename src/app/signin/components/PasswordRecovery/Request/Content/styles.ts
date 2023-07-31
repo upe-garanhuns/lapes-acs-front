@@ -1,4 +1,4 @@
-import Button from '../../../Button';
+import { LoginInput } from '../../../LoginInput/index';
 
 import styled from 'styled-components';
 
@@ -21,25 +21,13 @@ export const Message = styled.h2`
   margin: 2rem;
   margin-top: 2rem;
 `;
-export const Wrapper = styled.div`
-  position: relative;
+
+export const EmailInput = styled(LoginInput)`
+  height: 2.5rem;
+  padding-top: 5px
   width: 100%;
-  display: flex;
-  justify-content: center;
-`;
-export const Icon = styled.div`
-  position: absolute;
-  transform: translateY(-50%);
-  left: 2rem;
-  top: 50%;
-`;
-export const EmailInput = styled.input`
-  height: 4.5rem;
-  padding-left: 4rem;
-  width: 80%;
   border-radius: 45px;
   background: #ebeced;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
   &::placeholder {
     color: #8e8a8a;
     font-size: 20px;
@@ -50,7 +38,7 @@ export const EmailInput = styled.input`
 `;
 export const SendCodeButton = styled.button`
   height: 3.75rem;
-  width: 60%;
+  width: 35%;
   color: #fff;
   font-weight: 700;
   font-size: 18px;
@@ -72,4 +60,9 @@ export const Centered = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
+`;
+export const ErrorSpan = styled.span`
+  color: red;
+  font-size: 12px;
+  padding-left: 15px;
 `;

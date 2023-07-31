@@ -1,4 +1,4 @@
-import { Modal } from '../../../Modal';
+import { Modal } from '../../../../../../components/Modal/index';
 
 import styled from 'styled-components';
 export const ModalContainer = styled(Modal)`
@@ -10,7 +10,7 @@ export const ModalContainer = styled(Modal)`
   border: #253555 0.0625rem solid;
   height: fit-content;
   &&(max-width:768) {
-    width: 70vw;
+    width: 65vw;
   }
 `;
 
