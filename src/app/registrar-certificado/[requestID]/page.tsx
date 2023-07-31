@@ -27,10 +27,10 @@ export default function RegistePageTest({ params }: idProps) {
   const requestId = parseInt(params.requestID);
   const [selectedEixo, setSelectedEixo] = useState('');
   const [errorSelectedAtividade, setErrorSelectedAtividade] =
-    useState<boolean>(false);
-  const [errorTitulo, setErrorTitulo] = useState<boolean>(false);
-  const [errorDataInicial, setErrorDataInicial] = useState<boolean>(false);
-  const [errorDataFinal, setErrorDataFinal] = useState<boolean>(false);
+    useState<boolean>(true);
+  const [errorTitulo, setErrorTitulo] = useState<boolean>(true);
+  const [errorDataInicial, setErrorDataInicial] = useState<boolean>(true);
+  const [errorDataFinal, setErrorDataFinal] = useState<boolean>(true);
   const [errorHoras, setErrorHoras] = useState<boolean>(false);
   const [certificateData, setCertificateData] = useState<Certificate[]>([]);
   const [activitiesData, setActivitiesData] = useState<Activity[]>([]);
