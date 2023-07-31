@@ -16,7 +16,6 @@ import * as S from './style';
 
 import { Check } from '@phosphor-icons/react';
 import Cookies from 'js-cookie';
-import moment from 'moment';
 
 interface idProps {
   params: { requestID: string };
@@ -125,8 +124,8 @@ export default function RegistePageTest({ params }: idProps) {
 
   const createCerificateData: CreateCertificate = {
     titulo: titulo,
-    dataIncial: moment(dataInicial).format('DD/MM/YYYY'),
-    dataFinal: moment(dataFinal).format('DD/MM/YYYY'),
+    dataIncial: dataInicial,
+    dataFinal: dataFinal,
     quantidadeDeHoras: parseInt(horas),
     atividadeId: parseInt(selectedAtividade)
   };

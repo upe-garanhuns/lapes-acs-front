@@ -23,6 +23,7 @@ export function ConfirmationPagination() {
     const request = async () => {
       const requestResponse = await getRequest(requestId, token);
       setCertificateData(requestResponse.certificados ?? []);
+      console.log(requestResponse);
     };
     request();
   }, [requestId, token]);
