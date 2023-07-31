@@ -24,11 +24,11 @@ export default function ConfirmarForm() {
       }
 
       const verificado = await verificarCodigo(codigoVerificacao, token);
-      console.log(verificado);
+      //console.log(verificado);
 
+      router.push('/home');
       setCodigoVerificado(true);
-
-      router.push('/home'); // Redireciona o usuário para a página /home
+      // Redireciona o usuário para a página /home
     } catch (error) {
       console.error(error);
       alert(
@@ -53,6 +53,7 @@ export default function ConfirmarForm() {
       <S.Input
         type="text"
         max="9999"
+        placeholder="0 - 0 - 0 - 0 "
         value={codigoVerificacao}
         onChange={handleCodigoChange}
       />

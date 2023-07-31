@@ -4,6 +4,7 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
+  background-color: #f5f5f5;
 `;
 
 export const GridArea = styled.div`
