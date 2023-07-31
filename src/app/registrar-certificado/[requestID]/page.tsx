@@ -39,6 +39,7 @@ export default function RegistePageTest({ params }: idProps) {
   const [horas, setHoras] = useState<string>('1');
   const [dataInicial, setDataInicial] = useState('');
   const [dataFinal, setDataFinal] = useState('');
+  const [minDate, setMinDate] = useState<string>('');
   const [certificateIndex, setCertificateIndex] = useState(0);
   const [isReadyToSent, setIsReadyToSent] = useState(false);
   const router = useRouter();
@@ -105,6 +106,7 @@ export default function RegistePageTest({ params }: idProps) {
     const { value } = e.target;
     setDataInicial(value);
     setErrorDataInicial(false);
+    setMinDate(value);
   };
 
   const handleChangeDataFinal = (e: { target: { value: string } }) => {
@@ -242,6 +244,7 @@ export default function RegistePageTest({ params }: idProps) {
                 value={dataFinal}
                 disabled={isReadyToSent}
                 max={getMaxDate()}
+                min={minDate}
               />
               {errorDataFinal ? (
                 <S.ErrorSpan>*Selecione uma data</S.ErrorSpan>
