@@ -84,7 +84,7 @@ export default function LoginForm() {
   return (
     <S.Container onSubmit={handleLogin}>
       <Image
-        src={'/../public/logo-blue.png'}
+        src={'/logo-blue.png'}
         alt={'Logo da UPE com fundo azul'}
         width={180}
         height={180}
