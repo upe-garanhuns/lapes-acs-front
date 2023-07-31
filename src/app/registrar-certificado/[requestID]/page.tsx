@@ -164,6 +164,7 @@ export default function RegistePageTest({ params }: idProps) {
       setHoras('1');
       setTitulo('');
       setSelectedEixo('');
+      setMinDate('');
       setCertificateIndex(certificateIndex + 1);
       if (certificateData.length == certificateIndex + 1) {
         setIsReadyToSent(true);
