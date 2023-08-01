@@ -6,6 +6,7 @@ import { DataText } from './components/DataText';
 import * as S from './styles';
 
 import { DownloadSimple, File } from '@phosphor-icons/react';
+import moment from 'moment';
 
 interface CertificateViewInterface {
   token: string;
@@ -35,6 +36,7 @@ export const CertificateView = ({
     };
     certificateFetch();
   }, [id, token]);
+
   return (
     <S.Container>
       <S.RequestDiv>
@@ -48,9 +50,16 @@ export const CertificateView = ({
             <DataText title={'Titulo:'} content={certificate.titulo} />
             <DataText
               title={'Data inicial:'}
-              content={certificate.dataInicial}
+              content={moment(certificate.dataInicial, 'YYYY-MM-DD').format(
+                'DD/MM/YYYY'
+              )}
             />
-            <DataText title={'Data final:'} content={certificate.dataFinal} />
+            <DataText
+              title={'Data final:'}
+              content={moment(certificate.dataFinal, 'YYYY-MM-DD').format(
+                'DD/MM/YYYY'
+              )}
+            />
           </S.DataRow>
           <S.DataRow>
             <DataText

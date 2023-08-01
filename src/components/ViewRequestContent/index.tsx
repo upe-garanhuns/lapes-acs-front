@@ -77,6 +77,7 @@ export default function ViewRequestContent(props: ViewRequestProps) {
             requestId={id}
             eixoAtividade={''}
             atividade={''}
+            certificateId={certificado.id}
             key={certificado.id}
             horas={certificado.horas}
             {...certificado}

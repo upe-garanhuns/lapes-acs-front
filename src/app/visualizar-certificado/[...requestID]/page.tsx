@@ -11,14 +11,16 @@ import * as S from './styles';
 import Cookies from 'js-cookie';
 
 interface idProps {
-  params: { requestID: string };
+  params: { requestID: string; certificateId: string };
 }
 
 export default function VisualizarCertificado({ params }: idProps) {
   const token = Cookies.get('token');
   const [selectId, setSelectId] = useState<UserRequest>();
   const [requestIdSelect, setRequestIdSelect] = useState<number>();
-  const [certificateId, setCertificateId] = useState<number>();
+  const [certificateId, setCertificateId] = useState<number>(
+    parseInt(params.requestID[1])
+  );
 
   useEffect(() => {
     setRequestIdSelect(parseInt(params.requestID));

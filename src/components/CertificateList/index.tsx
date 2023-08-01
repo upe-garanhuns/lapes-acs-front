@@ -12,6 +12,7 @@ export type ComponentProps = {
   eixoAtividade: string;
   atividade: string;
   requestId: number;
+  certificateId: number;
 };
 
 export const CertificateList: React.FC<ComponentProps> = ({
@@ -19,7 +20,8 @@ export const CertificateList: React.FC<ComponentProps> = ({
   statusCertificado,
   atividade,
   horas,
-  requestId
+  requestId,
+  certificateId
 }) => {
   const router = useRouter();
   let statusDescription = '';
@@ -35,7 +37,7 @@ export const CertificateList: React.FC<ComponentProps> = ({
   const iconSize = 24;
 
   const nextCertificateScreen = () => {
-    router.push(`/visualizar-certificado/${requestId}`);
+    router.push(`/visualizar-certificado/${requestId}/${certificateId}`);
   };
   return (
     <div>
