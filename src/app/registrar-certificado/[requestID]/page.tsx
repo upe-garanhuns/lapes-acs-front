@@ -300,7 +300,7 @@ export default function RegistePageTest({ params }: idProps) {
           ))}
         </S.ContainerCertificates>
         <S.ButtonsContainerCertificates>
-          <S.Button>Voltar</S.Button>
+          <S.Button onClick={() => router.push('/home')}>Voltar</S.Button>
           <ConfirmationModal handleIsCompleted={handleIsCompleted} />
         </S.ButtonsContainerCertificates>
       </S.CertificatesContainer>
