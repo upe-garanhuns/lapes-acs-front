@@ -24,5 +24,11 @@ export const middleware = (request: NextRequest) => {
 };
 
 export const config = {
-  matcher: ['/home/:path*', '/signin', '/', '/lista-requisicoes']
+  matcher: [
+    '/home/:path*',
+    '/signin',
+    '/',
+    '/lista-requisicoes',
+    '/registrar-certificado/:path*'
+  ]
 };
