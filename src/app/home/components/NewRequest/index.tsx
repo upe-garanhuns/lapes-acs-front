@@ -2,6 +2,7 @@
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 
+import { errorToast } from '../../../../functions/errorToast';
 import { newCertificate } from '../../../../services/newCertificate';
 import * as S from './style';
 
@@ -23,9 +24,23 @@ export const NewRequest = ({
   const certifacatesId = [];
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const fileRegex = /^.+\.pdf$/;
+    const mb = 1048576;
+
     const files = event.target.files;
     if (files) {
-      setUploadedFiles((prevFiles) => [...prevFiles, ...Array.from(files)]);
+      console.log(files);
+      for (let index = 0; index < files.length; index++) {
+        if (fileRegex.test(files[index].name)) {
+          if (files[index].size < mb) {
+            setUploadedFiles((prevFiles) => [...prevFiles, files[index]]);
+          } else {
+            errorToast('Só é possível enviar arquivos com menos de 1mb');
+          }
+        } else {
+          errorToast('Só é possível enviar PDF');
+        }
+      }
     }
   };
 

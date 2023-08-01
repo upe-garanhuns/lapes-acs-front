@@ -33,7 +33,7 @@ export const deleteRequest = async (
   id: number,
   token: string
 ): Promise<void> => {
-  await fetchWrapper(`api/requisicao/rascunho/${id}`, {
+  await fetchWrapperTest(`api/requisicao/${id}`, {
     method: 'DELETE',
     headers: {
       Authorization: `Bearer ${token}`,
