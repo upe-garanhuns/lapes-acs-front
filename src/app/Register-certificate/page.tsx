@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { SetStateAction, useState } from 'react';
 
 import { createCertificate } from '../../services/registerCertificate';
 import { CreateCertificate } from '../../services/registerCertificate/types';
@@ -9,38 +9,36 @@ import Cookies from 'js-cookie';
 import moment from 'moment';
 
 export default function RegistePageTest() {
-  const token = Cookies.get('token');
-  const [selectedEixo, setSelectedEixo] = useState();
-  const [selectedAtividade, setSelectedAtividade] = useState<number>();
+  const token = Cookies.get('token') || '';
+  const [selectedEixo, setSelectedEixo] = useState<string>('');
+  const [selectedAtividade, setSelectedAtividade] = useState<string>('');
   const [titulo, setTitulo] = useState('');
   const [horas, setHoras] = useState<number>();
   const [dataInicial, setDataInicial] = useState('');
   const [dataFinal, setDataFinal] = useState('');
 
-  const handleEixoChange = (event) => {
-    setSelectedEixo(event.target.value);
-  };
-
-  const handleAtividadeChange = (event) => {
+  const handleAtividadeChange = (event: {
+    target: { value: SetStateAction<string> };
+  }) => {
     setSelectedAtividade(event.target.value);
   };
 
-  const handleChangeTitulo = (e) => {
+  const handleChangeTitulo = (e: { target: { value: string } }) => {
     const { value } = e.target;
     setTitulo(value);
   };
 
-  const handleChangeHoras = (e) => {
+  const handleChangeHoras = (e: { target: { value: string } }) => {
     const { value } = e.target;
-    setHoras(value);
+    setHoras(parseInt(value));
   };
 
-  const handleChangeDataInicial = (e) => {
+  const handleChangeDataInicial = (e: { target: { value: string } }) => {
     const { value } = e.target;
     setDataInicial(value);
   };
 
-  const handleChangeDataFinal = (e) => {
+  const handleChangeDataFinal = (e: { target: { value: string } }) => {
     const { value } = e.target;
     setDataFinal(value);
   };
@@ -65,6 +63,12 @@ export default function RegistePageTest() {
     } catch (error) {
       alert('Houve algum erro ao tentar cadastrar!');
     }
+  };
+
+  const handleEixoChange = (event: {
+    target: { value: SetStateAction<string> };
+  }) => {
+    setSelectedEixo(event.target.value);
   };
 
   return (

@@ -7,7 +7,7 @@ import * as S from './styles';
 import { Printer } from '@phosphor-icons/react';
 
 interface SideViewInterface {
-  certificate: Array<Certificate>;
+  certificate: Array<Certificate> | undefined;
   onCertificateClick: (id: number) => void;
 }
 
@@ -22,7 +22,9 @@ export const SideCertificateView = ({
   );
 
   useEffect(() => {
-    setCertificates(certificate);
+    if (certificate !== undefined) {
+      setCertificates(certificate);
+    }
   }, [certificate, certificates]);
 
   const backHomeScreen = () => {

@@ -15,7 +15,7 @@ interface idProps {
 }
 
 export default function VisualizarCertificado({ params }: idProps) {
-  const token = Cookies.get('token');
+  const token = Cookies.get('token') || '';
   const [selectId, setSelectId] = useState<UserRequest>();
   const [requestIdSelect, setRequestIdSelect] = useState<number>();
   const [certificateId, setCertificateId] = useState<number>(
@@ -39,11 +39,13 @@ export default function VisualizarCertificado({ params }: idProps) {
     <S.Container>
       <S.ContentDiv>
         <S.PrincipalDiv>
-          <CertificateView
-            token={token}
-            id={certificateId}
-            requestId={requestIdSelect}
-          />
+          {requestIdSelect && (
+            <CertificateView
+              token={token}
+              id={certificateId}
+              requestId={requestIdSelect}
+            />
+          )}
           <S.Div>preview</S.Div>
         </S.PrincipalDiv>
         {selectId && (

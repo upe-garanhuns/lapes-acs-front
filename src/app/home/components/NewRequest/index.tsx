@@ -7,7 +7,7 @@ import { XCircle, FileText, FilePlus } from '@phosphor-icons/react';
 
 type ComponentProps = {
   cancelRequest: () => void;
-  requestId: number;
+  requestId: number | undefined;
   token: string;
   nextScreen: () => void;
 };
@@ -37,7 +37,10 @@ export const NewRequest = ({
 
   const handleNext = () => {
     // Lógica para avançar para a próxima etapa
-    fetchCertificate(token, requestId);
+    if (requestId !== undefined) {
+      fetchCertificate(token, requestId);
+    }
+
     nextScreen();
   };
 

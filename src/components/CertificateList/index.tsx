@@ -8,10 +8,10 @@ import { Eye } from '@phosphor-icons/react';
 export type ComponentProps = {
   statusCertificado: string;
   titulo: string;
-  horas: number;
+  hours: number;
   eixoAtividade: string;
   atividade: string;
-  requestId: number;
+  requestId: number | undefined;
   certificateId: number;
 };
 
@@ -19,7 +19,7 @@ export const CertificateList: React.FC<ComponentProps> = ({
   eixoAtividade,
   statusCertificado,
   atividade,
-  horas,
+  hours,
   requestId,
   certificateId
 }) => {
@@ -56,7 +56,7 @@ export const CertificateList: React.FC<ComponentProps> = ({
         </S.Content>
         <S.Content>
           <S.Title>Quantidade de horas:</S.Title>
-          <S.Text>{horas} horas</S.Text>
+          <S.Text>{hours} horas</S.Text>
         </S.Content>
         <S.IconsContainer>
           <Eye size={iconSize} onClick={nextCertificateScreen} />

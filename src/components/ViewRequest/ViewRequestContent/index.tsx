@@ -83,7 +83,7 @@ export default function ViewRequestContent(props: ViewRequestProps) {
             atividade={''}
             certificateId={certificado.id}
             key={certificado.id}
-            horas={certificado.horas}
+            hours={certificado.horas}
             {...certificado}
           />
         ))}
