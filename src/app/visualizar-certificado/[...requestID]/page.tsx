@@ -44,7 +44,7 @@ export default function VisualizarCertificado({ params }: idProps) {
             id={certificateId}
             requestId={requestIdSelect}
           />
-          <S.Div>previewe</S.Div>
+          <S.Div>preview</S.Div>
         </S.PrincipalDiv>
         {selectId && (
           <SideCertificateView

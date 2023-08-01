@@ -48,8 +48,8 @@ export const useSetInput = () => {
     userStreet,
     setUserStreet,
     userComplement,
-    setUserComplement, 
-    userRegistry, 
+    setUserComplement,
+    userRegistry,
     setUserRegistry
   };
 };

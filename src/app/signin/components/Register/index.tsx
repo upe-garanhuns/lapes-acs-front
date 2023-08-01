@@ -80,6 +80,7 @@ export function Register() {
     userStreet,
     setUserStreet,
     userComplement,
+
     userRegistry,
     setUserRegistry
   } = useSetInput();

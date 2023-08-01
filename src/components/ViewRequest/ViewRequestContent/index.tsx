@@ -2,10 +2,10 @@
 
 import React, { useState } from 'react';
 
-import { sumRequestHours } from '../../app/home/functions/sumRequestHours';
-import { Certificate } from '../../services/request/types';
-import { CertificateList } from '../CertificateList';
-import { Pagination } from '../Pagination';
+import { sumRequestHours } from '../../../app/home/functions/sumRequestHours';
+import { Certificate } from '../../../services/request/types';
+import { CertificateList } from '../../CertificateList';
+import { Pagination } from '../../Pagination';
 import * as S from './styles';
 
 import { Printer } from '@phosphor-icons/react';
