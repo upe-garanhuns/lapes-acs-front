@@ -8,5 +8,6 @@ export const fetchCep = async (cep: string): Promise<Endereco> => {
     return data;
   } catch (error) {
     console.error('erro', error);
+    throw error; // Adicionando o 'throw' para propagar o erro novamente
   }
 };

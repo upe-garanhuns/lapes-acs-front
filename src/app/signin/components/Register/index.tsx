@@ -101,67 +101,67 @@ export function Register() {
   } = useSetLock();
 
   //funções de handle para captar os valores dos input - jamu
-  const handleChangeName = (e) => {
+  const handleChangeName = (e: { target: { value: string } }) => {
     const { value } = e.target;
     setUserName(value);
     setErrorName(!checkName(value));
   };
 
-  const handleChangeCpf = (e) => {
+  const handleChangeCpf = (e: { target: { value: string } }) => {
     const { value } = e.target;
     setUserCpf(value);
     setErrorCpf(checkCPF(value));
   };
 
-  const handleChangePhone = (e) => {
+  const handleChangePhone = (e: { target: { value: string } }) => {
     const { value } = e.target;
     setUserPhone(value);
     setErrorPhone(checkPhone(value));
   };
 
-  const handleChangeGrade = (e) => {
+  const handleChangeGrade = (e: { target: { value: string } }) => {
     const { value } = e.target;
     setUserGrade(value);
     setErrorGrade(checkGrade(parseInt(value)));
   };
 
-  const handleChangeEmail = (e) => {
+  const handleChangeEmail = (e: { target: { value: string } }) => {
     const { value } = e.target;
     setUserEmail(value);
     setErrorEmail(checkEmail(value));
   };
 
-  const handleChangePass = (e) => {
+  const handleChangePass = (e: { target: { value: string } }) => {
     const { value } = e.target;
     setUserPass(value);
     setErrorPass(checkPassWord(value));
   };
 
-  const handleChangeSamePass = (e) => {
+  const handleChangeSamePass = (e: { target: { value: string } }) => {
     const { value } = e.target;
     setUserSamePass(value);
     setErrorSamePass(checkSamePass(userPass, value));
   };
 
-  const handleChangeNumber = (e) => {
+  const handleChangeNumber = (e: { target: { value: string } }) => {
     const { value } = e.target;
     setUserNumber(value);
     setErrorNumber(checkNumber(parseInt(value)));
   };
 
-  const handleChangeRegistry = (e) => {
+  const handleChangeRegistry = (e: { target: { value: string } }) => {
     const { value } = e.target;
     setUserRegistry(value);
     setErrorRegistry(checkRegistry(value));
   };
 
-  const handleChangeCourser = (e) => {
+  const handleChangeCourser = (e: { target: { value: string } }) => {
     const { value } = e.target;
     setUserCourse(value);
     setErrorCourse(checkCourse(value));
   };
 
-  const handleChangeCEP = (e) => {
+  const handleChangeCEP = (e: { target: { value: string } }) => {
     const { value } = e.target;
     setUserCep(value);
     setErrorCep(checkCep(value));
@@ -171,19 +171,19 @@ export function Register() {
     }
   };
 
-  const handleChangeCity = (e) => {
+  const handleChangeCity = (e: { target: { value: string } }) => {
     const { value } = e.target;
     setUserCity(value);
   };
-  const handleChangeUf = (e) => {
+  const handleChangeUf = (e: { target: { value: string } }) => {
     const { value } = e.target;
     setUserUf(value);
   };
-  const handleChangeBlock = (e) => {
+  const handleChangeBlock = (e: { target: { value: string } }) => {
     const { value } = e.target;
     setUserBlock(value);
   };
-  const handleChangeStreet = (e) => {
+  const handleChangeStreet = (e: { target: { value: string } }) => {
     const { value } = e.target;
     setUserStreet(value);
   };
@@ -210,7 +210,7 @@ export function Register() {
   const checkCity = (name: string) => {
     if (name === '') {
       setCityLock(false);
-      setUserCity(null);
+      setUserCity('Cidade');
     }
     setUserCity(name);
   };
@@ -218,7 +218,7 @@ export function Register() {
   const checkUf = (name: string) => {
     if (name === '') {
       setUfLock(false);
-      setUserUf(null);
+      setUserUf('UF');
     }
     setUserUf(name);
   };
@@ -226,14 +226,14 @@ export function Register() {
   const checkBlock = (name: string) => {
     if (name === '') {
       setBlockLock(false);
-      setUserBlock(null);
+      setUserBlock('Bairro');
     }
     setUserBlock(name);
   };
   const checkStreet = (name: string) => {
     if (name === '') {
       setStreetLock(false);
-      setUserStreet(null);
+      setUserStreet('Rua');
     }
     setUserStreet(name);
   };
