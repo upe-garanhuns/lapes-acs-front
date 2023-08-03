@@ -1,11 +1,12 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 //import { request } from '../../services/request';
 //import { UserRequest } from '../../services/request/types';
 
+import { errorToast } from '../../functions/errorToast';
+import { sucessToast } from '../../functions/sucessToast';
 import { newRequest } from '../../services/newRequest';
 import { pagination } from '../../services/pagination';
 import { PageValue } from '../../services/pagination/types';
@@ -21,12 +22,11 @@ import Cookies from 'js-cookie';
 import moment from 'moment';
 
 export default function Home() {
-  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [hours, setHours] = useState<UserHours>();
   const [requestsPag, setRequestsPag] = useState<PageValue>();
   const [currentPage, setCurrentPage] = useState<number>(0);
-  const [requestId, setRequestId] = useState<number>();
+  const [requestId, setRequestId] = useState<number>(0);
 
   const token = Cookies.get('token') || '';
 
@@ -53,13 +53,10 @@ export default function Home() {
       const createNewRequest = await newRequest(token);
       setRequestId(createNewRequest);
       setIsOpen(true);
-      alert('Rascunho criado com sucesso!');
+      sucessToast('Rascunho criado com sucesso');
     } catch (error) {
-      alert(
-        `Houve erro ao iniciar uma requisicao, verificar se ja existem dois rascunhos`
-      );
+      errorToast('Ocorreu um erro! Só é permitido possuir dois rascunhos');
       setIsOpen(false);
-      console.error('error', error);
     }
   };
 
@@ -83,10 +80,6 @@ export default function Home() {
     if (currentPage > 0) {
       setCurrentPage(currentPage - 1);
     }
-  };
-
-  const nextCertificateScreen = () => {
-    router.push('/Register-certificate');
   };
 
   return (
@@ -200,7 +193,6 @@ export default function Home() {
                     cancelRequest={closeNewRequestModal}
                     requestId={requestId}
                     token={token}
-                    nextScreen={nextCertificateScreen}
                   />
                 }
                 closeText={<XCircle size={32} color="#FF0000" />}

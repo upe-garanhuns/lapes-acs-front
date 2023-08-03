@@ -19,15 +19,10 @@ export const OpenRequest = styled.button`
   font-size: 0.875rem;
   background-color: #253555;
   border-radius: 1.25rem;
-  height: 2.5rem;
-  width: 10rem;
+  padding: 8px 16px;
+  min-width: 9.375rem;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   color: white;
   font-weight: 400;
-  line-height: 1.5rem;
   font-style: normal;
-  transition: transform 0.3s ease-in-out;
-  &:hover {
-    transform: scale(1.03);
-  }
 `;

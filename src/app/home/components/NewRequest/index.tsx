@@ -1,5 +1,8 @@
+'use client';
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 
+import { errorToast } from '../../../../functions/errorToast';
 import { newCertificate } from '../../../../services/newCertificate';
 import * as S from './style';
 
@@ -9,21 +12,35 @@ type ComponentProps = {
   cancelRequest: () => void;
   requestId: number | undefined;
   token: string;
-  nextScreen: () => void;
 };
 
 export const NewRequest = ({
   cancelRequest,
   requestId,
-  token,
-  nextScreen
+  token
 }: ComponentProps) => {
+  const router = useRouter();
   const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
+  const certifacatesId = [];
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const fileRegex = /^.+\.pdf$/;
+    const mb = 1048576;
+
     const files = event.target.files;
     if (files) {
-      setUploadedFiles((prevFiles) => [...prevFiles, ...Array.from(files)]);
+      console.log(files);
+      for (let index = 0; index < files.length; index++) {
+        if (fileRegex.test(files[index].name)) {
+          if (files[index].size < mb) {
+            setUploadedFiles((prevFiles) => [...prevFiles, files[index]]);
+          } else {
+            errorToast('Só é possível enviar arquivos com menos de 1mb');
+          }
+        } else {
+          errorToast('Só é possível enviar PDF');
+        }
+      }
     }
   };
 
@@ -37,22 +54,21 @@ export const NewRequest = ({
 
   const handleNext = () => {
     // Lógica para avançar para a próxima etapa
-    if (requestId !== undefined) {
-      fetchCertificate(token, requestId);
-    }
-
-    nextScreen();
+    fetchCertificate(token, requestId);
+    router.push(`/registrar-certificado/${requestId}`);
   };
 
   const fetchCertificate = async (userToken: string, id: number) => {
+    console.log(uploadedFiles);
     for (let index = 0; index < uploadedFiles.length; index++) {
       const addCertificate = await newCertificate(
         userToken,
         id,
         uploadedFiles[index]
       );
-      console.log(addCertificate);
+      certifacatesId.push(addCertificate);
     }
+    localStorage.setItem('requestId', String(requestId));
   };
 
   const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
