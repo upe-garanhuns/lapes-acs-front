@@ -2,28 +2,23 @@
 
 import React from 'react';
 
+import { Certificate } from '../../../services/request/types';
 import * as S from './styles';
 
-export type ConfirmRequestProps = {
-  id: number;
-  title: string;
-  educationAxis: string;
-  activity: string;
-  initialDate: Date;
-  finalDate: Date;
-  hours: number;
-};
+import moment from 'moment';
 
-export const ConfirmationContent: React.FC<ConfirmRequestProps> = ({
-  title,
-  educationAxis,
-  activity,
-  initialDate,
-  finalDate,
-  hours
+export const ConfirmationContent: React.FC<Certificate> = ({
+  cargaHoraria,
+  titulo,
+  atividade,
+  dataFinal,
+  dataInicial,
+  eixoAtividade
 }) => {
-  const formattedInitialDate = initialDate.toLocaleDateString('en-GB');
-  const formattedFinalDate = finalDate.toLocaleDateString('en-GB');
+  const formattedInitialDate = moment(dataInicial).format('DD/MM/YYYY');
+  const formattedFinalDate = moment(dataFinal).format('DD/MM/YYYY');
+  const formattedActivity =
+    atividade.length > 79 ? `${atividade.substring(0, 79)}...` : atividade;
   return (
     <div>
       <S.Container>
@@ -32,7 +27,7 @@ export const ConfirmationContent: React.FC<ConfirmRequestProps> = ({
             <S.Div1>
               <S.DetailsName>
                 Título:
-                <S.Details>{title}</S.Details>
+                <S.Details>{titulo}</S.Details>
               </S.DetailsName>
             </S.Div1>
             <S.Div2>
@@ -50,30 +45,22 @@ export const ConfirmationContent: React.FC<ConfirmRequestProps> = ({
             <S.Div4>
               <S.DetailsName>
                 Eixo de Ensino
-                <S.Details>{educationAxis}</S.Details>
+                <S.Details>{eixoAtividade}</S.Details>
               </S.DetailsName>
             </S.Div4>
             <S.Div5>
               <S.DetailsName>
                 Quantidade de Horas
-                <S.Details>{hours} hora(s)</S.Details>
+                <S.Details>{cargaHoraria} hora(s)</S.Details>
               </S.DetailsName>
             </S.Div5>
             <S.Div6>
               <S.DetailsName>
                 Atividade
-                <S.Details>{activity}</S.Details>
+                <S.Details>{formattedActivity}</S.Details>
               </S.DetailsName>
             </S.Div6>
           </S.DetailsGrid>
-          <S.Buttons>
-            <S.CancelConfirmButton buttonColor={false}>
-              Cancelar
-            </S.CancelConfirmButton>
-            <S.CancelConfirmButton buttonColor={true}>
-              Confirmar
-            </S.CancelConfirmButton>
-          </S.Buttons>
         </S.Centered>
       </S.Container>
     </div>
