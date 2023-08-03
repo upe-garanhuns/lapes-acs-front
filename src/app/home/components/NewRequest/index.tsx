@@ -10,7 +10,7 @@ import { XCircle, FileText, FilePlus } from '@phosphor-icons/react';
 
 type ComponentProps = {
   cancelRequest: () => void;
-  requestId: number;
+  requestId: number | undefined;
   token: string;
 };
 

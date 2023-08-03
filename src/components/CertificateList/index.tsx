@@ -1,3 +1,4 @@
+import { useRouter } from 'next/navigation';
 import React from 'react';
 
 import * as S from './styles';
@@ -7,17 +8,22 @@ import { Eye } from '@phosphor-icons/react';
 export type ComponentProps = {
   statusCertificado: string;
   titulo: string;
-  horas: number;
+  hours: number;
   eixoAtividade: string;
   atividade: string;
+  requestId: number | undefined;
+  certificateId: number;
 };
 
 export const CertificateList: React.FC<ComponentProps> = ({
   eixoAtividade,
   statusCertificado,
   atividade,
-  horas
+  hours,
+  requestId,
+  certificateId
 }) => {
+  const router = useRouter();
   let statusDescription = '';
   statusCertificado === 'DEFERIDO'
     ? (statusDescription = 'Concluído')
@@ -29,6 +35,10 @@ export const CertificateList: React.FC<ComponentProps> = ({
     ? (statusDescription = 'Em análise')
     : (statusDescription = 'Sem status');
   const iconSize = 24;
+
+  const nextCertificateScreen = () => {
+    router.push(`/visualizar-certificado/${requestId}/${certificateId}`);
+  };
   return (
     <div>
       <S.Card>
@@ -46,10 +56,10 @@ export const CertificateList: React.FC<ComponentProps> = ({
         </S.Content>
         <S.Content>
           <S.Title>Quantidade de horas:</S.Title>
-          <S.Text>{horas} horas</S.Text>
+          <S.Text>{hours} horas</S.Text>
         </S.Content>
         <S.IconsContainer>
-          <Eye size={iconSize} />
+          <Eye size={iconSize} onClick={nextCertificateScreen} />
         </S.IconsContainer>
       </S.Card>
     </div>

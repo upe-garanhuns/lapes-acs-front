@@ -3,7 +3,7 @@ import { fetchWrapperTest } from '../apiTest';
 import { UserRequest } from './types';
 
 export const getRequest = async (
-  id: number,
+  id: number | undefined,
   token: string
 ): Promise<UserRequest> => {
   const response: UserRequest = await fetchWrapper(`api/requisicao/${id}`, {
