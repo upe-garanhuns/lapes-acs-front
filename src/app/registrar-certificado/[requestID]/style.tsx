@@ -90,24 +90,91 @@ export const ViewButton = styled.button`
   border: none;
   cursor: pointer;
 `;
-
 export const CertificatesContainer = styled.div`
+  /* Propriedades para fixar o container no lado direito */
+  position: fixed;
+  right: 0;
+  top: 0;
+  bottom: 0;
+
+  /* Estilo do container */
   display: flex;
   flex-direction: column;
-  align-self: flex-end;
-  max-width: 500px;
-  max-height: 500px;
+  align-items: center;
+  max-width: 16rem;
+  min-width: 11.5rem;
   overflow-y: auto;
-  margin-top: 20px;
-  align-items: flex-end;
   background-color: #d9d9d9;
 `;
 
+export const TitleAnexados = styled.h2`
+  font-size: 16px;
+  color: #253555;
+  text-align: center;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #253555;
+  padding-bottom: 8px;
+  width: 100%;
+`;
+
+export const ContainerCertificates = styled.div`
+  padding: 0px 10px;
+`;
+
 export const CertificateItem = styled.div`
-  background-color: #253555;
+  display: flex;
+  background-color: ${(props) => (props.color ? props.color : '#253555')};
+  font-size: 16px;
+  text-align: start;
   color: #ffffff;
   border-radius: 20px;
-  padding: 8px;
+  padding: 8px 12px;
+  margin-bottom: 10px;
+  max-width: 16rem;
+  min-width: 150px;
+`;
+
+export const ButtonsContainerCertificates = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: center;
   margin-bottom: 10px;
   max-width: 300px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  margin-top: 20px;
+`;
+
+export const Button = styled.button`
+  color: #253555;
+  background-color: #fff;
+  font-size: 14px;
+  border-radius: 20px;
+  padding: 8px 16px;
+  cursor: pointer;
+  min-width: 150px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+`;
+
+export const ButtonEnviar = styled.button`
+  color: #fff;
+  background-color: #253555;
+  font-size: 14px;
+  border-radius: 20px;
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+  min-width: 150px;
+  margin-bottom: 20px;
+`;
+
+export const ErrorSpan = styled.span`
+  color: red;
+  font-size: 10px;
+  margin-top: 6px;
+  margin-left: 5px;
 `;

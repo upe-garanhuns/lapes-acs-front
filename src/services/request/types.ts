@@ -8,9 +8,13 @@ export interface UserRequest {
 }
 
 export interface Certificate {
-  id: number;
-  horas: number;
+  id?: number;
+  cargaHoraria: number;
   titulo: string;
-  data: Date;
-  statusCertificado: string;
+  data?: Date;
+  dataInicial: Date;
+  dataFinal: Date;
+  atividade: string;
+  eixoAtividade: string;
+  statusCertificado?: string;
 }

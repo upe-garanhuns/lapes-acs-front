@@ -37,13 +37,11 @@ export const RequestList: React.FC<ComponentProps> = ({
   }
   const iconSize = 24;
   let statusDescription = '';
-  status === 'DEFERIDO'
+  status === 'ACEITO'
     ? (statusDescription = 'Concluído')
-    : status === 'ENCAMINHADO_COORDENACAO'
+    : status === 'TRANSITO'
     ? (statusDescription = 'Em análise')
-    : status === 'ENCAMINHADO_COMISSAO'
-    ? (statusDescription = 'Em análise')
-    : status === 'INDEFERIDO'
+    : status === 'NEGADO'
     ? (statusDescription = 'Indeferido')
     : status === 'RASCUNHO'
     ? (statusDescription = 'Rascunho')

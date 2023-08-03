@@ -5,6 +5,9 @@ import { useEffect, useState } from 'react';
 //import { request } from '../../services/request';
 //import { UserRequest } from '../../services/request/types';
 
+import { errorToast } from '../../functions/errorToast';
+import { sucessToast } from '../../functions/sucessToast';
+import { newRequest } from '../../services/newRequest';
 import { pagination } from '../../services/pagination';
 import { PageValue } from '../../services/pagination/types';
 import { getUserHours } from '../../services/userHours';
@@ -23,6 +26,7 @@ export default function Home() {
   const [hours, setHours] = useState<UserHours>();
   const [requestsPag, setRequestsPag] = useState<PageValue>();
   const [currentPage, setCurrentPage] = useState<number>(0);
+  const [requestId, setRequestId] = useState<number>(0);
 
   const token = Cookies.get('token') || '';
 
@@ -44,8 +48,20 @@ export default function Home() {
     userHours();
   }, [token, currentPage]);
 
+  const fetchRequest = async () => {
+    try {
+      const createNewRequest = await newRequest(token);
+      setRequestId(createNewRequest);
+      setIsOpen(true);
+      sucessToast('Rascunho criado com sucesso');
+    } catch (error) {
+      errorToast('Ocorreu um erro! Só é permitido possuir dois rascunhos');
+      setIsOpen(false);
+    }
+  };
+
   function openNewRequestModal() {
-    setIsOpen(true);
+    fetchRequest();
   }
 
   function closeNewRequestModal() {
@@ -172,7 +188,13 @@ export default function Home() {
                 isOpen={isOpen}
                 closeModal={closeNewRequestModal}
                 // eslint-disable-next-line react/no-children-prop
-                children={<NewRequest cancelRequest={closeNewRequestModal} />}
+                children={
+                  <NewRequest
+                    cancelRequest={closeNewRequestModal}
+                    requestId={requestId}
+                    token={token}
+                  />
+                }
                 closeText={<XCircle size={32} color="#FF0000" />}
               ></S.NewRequestModal>
             </S.Div>

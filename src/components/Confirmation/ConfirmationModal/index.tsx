@@ -2,18 +2,28 @@
 
 import React, { useState } from 'react';
 
+import { warnToast } from '../../../functions/warnToast';
 import { ConfirmationPagination } from '../ConfirmationPagination';
 import * as S from './styles';
 
 import { XCircle } from '@phosphor-icons/react';
 
-export default function ConfirmationModal() {
+type ComponentProps = {
+  handleIsCompleted: () => boolean;
+};
+export default function ConfirmationModal({
+  handleIsCompleted
+}: ComponentProps) {
   const [isOpen, setIsOpen] = useState(false);
   const closeModal = () => {
     setIsOpen(false);
   };
   const openModal = () => {
-    setIsOpen(true);
+    if (handleIsCompleted()) {
+      setIsOpen(true);
+    } else {
+      warnToast('Você não preencheu os dados de todos os certificados!');
+    }
   };
   const closeModalArea = () => {
     setIsOpen(false);
