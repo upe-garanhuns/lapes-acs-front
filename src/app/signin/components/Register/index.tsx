@@ -1,5 +1,9 @@
 import { useState } from 'react';
+import React from 'react';
 
+import { errorToast } from '../../../../functions/errorToast';
+import { sucessToast } from '../../../../functions/sucessToast';
+import { warnToast } from '../../../../functions/warnToast';
 import { fetchWrapper } from '../../../../services/api';
 import { Endereco } from '../../../../services/cep/types';
 import { createUser } from '../../../../services/signUp';
@@ -79,7 +83,6 @@ export function Register() {
     setUserUf,
     userStreet,
     setUserStreet,
-    userComplement,
     userRegistry,
     setUserRegistry
   } = useSetInput();
@@ -256,19 +259,34 @@ export function Register() {
 
   //função disparda quando botão cadastrar é acionado - jamu
 
-  async function registerUser() {
+  const registerUser = async (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    e.preventDefault();
     try {
-      await createUser(signUpData);
-      alert('Acesse o e-mail cadastrado para verificar a sua conta!');
+      if (
+        errorName &&
+        errorCpf &&
+        errorPhone &&
+        errorCourse &&
+        errorGrade &&
+        errorEmail &&
+        errorRegistry &&
+        errorPass &&
+        errorSamePass &&
+        errorCep &&
+        errorNumber === true
+      ) {
+        await createUser(signUpData);
+        sucessToast('Acesse o e-mail cadastrado para verificar a sua conta!');
+        return;
+      }
+      warnToast('preencha todos os campos corretamente para cadastrar!');
     } catch (error) {
-      alert('Houve algum erro ao tentar se cadastrar!');
+      errorToast('Houve algum erro ao tentar se cadastrar!');
       console.log(error);
     }
-
-    console.log(
-      `Nome: ${userName}, cpf: ${userCpf}, telefone: ${userPhone}, curso: ${userCourse}, periodo: ${userGrade}, email: ${userEmail}, senha: ${userPass}, senha2: ${userSamePass},matricula:${userRegistry} ,cep: ${userCep}, cidade: ${userCity}, uf: ${userUf},bairro: ${userBlock}, rua: ${userStreet}, numero: ${userNumber}, complemento: ${userComplement}`
-    );
-  }
+  };
 
   return (
     <S.Container>
@@ -550,7 +568,13 @@ export function Register() {
           </S.InputDiv>
         </S.Div>
         <S.ButtonDiv>
-          <S.RegisterButton label="Cadastrar" onClick={registerUser} />
+          <S.RegisterButton
+            onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) =>
+              registerUser(e)
+            }
+          >
+            Cadastrar
+          </S.RegisterButton>
         </S.ButtonDiv>
       </S.RegisterContainer>
     </S.Container>

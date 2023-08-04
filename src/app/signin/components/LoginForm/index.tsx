@@ -52,7 +52,8 @@ export default function LoginForm() {
     setIsPasswordVisibility(!isPasswordVisible);
   }
 
-  function registerOpen() {
+  function registerOpen(e: React.MouseEvent<HTMLButtonElement>) {
+    e.preventDefault();
     setOpenRegister(true);
   }
 
@@ -133,8 +134,14 @@ export default function LoginForm() {
       <S.ButtonContainer>
         <LoginButton label="Entrar" type="submit" />
         <S.LinkContainer>
-          <S.PasswordRecovery href="">Esqueceu a senha?</S.PasswordRecovery>
-          <S.SignUp onClick={registerOpen}>Cadastrar</S.SignUp>
+          <S.PasswordRecovery>Esqueceu a senha?</S.PasswordRecovery>
+          <S.SignUp
+            onClick={(e: React.MouseEvent<HTMLButtonElement>) =>
+              registerOpen(e)
+            }
+          >
+            Cadastrar
+          </S.SignUp>
           <S.ModalContainer
             closeModalArea={registerClose}
             isOpen={OpenRegister}
