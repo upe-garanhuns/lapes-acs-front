@@ -29,6 +29,8 @@ export const config = {
     '/signin',
     '/',
     '/lista-requisicoes',
-    '/registrar-certificado/:path*'
+    '/registrar-certificado/:path*',
+    '/confirmacao-cadastro',
+    '/visualizar-certificado/:path*'
   ]
 };

@@ -1,9 +1,11 @@
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 import { verificarCodigo } from './../../../../services/verification';
 import * as S from './styles';
 
+import axios from 'axios';
+import { STATUS_CODES } from 'http';
 import Cookies from 'js-cookie';
 
 export default function ConfirmarForm() {
@@ -15,19 +17,28 @@ export default function ConfirmarForm() {
     setCodigoVerificacao(event.target.value);
   };
   const token = Cookies.get('token'); // Obtém o código de verificação do cookie "token"
-  const handleConfirmarClick = async () => {
+
+  const handleConfirmarClick = async (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    event.preventDefault();
     try {
       console.log(token);
       if (!token) {
         // Caso o código de verificação não esteja presente no cookie, trate o erro
         throw new Error('Código de verificação não encontrado no cookie.');
       }
-
-      const verificado = await verificarCodigo(codigoVerificacao, token);
-      //console.log(verificado);
-
-      router.push('/home');
-      setCodigoVerificado(true);
+      const verificado = await verificarCodigo(codigoVerificacao, token)
+        .then((res) => {
+          if (res.status == 200) {
+            router.push('/home');
+            return;
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      console.log(verificado);
       // Redireciona o usuário para a página /home
     } catch (error) {
       console.error(error);
@@ -59,7 +70,11 @@ export default function ConfirmarForm() {
       />
       <S.ButtonsContainer>
         <S.CancelButton>Cancelar</S.CancelButton>
-        <S.ConfirmButton onClick={handleConfirmarClick}>
+        <S.ConfirmButton
+          onClick={(event: React.MouseEvent<HTMLButtonElement>) => {
+            handleConfirmarClick(event);
+          }}
+        >
           Confirmar
         </S.ConfirmButton>
       </S.ButtonsContainer>
