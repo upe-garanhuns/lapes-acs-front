@@ -4,13 +4,11 @@ import React, { useState } from 'react';
 import { verificarCodigo } from './../../../../services/verification';
 import * as S from './styles';
 
-import axios from 'axios';
-import { STATUS_CODES } from 'http';
 import Cookies from 'js-cookie';
 
 export default function ConfirmarForm() {
   const [codigoVerificacao, setCodigoVerificacao] = useState('');
-  const [codigoVerificado, setCodigoVerificado] = useState(false);
+
   const router = useRouter();
 
   const handleCodigoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
