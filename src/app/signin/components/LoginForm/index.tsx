@@ -9,6 +9,8 @@ import { Login } from '../../../../services/signIn/types';
 import LoginButton from '../LoginButton';
 import { LoginInput } from '../LoginInput';
 import { Register } from '../Register';
+import { useSetData } from './hooks/useSetData';
+import { useSetValid } from './hooks/useSetValid';
 import * as S from './styles';
 
 import {
@@ -22,14 +24,18 @@ import Cookies from 'js-cookie';
 
 export default function LoginForm() {
   const router = useRouter();
-  const [isPasswordVisible, setIsPasswordVisibility] = useState(false);
-  const [email, setEmail] = useState('');
-  const [isValidEmailAndPassword, setIsValidEmailAndPassword] =
-    useState<boolean>(true);
-  const [isValidEmail, setIsValidEmail] = useState<boolean>(true);
-  const [isValidPassword, setIsValidPassword] = useState<boolean>(true);
-  const [password, setPassword] = useState('');
   const [OpenRegister, setOpenRegister] = useState(false);
+  const { email, setEmail, password, setPassword } = useSetData();
+  const {
+    isPasswordVisible,
+    setIsPasswordVisibility,
+    isValidEmailAndPassword,
+    setIsValidEmailAndPassword,
+    isValidEmail,
+    setIsValidEmail,
+    isValidPassword,
+    setIsValidPassword
+  } = useSetValid();
 
   const iconEye = isPasswordVisible ? (
     <Eye size={20} onClick={handlePasswordVisibility} />
@@ -75,7 +81,6 @@ export default function LoginForm() {
       } catch (error) {
         setIsValidEmailAndPassword(false);
       }
-      //console.log('Email: ' + email + ' senha: ' + password);
     } else {
       setIsValidPassword(false);
     }
@@ -102,9 +107,7 @@ export default function LoginForm() {
             onChange={(ev) => setEmail(ev.target.value)}
           />
           {!isValidEmail ? (
-            <S.ErrorSpan>
-              E-mail inválido {'(Ex.: email@email.com)'}
-            </S.ErrorSpan>
+            <S.ErrorSpan>E-mail inválido {'(Ex.: email@upe.br)'}</S.ErrorSpan>
           ) : (
             <></>
           )}
@@ -119,7 +122,8 @@ export default function LoginForm() {
           />
           {!isValidPassword ? (
             <S.ErrorSpan>
-              Senha inválida! É necessário ter entre 8 e 16 dígitos
+              Senha inválida! É necessário ter pelo menos 8 digitos, uma letra
+              maiúscula, um número e um caractere especial
             </S.ErrorSpan>
           ) : (
             <></>
