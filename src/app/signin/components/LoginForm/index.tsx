@@ -123,7 +123,7 @@ export default function LoginForm() {
           {!isValidPassword ? (
             <S.ErrorSpan>
               Senha inválida! É necessário ter pelo menos 8 digitos, uma letra
-              maiúscula, um número e um caractere especial
+              maiúscula, um número e um caractere especial.
             </S.ErrorSpan>
           ) : (
             <></>
