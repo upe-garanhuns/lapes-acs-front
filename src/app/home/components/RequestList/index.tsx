@@ -1,8 +1,11 @@
 import { useRouter } from 'next/navigation';
-import React from 'react';
+import React, { useState } from 'react';
 
 import DeleteDraftModal from '../../../../components/DeleteDraft/DeleteDraftModal';
 import ViewRequestModal from '../../../../components/ViewRequest/ViewRequestModal';
+import { getRequest } from '../../../../services/request';
+import { Certificate } from '../../../../services/request/types';
+import { NewRequest } from '../NewRequest';
 import * as S from './styles';
 
 import {
@@ -12,7 +15,8 @@ import {
   CheckCircle,
   Printer,
   Archive,
-  PencilSimpleLine
+  PencilSimpleLine,
+  XCircle
 } from '@phosphor-icons/react';
 
 export type ComponentProps = {
@@ -32,9 +36,19 @@ export const RequestList: React.FC<ComponentProps> = ({
   hours,
   isDraft
 }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
   isDraft = false;
   if (status === 'RASCUNHO') {
     isDraft = true;
+  }
+
+  function openNewRequestModal() {
+    setIsOpen(true);
+  }
+
+  function closeNewRequestModal() {
+    setIsOpen(false);
   }
   const iconSize = 24;
   const router = useRouter();
@@ -50,6 +64,21 @@ export const RequestList: React.FC<ComponentProps> = ({
     : (statusDescription = 'Sem status');
   return (
     <div>
+      <S.NewRequestModal
+        closeModalArea={closeNewRequestModal}
+        isOpen={isOpen}
+        closeModal={closeNewRequestModal}
+        // eslint-disable-next-line react/no-children-prop
+        children={
+          <NewRequest
+            cancelRequest={closeNewRequestModal}
+            requestId={id}
+            token={token}
+            isNewRequest={false}
+          />
+        }
+        closeText={<XCircle size={32} color="#FF0000" />}
+      ></S.NewRequestModal>
       <S.Card cardcolor={isDraft}>
         <S.StatusIcon>
           {isDraft ? (
@@ -83,10 +112,7 @@ export const RequestList: React.FC<ComponentProps> = ({
         <S.IconsContainer>
           {isDraft ? (
             <S.ActionIcon>
-              <PencilSimpleLine
-                size={iconSize}
-                onClick={() => router.push(`/registrar-certificado/${id}`)}
-              />
+              <PencilSimpleLine size={iconSize} onClick={openNewRequestModal} />
             </S.ActionIcon>
           ) : (
             <ViewRequestModal id={id} token={token} />

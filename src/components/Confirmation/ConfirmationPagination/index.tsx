@@ -31,7 +31,6 @@ export function ConfirmationPagination() {
   const submit = async () => {
     try {
       await submitRequest(requestId, token);
-      localStorage.removeItem('requestId');
       sucessToast('Requisição enviada com sucesso!');
       router.push('/home');
     } catch (error) {

@@ -1,9 +1,13 @@
 'use client';
 import { useRouter } from 'next/navigation';
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 import { errorToast } from '../../../../functions/errorToast';
+import { sucessToast } from '../../../../functions/sucessToast';
+import { deleteCertificate } from '../../../../services/deleteCertificate';
 import { newCertificate } from '../../../../services/newCertificate';
+import { getRequest } from '../../../../services/request';
+import { Certificate } from '../../../../services/request/types';
 import * as S from './style';
 
 import { XCircle, FileText, FilePlus } from '@phosphor-icons/react';
@@ -12,20 +16,39 @@ type ComponentProps = {
   cancelRequest: () => void;
   requestId: number | undefined;
   token: string;
+  isNewRequest: boolean;
 };
 
 export const NewRequest = ({
   cancelRequest,
   requestId,
-  token
+  token,
+  isNewRequest
 }: ComponentProps) => {
+  const [certificateData, setCertificateData] = useState<Certificate[]>([]);
   const router = useRouter();
   const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
   const certifacatesId = [];
 
+  const request = useCallback(async () => {
+    try {
+      const requestResponse = await getRequest(requestId, token);
+      setCertificateData(requestResponse.certificados ?? []);
+      console.log(requestResponse);
+    } catch (error) {
+      console.log(error);
+    }
+  }, [requestId, token]);
+
+  useEffect(() => {
+    if (!isNewRequest) {
+      request();
+    }
+  }, [isNewRequest, request, requestId, token]);
+
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const fileRegex = /^.+\.pdf$/;
-    const mb = 1048576;
+    const mb = 1048576; //1mb
 
     const files = event.target.files;
     if (files) {
@@ -52,6 +75,16 @@ export const NewRequest = ({
     });
   };
 
+  const handleDeleteCertificate = async (certificateId: number) => {
+    try {
+      await deleteCertificate(certificateId, token);
+      sucessToast('Certificado deletado com sucesso!');
+      request();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const handleNext = () => {
     // Lógica para avançar para a próxima etapa
     fetchCertificate(token, requestId);
@@ -59,7 +92,6 @@ export const NewRequest = ({
   };
 
   const fetchCertificate = async (userToken: string, id: number) => {
-    console.log(uploadedFiles);
     for (let index = 0; index < uploadedFiles.length; index++) {
       const addCertificate = await newCertificate(
         userToken,
@@ -68,7 +100,6 @@ export const NewRequest = ({
       );
       certifacatesId.push(addCertificate);
     }
-    localStorage.setItem('requestId', String(requestId));
   };
 
   const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
@@ -108,6 +139,18 @@ export const NewRequest = ({
       </S.FileInputContainer>
       <S.FileListContainer>
         <S.FileList>
+          {certificateData.map((certificate) => (
+            <S.FileItem key={certificate.id}>
+              <S.FileName>{`Certificado ${certificate.id}.pdf`}</S.FileName>
+              <S.FileRemoveButton>
+                <XCircle
+                  color="#FF0000"
+                  size={20}
+                  onClick={() => handleDeleteCertificate(certificate.id)}
+                />
+              </S.FileRemoveButton>
+            </S.FileItem>
+          ))}
           {uploadedFiles.map((file, index) => (
             <S.FileItem key={index}>
               <S.FileName>{file.name}</S.FileName>
