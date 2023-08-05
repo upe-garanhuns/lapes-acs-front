@@ -1,6 +1,5 @@
 import InputMask from 'react-input-mask';
 
-import Button from '../../../../components/Button';
 import { Input } from '../../../../components/Input';
 
 import styled from 'styled-components';

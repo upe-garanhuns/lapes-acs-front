@@ -27,6 +27,7 @@ export default function Home() {
   const [requestsPag, setRequestsPag] = useState<PageValue>();
   const [currentPage, setCurrentPage] = useState<number>(0);
   const [requestId, setRequestId] = useState<number>(0);
+  const [reloadEffect, setReloadEffect] = useState<number>(0);
 
   const token = Cookies.get('token') || '';
 
@@ -66,6 +67,10 @@ export default function Home() {
 
   function closeNewRequestModal() {
     setIsOpen(false);
+  }
+
+  function reloadPag() {
+    setReloadEffect((prev) => prev + 1);
   }
 
   const handlePageChangeNext = () => {
