@@ -34,9 +34,8 @@ export const NewRequest = ({
     try {
       const requestResponse = await getRequest(requestId, token);
       setCertificateData(requestResponse.certificados ?? []);
-      console.log(requestResponse);
     } catch (error) {
-      console.log(error);
+      errorToast('Ocorreu um erro! Tente novamente mais tarde');
     }
   }, [requestId, token]);
 
@@ -81,14 +80,21 @@ export const NewRequest = ({
       sucessToast('Certificado deletado com sucesso!');
       request();
     } catch (error) {
-      console.log(error);
+      errorToast('Ocorreu um erro ao deletar o certificado!');
     }
   };
 
   const handleNext = () => {
-    // Lógica para avançar para a próxima etapa
-    fetchCertificate(token, requestId);
-    router.push(`/registrar-certificado/${requestId}`);
+    if (uploadedFiles.length > 0 || certificateData.length > 0) {
+      try {
+        fetchCertificate(token, requestId);
+        router.push(`/registrar-certificado/${requestId}`);
+      } catch (error) {
+        errorToast('Ocorreu um erro ao cadastrar os certificados!');
+      }
+    } else {
+      errorToast('Insira um arquivo!');
+    }
   };
 
   const fetchCertificate = async (userToken: string, id: number) => {

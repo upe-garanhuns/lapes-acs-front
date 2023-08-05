@@ -1,10 +1,7 @@
-import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 
 import DeleteDraftModal from '../../../../components/DeleteDraft/DeleteDraftModal';
 import ViewRequestModal from '../../../../components/ViewRequest/ViewRequestModal';
-import { getRequest } from '../../../../services/request';
-import { Certificate } from '../../../../services/request/types';
 import { NewRequest } from '../NewRequest';
 import * as S from './styles';
 
@@ -51,7 +48,6 @@ export const RequestList: React.FC<ComponentProps> = ({
     setIsOpen(false);
   }
   const iconSize = 24;
-  const router = useRouter();
   let statusDescription = '';
   status === 'ACEITO'
     ? (statusDescription = 'Concluído')

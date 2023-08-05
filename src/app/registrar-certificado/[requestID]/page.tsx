@@ -1,6 +1,6 @@
 'use client';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import ConfirmationModal from '../../../components/Confirmation/ConfirmationModal';
 import { errorToast } from '../../../functions/errorToast';
@@ -43,37 +43,30 @@ export default function RegistePageTest({ params }: idProps) {
   const [isReadyToSent, setIsReadyToSent] = useState(false);
   const router = useRouter();
 
-  useEffect(() => {
-    const request = async () => {
-      try {
-        const requestResponse = await getRequest(requestId, token);
-        setCertificateData(requestResponse.certificados ?? []);
-        const certificate = requestResponse.certificados[certificateIndex];
-        if (certificate) {
-          setDataInicial(
-            certificate.dataInicial != null
-              ? String(certificate.dataInicial)
-              : ''
-          );
-          setDataFinal(
-            certificate.dataFinal != null ? String(certificate.dataFinal) : ''
-          );
-          setTitulo(
-            certificate.titulo != null ? String(certificate.titulo) : ''
-          );
-          setHoras(
-            certificate.cargaHoraria != null
-              ? String(certificate.cargaHoraria)
-              : ''
-          );
-        }
-      } catch (error) {
-        console.log(error);
-        errorToast('Requisição não encontrada');
-        router.push('/home');
-      }
-    };
+  function delay(time: number) {
+    return new Promise((resolve) => setTimeout(resolve, time));
+  }
 
+  const isValidInputTest = () => {
+    setErrorSelectedAtividade(selectedAtividade === '0');
+    setErrorTitulo(titulo === '');
+    setErrorDataInicial(dataInicial === '');
+    setErrorDataFinal(dataFinal === '');
+    setErrorHoras(parseInt(horas) < 1 || horas === '');
+  };
+
+  const request = useCallback(async () => {
+    try {
+      const requestResponse = await getRequest(requestId, token);
+      setCertificateData(requestResponse.certificados ?? []);
+    } catch (error) {
+      console.log(error);
+      errorToast('Requisição não encontrada');
+      router.push('/home');
+    }
+  }, [requestId, router, token]);
+
+  useEffect(() => {
     const activity = async () => {
       try {
         const activityResponse = await getActivities(token);
@@ -89,14 +82,40 @@ export default function RegistePageTest({ params }: idProps) {
 
     request();
     activity();
-  }, [certificateIndex, requestId, router, token]);
+  }, [request, requestId, router, token]);
 
-  // const getId = () => {
-  //   const selectedId: Activity | undefined = activitiesData.find(
-  //     (item) => item.descricao === certificateData[certificateIndex].atividade
-  //   );
-  //   return String(selectedId.id);
-  // };
+  useEffect(() => {
+    setDataInicial(
+      certificateData[certificateIndex]?.dataInicial != null
+        ? String(certificateData[certificateIndex].dataInicial)
+        : ''
+    );
+    setDataFinal(
+      certificateData[certificateIndex]?.dataFinal != null
+        ? String(certificateData[certificateIndex].dataFinal)
+        : ''
+    );
+    setTitulo(
+      certificateData[certificateIndex]?.titulo != null
+        ? String(certificateData[certificateIndex].titulo)
+        : ''
+    );
+    setHoras(
+      certificateData[certificateIndex]?.cargaHoraria != null
+        ? String(certificateData[certificateIndex].cargaHoraria)
+        : '1'
+    );
+
+    const selectedAxis: Activity | undefined = activitiesData.find(
+      (item) => item.descricao === certificateData[certificateIndex]?.atividade
+    );
+
+    setSelectedAtividade(
+      selectedAxis?.id != null ? String(selectedAxis?.id) : '0'
+    );
+  }, [activitiesData, certificateData, certificateIndex]);
+
+  delay(5).then(() => isValidInputTest());
 
   const handleAtividadeChange = (e: { target: { value: string } }) => {
     setSelectedAtividade(e.target.value);
@@ -143,7 +162,9 @@ export default function RegistePageTest({ params }: idProps) {
 
   const handleBackButton = () => {
     setIsReadyToSent(false);
-    setCertificateIndex(certificateIndex - 1);
+    setCertificateIndex(0);
+    request();
+    router.refresh();
   };
 
   const handleIsCompleted = (): boolean => {
@@ -183,7 +204,6 @@ export default function RegistePageTest({ params }: idProps) {
 
   const registerCertificate = async () => {
     try {
-      console.log(createCerificateData);
       await createCertificate(
         createCerificateData,
         certificateData[certificateIndex].id ?? 0,
@@ -220,6 +240,7 @@ export default function RegistePageTest({ params }: idProps) {
               onChange={handleChangeTitulo}
               value={titulo}
               disabled={isReadyToSent}
+              required
             />
             {errorTitulo ? <S.ErrorSpan>*Digite um título</S.ErrorSpan> : <></>}
           </S.InputGroup>
