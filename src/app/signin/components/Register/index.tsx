@@ -1,3 +1,4 @@
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import React from 'react';
 
@@ -27,6 +28,8 @@ import * as S from './style';
 import { MapPin, User, Eye, EyeSlash } from '@phosphor-icons/react';
 
 export function Register() {
+  const router = useRouter();
+
   // hooks usados para setar mensagem de erros dos inputs - jamu
   const {
     errorName,
