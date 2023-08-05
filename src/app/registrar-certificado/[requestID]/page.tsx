@@ -334,7 +334,10 @@ export default function RegistePageTest({ params }: idProps) {
         </S.ContainerCertificates>
         <S.ButtonsContainerCertificates>
           <S.Button onClick={handleBackButton}>Voltar</S.Button>
-          <ConfirmationModal handleIsCompleted={handleIsCompleted} />
+          <ConfirmationModal
+            handleIsCompleted={handleIsCompleted}
+            requestId={requestId}
+          />
         </S.ButtonsContainerCertificates>
       </S.CertificatesContainer>
     </S.Container>
