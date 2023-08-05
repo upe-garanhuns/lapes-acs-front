@@ -48,7 +48,27 @@ export default function RegistePageTest({ params }: idProps) {
       try {
         const requestResponse = await getRequest(requestId, token);
         setCertificateData(requestResponse.certificados ?? []);
+        const certificate = requestResponse.certificados[certificateIndex];
+        if (certificate) {
+          setDataInicial(
+            certificate.dataInicial != null
+              ? String(certificate.dataInicial)
+              : ''
+          );
+          setDataFinal(
+            certificate.dataFinal != null ? String(certificate.dataFinal) : ''
+          );
+          setTitulo(
+            certificate.titulo != null ? String(certificate.titulo) : ''
+          );
+          setHoras(
+            certificate.cargaHoraria != null
+              ? String(certificate.cargaHoraria)
+              : ''
+          );
+        }
       } catch (error) {
+        console.log(error);
         errorToast('Requisição não encontrada');
         router.push('/home');
       }
@@ -69,7 +89,14 @@ export default function RegistePageTest({ params }: idProps) {
 
     request();
     activity();
-  }, [requestId, router, token]);
+  }, [certificateIndex, requestId, router, token]);
+
+  // const getId = () => {
+  //   const selectedId: Activity | undefined = activitiesData.find(
+  //     (item) => item.descricao === certificateData[certificateIndex].atividade
+  //   );
+  //   return String(selectedId.id);
+  // };
 
   const handleAtividadeChange = (e: { target: { value: string } }) => {
     setSelectedAtividade(e.target.value);
@@ -114,6 +141,11 @@ export default function RegistePageTest({ params }: idProps) {
     setErrorDataFinal(false);
   };
 
+  const handleBackButton = () => {
+    setIsReadyToSent(false);
+    setCertificateIndex(certificateIndex - 1);
+  };
+
   const handleIsCompleted = (): boolean => {
     if (certificateData.length > certificateIndex) {
       return false;
@@ -151,6 +183,7 @@ export default function RegistePageTest({ params }: idProps) {
 
   const registerCertificate = async () => {
     try {
+      console.log(createCerificateData);
       await createCertificate(
         createCerificateData,
         certificateData[certificateIndex].id ?? 0,
@@ -300,7 +333,7 @@ export default function RegistePageTest({ params }: idProps) {
           ))}
         </S.ContainerCertificates>
         <S.ButtonsContainerCertificates>
-          <S.Button onClick={() => router.push('/home')}>Voltar</S.Button>
+          <S.Button onClick={handleBackButton}>Voltar</S.Button>
           <ConfirmationModal handleIsCompleted={handleIsCompleted} />
         </S.ButtonsContainerCertificates>
       </S.CertificatesContainer>

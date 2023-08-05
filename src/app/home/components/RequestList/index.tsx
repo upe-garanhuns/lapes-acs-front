@@ -1,3 +1,4 @@
+import { useRouter } from 'next/navigation';
 import React from 'react';
 
 import DeleteDraftModal from '../../../../components/DeleteDraft/DeleteDraftModal';
@@ -36,6 +37,7 @@ export const RequestList: React.FC<ComponentProps> = ({
     isDraft = true;
   }
   const iconSize = 24;
+  const router = useRouter();
   let statusDescription = '';
   status === 'ACEITO'
     ? (statusDescription = 'Concluído')
@@ -81,7 +83,10 @@ export const RequestList: React.FC<ComponentProps> = ({
         <S.IconsContainer>
           {isDraft ? (
             <S.ActionIcon>
-              <PencilSimpleLine size={iconSize} />
+              <PencilSimpleLine
+                size={iconSize}
+                onClick={() => router.push(`/registrar-certificado/${id}`)}
+              />
             </S.ActionIcon>
           ) : (
             <ViewRequestModal id={id} token={token} />
