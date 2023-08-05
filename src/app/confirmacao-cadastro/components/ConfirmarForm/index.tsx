@@ -1,6 +1,8 @@
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 
+import { errorToast } from '../../../../functions/errorToast';
+import { sucessToast } from '../../../../functions/sucessToast';
 import { verificarCodigo } from './../../../../services/verification';
 import * as S from './styles';
 
@@ -21,23 +23,22 @@ export default function ConfirmarForm() {
   ) => {
     event.preventDefault();
     try {
-      console.log(token);
       if (!token) {
         // Caso o código de verificação não esteja presente no cookie, trate o erro
         throw new Error('Código de verificação não encontrado no cookie.');
       }
-      const verificado = await verificarCodigo(codigoVerificacao, token)
+      await verificarCodigo(codigoVerificacao, token)
         .then((res) => {
           if (res.status == 200) {
-            router.push('/home');
+            sucessToast('Usuário cadastrado com sucesso!');
+            router.push('/home'); // Redireciona o usuário para a página /home
             return;
           }
         })
         .catch((error) => {
+          errorToast('Código incorreto, verifique e confirme novamente!');
           console.log(error);
         });
-      console.log(verificado);
-      // Redireciona o usuário para a página /home
     } catch (error) {
       console.error(error);
       alert(
