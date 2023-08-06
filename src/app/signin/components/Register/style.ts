@@ -32,7 +32,7 @@ export const RegisterContainer = styled.div`
 `;
 
 export const Div = styled.div`
-  width: 100%;
+  width: 90%;
 `;
 
 export const Line = styled.hr`

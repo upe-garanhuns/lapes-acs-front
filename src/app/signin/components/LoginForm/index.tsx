@@ -4,7 +4,6 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
-import EditProfileModal from '../../../../components/EditProfile/EditProfileModal';
 import { login } from '../../../../services/signIn';
 import { Login } from '../../../../services/signIn/types';
 import LoginButton from '../LoginButton';
@@ -130,7 +129,6 @@ export default function LoginForm() {
       <S.ButtonContainer>
         <LoginButton label="Entrar" type="submit" />
         <S.LinkContainer>
-          <EditProfileModal />
           <S.SignUp onClick={registerOpen}>Cadastrar</S.SignUp>
           <S.ModalContainer
             closeModalArea={registerClose}

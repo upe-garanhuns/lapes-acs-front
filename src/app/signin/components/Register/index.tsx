@@ -21,8 +21,27 @@ import { useSetLock } from './hooks/useSetLock';
 import * as S from './style';
 
 import { MapPin, User, Eye, EyeSlash } from '@phosphor-icons/react';
+export interface RegisterParams {
+  userName?: string;
+  userCpf?: string;
+  userPhone?: string;
+  userGrade?: string;
+  userEmail?: string;
+  userCourse?: string;
+  userPass?: string;
+  userSamePass?: string;
+  userNumber?: string;
+  userCep?: string;
+  userCity?: string;
+  userBlock?: string;
+  userUf?: string;
+  userStreet?: string;
+  userComplement?: string;
+  userRegistry?: string;
+  isEdit?: boolean; // Parametro pra definir se o componente está sendo utilizado no cadastro ou na edição de dados
+}
 
-export function Register() {
+export function Register(props: RegisterParams) {
   // hooks usados para setar mensagem de erros dos inputs - jamu
   const {
     errorName,
@@ -82,7 +101,7 @@ export function Register() {
     userComplement,
     userRegistry,
     setUserRegistry
-  } = useSetInput();
+  } = useSetInput(props);
 
   //hook para o botão de visualizar senha - jamu
   const [visibility, setVisibility] = useState<boolean>(false);
@@ -293,6 +312,8 @@ export function Register() {
                 label="Nome Completo:"
                 placeholder="Nome Completo"
                 onChange={handleChangeName}
+                value={props.userName}
+                disabled={props.isEdit}
               />
               {!errorName && (
                 <S.ErroMessage>
@@ -307,6 +328,7 @@ export function Register() {
                   mask="999.999.999-99"
                   placeholder="___.___.___.__"
                   onChange={handleChangeCpf}
+                  disabled={props.isEdit}
                 />
                 {!errorCpf && (
                   <S.ErroMessage>*Insira um CPF válido</S.ErroMessage>
@@ -316,9 +338,12 @@ export function Register() {
             <S.InsideDiv>
               <S.ComponentsContainer>
                 <S.Label>Telefone:</S.Label>
+
                 <S.RegisterInputMask
                   mask="(99) 9999-9999"
-                  placeholder="(__) ____-____"
+                  placeholder={
+                    props.isEdit ? props.userPhone : '(__) ____-____'
+                  }
                   onChange={handleChangePhone}
                 />
                 {!errorPhone && (
@@ -329,7 +354,11 @@ export function Register() {
             <S.InsideDiv>
               <S.ComponentsContainer>
                 <S.Label>Cursos:</S.Label>
-                <S.RegisterSelect onChange={handleChangeCourser}>
+                <S.RegisterSelect
+                  onChange={handleChangeCourser}
+                  value={props.userCourse}
+                  disabled={props.isEdit}
+                >
                   <S.SelectOption value="">Cursos</S.SelectOption>
                   <S.SelectOption value="1">Ciências Biológicas</S.SelectOption>
                   <S.SelectOption value="2">Ciências Sociais</S.SelectOption>
@@ -409,6 +438,8 @@ export function Register() {
                 placeholder="Período"
                 type="number"
                 onChange={handleChangeGrade}
+                value={props.userGrade}
+                disabled={props.isEdit}
               />
               {!errorGrade && (
                 <S.ErroMessage>*Insira um período válido</S.ErroMessage>
@@ -417,7 +448,9 @@ export function Register() {
             <S.InsideDiv $col="span 2 / span 2">
               <S.RegisterInput
                 label="E-mail:"
-                placeholder="Ex: exemplo@upe.br"
+                placeholder={
+                  props.isEdit ? props.userEmail : 'Ex: exemplo@upe.br'
+                }
                 type="email"
                 onChange={handleChangeEmail}
               />
@@ -433,6 +466,8 @@ export function Register() {
                 placeholder="Matrícula"
                 type="text"
                 onChange={handleChangeRegistry}
+                value={props.userRegistry}
+                disabled={props.isEdit}
               />
               {!errorRegistry && (
                 <S.ErroMessage>
@@ -550,7 +585,10 @@ export function Register() {
           </S.InputDiv>
         </S.Div>
         <S.ButtonDiv>
-          <S.RegisterButton label="Cadastrar" onClick={registerUser} />
+          <S.RegisterButton
+            label={!props.isEdit || undefined ? 'Cadastrar' : 'Editar'}
+            onClick={registerUser}
+          />
         </S.ButtonDiv>
       </S.RegisterContainer>
     </S.Container>
