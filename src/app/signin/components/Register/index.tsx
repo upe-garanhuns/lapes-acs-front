@@ -28,8 +28,6 @@ import * as S from './style';
 import { MapPin, User, Eye, EyeSlash } from '@phosphor-icons/react';
 
 export function Register() {
-  const router = useRouter();
-
   // hooks usados para setar mensagem de erros dos inputs - jamu
   const {
     errorName,
@@ -278,13 +276,12 @@ export function Register() {
         errorPass &&
         errorSamePass &&
         errorCep &&
-        errorNumber === true
+        errorNumber !== true
       ) {
-        await createUser(signUpData);
-        sucessToast('Acesse o e-mail cadastrado para verificar a sua conta!');
-        return;
+        warnToast('preencha todos os campos corretamente para cadastrar!');
       }
-      warnToast('preencha todos os campos corretamente para cadastrar!');
+      await createUser(signUpData);
+      sucessToast('Acesse o e-mail cadastrado para verificar a sua conta!');
     } catch (error) {
       errorToast('Houve algum erro ao tentar se cadastrar!');
       console.log(error);
@@ -571,13 +568,7 @@ export function Register() {
           </S.InputDiv>
         </S.Div>
         <S.ButtonDiv>
-          <S.RegisterButton
-            onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) =>
-              registerUser(e)
-            }
-          >
-            Cadastrar
-          </S.RegisterButton>
+          <S.RegisterButton onClick={registerUser}>Cadastrar</S.RegisterButton>
         </S.ButtonDiv>
       </S.RegisterContainer>
     </S.Container>

@@ -1,5 +1,6 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 //import { request } from '../../services/request';
@@ -22,12 +23,14 @@ import Cookies from 'js-cookie';
 import moment from 'moment';
 
 export default function Home() {
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [hours, setHours] = useState<UserHours>();
   const [requestsPag, setRequestsPag] = useState<PageValue>();
   const [currentPage, setCurrentPage] = useState<number>(0);
   const [requestId, setRequestId] = useState<number>(0);
   const [reloadEffect, setReloadEffect] = useState<number>(0);
+  const [isVerify, setIsVerify] = useState<boolean>(false);
 
   const token = Cookies.get('token') || '';
 
@@ -87,6 +90,10 @@ export default function Home() {
     }
   };
 
+  const teste = () => {
+    router.push('/confirmacao-cadastro');
+  };
+
   return (
     <S.Container>
       <S.ContentDiv>
@@ -95,6 +102,9 @@ export default function Home() {
           <S.Line />
         </S.TitleDiv>
         <S.FunctionContainer>
+          <div>
+            <button onClick={teste}>teste</button>
+          </div>
           <div>
             {hours ? (
               <HourCount
