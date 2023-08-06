@@ -297,7 +297,9 @@ export function Register(props: RegisterParams) {
       <S.RegisterContainer>
         {/* */}
         <S.Div>
-          <S.RegisterTitle $principal>Cadastro</S.RegisterTitle>
+          <S.RegisterTitle $principal>
+            {props.isEdit ? 'Editar Perfil' : 'Cadastrar'}
+          </S.RegisterTitle>
         </S.Div>
         <S.Line />
         <S.Div>
@@ -586,7 +588,9 @@ export function Register(props: RegisterParams) {
         </S.Div>
         <S.ButtonDiv>
           <S.RegisterButton
-            label={!props.isEdit || undefined ? 'Cadastrar' : 'Editar'}
+            label={
+              !props.isEdit || undefined ? 'Cadastrar' : 'Salvar Alterações'
+            }
             onClick={registerUser}
           />
         </S.ButtonDiv>
