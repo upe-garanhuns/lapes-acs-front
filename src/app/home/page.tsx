@@ -12,6 +12,8 @@ import { sucessToast } from '../../functions/sucessToast';
 import { newRequest } from '../../services/newRequest';
 import { pagination } from '../../services/pagination';
 import { PageValue } from '../../services/pagination/types';
+import { getUserInformation } from '../../services/user';
+import { UserInformation } from '../../services/user/types';
 import { getUserHours } from '../../services/userHours';
 import { UserHours } from '../../services/userHours/types';
 import ConfirmarForm from '../confirmacao-cadastro/components/ConfirmarForm';
@@ -32,6 +34,7 @@ export default function Home() {
   const [requestsPag, setRequestsPag] = useState<PageValue>();
   const [currentPage, setCurrentPage] = useState<number>(0);
   const [requestId, setRequestId] = useState<number>(0);
+  const [userInfo, setUserInfo] = useState<UserInformation>();
   const [reloadEffect, setReloadEffect] = useState<number>(0);
   const [isVerify, setIsVerify] = useState<boolean>(false);
 
@@ -51,8 +54,14 @@ export default function Home() {
       });
       setRequestsPag(paginationResponse);
     };
+
+    const userInfo = async () => {
+      const userResponse = await getUserInformation(token);
+      setUserInfo(userResponse);
+    };
     requestPagination(currentPage);
     userHours();
+    userInfo();
   }, [token, currentPage]);
 
   const fetchRequest = async () => {
@@ -105,13 +114,15 @@ export default function Home() {
           <S.Line />
         </S.TitleDiv>
         <S.FunctionContainer>
-          {!verify && (
+          {userInfo && userInfo.verificado == false ? (
             <div>
               <p>
                 Para acessar as funcionalidades, verifique sua conta.
                 <button onClick={teste}>teste</button>
               </p>
             </div>
+          ) : (
+            <p>verificado</p>
           )}
 
           <div>
