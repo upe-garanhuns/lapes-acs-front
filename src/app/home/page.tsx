@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 //import { request } from '../../services/request';
 //import { UserRequest } from '../../services/request/types';
 
+import { Modal } from '../../components/Modal';
 import { errorToast } from '../../functions/errorToast';
 import { sucessToast } from '../../functions/sucessToast';
 import { newRequest } from '../../services/newRequest';
@@ -13,12 +14,14 @@ import { pagination } from '../../services/pagination';
 import { PageValue } from '../../services/pagination/types';
 import { getUserHours } from '../../services/userHours';
 import { UserHours } from '../../services/userHours/types';
+import ConfirmarForm from '../confirmacao-cadastro/components/ConfirmarForm';
 import HourCount from './components/HourCount';
 import { NewRequest } from './components/NewRequest';
 import { RequestList } from './components/RequestList';
 import * as S from './style';
 
 import { FileText, Funnel, XCircle } from '@phosphor-icons/react';
+import { verify } from 'crypto';
 import Cookies from 'js-cookie';
 import moment from 'moment';
 
@@ -102,9 +105,15 @@ export default function Home() {
           <S.Line />
         </S.TitleDiv>
         <S.FunctionContainer>
-          <div>
-            <button onClick={teste}>teste</button>
-          </div>
+          {!verify && (
+            <div>
+              <p>
+                Para acessar as funcionalidades, verifique sua conta.
+                <button onClick={teste}>teste</button>
+              </p>
+            </div>
+          )}
+
           <div>
             {hours ? (
               <HourCount
