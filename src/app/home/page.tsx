@@ -108,7 +108,7 @@ export default function Home() {
         <S.TitleDiv>
           {userInfo && (
             <S.UserName>
-              Bem vindo, {userInfo.nomeCompleto.split(' ')[0]}!
+              {`Bem vindo(a)`}, {userInfo.nomeCompleto.split(' ')[0]}!
             </S.UserName>
           )}
 
