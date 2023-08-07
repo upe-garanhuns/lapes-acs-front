@@ -23,6 +23,7 @@ export type ComponentProps = {
   hours: number;
   token: string;
   isDraft: boolean;
+  reloadRequestDelete: () => void;
 };
 
 export const RequestList: React.FC<ComponentProps> = ({
@@ -31,7 +32,8 @@ export const RequestList: React.FC<ComponentProps> = ({
   id,
   initialDate,
   hours,
-  isDraft
+  isDraft,
+  reloadRequestDelete
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -118,6 +120,7 @@ export const RequestList: React.FC<ComponentProps> = ({
               type={true}
               token={token}
               id={id}
+              updateRequestsDelete={reloadRequestDelete}
             ></DeleteDraftModal>
           )}
           <S.ActionIcon>

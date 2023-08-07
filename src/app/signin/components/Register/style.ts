@@ -1,6 +1,5 @@
 import InputMask from 'react-input-mask';
 
-import Button from '../../../../components/Button';
 import { Input } from '../../../../components/Input';
 
 import styled from 'styled-components';
@@ -137,7 +136,7 @@ export const ButtonDiv = styled.div`
   margin: 20px 0px;
 `;
 
-export const RegisterButton = styled(Button)`
+export const RegisterButton = styled.button`
   background: #253555;
   color: #fff;
   border-radius: 45px;

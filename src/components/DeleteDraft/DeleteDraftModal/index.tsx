@@ -10,6 +10,7 @@ export type ComponentProps = {
   type: boolean;
   token: string;
   id: number;
+  updateRequestsDelete: () => void;
 };
 export default function DeleteDraftModal(props: ComponentProps) {
   const [isOpen, setIsOpen] = useState(false);
@@ -39,6 +40,7 @@ export default function DeleteDraftModal(props: ComponentProps) {
             token={props.token}
             id={props.id}
             closeModal={closeModal}
+            updateRequests={props.updateRequestsDelete}
           />
         }
         closeText={<XCircle size={30} color="#FF0000" />}

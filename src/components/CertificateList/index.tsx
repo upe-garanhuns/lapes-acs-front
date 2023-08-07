@@ -6,13 +6,13 @@ import * as S from './styles';
 import { Eye } from '@phosphor-icons/react';
 
 export type ComponentProps = {
-  statusCertificado: string;
+  statusCertificado: string | undefined;
   titulo: string;
-  hours: number;
+  hours: number | undefined;
   eixoAtividade: string;
   atividade: string;
   requestId: number | undefined;
-  certificateId: number;
+  certificateId: number | undefined;
 };
 
 export const CertificateList: React.FC<ComponentProps> = ({
