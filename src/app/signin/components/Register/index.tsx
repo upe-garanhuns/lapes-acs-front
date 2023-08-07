@@ -1,3 +1,4 @@
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 import { fetchWrapper } from '../../../../services/api';
@@ -23,6 +24,8 @@ import * as S from './style';
 import { MapPin, User, Eye, EyeSlash } from '@phosphor-icons/react';
 
 export function Register() {
+  const router = useRouter();
+
   // hooks usados para setar mensagem de erros dos inputs - jamu
   const {
     errorName,
@@ -260,6 +263,7 @@ export function Register() {
     try {
       await createUser(signUpData);
       alert('Acesse o e-mail cadastrado para verificar a sua conta!');
+      router.push('/confirmacao-cadastro');
     } catch (error) {
       alert('Houve algum erro ao tentar se cadastrar!');
       console.log(error);
