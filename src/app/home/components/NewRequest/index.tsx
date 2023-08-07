@@ -74,11 +74,13 @@ export const NewRequest = ({
     });
   };
 
-  const handleDeleteCertificate = async (certificateId: number) => {
+  const handleDeleteCertificate = async (certificateId: number | undefined) => {
     try {
-      await deleteCertificate(certificateId, token);
-      sucessToast('Certificado deletado com sucesso!');
-      request();
+      if (certificateId != undefined) {
+        await deleteCertificate(certificateId, token);
+        sucessToast('Certificado deletado com sucesso!');
+        request();
+      }
     } catch (error) {
       errorToast('Ocorreu um erro ao deletar o certificado!');
     }
@@ -87,8 +89,10 @@ export const NewRequest = ({
   const handleNext = () => {
     if (uploadedFiles.length > 0 || certificateData.length > 0) {
       try {
-        fetchCertificate(token, requestId);
-        router.push(`/registrar-certificado/${requestId}`);
+        if (requestId != undefined) {
+          fetchCertificate(token, requestId);
+          router.push(`/registrar-certificado/${requestId}`);
+        }
       } catch (error) {
         errorToast('Ocorreu um erro ao cadastrar os certificados!');
       }
