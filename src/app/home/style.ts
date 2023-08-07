@@ -137,3 +137,19 @@ export const PageNumber = styled.p`
   font-size: 1em;
   color: #5555ff;
 `;
+
+export const VerifyDiv = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+`;
+export const VerifyMessage = styled.label`
+  color: #e74c3c;
+`;
+export const VerifyBut = styled.button`
+  color: #e74c3c;
+  font-size: 1em;
+  font-weight: bold;
+  text-decoration: underline;
+`;
