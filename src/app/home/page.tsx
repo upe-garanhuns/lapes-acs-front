@@ -106,7 +106,12 @@ export default function Home() {
     <S.Container>
       <S.ContentDiv>
         <S.TitleDiv>
-          <S.UserName>Bem vindo, Fulano!</S.UserName>
+          {userInfo && (
+            <S.UserName>
+              Bem vindo, {userInfo.nomeCompleto.split(' ')[0]}!
+            </S.UserName>
+          )}
+
           <S.Line />
         </S.TitleDiv>
         <S.FunctionContainer>
