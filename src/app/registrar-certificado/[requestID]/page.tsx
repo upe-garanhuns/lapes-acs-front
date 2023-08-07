@@ -160,7 +160,7 @@ export default function RegistePageTest({ params }: idProps) {
     setErrorDataFinal(false);
   };
 
-  const handleBackButton = () => {
+  const handleEditButton = () => {
     setIsReadyToSent(false);
     setCertificateIndex(0);
     request();
@@ -334,7 +334,11 @@ export default function RegistePageTest({ params }: idProps) {
               <S.ViewButton>Visualizar certificado</S.ViewButton>
             </S.ButtonsContainer>
           ) : (
-            <></>
+            <S.ButtonsContainer>
+              <S.EditButton onClick={handleEditButton}>
+                Editar Certificados
+              </S.EditButton>
+            </S.ButtonsContainer>
           )}
         </S.InputArea>
       </S.FormContainer>
@@ -354,7 +358,7 @@ export default function RegistePageTest({ params }: idProps) {
           ))}
         </S.ContainerCertificates>
         <S.ButtonsContainerCertificates>
-          <S.Button onClick={handleBackButton}>Voltar</S.Button>
+          <S.Button onClick={() => router.push('/home')}>Voltar</S.Button>
           <ConfirmationModal
             handleIsCompleted={handleIsCompleted}
             requestId={requestId}

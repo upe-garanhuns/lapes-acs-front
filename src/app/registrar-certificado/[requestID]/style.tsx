@@ -172,6 +172,18 @@ export const ButtonEnviar = styled.button`
   margin-bottom: 20px;
 `;
 
+export const EditButton = styled.button`
+  color: #fff;
+  background-color: #253555;
+  font-size: 14px;
+  border-radius: 20px;
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+  min-width: 150px;
+  margin-bottom: 20px;
+`;
+
 export const ErrorSpan = styled.span`
   color: red;
   font-size: 10px;
