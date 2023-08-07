@@ -54,8 +54,10 @@ export const NewRequest = ({
 
   const handleNext = () => {
     // Lógica para avançar para a próxima etapa
-    fetchCertificate(token, requestId);
-    router.push(`/registrar-certificado/${requestId}`);
+    if (requestId != undefined) {
+      fetchCertificate(token, requestId);
+      router.push(`/registrar-certificado/${requestId}`);
+    }
   };
 
   const fetchCertificate = async (userToken: string, id: number) => {

@@ -58,7 +58,7 @@ export default function Home() {
     requestPagination(currentPage);
     userHours();
     userInfo();
-  }, [token, currentPage]);
+  }, [token, currentPage, reloadEffect]);
 
   const fetchRequest = async () => {
     try {
@@ -66,6 +66,7 @@ export default function Home() {
       setRequestId(createNewRequest);
       setIsOpen(true);
       sucessToast('Rascunho criado com sucesso');
+      reloadPag();
     } catch (error) {
       errorToast('Ocorreu um erro! Só é permitido possuir dois rascunhos');
       setIsOpen(false);
@@ -128,7 +129,7 @@ export default function Home() {
             <></>
           )}
 
-          <div>
+          <S.Div>
             {hours ? (
               <HourCount
                 gesHours={hours.horasGestao}
@@ -139,7 +140,7 @@ export default function Home() {
             ) : (
               <HourCount gesHours={0} extHours={0} pesHours={0} ensHours={0} />
             )}
-          </div>
+          </S.Div>
 
           <S.Div>
             <S.RequestDiv>
@@ -177,6 +178,7 @@ export default function Home() {
                         key={item.id}
                         token={token}
                         isDraft={false}
+                        reloadRequestDelete={reloadPag}
                       />
                     ))}
                   </>

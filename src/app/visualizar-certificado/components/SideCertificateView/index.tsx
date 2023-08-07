@@ -31,9 +31,11 @@ export const SideCertificateView = ({
     router.push(`/home`);
   };
 
-  const handleCertificateSelect = (id: number) => {
-    setSelectedCertificate(id);
-    onCertificateClick(id);
+  const handleCertificateSelect = (id: number | undefined) => {
+    if (id !== undefined) {
+      setSelectedCertificate(id);
+      onCertificateClick(id);
+    }
   };
 
   return (
@@ -45,15 +47,19 @@ export const SideCertificateView = ({
         </S.TitleDiv>
         <S.ListDiv>
           {certificates &&
-            certificates.map((certificado, index) => (
-              <S.CertificateSelect
-                key={index}
-                onClick={() => handleCertificateSelect(certificado.id)}
-                selected={selectedCertificate === certificado.id}
-              >
-                <S.Label>{`Certificado ${certificado.id}`}</S.Label>
-              </S.CertificateSelect>
-            ))}
+            certificates.map((certificado, index) => {
+              if (certificado.id !== undefined) {
+                return (
+                  <S.CertificateSelect
+                    key={index}
+                    onClick={() => handleCertificateSelect(certificado.id)}
+                    selected={selectedCertificate === certificado.id}
+                  >
+                    <S.Label>{`Certificado ${certificado.id}`}</S.Label>
+                  </S.CertificateSelect>
+                );
+              }
+            })}
         </S.ListDiv>
         <S.ButtonDiv>
           <S.Printer

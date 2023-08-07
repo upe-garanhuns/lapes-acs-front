@@ -1,4 +1,3 @@
-import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import React from 'react';
 
@@ -70,7 +69,6 @@ export function Register() {
     setUserCourse,
     userPass,
     setUserPass,
-    userSamePass,
     setUserSamePass,
     userNumber,
     setUserNumber,
