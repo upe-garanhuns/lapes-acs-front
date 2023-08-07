@@ -12,7 +12,7 @@ export const FormContainer = styled.div`
   margin-bottom: 20px;
   display: flex;
   flex-direction: row;
-  height: 200px;
+  height: 235px;
   padding: 15px 0px 15px 0px;
 `;
 
