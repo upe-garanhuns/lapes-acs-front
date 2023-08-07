@@ -23,9 +23,7 @@ export default function EditProfileModal() {
   const fetchUserData = async () => {
     try {
       const user = await userData({ token });
-      console.log(user);
       setUserDataJSON(user);
-      console.log(userDataJSON);
     } catch (error) {
       console.log(error);
     }

@@ -4,6 +4,7 @@ import { fetchWrapper } from '../../../../services/api';
 import { Endereco } from '../../../../services/cep/types';
 import { createUser } from '../../../../services/signUp';
 import { CreateUser } from '../../../../services/signUp/types';
+import { updateUserData } from '../../../../services/user';
 import { checkCep } from './functions/checkCep';
 import { checkCourse } from './functions/checkCourse';
 import { checkCPF } from './functions/checkCpf';
@@ -21,6 +22,7 @@ import { useSetLock } from './hooks/useSetLock';
 import * as S from './style';
 
 import { MapPin, User, Eye, EyeSlash } from '@phosphor-icons/react';
+import Cookies from 'js-cookie';
 export interface RegisterParams {
   userName?: string;
   userCpf?: string;
@@ -42,6 +44,7 @@ export interface RegisterParams {
 }
 
 export function Register(props: RegisterParams) {
+  const token = Cookies.get('token') || '';
   // hooks usados para setar mensagem de erros dos inputs - jamu
   const {
     errorName,
@@ -289,6 +292,16 @@ export function Register(props: RegisterParams) {
     );
   }
 
+  //função disparada quando botão editar na página de editar usuário é acionado - pedro
+  async function editUser() {
+    try {
+      await updateUserData({ EditUserData: signUpData, token: token });
+      alert('Dados atualizados com sucesso!');
+    } catch (err) {
+      alert('Houve algum erro ao tentar atualizar os dados!');
+      console.log(err);
+    }
+  }
   return (
     <S.Container>
       {/* container principal */}
@@ -588,9 +601,7 @@ export function Register(props: RegisterParams) {
         </S.Div>
         <S.ButtonDiv>
           <S.RegisterButton
-            label={
-              !props.isEdit || undefined ? 'Cadastrar' : 'Salvar Alterações'
-            }
+            label={!props.isEdit ? 'Cadastrar' : 'Salvar Alterações'}
             onClick={registerUser}
           />
         </S.ButtonDiv>
