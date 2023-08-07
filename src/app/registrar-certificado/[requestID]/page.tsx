@@ -11,12 +11,12 @@ import { createCertificate } from '../../../services/registerCertificate';
 import { CreateCertificate } from '../../../services/registerCertificate/types';
 import { getRequest } from '../../../services/request';
 import { Certificate } from '../../../services/request/types';
+import PDFViewer from '../PDFViewer/PDFViewer';
 import { getMaxDate } from './functions/getMaxDate';
 import * as S from './style';
 
 import { Check } from '@phosphor-icons/react';
 import Cookies from 'js-cookie';
-
 interface idProps {
   params: { requestID: string };
 }
@@ -284,7 +284,9 @@ export default function RegistePageTest({ params }: idProps) {
           )}
         </S.InputArea>
       </S.FormContainer>
-
+      <S.ContainerPdf>
+        <PDFViewer />
+      </S.ContainerPdf>
       <S.CertificatesContainer>
         <S.TitleAnexados>Anexados</S.TitleAnexados>
         <S.ContainerCertificates>

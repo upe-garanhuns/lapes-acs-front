@@ -178,3 +178,7 @@ export const ErrorSpan = styled.span`
   margin-top: 6px;
   margin-left: 5px;
 `;
+
+export const ContainerPdf = styled.div`
+  display: flex;
+`;
