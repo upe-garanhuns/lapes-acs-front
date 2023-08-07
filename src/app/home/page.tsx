@@ -58,7 +58,7 @@ export default function Home() {
     requestPagination(currentPage);
     userHours();
     userInfo();
-  }, [token, currentPage]);
+  }, [token, currentPage, reloadEffect]);
 
   const fetchRequest = async () => {
     try {
@@ -177,6 +177,7 @@ export default function Home() {
                         key={item.id}
                         token={token}
                         isDraft={false}
+                        reloadRequestDelete={reloadPag}
                       />
                     ))}
                   </>
