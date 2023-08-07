@@ -11,7 +11,9 @@ export const Container = styled.div`
 export const FormContainer = styled.div`
   margin-bottom: 20px;
   display: flex;
-  flex-direction: rown;
+  flex-direction: row;
+  height: 200px;
+  padding: 15px 0px 15px 0px;
 `;
 
 export const Title = styled.h2`
@@ -23,13 +25,13 @@ export const Title = styled.h2`
 export const InputContainer = styled.div`
   display: flex;
   align-items: flex-start;
-  margin-bottom: 10px;
 `;
 
 export const InputArea = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  justify-content: space-between;
   margin-right: 10px;
 `;
 
@@ -38,7 +40,6 @@ export const InputGroup = styled.div`
   flex-direction: column;
   align-items: flex-start;
   margin-right: 10px;
-  margin-top: 10px;
 `;
 
 export const Label = styled.label`
@@ -68,6 +69,7 @@ export const Select = styled.select`
 
 export const ButtonsContainer = styled.div`
   display: flex;
+  margin-top: 16px;
 `;
 
 export const SaveButton = styled.button`
