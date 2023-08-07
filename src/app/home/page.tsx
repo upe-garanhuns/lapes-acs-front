@@ -6,7 +6,6 @@ import { useEffect, useState } from 'react';
 //import { request } from '../../services/request';
 //import { UserRequest } from '../../services/request/types';
 
-import { Modal } from '../../components/Modal';
 import { errorToast } from '../../functions/errorToast';
 import { sucessToast } from '../../functions/sucessToast';
 import { newRequest } from '../../services/newRequest';
@@ -16,14 +15,12 @@ import { getUserInformation } from '../../services/user';
 import { UserInformation } from '../../services/user/types';
 import { getUserHours } from '../../services/userHours';
 import { UserHours } from '../../services/userHours/types';
-import ConfirmarForm from '../confirmacao-cadastro/components/ConfirmarForm';
 import HourCount from './components/HourCount';
 import { NewRequest } from './components/NewRequest';
 import { RequestList } from './components/RequestList';
 import * as S from './style';
 
 import { FileText, Funnel, XCircle } from '@phosphor-icons/react';
-import { verify } from 'crypto';
 import Cookies from 'js-cookie';
 import moment from 'moment';
 
@@ -36,7 +33,6 @@ export default function Home() {
   const [requestId, setRequestId] = useState<number>(0);
   const [userInfo, setUserInfo] = useState<UserInformation>();
   const [reloadEffect, setReloadEffect] = useState<number>(0);
-  const [isVerify, setIsVerify] = useState<boolean>(false);
 
   const token = Cookies.get('token') || '';
 
@@ -102,7 +98,7 @@ export default function Home() {
     }
   };
 
-  const teste = () => {
+  const confirmationScreen = () => {
     router.push('/confirmacao-cadastro');
   };
 
@@ -115,14 +111,16 @@ export default function Home() {
         </S.TitleDiv>
         <S.FunctionContainer>
           {userInfo && userInfo.verificado == false ? (
-            <div>
-              <p>
-                Para acessar as funcionalidades, verifique sua conta.
-                <button onClick={teste}>teste</button>
-              </p>
-            </div>
+            <S.VerifyDiv>
+              <S.VerifyMessage>
+                Para acessar as funcionalidades,
+                <S.VerifyBut onClick={confirmationScreen}>
+                  verifique sua conta.
+                </S.VerifyBut>
+              </S.VerifyMessage>
+            </S.VerifyDiv>
           ) : (
-            <p>verificado</p>
+            <></>
           )}
 
           <div>
