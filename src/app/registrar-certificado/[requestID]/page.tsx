@@ -11,7 +11,7 @@ import { createCertificate } from '../../../services/registerCertificate';
 import { CreateCertificate } from '../../../services/registerCertificate/types';
 import { getRequest } from '../../../services/request';
 import { Certificate } from '../../../services/request/types';
-import PDFViewer from '../PDFViewer/PDFViewer';
+import PdfViewer from '../PDFViewer/PDFViewer';
 import { getMaxDate } from './functions/getMaxDate';
 import * as S from './style';
 
@@ -285,7 +285,7 @@ export default function RegistePageTest({ params }: idProps) {
         </S.InputArea>
       </S.FormContainer>
       <S.ContainerPdf>
-        <PDFViewer />
+        <PdfViewer />
       </S.ContainerPdf>
       <S.CertificatesContainer>
         <S.TitleAnexados>Anexados</S.TitleAnexados>

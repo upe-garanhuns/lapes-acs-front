@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Document, Page, pdfjs } from 'react-pdf';
 
 import { exibirPDF } from '../../../services/PDF/index'; // Importe a função
 
 import Cookies from 'js-cookie';
-pdfjs.GlobalWorkerOptions.workerSrc =
-  'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.9.179/pdf.min.js';
 
 const PDFViewer = () => {
   const [pdfData, setPdfData] = useState(null);
@@ -15,13 +12,11 @@ const PDFViewer = () => {
 
     const fetchPDFData = async () => {
       try {
-        const response = await exibirPDF(token); // Use a função para obter os dados do PDF
-
+        const response = await exibirPDF(token);
         const data = await response.json();
-        console.log(data);
 
         if (data && data.arquivo) {
-          setPdfData(data.arquivo); // Os dados já estão em formato base64
+          setPdfData(data.arquivo);
         } else {
           console.error('Nenhum dado de PDF encontrado na resposta.');
         }
@@ -36,9 +31,12 @@ const PDFViewer = () => {
   return (
     <div>
       {pdfData && (
-        <Document file={{ data: pdfData }}>
-          <Page pageNumber={1} />
-        </Document>
+        <iframe
+          src={`data:application/pdf;base64,${pdfData}`}
+          title="PDF Viewer"
+          width="100%"
+          height="500px"
+        ></iframe>
       )}
     </div>
   );
