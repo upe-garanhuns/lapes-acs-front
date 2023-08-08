@@ -4,7 +4,7 @@ import { exibirPDF } from '../../../services/PDF/index'; // Importe a função
 
 import Cookies from 'js-cookie';
 
-const PDFViewer = () => {
+const PDFViewer = ({ pdfId }) => {
   const [pdfData, setPdfData] = useState(null);
 
   useEffect(() => {
@@ -12,7 +12,7 @@ const PDFViewer = () => {
 
     const fetchPDFData = async () => {
       try {
-        const response = await exibirPDF(token);
+        const response = await exibirPDF(token, pdfId);
         const data = await response.json();
 
         if (data && data.arquivo) {

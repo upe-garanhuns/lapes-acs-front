@@ -285,7 +285,8 @@ export default function RegistePageTest({ params }: idProps) {
         </S.InputArea>
       </S.FormContainer>
       <S.ContainerPdf>
-        <PdfViewer />
+        <PdfViewer pdfId={'507'} /> {/* Aqui deve passar o Id do certificado */}
+        {/* pdfId={certificateData[certificateIndex]?.id.toString()} */}
       </S.ContainerPdf>
       <S.CertificatesContainer>
         <S.TitleAnexados>Anexados</S.TitleAnexados>
