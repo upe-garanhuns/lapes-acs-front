@@ -45,8 +45,9 @@ export const Modal = ({
 
       const handleKeyDown = (event: KeyboardEvent) => {
         const isTabPressed = event.key === 'Tab';
+
         if (!isTabPressed) {
-          return;
+          event.preventDefault;
         }
         if (
           event.shiftKey &&
