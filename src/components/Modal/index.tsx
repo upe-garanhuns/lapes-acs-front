@@ -24,7 +24,7 @@ export const Modal = ({
   className,
   closeText = 'Fechar'
 }: ComponentProps) => {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(undefined);
   const firstFocusableElRef = useRef<HTMLElement | undefined>();
   const lastFocusableElRef = useRef<HTMLElement | undefined>();
   const handleContainerClick = (
@@ -44,7 +44,7 @@ export const Modal = ({
       lastFocusableElRef.current = focusableEls[focusableEls.length - 1];
 
       const handleKeyDown = (event: KeyboardEvent) => {
-        const isTabPressed = event.key === 'Tab' || event.keyCode === 9;
+        const isTabPressed = event.key === 'Tab';
         if (!isTabPressed) {
           return;
         }
