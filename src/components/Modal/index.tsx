@@ -42,13 +42,18 @@ export const Modal = ({
       }
       firstFocusableElRef.current = focusableEls[0];
       lastFocusableElRef.current = focusableEls[focusableEls.length - 1];
-
+      let wasPressed = false;
       const handleKeyDown = (event: KeyboardEvent) => {
         const isTabPressed = event.key === 'Tab';
 
-        if (!isTabPressed) {
+        if (!isTabPressed && !wasPressed) {
           event.preventDefault;
+          wasPressed = true;
+          console.log(wasPressed);
+        } else {
+          return;
         }
+
         if (
           event.shiftKey &&
           firstFocusableElRef.current &&
