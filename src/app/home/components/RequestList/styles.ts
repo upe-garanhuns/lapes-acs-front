@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 export const Card = styled.div<{ cardcolor: boolean }>`
   display: grid;
-  grid-template-columns: auto 0.5fr minmax(200px, 1.5fr) 0.5fr 0.5fr auto;
+  grid-template-columns: 0.1fr 0.5fr 1fr 0.5fr 0.5fr 70px;
   gap: 5px;
   justify-content: center;
   align-items: center;
@@ -14,7 +14,7 @@ export const Card = styled.div<{ cardcolor: boolean }>`
   margin: 20px;
   padding: 7px;
 
-  @media (max-width: 715px) {
+  @media (max-width: 850px) {
     grid-template-columns: repeat(2, minmax(150px, 1fr));
   }
   @media (max-width: 460px) {
