@@ -1,28 +1,26 @@
 import { fetchWrapper } from '../api';
+import { UserRequest } from '../request/types';
 import { ArchiveInterface, ResponseArchiveInterface } from './types';
 
 export const archived = async ({
   token,
   id
-}: ArchiveInterface): Promise<ArchiveInterface> => {
-  const response: ArchiveInterface = await fetchWrapper(
-    `api/requisicao/arquivar/${id}`,
-    {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json'
-      }
+}: ArchiveInterface): Promise<string> => {
+  const response: string = await fetchWrapper(`api/requisicao/arquivar/${id}`, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json'
     }
-  );
+  });
   return response;
 };
 
 export const DontArchived = async ({
   token,
   id
-}: ArchiveInterface): Promise<ArchiveInterface> => {
-  const response: ArchiveInterface = await fetchWrapper(
+}: ArchiveInterface): Promise<string> => {
+  const response: string = await fetchWrapper(
     `api/requisicao/desarquivar/${id}`,
     {
       method: 'POST',
@@ -35,18 +33,23 @@ export const DontArchived = async ({
   return response;
 };
 
-export const getArchived = async ({
-  token
-}: ArchiveInterface): Promise<ResponseArchiveInterface> => {
-  const response: ResponseArchiveInterface = await fetchWrapper(
-    `api/requisicao/arquivar`,
-    {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json'
+export const getArchived = async (
+  token: string
+): Promise<Array<UserRequest>> => {
+  try {
+    const response: Array<UserRequest> = await fetchWrapper(
+      `api/requisicao/arquivar`,
+      {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
       }
-    }
-  );
-  return response;
+    );
+    return response;
+  } catch (error) {
+    console.error('erro', error);
+    throw error;
+  }
 };
