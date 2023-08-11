@@ -1,4 +1,5 @@
 import { fetchWrapper } from '../api';
+import { ArchiveInterface, ResponseArchiveInterface } from './types';
 
 export const archived = async ({
   token,
@@ -36,8 +37,8 @@ export const DontArchived = async ({
 
 export const getArchived = async ({
   token
-}: ArchiveInterface): Promise<ArchiveInterface> => {
-  const response: ArchiveInterface = await fetchWrapper(
+}: ArchiveInterface): Promise<ResponseArchiveInterface> => {
+  const response: ResponseArchiveInterface = await fetchWrapper(
     `api/requisicao/arquivar`,
     {
       method: 'GET',
