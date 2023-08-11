@@ -1,6 +1,6 @@
 'use client';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import ConfirmationModal from '../../../components/Confirmation/ConfirmationModal';
 import { errorToast } from '../../../functions/errorToast';
@@ -43,17 +43,30 @@ export default function RegistePageTest({ params }: idProps) {
   const [isReadyToSent, setIsReadyToSent] = useState(false);
   const router = useRouter();
 
-  useEffect(() => {
-    const request = async () => {
-      try {
-        const requestResponse = await getRequest(requestId, token);
-        setCertificateData(requestResponse.certificados ?? []);
-      } catch (error) {
-        errorToast('Requisição não encontrada');
-        router.push('/home');
-      }
-    };
+  function delay(time: number) {
+    return new Promise((resolve) => setTimeout(resolve, time));
+  }
 
+  const isValidInputTest = () => {
+    setErrorSelectedAtividade(selectedAtividade === '0');
+    setErrorTitulo(titulo === '');
+    setErrorDataInicial(dataInicial === '');
+    setErrorDataFinal(dataFinal === '');
+    setErrorHoras(parseInt(horas) < 1 || horas === '');
+  };
+
+  const request = useCallback(async () => {
+    try {
+      const requestResponse = await getRequest(requestId, token);
+      setCertificateData(requestResponse.certificados ?? []);
+    } catch (error) {
+      console.log(error);
+      errorToast('Requisição não encontrada');
+      router.push('/home');
+    }
+  }, [requestId, router, token]);
+
+  useEffect(() => {
     const activity = async () => {
       try {
         const activityResponse = await getActivities(token);
@@ -69,7 +82,40 @@ export default function RegistePageTest({ params }: idProps) {
 
     request();
     activity();
-  }, [requestId, router, token]);
+  }, [request, requestId, router, token]);
+
+  useEffect(() => {
+    setDataInicial(
+      certificateData[certificateIndex]?.dataInicial != null
+        ? String(certificateData[certificateIndex].dataInicial)
+        : ''
+    );
+    setDataFinal(
+      certificateData[certificateIndex]?.dataFinal != null
+        ? String(certificateData[certificateIndex].dataFinal)
+        : ''
+    );
+    setTitulo(
+      certificateData[certificateIndex]?.titulo != null
+        ? String(certificateData[certificateIndex].titulo)
+        : ''
+    );
+    setHoras(
+      certificateData[certificateIndex]?.cargaHoraria != null
+        ? String(certificateData[certificateIndex].cargaHoraria)
+        : '1'
+    );
+
+    const selectedAxis: Activity | undefined = activitiesData.find(
+      (item) => item.descricao === certificateData[certificateIndex]?.atividade
+    );
+
+    setSelectedAtividade(
+      selectedAxis?.id != null ? String(selectedAxis?.id) : '0'
+    );
+  }, [activitiesData, certificateData, certificateIndex]);
+
+  delay(5).then(() => isValidInputTest());
 
   const handleAtividadeChange = (e: { target: { value: string } }) => {
     setSelectedAtividade(e.target.value);
@@ -112,6 +158,13 @@ export default function RegistePageTest({ params }: idProps) {
     const { value } = e.target;
     setDataFinal(value);
     setErrorDataFinal(false);
+  };
+
+  const handleEditButton = () => {
+    setIsReadyToSent(false);
+    setCertificateIndex(0);
+    request();
+    router.refresh();
   };
 
   const handleIsCompleted = (): boolean => {
@@ -187,6 +240,7 @@ export default function RegistePageTest({ params }: idProps) {
               onChange={handleChangeTitulo}
               value={titulo}
               disabled={isReadyToSent}
+              required
             />
             {errorTitulo ? <S.ErrorSpan>*Digite um título</S.ErrorSpan> : <></>}
           </S.InputGroup>
@@ -280,7 +334,11 @@ export default function RegistePageTest({ params }: idProps) {
               <S.ViewButton>Visualizar certificado</S.ViewButton>
             </S.ButtonsContainer>
           ) : (
-            <></>
+            <S.ButtonsContainer>
+              <S.EditButton onClick={handleEditButton}>
+                Editar Certificados
+              </S.EditButton>
+            </S.ButtonsContainer>
           )}
         </S.InputArea>
       </S.FormContainer>
@@ -301,7 +359,10 @@ export default function RegistePageTest({ params }: idProps) {
         </S.ContainerCertificates>
         <S.ButtonsContainerCertificates>
           <S.Button onClick={() => router.push('/home')}>Voltar</S.Button>
-          <ConfirmationModal handleIsCompleted={handleIsCompleted} />
+          <ConfirmationModal
+            handleIsCompleted={handleIsCompleted}
+            requestId={requestId}
+          />
         </S.ButtonsContainerCertificates>
       </S.CertificatesContainer>
     </S.Container>

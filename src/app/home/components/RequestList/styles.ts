@@ -1,3 +1,4 @@
+import { Modal } from '../../../../components/Modal';
 import { colors } from '../../../../styles/colors';
 
 import styled from 'styled-components';
@@ -30,6 +31,10 @@ export const Title = styled.p`
   margin-bottom: 3px;
   margin-top: 3px;
   font-size: 13px;
+`;
+
+export const NewRequestModal = styled(Modal)`
+  border-radius: 24px;
 `;
 
 export const Text = styled.p`

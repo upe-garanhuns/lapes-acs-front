@@ -12,10 +12,13 @@ import * as S from './styles';
 
 import Cookies from 'js-cookie';
 
-export function ConfirmationPagination() {
+type ComponentProps = {
+  requestId: number;
+};
+
+export function ConfirmationPagination({ requestId }: ComponentProps) {
   const router = useRouter();
   const token = Cookies.get('token') ?? '';
-  const requestId = parseInt(localStorage.getItem('requestId') ?? '0');
   const [currentPage, setCurrentPage] = useState(1);
   const [certificateData, setCertificateData] = useState<Certificate[]>([]);
 
@@ -23,7 +26,6 @@ export function ConfirmationPagination() {
     const request = async () => {
       const requestResponse = await getRequest(requestId, token);
       setCertificateData(requestResponse.certificados ?? []);
-      console.log(requestResponse);
     };
     request();
   }, [requestId, token]);
@@ -31,7 +33,6 @@ export function ConfirmationPagination() {
   const submit = async () => {
     try {
       await submitRequest(requestId, token);
-      localStorage.removeItem('requestId');
       sucessToast('Requisição enviada com sucesso!');
       router.push('/home');
     } catch (error) {

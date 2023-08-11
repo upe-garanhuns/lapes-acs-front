@@ -233,6 +233,7 @@ export default function Home() {
                     cancelRequest={closeNewRequestModal}
                     requestId={requestId}
                     token={token}
+                    isNewRequest={true}
                   />
                 }
                 closeText={<XCircle size={32} color="#FF0000" />}
