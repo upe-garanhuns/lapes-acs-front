@@ -1,7 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 
-import { ArchiveDraftButton } from '../ArchiveDraftButton/index';
+import { ArchiveButton } from '../ArchiveButton/index';
 import * as S from './styles';
 
 export type ComponentProps = {
@@ -9,12 +9,14 @@ export type ComponentProps = {
   token: string;
   id: number;
   closeModal: () => void;
+  updateRequests: () => void;
 };
 
-const ArchiveDraftContent: React.FC<ComponentProps> = ({
+const ArchiveContent: React.FC<ComponentProps> = ({
   id,
   token,
-  closeModal
+  closeModal,
+  updateRequests
 }) => {
   const [warning, setWarninig] = useState(false);
 
@@ -29,15 +31,16 @@ const ArchiveDraftContent: React.FC<ComponentProps> = ({
       </S.Warning>
       <S.Buttons>
         <S.CancelArchive onClick={closeModal}>Cancelar</S.CancelArchive>
-        <ArchiveDraftButton
+        <ArchiveButton
           id={id}
           token={token}
           closeModal={closeModal}
           failureWarning={setWarningText}
-        ></ArchiveDraftButton>
+          onSuccess={updateRequests}
+        ></ArchiveButton>
       </S.Buttons>
     </S.Container>
   );
 };
 
-export default ArchiveDraftContent;
+export default ArchiveContent;

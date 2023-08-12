@@ -19,8 +19,8 @@ export default function SolicitacoesArquivadas() {
 
   useEffect(() => {
     const archiveRequest = async () => {
-      const requestResponse2 = await getArchived(token);
-      setRequestList(requestResponse2);
+      const requestResponse = await getArchived(token);
+      setRequestList(requestResponse);
     };
     archiveRequest();
   }, [token]);
@@ -66,7 +66,9 @@ export default function SolicitacoesArquivadas() {
               ))}
             </>
           ) : (
-            <>Nao exite nenhum rrequisicao arquivada</>
+            <>
+              <p>Nao exite nenhuma requisicao arquivada</p>
+            </>
           )}
         </S.RequestDiv>
       </S.Content>

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+import ArchiveModal from '../../../../components/ArchiveDraft/ArchiveModal';
 import DeleteDraftModal from '../../../../components/DeleteDraft/DeleteDraftModal';
 import ViewRequestModal from '../../../../components/ViewRequest/ViewRequestModal';
 import { NewRequest } from '../NewRequest';
@@ -10,8 +11,6 @@ import {
   Clock,
   WarningCircle,
   CheckCircle,
-  Printer,
-  Archive,
   PencilSimpleLine,
   XCircle
 } from '@phosphor-icons/react';
@@ -115,28 +114,20 @@ export const RequestList: React.FC<ComponentProps> = ({
           ) : (
             <ViewRequestModal id={id} token={token} />
           )}
-          {!isDraft ? null : (
+          {!isDraft ? (
+            <ArchiveModal
+              type={false}
+              token={token}
+              id={id}
+              updateRequestsArchive={reloadRequestDelete}
+            ></ArchiveModal>
+          ) : (
             <DeleteDraftModal
-              type={true}
               token={token}
               id={id}
               updateRequestsDelete={reloadRequestDelete}
             ></DeleteDraftModal>
           )}
-          <S.ActionIcon>
-            {(() => {
-              switch (status) {
-                case 'DEFERIDO':
-                case 'ENCAMINHADO_COORDENACAO':
-                case 'ENCAMINHADO_COMISSAO':
-                  return <Printer size={iconSize} />;
-                case 'INDEFERIDO':
-                  return <Archive size={iconSize}></Archive>;
-                default:
-                  return null;
-              }
-            })()}
-          </S.ActionIcon>
         </S.IconsContainer>
       </S.Card>
     </div>

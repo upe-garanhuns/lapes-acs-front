@@ -1,4 +1,4 @@
-import { getRequest } from '../../../services/request';
+import { archived } from '../../../services/archived';
 import * as S from './styles';
 
 export type ArchiveRequestProps = {
@@ -6,14 +6,16 @@ export type ArchiveRequestProps = {
   token: string;
   closeModal: () => void;
   failureWarning: () => void;
+  onSuccess: () => void;
 };
 
-export function ArchiveDraftButton(props: ArchiveRequestProps) {
+export function ArchiveButton(props: ArchiveRequestProps) {
   const { id, token, closeModal, failureWarning } = props;
 
   const handleArchive = async () => {
     try {
-      await getRequest(id, token);
+      await archived(token, id);
+      props.onSuccess();
       closeModal();
     } catch (error) {
       console.log(error);

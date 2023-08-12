@@ -1,11 +1,8 @@
 import { fetchWrapper } from '../api';
 import { UserRequest } from '../request/types';
-import { ArchiveInterface, ResponseArchiveInterface } from './types';
+import { ArchiveInterface } from './types';
 
-export const archived = async ({
-  token,
-  id
-}: ArchiveInterface): Promise<string> => {
+export const archived = async (token: string, id: number): Promise<string> => {
   const response: string = await fetchWrapper(`api/requisicao/arquivar/${id}`, {
     method: 'POST',
     headers: {
