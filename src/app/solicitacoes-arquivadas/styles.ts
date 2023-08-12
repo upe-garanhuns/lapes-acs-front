@@ -1,3 +1,5 @@
+import { ActiveLink } from '../../components/ActiveLink';
+import Button from '../../components/Button';
 import { Input } from '../../components/Input';
 
 import styled from 'styled-components';
@@ -29,6 +31,10 @@ export const Line = styled.hr`
 
 export const FilterDiv = styled.div`
   margin-top: 40px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 `;
 
 export const InputRequestDiv = styled.div`
@@ -68,3 +74,17 @@ export const IconButton = styled.span`
 `;
 
 export const RequestDiv = styled.div``;
+
+export const BackButton = styled(Button)`
+  background: '#fff';
+  color: '#1C3C78';
+  height: 5.5vh;
+  width: 10vw;
+  box-shadow: 0 4px 4px 0 rgb(0 0 0 / 0.15);
+  padding: 0 0.5em;
+  border-radius: 20px;
+  font-size: 1em;
+  font-weight: bold;
+`;
+
+export const BackDiv = styled.div``;

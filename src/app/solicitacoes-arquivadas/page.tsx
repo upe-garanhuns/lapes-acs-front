@@ -1,5 +1,6 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 import { getArchived } from '../../services/archived';
@@ -13,7 +14,7 @@ import moment from 'moment';
 
 export default function SolicitacoesArquivadas() {
   const [requestList, setRequestList] = useState<Array<UserRequest>>([]);
-
+  const router = useRouter();
   const token = Cookies.get('token') || '';
 
   useEffect(() => {
@@ -23,6 +24,10 @@ export default function SolicitacoesArquivadas() {
     };
     archiveRequest();
   }, [token]);
+
+  function backHome() {
+    router.push('/home');
+  }
 
   return (
     <S.Container>
@@ -38,6 +43,9 @@ export default function SolicitacoesArquivadas() {
               <Funnel size={28} weight="fill" />
             </S.IconButton>
           </S.InputRequestDiv>
+          <S.BackDiv>
+            <S.BackButton label="Voltar" onClick={backHome} />
+          </S.BackDiv>
         </S.FilterDiv>
         <S.RequestDiv>
           {requestList !== undefined ? (

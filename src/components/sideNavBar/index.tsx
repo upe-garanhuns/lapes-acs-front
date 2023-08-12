@@ -111,7 +111,6 @@ export default function SideNavBar() {
           </S.LiItems>
         </S.UlItems>
       </S.Div>
-
       <S.BlankDiv>
         <S.UlItems>
           <S.LiItems></S.LiItems>
