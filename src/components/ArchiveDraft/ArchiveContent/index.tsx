@@ -15,6 +15,7 @@ export type ComponentProps = {
 const ArchiveContent: React.FC<ComponentProps> = ({
   id,
   token,
+  type,
   closeModal,
   updateRequests
 }) => {
@@ -27,7 +28,7 @@ const ArchiveContent: React.FC<ComponentProps> = ({
     <S.Container>
       <S.Message>Deseja arquivar essa solicitação?</S.Message>
       <S.Warning>
-        {warning ? 'Não foi possível arquivar este rascunho' : null}
+        {warning ? 'Não foi possível realizar essa ação' : null}
       </S.Warning>
       <S.Buttons>
         <S.CancelArchive onClick={closeModal}>Cancelar</S.CancelArchive>
@@ -37,6 +38,7 @@ const ArchiveContent: React.FC<ComponentProps> = ({
           closeModal={closeModal}
           failureWarning={setWarningText}
           onSuccess={updateRequests}
+          type={type}
         ></ArchiveButton>
       </S.Buttons>
     </S.Container>

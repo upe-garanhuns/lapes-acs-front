@@ -14,6 +14,8 @@ import moment from 'moment';
 
 export default function SolicitacoesArquivadas() {
   const [requestList, setRequestList] = useState<Array<UserRequest>>([]);
+  const [reloadEffect, setReloadEffect] = useState<number>(0);
+  const [archive, setArchive] = useState<boolean>(false);
   const router = useRouter();
   const token = Cookies.get('token') || '';
 
@@ -22,11 +24,16 @@ export default function SolicitacoesArquivadas() {
       const requestResponse = await getArchived(token);
       setRequestList(requestResponse);
     };
+    setArchive(true);
     archiveRequest();
-  }, [token]);
+  }, [token, reloadEffect]);
 
   function backHome() {
     router.push('/home');
+  }
+
+  function reloadPag() {
+    setReloadEffect((prev) => prev + 1);
   }
 
   return (
@@ -62,6 +69,8 @@ export default function SolicitacoesArquivadas() {
                   reloadRequestDelete={function (): void {
                     throw new Error('Function not implemented.');
                   }}
+                  reloadRequestArchive={reloadPag}
+                  type={archive}
                 />
               ))}
             </>
