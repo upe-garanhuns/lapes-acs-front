@@ -23,7 +23,7 @@ export default function SolicitacoesArquivadas() {
     };
     archiveRequest();
   }, [token]);
-  console.log(requestList);
+
   return (
     <S.Container>
       <S.Content>
