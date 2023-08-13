@@ -41,6 +41,8 @@ export default function RegistePageTest({ params }: idProps) {
   const [minDate, setMinDate] = useState<string>('');
   const [certificateIndex, setCertificateIndex] = useState(0);
   const [isReadyToSent, setIsReadyToSent] = useState(false);
+  const [isPdfViewerVisible, setIsPdfViewerVisible] = useState(false);
+
   const router = useRouter();
 
   function delay(time: number) {
@@ -218,6 +220,7 @@ export default function RegistePageTest({ params }: idProps) {
       setSelectedEixo('');
       setMinDate('');
       setCertificateIndex(certificateIndex + 1);
+      setIsPdfViewerVisible(false); // Definir como falso após salvar o certificado
       if (certificateData.length == certificateIndex + 1) {
         setIsReadyToSent(true);
       }
@@ -331,7 +334,9 @@ export default function RegistePageTest({ params }: idProps) {
               <S.SaveButton onClick={verifyInputs}>
                 Salvar certificado
               </S.SaveButton>
-              <S.ViewButton>Visualizar certificado</S.ViewButton>
+              <S.ViewButton onClick={() => setIsPdfViewerVisible(true)}>
+                Visualizar certificado
+              </S.ViewButton>
             </S.ButtonsContainer>
           ) : (
             <S.ButtonsContainer>
@@ -343,7 +348,14 @@ export default function RegistePageTest({ params }: idProps) {
         </S.InputArea>
       </S.FormContainer>
       <S.ContainerPdf>
-        <PdfViewer pdfId={'507'} /> {/* Aqui deve passar o Id do certificado */}
+        {isPdfViewerVisible && certificateData.length > 0 && (
+          <S.ContainerPdf>
+            <PdfViewer
+              pdfId={certificateData[certificateIndex]?.id.toString()}
+            />
+          </S.ContainerPdf>
+        )}
+
         {/* pdfId={certificateData[certificateIndex]?.id.toString()} */}
       </S.ContainerPdf>
       <S.CertificatesContainer>

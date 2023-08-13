@@ -26,7 +26,7 @@ const PDFViewer = ({ pdfId }) => {
     };
 
     fetchPDFData();
-  }, []);
+  }, [pdfId]);
 
   return (
     <div>
