@@ -262,7 +262,32 @@ export function Register() {
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     e.preventDefault();
+    // console.log(signUpData);
     try {
+      // console.log('Erro do nome: ' + errorName);
+      // console.log('Erro do cpf: ' + errorCpf);
+      // console.log('Erro do telefone: ' + errorPhone);
+      // console.log('Erro do Curso: ' + errorCourse);
+      // console.log('Erro do periodo: ' + errorGrade);
+      // console.log('Erro do email: ' + errorEmail);
+      // console.log('Erro do registro: ' + errorRegistry);
+      // console.log('Erro do senha: ' + errorPass);
+      // console.log('Erro do copiaSenha: ' + errorSamePass);
+      // console.log('Erro do errorCep: ' + errorCep);
+      // console.log('Erro do errorNumber: ' + errorNumber);
+      // console.log(
+      //   'Erro ' + errorName &&
+      //     errorCpf &&
+      //     errorPhone &&
+      //     errorCourse &&
+      //     errorGrade &&
+      //     errorEmail &&
+      //     errorRegistry &&
+      //     errorPass &&
+      //     errorSamePass &&
+      //     errorCep &&
+      //     errorNumber == true
+      // );
       if (
         errorName &&
         errorCpf &&
@@ -274,12 +299,13 @@ export function Register() {
         errorPass &&
         errorSamePass &&
         errorCep &&
-        errorNumber !== true
+        errorNumber == true
       ) {
-        warnToast('preencha todos os campos corretamente para cadastrar!');
+        await createUser(signUpData);
+        sucessToast('Acesse o e-mail cadastrado para verificar a sua conta!');
+      } else {
+        warnToast('Preencha todos os campos corretamente para cadastrar!');
       }
-      await createUser(signUpData);
-      sucessToast('Acesse o e-mail cadastrado para verificar a sua conta!');
     } catch (error) {
       errorToast('Houve algum erro ao tentar se cadastrar!');
       console.log(error);
@@ -424,6 +450,8 @@ export function Register() {
                 label="Período:"
                 placeholder="Período"
                 type="number"
+                min={1}
+                max={12}
                 onChange={handleChangeGrade}
               />
               {!errorGrade && (
