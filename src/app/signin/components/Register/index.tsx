@@ -262,32 +262,7 @@ export function Register() {
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     e.preventDefault();
-    // console.log(signUpData);
     try {
-      // console.log('Erro do nome: ' + errorName);
-      // console.log('Erro do cpf: ' + errorCpf);
-      // console.log('Erro do telefone: ' + errorPhone);
-      // console.log('Erro do Curso: ' + errorCourse);
-      // console.log('Erro do periodo: ' + errorGrade);
-      // console.log('Erro do email: ' + errorEmail);
-      // console.log('Erro do registro: ' + errorRegistry);
-      // console.log('Erro do senha: ' + errorPass);
-      // console.log('Erro do copiaSenha: ' + errorSamePass);
-      // console.log('Erro do errorCep: ' + errorCep);
-      // console.log('Erro do errorNumber: ' + errorNumber);
-      // console.log(
-      //   'Erro ' + errorName &&
-      //     errorCpf &&
-      //     errorPhone &&
-      //     errorCourse &&
-      //     errorGrade &&
-      //     errorEmail &&
-      //     errorRegistry &&
-      //     errorPass &&
-      //     errorSamePass &&
-      //     errorCep &&
-      //     errorNumber == true
-      // );
       if (
         errorName &&
         errorCpf &&
