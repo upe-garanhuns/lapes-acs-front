@@ -334,8 +334,8 @@ export function Register() {
               <S.ComponentsContainer>
                 <S.Label>Telefone:</S.Label>
                 <S.RegisterInputMask
-                  mask="(99) 9999-9999"
-                  placeholder="(__) ____-____"
+                  mask="(99) 9 9999-9999"
+                  placeholder="(__) _ ____-____"
                   onChange={handleChangePhone}
                 />
                 {!errorPhone && (
