@@ -1,5 +1,6 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 //import { request } from '../../services/request';
@@ -10,6 +11,8 @@ import { sucessToast } from '../../functions/sucessToast';
 import { newRequest } from '../../services/newRequest';
 import { pagination } from '../../services/pagination';
 import { PageValue } from '../../services/pagination/types';
+import { getUserInformation } from '../../services/user';
+import { UserInformation } from '../../services/user/types';
 import { getUserHours } from '../../services/userHours';
 import { UserHours } from '../../services/userHours/types';
 import HourCount from './components/HourCount';
@@ -22,11 +25,14 @@ import Cookies from 'js-cookie';
 import moment from 'moment';
 
 export default function Home() {
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [hours, setHours] = useState<UserHours>();
   const [requestsPag, setRequestsPag] = useState<PageValue>();
   const [currentPage, setCurrentPage] = useState<number>(0);
   const [requestId, setRequestId] = useState<number>(0);
+  const [userInfo, setUserInfo] = useState<UserInformation>();
+  const [reloadEffect, setReloadEffect] = useState<number>(0);
 
   const token = Cookies.get('token') || '';
 
@@ -44,9 +50,15 @@ export default function Home() {
       });
       setRequestsPag(paginationResponse);
     };
+
+    const userInfo = async () => {
+      const userResponse = await getUserInformation(token);
+      setUserInfo(userResponse);
+    };
     requestPagination(currentPage);
     userHours();
-  }, [token, currentPage]);
+    userInfo();
+  }, [token, currentPage, reloadEffect]);
 
   const fetchRequest = async () => {
     try {
@@ -54,6 +66,7 @@ export default function Home() {
       setRequestId(createNewRequest);
       setIsOpen(true);
       sucessToast('Rascunho criado com sucesso');
+      reloadPag();
     } catch (error) {
       errorToast('Ocorreu um erro! Só é permitido possuir dois rascunhos');
       setIsOpen(false);
@@ -66,6 +79,10 @@ export default function Home() {
 
   function closeNewRequestModal() {
     setIsOpen(false);
+  }
+
+  function reloadPag() {
+    setReloadEffect((prev) => prev + 1);
   }
 
   const handlePageChangeNext = () => {
@@ -82,15 +99,37 @@ export default function Home() {
     }
   };
 
+  const confirmationScreen = () => {
+    router.push('/confirmacao-cadastro');
+  };
+
   return (
     <S.Container>
       <S.ContentDiv>
         <S.TitleDiv>
-          <S.UserName>Bem vindo, Fulano!</S.UserName>
+          {userInfo && (
+            <S.UserName>
+              {`Bem vindo(a)`}, {userInfo.nomeCompleto.split(' ')[0]}!
+            </S.UserName>
+          )}
+
           <S.Line />
         </S.TitleDiv>
         <S.FunctionContainer>
-          <div>
+          {userInfo && userInfo.verificado == false ? (
+            <S.VerifyDiv>
+              <S.VerifyMessage>
+                Para acessar as funcionalidades,
+                <S.VerifyBut onClick={confirmationScreen}>
+                  verifique sua conta.
+                </S.VerifyBut>
+              </S.VerifyMessage>
+            </S.VerifyDiv>
+          ) : (
+            <></>
+          )}
+
+          <S.Div>
             {hours ? (
               <HourCount
                 gesHours={hours.horasGestao}
@@ -101,7 +140,7 @@ export default function Home() {
             ) : (
               <HourCount gesHours={0} extHours={0} pesHours={0} ensHours={0} />
             )}
-          </div>
+          </S.Div>
 
           <S.Div>
             <S.RequestDiv>
@@ -139,6 +178,7 @@ export default function Home() {
                         key={item.id}
                         token={token}
                         isDraft={false}
+                        reloadRequestDelete={reloadPag}
                       />
                     ))}
                   </>
@@ -193,6 +233,7 @@ export default function Home() {
                     cancelRequest={closeNewRequestModal}
                     requestId={requestId}
                     token={token}
+                    isNewRequest={true}
                   />
                 }
                 closeText={<XCircle size={32} color="#FF0000" />}

@@ -78,13 +78,14 @@ export default function ViewRequestContent(props: ViewRequestProps) {
         <S.Division />
         {displayedItems.map((certificado) => (
           <CertificateList
-            requestId={id}
-            eixoAtividade={''}
-            atividade={''}
-            certificateId={certificado.id}
             key={certificado.id}
-            hours={certificado.horas}
-            {...certificado}
+            eixoAtividade={certificado.eixoAtividade}
+            statusCertificado={certificado.statusCertificado}
+            atividade={certificado.atividade}
+            hours={certificado.cargaHoraria}
+            requestId={id}
+            certificateId={certificado.id}
+            titulo={certificado.titulo}
           />
         ))}
         <Pagination

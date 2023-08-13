@@ -9,13 +9,15 @@ export type ComponentProps = {
   token: string;
   id: number;
   closeModal: () => void;
+  updateRequests: () => void;
 };
 
 const DeleteDraftContent: React.FC<ComponentProps> = ({
   type,
   id,
   token,
-  closeModal
+  closeModal,
+  updateRequests
 }) => {
   const [warning, setWarninig] = useState(false);
 
@@ -36,6 +38,7 @@ const DeleteDraftContent: React.FC<ComponentProps> = ({
           type={type}
           closeModal={closeModal}
           failureWarning={setWarningText}
+          onSuccess={updateRequests}
         ></DeleteDraftButton>
       </S.Buttons>
     </S.Container>

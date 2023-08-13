@@ -1,18 +1,17 @@
 import styled from 'styled-components';
-import { FiUser, FiPenTool } from 'react-icons/fi';
 
 export const Background = styled.div`
-    position:fixed;
-    top:0;
-    left:0;
-    right:0;
-    bottom:0;
-    background-color:rgba(0,0,0,0.5);
-    backdrop-filter:blur(1px);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(1px);
 `;
 
 export const Container = styled.div`
-  background-color: #D9D9D9;
+  background-color: #d9d9d9;
   border-radius: 10px;
   padding: 20px;
   width: 280px;
@@ -24,68 +23,60 @@ export const Container = styled.div`
 `;
 
 export const ProfilePhoto = styled.img`
-    width:80px;
-    height:80px;
-    border-radius:50%;
-    display:block;
-    margin-left:auto;
-    margin-right:auto;
-    box-shadow:0px 4px 4px rgba(0,0,0,0.25);
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 `;
 
 export const ProfileIconContainer = styled.div`
-    width:80px;
-    height:80px;
-    border-radius:50%;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    margin-left:auto;
-    margin-right:auto;
-    box-shadow:0px 4px 4px rgba(0,0,0,0.25);
-    background-color:white;
-`;
-
-export const ProfileIcon = styled(FiUser)`
-    font-size:60px;
-
-    color:#253555;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  background-color: white;
 `;
 
 export const Name = styled.h2`
-font-size:20px;
+  font-size: 20px;
 
-font-weight:bold;
-text-align:center;
-padding:5px;
+  font-weight: bold;
+  text-align: center;
+  padding: 5px;
 `;
 
 export const HorizontalLine = styled.hr`
-border-top:2px solid #1C3C78;
-
+  border-top: 2px solid #1c3c78;
 `;
 
 export const InfoText = styled.p`
-font-size:15px;
-font-weight:regular;
-text-align:center;
-padding:5px;
+  font-size: 15px;
+  font-weight: regular;
+  text-align: center;
+  padding: 5px;
 `;
 
 export const EditButton = styled.button`
-position:absolute;
-top:10px;
-right:10px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
 
-background:none;
-border:none;
+  background: none;
+  border: none;
 
-cursor:pointer;
+  cursor: pointer;
 
-& > svg {
-font-size:20px;
+  & > svg {
+    font-size: 20px;
 
-color:#253555;
-
-}
+    color: #253555;
+  }
 `;

@@ -9,6 +9,5 @@ export const createUser = async (signUpData: object): Promise<object> => {
       'Content-Type': 'application/json'
     }
   });
-  console.log(response);
   return response;
 };
