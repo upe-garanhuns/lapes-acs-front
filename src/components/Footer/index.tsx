@@ -1,8 +1,11 @@
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 
 import * as S from './styles';
 
 export default function Footer() {
+  const pathName = usePathname();
+  if (pathName === '/signin') return null;
   return (
     <S.Container>
       <S.ImageContainer>
