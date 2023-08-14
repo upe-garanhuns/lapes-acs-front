@@ -123,19 +123,20 @@ export const NewRequest = ({
     const fileRegex = /^.+\.pdf$/;
     const maxFileSize = 1048576;
 
-    const filteredFiles = Array.from(files).filter((file) => {
-      if (fileRegex.test(file.name)) {
-        if (file.size > maxFileSize) {
-          errorToast('Só é possível enviar arquivos com menos de 1mb');
-          return false;
+    if (files) {
+      console.log(files);
+      for (let index = 0; index < files.length; index++) {
+        if (fileRegex.test(files[index].name)) {
+          if (files[index].size < maxFileSize) {
+            setUploadedFiles((prevFiles) => [...prevFiles, files[index]]);
+          } else {
+            errorToast('Só é possível enviar arquivos com menos de 1mb');
+          }
+        } else {
+          errorToast('Só é possível enviar PDF');
         }
-      } else {
-        errorToast('Só é possível enviar PDF');
       }
-      return fileRegex.test(file.name);
-    });
-
-    setUploadedFiles((prevFiles) => [...prevFiles, ...filteredFiles]);
+    }
   };
 
   return (
