@@ -3,7 +3,7 @@ export function checkPhone(numero: string): boolean {
   numero = numero.replace(/[^\d]/g, '');
 
   // Verifica se o número possui 10 dígitos
-  if (numero.length !== 11) {
+  if (numero.length !== 10) {
     return false;
   }
 
