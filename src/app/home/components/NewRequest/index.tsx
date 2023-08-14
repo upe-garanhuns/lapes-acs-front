@@ -119,9 +119,23 @@ export const NewRequest = ({
   const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
     const files = event.dataTransfer.files;
-    if (files && files.length > 0) {
-      setUploadedFiles((prevFiles) => [...prevFiles, ...Array.from(files)]);
-    }
+
+    const fileRegex = /^.+\.pdf$/;
+    const maxFileSize = 1048576;
+
+    const filteredFiles = Array.from(files).filter((file) => {
+      if (fileRegex.test(file.name)) {
+        if (file.size > maxFileSize) {
+          errorToast('Só é possível enviar arquivos com menos de 1mb');
+          return false;
+        }
+      } else {
+        errorToast('Só é possível enviar PDF');
+      }
+      return fileRegex.test(file.name);
+    });
+
+    setUploadedFiles((prevFiles) => [...prevFiles, ...filteredFiles]);
   };
 
   return (
