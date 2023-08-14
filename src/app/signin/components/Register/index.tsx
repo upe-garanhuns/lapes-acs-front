@@ -26,7 +26,11 @@ import * as S from './style';
 
 import { MapPin, User, Eye, EyeSlash } from '@phosphor-icons/react';
 
-export function Register() {
+type ComponentProps = {
+  close: () => void;
+};
+
+export function Register({ close }: ComponentProps) {
   // hooks usados para setar mensagem de erros dos inputs - jamu
   const {
     errorName,
@@ -280,6 +284,7 @@ export function Register() {
       }
       await createUser(signUpData);
       sucessToast('Acesse o e-mail cadastrado para verificar a sua conta!');
+      close();
     } catch (error) {
       errorToast('Houve algum erro ao tentar se cadastrar!');
       console.log(error);
