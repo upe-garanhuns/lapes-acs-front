@@ -14,7 +14,12 @@ export default function SideNavBar() {
   const router = useRouter();
   const pathName = usePathname();
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  if (pathName === '/signin' || pathName === '/not-found') return null;
+  if (
+    pathName === '/signin' ||
+    pathName === '/not-found' ||
+    pathName === '/confirmacao-cadastro'
+  )
+    return null;
 
   const openCloseNav = () => {
     if (isOpen == false) {
