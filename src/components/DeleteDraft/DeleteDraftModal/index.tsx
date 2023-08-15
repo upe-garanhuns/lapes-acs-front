@@ -7,7 +7,6 @@ import * as S from './styles';
 
 import { XCircle, Trash } from '@phosphor-icons/react';
 export type ComponentProps = {
-  type: boolean;
   token: string;
   id: number;
   updateRequestsDelete: () => void;
@@ -36,7 +35,6 @@ export default function DeleteDraftModal(props: ComponentProps) {
         // eslint-disable-next-line react/no-children-prop
         children={
           <DeleteDraftContent
-            type={props.type}
             token={props.token}
             id={props.id}
             closeModal={closeModal}

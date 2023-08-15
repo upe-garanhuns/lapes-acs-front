@@ -4,5 +4,9 @@ export function checkRegistry(numero: string): boolean {
     return false;
   }
 
+  if (Number.isNaN(parseInt(numero))) {
+    return false;
+  }
+
   return true;
 }

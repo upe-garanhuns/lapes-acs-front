@@ -12,7 +12,10 @@ export default function ConfirmarForm() {
   const [codigoVerificacao, setCodigoVerificacao] = useState('');
 
   const router = useRouter();
-
+  const returnHome = (event) => {
+    event.preventDefault();
+    router.push('home');
+  };
   const handleCodigoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCodigoVerificacao(event.target.value);
   };
@@ -27,18 +30,15 @@ export default function ConfirmarForm() {
         // Caso o código de verificação não esteja presente no cookie, trate o erro
         throw new Error('Código de verificação não encontrado no cookie.');
       }
-      await verificarCodigo(codigoVerificacao, token)
-        .then((res) => {
-          if (res.status == 200) {
-            sucessToast('Usuário cadastrado com sucesso!');
-            router.push('/home'); // Redireciona o usuário para a página /home
-            return;
-          }
-        })
-        .catch((error) => {
+      await verificarCodigo(codigoVerificacao, token).then((res) => {
+        if (res.status == 200) {
+          sucessToast('Usuário cadastrado com sucesso!');
+          router.push('/home'); // Redireciona o usuário para a página /home
+          return;
+        } else if (res.status == 406) {
           errorToast('Código incorreto, verifique e confirme novamente!');
-          console.log(error);
-        });
+        }
+      });
     } catch (error) {
       console.error(error);
       alert(
