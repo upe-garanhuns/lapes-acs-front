@@ -10,9 +10,12 @@ import { XCircle } from '@phosphor-icons/react';
 
 type ComponentProps = {
   handleIsCompleted: () => boolean;
+  requestId: number;
 };
+
 export default function ConfirmationModal({
-  handleIsCompleted
+  handleIsCompleted,
+  requestId
 }: ComponentProps) {
   const [isOpen, setIsOpen] = useState(false);
   const closeModal = () => {
@@ -36,7 +39,7 @@ export default function ConfirmationModal({
         closeModalArea={closeModalArea}
         closeModal={closeModal}
         // eslint-disable-next-line react/no-children-prop
-        children={<ConfirmationPagination />}
+        children={<ConfirmationPagination requestId={requestId} />}
         closeText={<XCircle size={30} color="#FF0000" />}
       ></S.ModalContainer>
     </div>

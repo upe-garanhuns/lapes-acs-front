@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 
-import ArchiveDraftContent from '../ArchiveDraftContent';
+import ArchiveDraftContent from '../ArchiveContent';
 import * as S from './styles';
 
 import { XCircle, Archive } from '@phosphor-icons/react';
@@ -11,9 +11,15 @@ export type ComponentProps = {
   type: boolean;
   token: string;
   id: number;
+  updateRequestsArchive: () => void;
 };
 
-export default function ArchiveDraftModal({ type, token, id }: ComponentProps) {
+export default function ArchiveModal({
+  type,
+  token,
+  id,
+  updateRequestsArchive
+}: ComponentProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   const closeModal = () => {
@@ -46,6 +52,7 @@ export default function ArchiveDraftModal({ type, token, id }: ComponentProps) {
           token={token}
           id={id}
           closeModal={closeModal}
+          updateRequests={updateRequestsArchive}
         />
       </S.ModalContainer>
     </div>

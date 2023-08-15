@@ -6,9 +6,13 @@ import { useState } from 'react';
 
 import { login } from '../../../../services/signIn';
 import { Login } from '../../../../services/signIn/types';
+import { checkEmail } from '../../functions/checkEmail';
+import { checkPassWord } from '../../functions/checkPassword';
 import LoginButton from '../LoginButton';
 import { LoginInput } from '../LoginInput';
 import { Register } from '../Register';
+import { useSetData } from './hooks/useSetData';
+import { useSetValid } from './hooks/useSetValid';
 import * as S from './styles';
 
 import {
@@ -22,14 +26,18 @@ import Cookies from 'js-cookie';
 
 export default function LoginForm() {
   const router = useRouter();
-  const [isPasswordVisible, setIsPasswordVisibility] = useState(false);
-  const [email, setEmail] = useState('');
-  const [isValidEmailAndPassword, setIsValidEmailAndPassword] =
-    useState<boolean>(true);
-  const [isValidEmail, setIsValidEmail] = useState<boolean>(true);
-  const [isValidPassword, setIsValidPassword] = useState<boolean>(true);
-  const [password, setPassword] = useState('');
   const [OpenRegister, setOpenRegister] = useState(false);
+  const { email, setEmail, password, setPassword } = useSetData();
+  const {
+    isPasswordVisible,
+    setIsPasswordVisibility,
+    isValidEmailAndPassword,
+    setIsValidEmailAndPassword,
+    isValidEmail,
+    setIsValidEmail,
+    isValidPassword,
+    setIsValidPassword
+  } = useSetValid();
 
   const iconEye = isPasswordVisible ? (
     <Eye size={20} onClick={handlePasswordVisibility} />
@@ -42,11 +50,24 @@ export default function LoginForm() {
     senha: password
   };
 
+  function onChangeEmail(e: { target: { value: string } }) {
+    const { value } = e.target;
+    setEmail(value);
+    setIsValidEmail(checkEmail(value));
+  }
+
+  function onChangePassword(e: { target: { value: string } }) {
+    const { value } = e.target;
+    setPassword(value);
+    setIsValidPassword(checkPassWord(value));
+  }
+
   function handlePasswordVisibility() {
     setIsPasswordVisibility(!isPasswordVisible);
   }
 
-  function registerOpen() {
+  function registerOpen(e: React.MouseEvent<HTMLButtonElement>) {
+    e.preventDefault();
     setOpenRegister(true);
   }
 
@@ -57,12 +78,10 @@ export default function LoginForm() {
   async function handleLogin(ev: React.FormEvent<EventTarget>) {
     ev.preventDefault();
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    setIsValidEmail(emailRegex.test(email));
+    setIsValidEmail(checkEmail(email));
+    setIsValidPassword(checkPassWord(password));
 
-    const isPasswordValid = password.length >= 8 && password.length <= 16;
-
-    if (isValidEmail && isPasswordValid) {
+    if (isValidEmail && isValidPassword && password !== '' && email != '') {
       try {
         const response = await login(signInData);
         const tokenDuration = new Date(Date.now() + 1000 * 60 * 48); //48min
@@ -70,14 +89,11 @@ export default function LoginForm() {
         Cookies.set('token', response.token, {
           expires: tokenDuration
         });
-        setIsValidEmail(true);
+
         router.push('/home');
       } catch (error) {
         setIsValidEmailAndPassword(false);
       }
-      //console.log('Email: ' + email + ' senha: ' + password);
-    } else {
-      setIsValidPassword(false);
     }
   }
 
@@ -90,7 +106,7 @@ export default function LoginForm() {
         height={180}
       />
       {!isValidEmailAndPassword ? (
-        <S.ErrorSpan>Email e/ou senha inválidos</S.ErrorSpan>
+        <S.Error>Email e/ou senha inválidos</S.Error>
       ) : (
         <></>
       )}
@@ -99,12 +115,10 @@ export default function LoginForm() {
           <LoginInput
             placeholder="E-mail"
             startAdornment={<User size={20} />}
-            onChange={(ev) => setEmail(ev.target.value)}
+            onChange={onChangeEmail}
           />
           {!isValidEmail ? (
-            <S.ErrorSpan>
-              E-mail inválido {'(Ex.: email@email.com)'}
-            </S.ErrorSpan>
+            <S.Error>E-mail inválido {'(Ex.: email@upe.br)'}</S.Error>
           ) : (
             <></>
           )}
@@ -115,12 +129,13 @@ export default function LoginForm() {
             type={!isPasswordVisible ? 'password' : 'text'}
             startAdornment={<LockSimple size={20} />}
             endAdornment={iconEye}
-            onChange={(ev) => setPassword(ev.target.value)}
+            onChange={onChangePassword}
           />
           {!isValidPassword ? (
-            <S.ErrorSpan>
-              Senha inválida! É necessário ter entre 8 e 16 dígitos
-            </S.ErrorSpan>
+            <S.Error>
+              Senha inválida! É necessário ter pelo menos 8 digitos, uma letra
+              maiúscula, um número e um caractere especial.
+            </S.Error>
           ) : (
             <></>
           )}
@@ -129,8 +144,14 @@ export default function LoginForm() {
       <S.ButtonContainer>
         <LoginButton label="Entrar" type="submit" />
         <S.LinkContainer>
-          <S.PasswordRecovery href="">Esqueceu a senha?</S.PasswordRecovery>
-          <S.SignUp onClick={registerOpen}>Cadastrar</S.SignUp>
+          <S.PasswordRecovery>Esqueceu a senha?</S.PasswordRecovery>
+          <S.SignUp
+            onClick={(e: React.MouseEvent<HTMLButtonElement>) =>
+              registerOpen(e)
+            }
+          >
+            Cadastrar
+          </S.SignUp>
           <S.ModalContainer
             closeModalArea={registerClose}
             isOpen={OpenRegister}

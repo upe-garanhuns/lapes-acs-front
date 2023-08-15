@@ -5,17 +5,17 @@ import { DeleteDraftButton } from '../DeleteDraftButton/index';
 import * as S from './styles';
 
 export type ComponentProps = {
-  type: boolean;
   token: string;
   id: number;
   closeModal: () => void;
+  updateRequests: () => void;
 };
 
 const DeleteDraftContent: React.FC<ComponentProps> = ({
-  type,
   id,
   token,
-  closeModal
+  closeModal,
+  updateRequests
 }) => {
   const [warning, setWarninig] = useState(false);
 
@@ -33,9 +33,9 @@ const DeleteDraftContent: React.FC<ComponentProps> = ({
         <DeleteDraftButton
           id={id}
           token={token}
-          type={type}
           closeModal={closeModal}
           failureWarning={setWarningText}
+          onSuccess={updateRequests}
         ></DeleteDraftButton>
       </S.Buttons>
     </S.Container>

@@ -1,9 +1,13 @@
 'use client';
 import { useRouter } from 'next/navigation';
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 import { errorToast } from '../../../../functions/errorToast';
+import { sucessToast } from '../../../../functions/sucessToast';
+import { deleteCertificate } from '../../../../services/deleteCertificate';
 import { newCertificate } from '../../../../services/newCertificate';
+import { getRequest } from '../../../../services/request';
+import { Certificate } from '../../../../services/request/types';
 import * as S from './style';
 
 import { XCircle, FileText, FilePlus } from '@phosphor-icons/react';
@@ -12,20 +16,38 @@ type ComponentProps = {
   cancelRequest: () => void;
   requestId: number | undefined;
   token: string;
+  isNewRequest: boolean;
 };
 
 export const NewRequest = ({
   cancelRequest,
   requestId,
-  token
+  token,
+  isNewRequest
 }: ComponentProps) => {
+  const [certificateData, setCertificateData] = useState<Certificate[]>([]);
   const router = useRouter();
   const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
   const certifacatesId = [];
 
+  const request = useCallback(async () => {
+    try {
+      const requestResponse = await getRequest(requestId, token);
+      setCertificateData(requestResponse.certificados ?? []);
+    } catch (error) {
+      errorToast('Ocorreu um erro! Tente novamente mais tarde');
+    }
+  }, [requestId, token]);
+
+  useEffect(() => {
+    if (!isNewRequest) {
+      request();
+    }
+  }, [isNewRequest, request, requestId, token]);
+
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const fileRegex = /^.+\.pdf$/;
-    const mb = 1048576;
+    const mb = 1048576; //1mb
 
     const files = event.target.files;
     if (files) {
@@ -52,14 +74,34 @@ export const NewRequest = ({
     });
   };
 
+  const handleDeleteCertificate = async (certificateId: number | undefined) => {
+    try {
+      if (certificateId != undefined) {
+        await deleteCertificate(certificateId, token);
+        sucessToast('Certificado deletado com sucesso!');
+        request();
+      }
+    } catch (error) {
+      errorToast('Ocorreu um erro ao deletar o certificado!');
+    }
+  };
+
   const handleNext = () => {
-    // Lógica para avançar para a próxima etapa
-    fetchCertificate(token, requestId);
-    router.push(`/registrar-certificado/${requestId}`);
+    if (uploadedFiles.length > 0 || certificateData.length > 0) {
+      try {
+        if (requestId != undefined) {
+          fetchCertificate(token, requestId);
+          router.push(`/registrar-certificado/${requestId}`);
+        }
+      } catch (error) {
+        errorToast('Ocorreu um erro ao cadastrar os certificados!');
+      }
+    } else {
+      errorToast('Insira um arquivo!');
+    }
   };
 
   const fetchCertificate = async (userToken: string, id: number) => {
-    console.log(uploadedFiles);
     for (let index = 0; index < uploadedFiles.length; index++) {
       const addCertificate = await newCertificate(
         userToken,
@@ -68,7 +110,6 @@ export const NewRequest = ({
       );
       certifacatesId.push(addCertificate);
     }
-    localStorage.setItem('requestId', String(requestId));
   };
 
   const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
@@ -78,8 +119,23 @@ export const NewRequest = ({
   const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
     const files = event.dataTransfer.files;
-    if (files && files.length > 0) {
-      setUploadedFiles((prevFiles) => [...prevFiles, ...Array.from(files)]);
+
+    const fileRegex = /^.+\.pdf$/;
+    const maxFileSize = 1048576;
+
+    if (files) {
+      console.log(files);
+      for (let index = 0; index < files.length; index++) {
+        if (fileRegex.test(files[index].name)) {
+          if (files[index].size < maxFileSize) {
+            setUploadedFiles((prevFiles) => [...prevFiles, files[index]]);
+          } else {
+            errorToast('Só é possível enviar arquivos com menos de 1mb');
+          }
+        } else {
+          errorToast('Só é possível enviar PDF');
+        }
+      }
     }
   };
 
@@ -108,6 +164,18 @@ export const NewRequest = ({
       </S.FileInputContainer>
       <S.FileListContainer>
         <S.FileList>
+          {certificateData.map((certificate) => (
+            <S.FileItem key={certificate.id}>
+              <S.FileName>{`Certificado ${certificate.id}.pdf`}</S.FileName>
+              <S.FileRemoveButton>
+                <XCircle
+                  color="#FF0000"
+                  size={20}
+                  onClick={() => handleDeleteCertificate(certificate.id)}
+                />
+              </S.FileRemoveButton>
+            </S.FileItem>
+          ))}
           {uploadedFiles.map((file, index) => (
             <S.FileItem key={index}>
               <S.FileName>{file.name}</S.FileName>
