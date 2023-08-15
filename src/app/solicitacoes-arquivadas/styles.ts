@@ -1,4 +1,3 @@
-import { ActiveLink } from '../../components/ActiveLink';
 import Button from '../../components/Button';
 import { Input } from '../../components/Input';
 
@@ -15,6 +14,14 @@ export const Container = styled.main`
 export const Content = styled.div`
   width: 90%;
   margin-left: 100px;
+
+  @media screen and (max-width: 767px) {
+    width: 75%;
+  }
+
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+    width: 80%;
+  }
 `;
 export const TitleDiv = styled.div`
   width: 100%;
@@ -35,6 +42,15 @@ export const FilterDiv = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+
+  @media screen and (max-width: 767px) {
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+  }
 `;
 
 export const InputRequestDiv = styled.div`
@@ -85,6 +101,9 @@ export const BackButton = styled(Button)`
   border-radius: 20px;
   font-size: 1em;
   font-weight: bold;
+  @media screen and (max-width: 767px) {
+    width: 15vw;
+  }
 `;
 
 export const BackDiv = styled.div``;
