@@ -33,6 +33,7 @@ export default function Home() {
   const [requestId, setRequestId] = useState<number>(0);
   const [userInfo, setUserInfo] = useState<UserInformation>();
   const [reloadEffect, setReloadEffect] = useState<number>(0);
+  const [archive, setArchive] = useState<boolean>(false);
 
   const token = Cookies.get('token') || '';
 
@@ -56,6 +57,7 @@ export default function Home() {
       setUserInfo(userResponse);
     };
     requestPagination(currentPage);
+    setArchive(false);
     userHours();
     userInfo();
   }, [token, currentPage, reloadEffect]);
@@ -179,6 +181,8 @@ export default function Home() {
                         token={token}
                         isDraft={false}
                         reloadRequestDelete={reloadPag}
+                        reloadRequestArchive={reloadPag}
+                        type={archive}
                       />
                     ))}
                   </>
