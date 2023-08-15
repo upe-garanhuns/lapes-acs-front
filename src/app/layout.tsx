@@ -1,7 +1,9 @@
+'use client';
 import { Inter } from 'next/font/google';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+import Footer from '../components/Footer';
 import SideNavBar from '../components/sideNavBar';
 import { StyledComponentRegistry } from '../lib';
 
@@ -27,6 +29,7 @@ export default function RootLayout({
         <StyledComponentRegistry>
           <SideNavBar />
           <main>{children}</main>
+          <Footer />
         </StyledComponentRegistry>
       </body>
     </html>
