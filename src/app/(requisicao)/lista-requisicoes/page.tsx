@@ -1,5 +1,9 @@
 'use client';
 
 export default function TablePage() {
-  return <h1>Página de requisições</h1>;
+  return (
+    <div>
+      <h1>Página de requisições</h1>
+    </div>
+  );
 }

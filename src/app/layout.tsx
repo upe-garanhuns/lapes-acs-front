@@ -1,8 +1,9 @@
 import { Inter } from 'next/font/google';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-import Navbar from '../components/Navbar';
+import SideNavBar from '../components/sideNavBar';
 import { StyledComponentRegistry } from '../lib';
-import { Providers } from './providers';
 
 import 'primereact/resources/themes/saga-blue/theme.css';
 import 'primereact/resources/primereact.min.css';
@@ -22,11 +23,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
+        <ToastContainer />
         <StyledComponentRegistry>
-          <Providers>
-            <Navbar />
-            <main>{children}</main>
-          </Providers>
+          <SideNavBar />
+          <main>{children}</main>
         </StyledComponentRegistry>
       </body>
     </html>

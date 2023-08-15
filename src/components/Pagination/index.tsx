@@ -32,10 +32,16 @@ export const Pagination = ({
   }
 
   const onNext = () => {
+    if (Math.ceil(totalCount / pageSize) == currentPage) {
+      return null;
+    }
     onPageChange(currentPage + 1);
   };
 
   const onPrevious = () => {
+    if (currentPage - 1 < 1) {
+      return null;
+    }
     onPageChange(currentPage - 1);
   };
 
