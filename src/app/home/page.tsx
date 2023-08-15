@@ -34,7 +34,6 @@ export default function Home() {
   const [userInfo, setUserInfo] = useState<UserInformation>();
   const [reloadEffect, setReloadEffect] = useState<number>(0);
   const [archive, setArchive] = useState<boolean>(false);
-  const [disableButton, setDisableButton] = useState(true);
 
   const token = Cookies.get('token') || '';
 
@@ -60,10 +59,6 @@ export default function Home() {
     userHours();
     userInfo();
   }, [token, currentPage, reloadEffect]);
-
-  useEffect(() => {
-    blockUserButton();
-  }, []);
 
   const fetchRequest = async () => {
     try {
@@ -107,14 +102,7 @@ export default function Home() {
   const confirmationScreen = () => {
     router.push('/confirmacao-cadastro');
   };
-  const blockUserButton = () => {
-    if (userInfo && userInfo.verificado) {
-      setDisableButton(false);
-      console.log(userInfo.verificado);
-    } else {
-      setDisableButton(true);
-    }
-  };
+
   return (
     <S.Container>
       <S.ContentDiv>
@@ -153,108 +141,112 @@ export default function Home() {
               <HourCount gesHours={0} extHours={0} pesHours={0} ensHours={0} />
             )}
           </S.Div>
-
-          <S.Div>
-            <S.RequestDiv>
-              <S.H2Title>Solicitações em Andamento</S.H2Title>
-              <S.IconButton>
-                <FileText size={24} weight="bold" />
-                <S.Text>Barema</S.Text>
-              </S.IconButton>
-            </S.RequestDiv>
-            <S.NewRequestDiv>
-              <S.NewRequestButton
-                label="Nova Solicitação"
-                onClick={openNewRequestModal}
-                disabled={disableButton}
-              />
-              <S.InputRequestDiv>
-                <S.RegisterInput placeholder="Pesquisar" />
-                <S.IconButton>
-                  <Funnel size={28} weight="fill" />
-                </S.IconButton>
-              </S.InputRequestDiv>
-            </S.NewRequestDiv>
-
+          {userInfo && userInfo.verificado == false ? (
+            <></>
+          ) : (
             <S.Div>
-              <S.Div>
-                {requestsPag && requestsPag.totalPaginas > 0 ? (
-                  <>
-                    {requestsPag.requisicoes.map((item) => (
-                      <RequestList
-                        status={item.status}
-                        id={item.id}
-                        initialDate={moment(item.dataDaSolicitacao).format(
-                          'DD/MM/YYYY'
-                        )}
-                        hours={item.quantidadeDeHoras}
-                        key={item.id}
-                        token={token}
-                        isDraft={false}
-                        reloadRequestDelete={reloadPag}
-                        reloadRequestArchive={reloadPag}
-                        type={archive}
-                      />
-                    ))}
-                  </>
-                ) : (
-                  <S.H3Title>Nenhuma solicitação registrada...</S.H3Title>
-                )}
-              </S.Div>
-              <S.Div>
-                {requestsPag && requestsPag.totalPaginas > 1 ? (
-                  <S.PaginationDiv>
-                    <S.Div>
-                      <S.LeftArrow
-                        size={24}
-                        color="#6060ff"
-                        onClick={handlePageChangeBack}
-                      />
-                    </S.Div>
+              <S.RequestDiv>
+                <S.H2Title>Solicitações em Andamento</S.H2Title>
+                <S.IconButton>
+                  <FileText size={24} weight="bold" />
+                  <S.Text>Barema</S.Text>
+                </S.IconButton>
+              </S.RequestDiv>
+              <S.NewRequestDiv>
+                <S.NewRequestButton
+                  label="Nova Solicitação"
+                  onClick={openNewRequestModal}
+                />
+                <S.InputRequestDiv>
+                  <S.RegisterInput placeholder="Pesquisar" />
+                  <S.IconButton>
+                    <Funnel size={28} weight="fill" />
+                  </S.IconButton>
+                </S.InputRequestDiv>
+              </S.NewRequestDiv>
 
-                    <S.Div>
-                      <S.CurrentPageNumber>
-                        <S.PageNumber>
-                          {requestsPag.paginaAtual + 1}
-                        </S.PageNumber>
-                      </S.CurrentPageNumber>
-                    </S.Div>
-                    <S.Div>/</S.Div>
-                    <S.Div>
-                      <S.CurrentPageNumber>
-                        <S.PageNumber>{requestsPag.totalPaginas}</S.PageNumber>
-                      </S.CurrentPageNumber>
-                    </S.Div>
-                    <S.Div>
-                      <S.RightArrow
-                        size={24}
-                        color="#5555ff"
-                        onClick={handlePageChangeNext}
-                      />
-                    </S.Div>
-                  </S.PaginationDiv>
-                ) : (
-                  <S.Div></S.Div>
-                )}
-              </S.Div>
+              <S.Div>
+                <S.Div>
+                  {requestsPag && requestsPag.totalPaginas > 0 ? (
+                    <>
+                      {requestsPag.requisicoes.map((item) => (
+                        <RequestList
+                          status={item.status}
+                          id={item.id}
+                          initialDate={moment(item.dataDaSolicitacao).format(
+                            'DD/MM/YYYY'
+                          )}
+                          hours={item.quantidadeDeHoras}
+                          key={item.id}
+                          token={token}
+                          isDraft={false}
+                          reloadRequestDelete={reloadPag}
+                          reloadRequestArchive={reloadPag}
+                          type={archive}
+                        />
+                      ))}
+                    </>
+                  ) : (
+                    <S.H3Title>Nenhuma solicitação registrada...</S.H3Title>
+                  )}
+                </S.Div>
+                <S.Div>
+                  {requestsPag && requestsPag.totalPaginas > 1 ? (
+                    <S.PaginationDiv>
+                      <S.Div>
+                        <S.LeftArrow
+                          size={24}
+                          color="#6060ff"
+                          onClick={handlePageChangeBack}
+                        />
+                      </S.Div>
 
-              <S.NewRequestModal
-                closeModalArea={closeNewRequestModal}
-                isOpen={isOpen}
-                closeModal={closeNewRequestModal}
-                // eslint-disable-next-line react/no-children-prop
-                children={
-                  <NewRequest
-                    cancelRequest={closeNewRequestModal}
-                    requestId={requestId}
-                    token={token}
-                    isNewRequest={true}
-                  />
-                }
-                closeText={<XCircle size={32} color="#FF0000" />}
-              ></S.NewRequestModal>
+                      <S.Div>
+                        <S.CurrentPageNumber>
+                          <S.PageNumber>
+                            {requestsPag.paginaAtual + 1}
+                          </S.PageNumber>
+                        </S.CurrentPageNumber>
+                      </S.Div>
+                      <S.Div>/</S.Div>
+                      <S.Div>
+                        <S.CurrentPageNumber>
+                          <S.PageNumber>
+                            {requestsPag.totalPaginas}
+                          </S.PageNumber>
+                        </S.CurrentPageNumber>
+                      </S.Div>
+                      <S.Div>
+                        <S.RightArrow
+                          size={24}
+                          color="#5555ff"
+                          onClick={handlePageChangeNext}
+                        />
+                      </S.Div>
+                    </S.PaginationDiv>
+                  ) : (
+                    <S.Div></S.Div>
+                  )}
+                </S.Div>
+
+                <S.NewRequestModal
+                  closeModalArea={closeNewRequestModal}
+                  isOpen={isOpen}
+                  closeModal={closeNewRequestModal}
+                  // eslint-disable-next-line react/no-children-prop
+                  children={
+                    <NewRequest
+                      cancelRequest={closeNewRequestModal}
+                      requestId={requestId}
+                      token={token}
+                      isNewRequest={true}
+                    />
+                  }
+                  closeText={<XCircle size={32} color="#FF0000" />}
+                ></S.NewRequestModal>
+              </S.Div>
             </S.Div>
-          </S.Div>
+          )}
         </S.FunctionContainer>
       </S.ContentDiv>
     </S.Container>
