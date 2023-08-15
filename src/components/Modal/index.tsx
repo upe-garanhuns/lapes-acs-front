@@ -24,7 +24,7 @@ export const Modal = ({
   className,
   closeText = 'Fechar'
 }: ComponentProps) => {
-  const containerRef = useRef<HTMLDivElement>(undefined);
+  const containerRef = useRef<HTMLDivElement>(null);
   const firstFocusableElRef = useRef<HTMLElement | undefined>();
   const lastFocusableElRef = useRef<HTMLElement | undefined>();
   const handleContainerClick = (
@@ -70,7 +70,8 @@ export const Modal = ({
           event.preventDefault();
         } else if (
           firstFocusableElRef.current &&
-          !containerRef.current?.contains(document.activeElement)
+          !containerRef.current?.contains(document.activeElement) &&
+          lastFocusableElRef.current !== undefined
         ) {
           lastFocusableElRef.current.focus();
           event.preventDefault();
