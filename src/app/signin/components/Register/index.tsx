@@ -286,7 +286,7 @@ export function Register({ close }: ComponentProps) {
         warnToast('Preencha todos os campos corretamente para cadastrar!');
       }
       await createUser(signUpData);
-      sucessToast('Acesse o e-mail cadastrado para verificar a sua conta!');
+      sucessToast('Cadastro realizado com sucesso! Realize o login');
       close();
     } catch (error) {
       errorToast('Houve algum erro ao tentar se cadastrar!');
