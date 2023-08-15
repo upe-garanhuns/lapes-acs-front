@@ -5,7 +5,7 @@ export const Container = styled.div`
   height: 84px;
   background-color: #1a2d57;
   border-top: 10px solid #f00;
-  padding: 7px 35px;
+  padding: 7px 25px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -13,7 +13,6 @@ export const Container = styled.div`
   position: fixed;
   bottom: 0;
   left: 0;
-  z-index: 999;
 `;
 export const ImageContainer = styled.div`
   padding: 10px 0;
