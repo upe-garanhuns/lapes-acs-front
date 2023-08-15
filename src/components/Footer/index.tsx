@@ -5,7 +5,8 @@ import * as S from './styles';
 
 export default function Footer() {
   const pathName = usePathname();
-  if (pathName === '/signin') return null;
+  if (pathName === '/signin' || pathName === '/confirmacao-cadastro')
+    return null;
   return (
     <S.Container>
       <S.ImageContainer>
