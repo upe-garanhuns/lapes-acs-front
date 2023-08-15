@@ -34,6 +34,7 @@ export default function Home() {
   const [userInfo, setUserInfo] = useState<UserInformation>();
   const [reloadEffect, setReloadEffect] = useState<number>(0);
   const [archive, setArchive] = useState<boolean>(false);
+  const [disableButton, setDisableButton] = useState(true);
 
   const token = Cookies.get('token') || '';
 
@@ -42,7 +43,6 @@ export default function Home() {
       const userHoursResponse = await getUserHours(token);
       setHours(userHoursResponse);
     };
-
     const requestPagination = async (page: number) => {
       const paginationResponse = await pagination({
         token,
@@ -51,7 +51,6 @@ export default function Home() {
       });
       setRequestsPag(paginationResponse);
     };
-
     const userInfo = async () => {
       const userResponse = await getUserInformation(token);
       setUserInfo(userResponse);
@@ -61,6 +60,10 @@ export default function Home() {
     userHours();
     userInfo();
   }, [token, currentPage, reloadEffect]);
+
+  useEffect(() => {
+    blockUserButton();
+  }, []);
 
   const fetchRequest = async () => {
     try {
@@ -104,7 +107,14 @@ export default function Home() {
   const confirmationScreen = () => {
     router.push('/confirmacao-cadastro');
   };
-
+  const blockUserButton = () => {
+    if (userInfo && userInfo.verificado) {
+      setDisableButton(false);
+      console.log(userInfo.verificado);
+    } else {
+      setDisableButton(true);
+    }
+  };
   return (
     <S.Container>
       <S.ContentDiv>
@@ -156,6 +166,7 @@ export default function Home() {
               <S.NewRequestButton
                 label="Nova Solicitação"
                 onClick={openNewRequestModal}
+                disabled={disableButton}
               />
               <S.InputRequestDiv>
                 <S.RegisterInput placeholder="Pesquisar" />
