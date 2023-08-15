@@ -12,10 +12,7 @@ export default function ConfirmarForm() {
   const [codigoVerificacao, setCodigoVerificacao] = useState('');
 
   const router = useRouter();
-  const returnHome = (event) => {
-    event.preventDefault();
-    router.push('home');
-  };
+
   const handleCodigoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCodigoVerificacao(event.target.value);
   };
