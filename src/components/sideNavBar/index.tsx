@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 
 import * as S from './style';
@@ -14,6 +14,26 @@ export default function SideNavBar() {
   const router = useRouter();
   const pathName = usePathname();
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isMobile, setIsMobile] = useState<boolean>(false);
+
+  useEffect(() => {
+    // Função para verificar o estado da largura da tela
+    const checkIsMobile = () => {
+      setIsMobile(window.matchMedia('(max-width: 767px)').matches);
+    };
+
+    // Verifique a largura da tela quando o componente é montado
+    checkIsMobile();
+
+    // Adicione um listener para verificar a largura da tela sempre que a janela for redimensionada
+    window.addEventListener('resize', checkIsMobile);
+
+    // Remova o listener quando o componente for desmontado
+    return () => {
+      window.removeEventListener('resize', checkIsMobile);
+    };
+  }, []);
+
   if (
     pathName === '/signin' ||
     pathName === '/not-found' ||
@@ -45,7 +65,7 @@ export default function SideNavBar() {
   }
 
   return (
-    <S.Container isOpen={isOpen}>
+    <S.Container isOpen={isOpen} isMobile={isMobile}>
       <S.PerfilDiv>
         {!isOpen ? (
           <S.PerfilDivInside>
@@ -65,16 +85,20 @@ export default function SideNavBar() {
           </S.PerfilDivInside>
         )}
       </S.PerfilDiv>
-      <S.Line isOpen={isOpen} />
+      <S.Line isOpen={isOpen} isMobile={isMobile} />
       <S.Div>
         <S.UlItems id="ul1">
           <S.LiItems>
             {!isOpen ? (
-              <S.LiInsideDiv isOpen={isOpen}>
-                <Bell size={24} />
-              </S.LiInsideDiv>
+              <>
+                {!isMobile && (
+                  <S.LiInsideDiv isOpen={isOpen} isMobile={isMobile}>
+                    <Bell size={24} />
+                  </S.LiInsideDiv>
+                )}
+              </>
             ) : (
-              <S.LiInsideDiv isOpen={isOpen}>
+              <S.LiInsideDiv isOpen={isOpen} isMobile={isMobile}>
                 <S.navBarLink href="/">
                   <Bell size={24} />
                   <S.PLink>notificação</S.PLink>
@@ -84,13 +108,17 @@ export default function SideNavBar() {
           </S.LiItems>
           <S.LiItems>
             {!isOpen ? (
-              <S.LiInsideDiv isOpen={isOpen}>
-                <S.navBarLink href="/solicitacoes-arquivadas">
-                  <Archive size={24} />
-                </S.navBarLink>
+              <S.LiInsideDiv isOpen={isOpen} isMobile={isMobile}>
+                <>
+                  {!isMobile && (
+                    <S.navBarLink href="/solicitacoes-arquivadas">
+                      <Archive size={24} />
+                    </S.navBarLink>
+                  )}
+                </>
               </S.LiInsideDiv>
             ) : (
-              <S.LiInsideDiv isOpen={isOpen}>
+              <S.LiInsideDiv isOpen={isOpen} isMobile={isMobile}>
                 <S.navBarLink href="/solicitacoes-arquivadas">
                   <Archive size={24} />
                   <S.PLink>Arquivadas</S.PLink>
@@ -100,13 +128,17 @@ export default function SideNavBar() {
           </S.LiItems>
           <S.LiItems>
             {!isOpen ? (
-              <S.LiInsideDiv isOpen={isOpen}>
-                <S.navBarLink href="/">
-                  <Trash size={24} />
-                </S.navBarLink>
+              <S.LiInsideDiv isOpen={isOpen} isMobile={isMobile}>
+                <>
+                  {!isMobile && (
+                    <S.navBarLink href="/">
+                      <Trash size={24} />
+                    </S.navBarLink>
+                  )}
+                </>
               </S.LiInsideDiv>
             ) : (
-              <S.LiInsideDiv isOpen={isOpen}>
+              <S.LiInsideDiv isOpen={isOpen} isMobile={isMobile}>
                 <S.navBarLink href="/">
                   <Trash size={24} />
                   <S.PLink>lixeira</S.PLink>
@@ -121,16 +153,20 @@ export default function SideNavBar() {
           <S.LiItems></S.LiItems>
         </S.UlItems>
       </S.BlankDiv>
-      <S.Line isOpen={isOpen} />
+      <S.Line isOpen={isOpen} isMobile={isMobile} />
       <S.Div>
         <S.UlItems>
           <S.LiItems>
             {!isOpen ? (
-              <S.LiInsideDiv isOpen={isOpen}>
-                <Power size={24} onClick={handleLogOut} />
-              </S.LiInsideDiv>
+              <>
+                {!isMobile && (
+                  <S.LiInsideDiv isOpen={isOpen} isMobile={isMobile}>
+                    <Power size={24} onClick={handleLogOut} />
+                  </S.LiInsideDiv>
+                )}
+              </>
             ) : (
-              <S.LiInsideDiv isOpen={isOpen}>
+              <S.LiInsideDiv isOpen={isOpen} isMobile={isMobile}>
                 <Power size={24} onClick={handleLogOut} />
                 <p>Sair</p>
               </S.LiInsideDiv>

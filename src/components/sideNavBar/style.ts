@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 interface navOpen {
   isOpen: boolean;
+  isMobile: boolean;
 }
 
 export const Container = styled.aside<navOpen>`
@@ -24,6 +25,13 @@ export const Container = styled.aside<navOpen>`
     isOpen &&
     ` box-shadow: 0 25px 50px 12px rgb(0 0 0 / 0.25); 
     `};
+
+  @media screen and (max-width: 767px) {
+    flex-direction: row;
+  }
+
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+  }
 `;
 
 export const Line = styled.hr<navOpen>`
