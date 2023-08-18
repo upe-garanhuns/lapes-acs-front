@@ -42,6 +42,20 @@ export const Line = styled.hr<navOpen>`
 
 export const Div = styled.div``;
 
+export const UlDiv = styled.div<navOpen>`
+  display: flex;
+
+  @media screen and (max-width: 767px) {
+    ${({ isOpen }) =>
+      !isOpen &&
+      ` display: none; 
+    `};
+  }
+
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+  }
+`;
+
 export const BlankDiv = styled.div`
   height: 20vh;
 `;
@@ -66,12 +80,22 @@ export const PerfilIcon = styled.span`
   padding: 0.8em;
 `;
 
-export const PerfilDivInside = styled.div`
+export const PerfilDivInside = styled.div<navOpen>`
   width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   gap: 12px;
+
+  @media screen and (max-width: 767px) {
+    ${({ isOpen }) =>
+      isOpen &&
+      ` flex-direction: column; 
+    `};
+  }
+
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+  }
 `;
 
 export const ItemsCounter = styled.p`

@@ -68,13 +68,13 @@ export default function SideNavBar() {
     <S.Container isOpen={isOpen} isMobile={isMobile}>
       <S.PerfilDiv>
         {!isOpen ? (
-          <S.PerfilDivInside>
+          <S.PerfilDivInside isOpen={isOpen} isMobile={isMobile}>
             <S.PerfilIcon onClick={openCloseNav}>
               <User size={24} weight="bold" color="#000" />
             </S.PerfilIcon>
           </S.PerfilDivInside>
         ) : (
-          <S.PerfilDivInside>
+          <S.PerfilDivInside isOpen={isOpen} isMobile={isMobile}>
             <S.PerfilIcon onClick={openCloseNav}>
               <User size={32} weight="bold" color="#000" />
             </S.PerfilIcon>
@@ -85,8 +85,8 @@ export default function SideNavBar() {
           </S.PerfilDivInside>
         )}
       </S.PerfilDiv>
-      <S.Line isOpen={isOpen} isMobile={isMobile} />
-      <S.Div>
+      {!isMobile && <S.Line isOpen={isOpen} isMobile={isMobile} />}
+      <S.UlDiv isOpen={isOpen} isMobile={!isMobile}>
         <S.UlItems id="ul1">
           <S.LiItems>
             {!isOpen ? (
@@ -147,13 +147,18 @@ export default function SideNavBar() {
             )}
           </S.LiItems>
         </S.UlItems>
-      </S.Div>
-      <S.BlankDiv>
-        <S.UlItems>
-          <S.LiItems></S.LiItems>
-        </S.UlItems>
-      </S.BlankDiv>
-      <S.Line isOpen={isOpen} isMobile={isMobile} />
+      </S.UlDiv>
+      <>
+        {!isMobile && (
+          <S.BlankDiv>
+            <S.UlItems>
+              <S.LiItems></S.LiItems>
+            </S.UlItems>
+          </S.BlankDiv>
+        )}
+      </>
+
+      {!isMobile && <S.Line isOpen={isOpen} isMobile={isMobile} />}
       <S.Div>
         <S.UlItems>
           <S.LiItems>
