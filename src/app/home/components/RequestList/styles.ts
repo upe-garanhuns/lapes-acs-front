@@ -45,20 +45,6 @@ export const Text = styled.p`
   overflow: hidden;
   font-size: 16px;
 `;
-export const ActionIcon = styled.span`
-  margin-right: 5px;
-
-  cursor: pointer;
-  --icon-color: ${colors.figmaColors[200]};
-
-  svg {
-    color: var(--icon-color);
-  }
-  transition: transform 0.3s ease-in-out;
-  &:hover {
-    transform: scale(1.4);
-  }
-`;
 
 export const IconsContainer = styled.div`
   display: flex;

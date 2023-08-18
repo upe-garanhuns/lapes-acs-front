@@ -44,21 +44,24 @@ export default function ViewRequestModal(props: ViewRequestModalProps) {
       router.push('/signin');
     }
   };
+
   const closeModal = () => {
     setIsOpen(false);
   };
+
   const openModal = () => {
     setIsOpen(true);
-
     fetchData().then((data) => {
       if (data !== undefined) {
         setCertificateData(data);
       }
     });
   };
+
   const closeModalArea = () => {
     setIsOpen(false);
   };
+
   return (
     <div>
       <S.OpenRequest onClick={openModal}>

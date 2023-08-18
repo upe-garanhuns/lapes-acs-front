@@ -16,7 +16,7 @@ import { UserInformation } from '../../services/user/types';
 import { getUserHours } from '../../services/userHours';
 import { UserHours } from '../../services/userHours/types';
 import HourCount from './components/HourCount';
-import { NewRequest } from './components/NewRequest';
+import { NewRequest } from './components/NewRequest/NewRequestContent';
 import { RequestList } from './components/RequestList';
 import * as S from './style';
 
