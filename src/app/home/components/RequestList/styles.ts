@@ -6,13 +6,14 @@ import styled from 'styled-components';
 export const Card = styled.div<{ cardcolor: boolean }>`
   display: grid;
   grid-template-columns: 0.1fr 0.5fr 1fr 0.5fr 0.5fr 70px;
-  gap: 5px;
+  gap: 0.3rem;
   justify-content: center;
   align-items: center;
   background-color: ${({ cardcolor }) =>
     cardcolor ? colors.figmaColors[50] : colors.figmaColors[100]};
   border-radius: 20px;
-  margin: 20px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
   padding: 7px;
 
   @media (max-width: 850px) {

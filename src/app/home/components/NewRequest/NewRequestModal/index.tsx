@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { NewRequest } from '../NewRequestContent/index';
 import * as S from './style';
 
-import { Pencil, XCircle } from '@phosphor-icons/react';
+import { PencilSimple, XCircle } from '@phosphor-icons/react';
 type NewRequestModal = {
   id: number;
   token: string;
@@ -23,7 +23,7 @@ export function NewRequestModal({ token, id }: NewRequestModal) {
   return (
     <div>
       <S.OpenRequest onClick={openNewRequestModal}>
-        <Pencil size={iconSize} />
+        <PencilSimple size={iconSize} />
       </S.OpenRequest>
       <S.NewRequestModal
         closeModalArea={closeNewRequestModal}
