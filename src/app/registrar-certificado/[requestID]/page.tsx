@@ -51,7 +51,7 @@ export default function RegistePageTest({ params }: idProps) {
     setErrorSelectedAtividade(selectedAtividade === '0');
     setErrorTitulo(titulo === '');
     setErrorDataInicial(dataInicial === '');
-    setErrorDataFinal(dataFinal === '');
+    setErrorDataFinal(dataFinal === '' || dataInicial > dataFinal);
     setErrorHoras(parseInt(horas) < 1 || horas === '');
   };
 
@@ -188,6 +188,7 @@ export default function RegistePageTest({ params }: idProps) {
     setErrorTitulo(titulo === '');
     setErrorDataInicial(dataInicial === '');
     setErrorDataFinal(dataFinal === '');
+    setErrorDataFinal(dataInicial > dataFinal);
     setErrorHoras(parseInt(horas) < 1 || horas === '');
 
     const isValidInputs =
@@ -199,6 +200,10 @@ export default function RegistePageTest({ params }: idProps) {
 
     if (isValidInputs) {
       registerCertificate();
+    }
+
+    if (errorDataFinal) {
+      errorToast('Selecione uma data final posterior a data inicial.');
     }
   };
 
@@ -301,7 +306,7 @@ export default function RegistePageTest({ params }: idProps) {
                 min={minDate}
               />
               {errorDataFinal ? (
-                <S.ErrorSpan>*Selecione uma data</S.ErrorSpan>
+                <S.ErrorSpan>*Selecione uma data válida</S.ErrorSpan>
               ) : (
                 <></>
               )}
