@@ -90,7 +90,8 @@ export const PerfilDivInside = styled.div<navOpen>`
   @media screen and (max-width: 767px) {
     ${({ isOpen }) =>
       isOpen &&
-      ` flex-direction: column; 
+      ` flex-direction: column;
+      align-items:center; 
     `};
   }
 
@@ -110,6 +111,13 @@ export const UlItems = styled.ul`
 
 export const LiItems = styled.li`
   width: 100%;
+  @media screen and (max-width: 767px) {
+    display: flex;
+    justify-content: center;
+  }
+
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+  }
 `;
 
 export const LiInsideDiv = styled.div<navOpen>`
@@ -152,4 +160,15 @@ export const navBarLink = styled(ActiveLink)`
 
 export const PLink = styled.p`
   margin: 0;
+`;
+
+export const LogOutDiv = styled.div`
+  @media screen and (max-width: 767px) {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+  }
 `;

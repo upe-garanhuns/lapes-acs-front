@@ -17,18 +17,14 @@ export default function SideNavBar() {
   const [isMobile, setIsMobile] = useState<boolean>(false);
 
   useEffect(() => {
-    // Função para verificar o estado da largura da tela
     const checkIsMobile = () => {
       setIsMobile(window.matchMedia('(max-width: 767px)').matches);
     };
 
-    // Verifique a largura da tela quando o componente é montado
     checkIsMobile();
 
-    // Adicione um listener para verificar a largura da tela sempre que a janela for redimensionada
     window.addEventListener('resize', checkIsMobile);
 
-    // Remova o listener quando o componente for desmontado
     return () => {
       window.removeEventListener('resize', checkIsMobile);
     };
@@ -79,8 +75,8 @@ export default function SideNavBar() {
               <User size={32} weight="bold" color="#000" />
             </S.PerfilIcon>
             <S.Div>
-              <p>Nome Aluno</p>
-              <p>curso upe</p>
+              <p>Jamuelton</p>
+              <p>Engenharia de software</p>
             </S.Div>
           </S.PerfilDivInside>
         )}
@@ -139,7 +135,7 @@ export default function SideNavBar() {
       </>
 
       {!isMobile && <S.Line isOpen={isOpen} isMobile={isMobile} />}
-      <S.Div>
+      <S.LogOutDiv>
         <S.UlItems>
           <S.LiItems>
             {!isOpen ? (
@@ -158,7 +154,7 @@ export default function SideNavBar() {
             )}
           </S.LiItems>
         </S.UlItems>
-      </S.Div>
+      </S.LogOutDiv>
     </S.Container>
   );
 }
