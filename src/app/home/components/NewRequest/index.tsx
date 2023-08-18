@@ -123,8 +123,7 @@ export const NewRequest = ({
     const fileRegex = /^.+\.pdf$/;
     const maxFileSize = 1048576;
 
-    if (files) {
-      console.log(files);
+    if (files && files.length > 0) {
       for (let index = 0; index < files.length; index++) {
         if (fileRegex.test(files[index].name)) {
           if (files[index].size < maxFileSize) {
@@ -186,7 +185,10 @@ export const NewRequest = ({
           ))}
         </S.FileList>
       </S.FileListContainer>
-
+      <S.SizeWarning>
+        Tamanho máximo do arquivo: 1MB. Por favor, certifique-se de que o seu
+        arquivo não exceda esse limite.
+      </S.SizeWarning>
       <S.ButtonsContainer>
         <S.CancelButton onClick={cancelRequest}>Cancelar</S.CancelButton>
         <S.NextButton onClick={handleNext}>Próximo</S.NextButton>
