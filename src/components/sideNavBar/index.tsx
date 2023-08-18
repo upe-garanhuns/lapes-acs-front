@@ -85,16 +85,18 @@ export default function SideNavBar() {
             <S.PerfilIcon onClick={openCloseNav}>
               <User size={32} weight="bold" color="#000" />
             </S.PerfilIcon>
-            <S.Div>
-              {userInfo && (
-                <S.UserInfoDiv>
-                  <S.UserInformation>
-                    {userInfo.nomeCompleto.split(' ')[0]}
-                  </S.UserInformation>
-                  <S.UserInformation>{userInfo.curso.nome}</S.UserInformation>
-                </S.UserInfoDiv>
-              )}
-            </S.Div>
+            {!isMobile && (
+              <S.Div>
+                {userInfo && (
+                  <S.UserInfoDiv>
+                    <S.UserInformation>
+                      {userInfo.nomeCompleto.split(' ')[0]}
+                    </S.UserInformation>
+                    <S.UserInformation>{userInfo.curso.nome}</S.UserInformation>
+                  </S.UserInfoDiv>
+                )}
+              </S.Div>
+            )}
           </S.PerfilDivInside>
         )}
       </S.PerfilDiv>

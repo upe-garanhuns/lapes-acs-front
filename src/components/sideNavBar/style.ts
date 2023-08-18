@@ -28,6 +28,8 @@ export const Container = styled.aside<navOpen>`
 
   @media screen and (max-width: 767px) {
     flex-direction: row;
+    justify-content: center;
+    align-items: center;
   }
 
   @media screen and (min-width: 768px) and (max-width: 1023px) {
@@ -90,7 +92,7 @@ export const PerfilDivInside = styled.div<navOpen>`
   @media screen and (max-width: 767px) {
     ${({ isOpen }) =>
       isOpen &&
-      ` flex-direction: column;
+      `
       align-items:center; 
     `};
   }
@@ -107,6 +109,12 @@ export const ItemsCounter = styled.p`
 export const UlItems = styled.ul`
   width: 100%;
   justify-content: center;
+  @media screen and (max-width: 767px) {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 export const LiItems = styled.li`
@@ -174,12 +182,11 @@ export const LogOutDiv = styled.div`
 `;
 
 export const UserInformation = styled.p`
-  width: 20vw;
+  width: 100px;
   word-wrap: break-word;
 `;
 
 export const UserInfoDiv = styled.div`
-  width: 100%;
   padding: 0.2em;
   display: flex;
   flex-direction: column;
