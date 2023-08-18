@@ -2,18 +2,36 @@
 
 import { useRouter } from 'next/navigation';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { toast } from 'react-toastify';
 
 import * as S from './style';
 
-import { User, Bell, Trash, Power, Archive } from '@phosphor-icons/react';
+import { User, Bell, Power, Archive } from '@phosphor-icons/react';
 import Cookies from 'js-cookie';
 
 export default function SideNavBar() {
   const router = useRouter();
   const pathName = usePathname();
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const componentRef = useRef(null);
+
+  useEffect(() => {
+    const handleOutsideClick = (event: MouseEvent) => {
+      if (
+        componentRef.current &&
+        !componentRef.current.contains(event.target)
+      ) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleOutsideClick);
+
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick);
+    };
+  }, []);
   if (
     pathName === '/signin' ||
     pathName === '/not-found' ||
@@ -45,7 +63,7 @@ export default function SideNavBar() {
   }
 
   return (
-    <S.Container isOpen={isOpen}>
+    <S.Container isOpen={isOpen} ref={componentRef}>
       <S.PerfilDiv>
         {!isOpen ? (
           <S.PerfilDivInside>
@@ -71,13 +89,15 @@ export default function SideNavBar() {
           <S.LiItems>
             {!isOpen ? (
               <S.LiInsideDiv isOpen={isOpen}>
-                <Bell size={24} />
+                <S.navBarLink href="/">
+                  <Bell size={24} />
+                </S.navBarLink>
               </S.LiInsideDiv>
             ) : (
               <S.LiInsideDiv isOpen={isOpen}>
                 <S.navBarLink href="/">
                   <Bell size={24} />
-                  <S.PLink>notificação</S.PLink>
+                  <S.PLink>Notificação</S.PLink>
                 </S.navBarLink>
               </S.LiInsideDiv>
             )}
@@ -94,22 +114,6 @@ export default function SideNavBar() {
                 <S.navBarLink href="/solicitacoes-arquivadas">
                   <Archive size={24} />
                   <S.PLink>Arquivadas</S.PLink>
-                </S.navBarLink>
-              </S.LiInsideDiv>
-            )}
-          </S.LiItems>
-          <S.LiItems>
-            {!isOpen ? (
-              <S.LiInsideDiv isOpen={isOpen}>
-                <S.navBarLink href="/">
-                  <Trash size={24} />
-                </S.navBarLink>
-              </S.LiInsideDiv>
-            ) : (
-              <S.LiInsideDiv isOpen={isOpen}>
-                <S.navBarLink href="/">
-                  <Trash size={24} />
-                  <S.PLink>lixeira</S.PLink>
                 </S.navBarLink>
               </S.LiInsideDiv>
             )}

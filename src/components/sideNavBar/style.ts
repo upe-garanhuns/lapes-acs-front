@@ -119,5 +119,5 @@ export const navBarLink = styled(ActiveLink)`
 `;
 
 export const PLink = styled.p`
-  margin: 0;
+  margin: 0.3rem;
 `;
