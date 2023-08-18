@@ -52,7 +52,9 @@ export default function RegistePageTest({ params }: idProps) {
     setErrorTitulo(titulo === '');
     setErrorDataInicial(dataInicial === '');
     setErrorDataFinal(dataFinal === '' || dataInicial > dataFinal);
-    setErrorHoras(parseInt(horas) < 1 || horas === '');
+    setErrorHoras(
+      parseInt(horas) < 1 || horas === '' || parseInt(horas) > 5000
+    );
   };
 
   const request = useCallback(async () => {
@@ -189,7 +191,9 @@ export default function RegistePageTest({ params }: idProps) {
     setErrorDataInicial(dataInicial === '');
     setErrorDataFinal(dataFinal === '');
     setErrorDataFinal(dataInicial > dataFinal);
-    setErrorHoras(parseInt(horas) < 1 || horas === '');
+    setErrorHoras(
+      parseInt(horas) < 1 || horas === '' || parseInt(horas) > 5000
+    );
 
     const isValidInputs =
       !errorSelectedAtividade &&
@@ -322,6 +326,7 @@ export default function RegistePageTest({ params }: idProps) {
                 onChange={handleChangeHoras}
                 value={horas}
                 disabled={isReadyToSent}
+                max={5000}
               />
               {errorHoras ? (
                 <S.ErrorSpan>*Entrada inválida</S.ErrorSpan>
