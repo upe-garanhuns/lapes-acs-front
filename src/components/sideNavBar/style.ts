@@ -20,16 +20,17 @@ export const Container = styled.aside<navOpen>`
   display: flex;
   flex-direction: column;
   position: absolute;
-
-  ${({ isOpen }) =>
-    isOpen &&
-    ` box-shadow: 0 25px 50px 12px rgb(0 0 0 / 0.25); 
+  top: 14vw
+    ${({ isOpen }) =>
+      isOpen &&
+      ` box-shadow: 0 25px 50px 12px rgb(0 0 0 / 0.25); 
     `};
 
   @media screen and (max-width: 767px) {
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    top: 0;
   }
 
   @media screen and (min-width: 768px) and (max-width: 1023px) {
