@@ -186,8 +186,7 @@ export const NewRequest = ({
         </S.FileList>
       </S.FileListContainer>
       <S.SizeWarning>
-        Tamanho máximo do arquivo: 1MB. Por favor, certifique-se de que o seu
-        arquivo não exceda esse limite.
+        Somente arquivos em formato PDFs são aceitos. Limite de tamanho: 1MB.
       </S.SizeWarning>
       <S.ButtonsContainer>
         <S.CancelButton onClick={cancelRequest}>Cancelar</S.CancelButton>
