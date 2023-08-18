@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 
 import * as S from './style';
 
-import { User, Bell, Trash, Power, Archive } from '@phosphor-icons/react';
+import { User, Bell, Power, Archive } from '@phosphor-icons/react';
 import Cookies from 'js-cookie';
 
 export default function SideNavBar() {
@@ -122,26 +122,6 @@ export default function SideNavBar() {
                 <S.navBarLink href="/solicitacoes-arquivadas">
                   <Archive size={24} />
                   <S.PLink>Arquivadas</S.PLink>
-                </S.navBarLink>
-              </S.LiInsideDiv>
-            )}
-          </S.LiItems>
-          <S.LiItems>
-            {!isOpen ? (
-              <S.LiInsideDiv isOpen={isOpen} isMobile={isMobile}>
-                <>
-                  {!isMobile && (
-                    <S.navBarLink href="/">
-                      <Trash size={24} />
-                    </S.navBarLink>
-                  )}
-                </>
-              </S.LiInsideDiv>
-            ) : (
-              <S.LiInsideDiv isOpen={isOpen} isMobile={isMobile}>
-                <S.navBarLink href="/">
-                  <Trash size={24} />
-                  <S.PLink>lixeira</S.PLink>
                 </S.navBarLink>
               </S.LiInsideDiv>
             )}
