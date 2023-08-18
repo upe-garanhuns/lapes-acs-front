@@ -20,7 +20,7 @@ export const Container = styled.aside<navOpen>`
   display: flex;
   flex-direction: column;
   position: absolute;
-  top: 14vw
+  top: 14vh
     ${({ isOpen }) =>
       isOpen &&
       ` box-shadow: 0 25px 50px 12px rgb(0 0 0 / 0.25); 
