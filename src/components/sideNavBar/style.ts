@@ -172,3 +172,16 @@ export const LogOutDiv = styled.div`
   @media screen and (min-width: 768px) and (max-width: 1023px) {
   }
 `;
+
+export const UserInformation = styled.p`
+  width: 20vw;
+  word-wrap: break-word;
+`;
+
+export const UserInfoDiv = styled.div`
+  width: 100%;
+  padding: 0.2em;
+  display: flex;
+  flex-direction: column;
+  gap: 4;
+`;

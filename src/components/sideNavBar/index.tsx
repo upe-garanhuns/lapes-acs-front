@@ -5,6 +5,8 @@ import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 
+import { getUserInformation } from '../../services/user';
+import { UserInformation } from '../../services/user/types';
 import * as S from './style';
 
 import { User, Bell, Power, Archive } from '@phosphor-icons/react';
@@ -15,20 +17,29 @@ export default function SideNavBar() {
   const pathName = usePathname();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isMobile, setIsMobile] = useState<boolean>(false);
+  const [userInfo, setUserInfo] = useState<UserInformation>();
+
+  const token = Cookies.get('token') || '';
 
   useEffect(() => {
+    const userInfo = async () => {
+      const userResponse = await getUserInformation(token);
+      setUserInfo(userResponse);
+      console.log(userResponse);
+    };
     const checkIsMobile = () => {
       setIsMobile(window.matchMedia('(max-width: 767px)').matches);
     };
 
     checkIsMobile();
+    userInfo();
 
     window.addEventListener('resize', checkIsMobile);
 
     return () => {
       window.removeEventListener('resize', checkIsMobile);
     };
-  }, []);
+  }, [token]);
 
   if (
     pathName === '/signin' ||
@@ -75,8 +86,14 @@ export default function SideNavBar() {
               <User size={32} weight="bold" color="#000" />
             </S.PerfilIcon>
             <S.Div>
-              <p>Jamuelton</p>
-              <p>Engenharia de software</p>
+              {userInfo && (
+                <S.UserInfoDiv>
+                  <S.UserInformation>
+                    {userInfo.nomeCompleto.split(' ')[0]}
+                  </S.UserInformation>
+                  <S.UserInformation>{userInfo.curso.nome}</S.UserInformation>
+                </S.UserInfoDiv>
+              )}
             </S.Div>
           </S.PerfilDivInside>
         )}
