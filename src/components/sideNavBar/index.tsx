@@ -49,6 +49,7 @@ export default function SideNavBar() {
 
   function handleLogOut() {
     Cookies.remove('token');
+    setIsOpen(false);
     toast.error('Sua sessão expirou!', {
       position: 'top-right',
       autoClose: 5000,
