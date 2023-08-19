@@ -56,6 +56,11 @@ export const PerfilIcon = styled.span`
   justify-content: center;
   align-items: center;
   padding: 0.8em;
+  transition: transform 0.3s ease-in-out;
+  cursor: pointer;
+  &:hover {
+    transform: scale(1.1);
+  }
 `;
 
 export const PerfilDivInside = styled.div`
