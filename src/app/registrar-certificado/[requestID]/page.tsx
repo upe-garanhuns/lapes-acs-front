@@ -14,7 +14,7 @@ import { Certificate } from '../../../services/request/types';
 import { getMaxDate } from './functions/getMaxDate';
 import * as S from './style';
 
-import { Check } from '@phosphor-icons/react';
+import { Check, DownloadSimple } from '@phosphor-icons/react';
 import Cookies from 'js-cookie';
 
 interface idProps {
@@ -326,9 +326,11 @@ export default function RegistePageTest({ params }: idProps) {
         {!isReadyToSent ? (
           <S.ButtonsContainer>
             <S.SaveButton onClick={verifyInputs}>
-              Salvar certificado
+              <S.SaveIcon>
+                <DownloadSimple size={24} />
+              </S.SaveIcon>
+              Salvar este certificado
             </S.SaveButton>
-            <S.ViewButton>Visualizar certificado</S.ViewButton>
           </S.ButtonsContainer>
         ) : (
           <S.ButtonsContainer>

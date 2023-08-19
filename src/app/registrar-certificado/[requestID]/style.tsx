@@ -24,7 +24,7 @@ export const FormContainer = styled.div`
 `;
 
 export const Title = styled.h2`
-  font-size: 14px;
+  font-size: 20px;
   margin-bottom: 10px;
   color: #1c3c78;
 `;
@@ -63,7 +63,7 @@ export const DataInput = styled.div`
 `;
 
 export const Label = styled.label`
-  font-size: 14px;
+  font-size: 18px;
   margin-bottom: 4px;
   color: #253555;
 `;
@@ -106,7 +106,8 @@ export const SaveButton = styled.button`
   color: #fff;
   width: 9.7rem;
   background-color: #264382;
-  font-size: 14px;
+  font-size: 13px;
+  font-weight: bold;
   border-radius: 20px;
   padding: 8px 16px;
   border: none;
@@ -116,9 +117,8 @@ export const SaveButton = styled.button`
   justify-content: center;
   align-items: center;
 `;
-
-export const ViewButton = styled(SaveButton)`
-  background-color: #b9b9b9;
+export const SaveIcon = styled.div`
+  margin-right: 0.5rem;
 `;
 export const CertificatesContainer = styled.div`
   /* Propriedades para fixar o container no lado direito */
@@ -190,18 +190,6 @@ export const Button = styled.button`
 `;
 
 export const ButtonEnviar = styled.button`
-  color: #fff;
-  background-color: #253555;
-  font-size: 14px;
-  border-radius: 20px;
-  padding: 8px 16px;
-  border: none;
-  cursor: pointer;
-  min-width: 150px;
-  margin-bottom: 20px;
-`;
-
-export const EditButton = styled.button`
   color: #fff;
   background-color: #253555;
   font-size: 14px;
