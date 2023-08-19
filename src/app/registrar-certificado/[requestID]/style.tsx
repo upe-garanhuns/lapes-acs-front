@@ -18,6 +18,9 @@ export const FormContainer = styled.div`
   align-items: flex-end;
   height: 235px;
   padding: 15px 0px 15px 0px;
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(1, 0.5fr);
+  }
 `;
 
 export const Title = styled.h2`
@@ -164,10 +167,9 @@ export const CertificateItem = styled.div`
 export const ButtonsContainerCertificates = styled.div`
   display: flex;
   flex-direction: column;
-
   justify-content: center;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 6rem;
   max-width: 300px;
   position: absolute;
   bottom: 0;
