@@ -13,8 +13,8 @@ export const FormContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 0.5fr);
   grid-template-rows: repeat(4, 0.5fr);
-  grid-column-gap: 20px;
-  grid-row-gap: 0px;
+  grid-column-gap: 1rem;
+  grid-row-gap: 1rem;
   align-items: flex-end;
   height: 235px;
   padding: 15px 0px 15px 0px;

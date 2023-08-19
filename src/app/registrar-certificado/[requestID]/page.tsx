@@ -241,23 +241,12 @@ export default function RegistePageTest({ params }: idProps) {
             disabled={isReadyToSent}
             required
           />
-          {errorTitulo ? <S.ErrorSpan>*Digite um título</S.ErrorSpan> : <></>}
+          {errorTitulo ? (
+            <S.ErrorSpan>*Digite um título</S.ErrorSpan>
+          ) : (
+            <S.InvisibleBox />
+          )}
         </S.InputGroup>
-
-        {/* <S.InputContainer>
-          <S.InputGroup>
-            <S.Label>Quantidade de horas:</S.Label>
-            <S.Input
-              type="number"
-              min={1}
-              onChange={handleChangeHoras}
-              value={horas}
-              disabled={isReadyToSent}
-            />
-            {errorHoras ? <S.ErrorSpan>*Entrada inválida</S.ErrorSpan> : <></>}
-          </S.InputGroup>
-        </S.InputContainer> */}
-
         <S.InputContainer>
           <S.InputGroup>
             <S.Label>Data inicial:</S.Label>
@@ -271,7 +260,7 @@ export default function RegistePageTest({ params }: idProps) {
             {errorDataInicial ? (
               <S.ErrorSpan>*Selecione uma data</S.ErrorSpan>
             ) : (
-              <></>
+              <S.InvisibleBox />
             )}
           </S.InputGroup>
 
@@ -288,7 +277,7 @@ export default function RegistePageTest({ params }: idProps) {
             {errorDataFinal ? (
               <S.ErrorSpan>*Selecione uma data</S.ErrorSpan>
             ) : (
-              <></>
+              <S.InvisibleBox />
             )}
           </S.InputGroup>
         </S.InputContainer>
@@ -309,7 +298,7 @@ export default function RegistePageTest({ params }: idProps) {
           {errorSelectedAtividade ? (
             <S.ErrorSpan>*Selecione uma opção</S.ErrorSpan>
           ) : (
-            <></>
+            <S.InvisibleBox />
           )}
         </S.InputGroup>
         <S.InputContainer>
@@ -322,7 +311,11 @@ export default function RegistePageTest({ params }: idProps) {
               value={horas}
               disabled={isReadyToSent}
             />
-            {errorHoras ? <S.ErrorSpan>*Entrada inválida</S.ErrorSpan> : <></>}
+            {errorHoras ? (
+              <S.ErrorSpan>*Entrada inválida</S.ErrorSpan>
+            ) : (
+              <S.InvisibleBox />
+            )}
           </S.InputGroup>
         </S.InputContainer>
         <S.InputGroup>
@@ -339,9 +332,9 @@ export default function RegistePageTest({ params }: idProps) {
           </S.ButtonsContainer>
         ) : (
           <S.ButtonsContainer>
-            <S.EditButton onClick={handleEditButton}>
+            <S.SaveButton onClick={handleEditButton}>
               Editar Certificados
-            </S.EditButton>
+            </S.SaveButton>
           </S.ButtonsContainer>
         )}
       </S.FormContainer>
