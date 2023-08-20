@@ -49,6 +49,7 @@ export default function Home() {
         value: 3
       });
       setRequestsPag(paginationResponse);
+      console.log(paginationResponse);
     };
     const userInfo = async () => {
       const userResponse = await getUserInformation(token);
@@ -173,9 +174,11 @@ export default function Home() {
                         <RequestList
                           status={item.status}
                           id={item.id}
-                          initialDate={moment(item.dataDaSolicitacao).format(
-                            'DD/MM/YYYY'
-                          )}
+                          initialDate={
+                            item.data == null
+                              ? 'Sem data'
+                              : moment(item.data).format('DD/MM/YYYY')
+                          }
                           hours={item.quantidadeDeHoras}
                           key={item.id}
                           token={token}
