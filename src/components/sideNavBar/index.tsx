@@ -7,14 +7,19 @@ import { toast } from 'react-toastify';
 
 import * as S from './style';
 
-import { User, Bell, Trash, Power } from '@phosphor-icons/react';
+import { User, Bell, Trash, Power, Archive } from '@phosphor-icons/react';
 import Cookies from 'js-cookie';
 
 export default function SideNavBar() {
   const router = useRouter();
   const pathName = usePathname();
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  if (pathName === '/signin' || pathName === '/not-found') return null;
+  if (
+    pathName === '/signin' ||
+    pathName === '/not-found' ||
+    pathName === '/confirmacao-cadastro'
+  )
+    return null;
 
   const openCloseNav = () => {
     if (isOpen == false) {
@@ -22,7 +27,6 @@ export default function SideNavBar() {
     } else {
       setIsOpen(false);
     }
-    console.log(isOpen);
   };
 
   function handleLogOut() {
@@ -81,7 +85,25 @@ export default function SideNavBar() {
           <S.LiItems>
             {!isOpen ? (
               <S.LiInsideDiv isOpen={isOpen}>
-                <Trash size={24} />
+                <S.navBarLink href="/solicitacoes-arquivadas">
+                  <Archive size={24} />
+                </S.navBarLink>
+              </S.LiInsideDiv>
+            ) : (
+              <S.LiInsideDiv isOpen={isOpen}>
+                <S.navBarLink href="/solicitacoes-arquivadas">
+                  <Archive size={24} />
+                  <S.PLink>Arquivadas</S.PLink>
+                </S.navBarLink>
+              </S.LiInsideDiv>
+            )}
+          </S.LiItems>
+          <S.LiItems>
+            {!isOpen ? (
+              <S.LiInsideDiv isOpen={isOpen}>
+                <S.navBarLink href="/">
+                  <Trash size={24} />
+                </S.navBarLink>
               </S.LiInsideDiv>
             ) : (
               <S.LiInsideDiv isOpen={isOpen}>
@@ -92,11 +114,8 @@ export default function SideNavBar() {
               </S.LiInsideDiv>
             )}
           </S.LiItems>
-          <S.BlankDiv></S.BlankDiv>
         </S.UlItems>
       </S.Div>
-
-      <S.Line isOpen={isOpen} />
       <S.BlankDiv>
         <S.UlItems>
           <S.LiItems></S.LiItems>

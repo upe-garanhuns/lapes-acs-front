@@ -26,7 +26,11 @@ import * as S from './style';
 
 import { MapPin, User, Eye, EyeSlash } from '@phosphor-icons/react';
 
-export function Register() {
+type ComponentProps = {
+  close: () => void;
+};
+
+export function Register({ close }: ComponentProps) {
   // hooks usados para setar mensagem de erros dos inputs - jamu
   const {
     errorName,
@@ -274,12 +278,16 @@ export function Register() {
         errorPass &&
         errorSamePass &&
         errorCep &&
-        errorNumber !== true
+        errorNumber == true
       ) {
-        warnToast('preencha todos os campos corretamente para cadastrar!');
+        await createUser(signUpData);
+        sucessToast('Acesse o e-mail cadastrado para verificar a sua conta!');
+      } else {
+        warnToast('Preencha todos os campos corretamente para cadastrar!');
       }
       await createUser(signUpData);
-      sucessToast('Acesse o e-mail cadastrado para verificar a sua conta!');
+      sucessToast('Cadastro realizado com sucesso! Realize o login');
+      close();
     } catch (error) {
       errorToast('Houve algum erro ao tentar se cadastrar!');
       console.log(error);
@@ -333,8 +341,8 @@ export function Register() {
               <S.ComponentsContainer>
                 <S.Label>Telefone:</S.Label>
                 <S.RegisterInputMask
-                  mask="(99) 9999-9999"
-                  placeholder="(__) ____-____"
+                  mask="(99) 9 9999-9999"
+                  placeholder="(__) _ ____-____"
                   onChange={handleChangePhone}
                 />
                 {!errorPhone && (
@@ -424,6 +432,8 @@ export function Register() {
                 label="Período:"
                 placeholder="Período"
                 type="number"
+                min={1}
+                max={12}
                 onChange={handleChangeGrade}
               />
               {!errorGrade && (

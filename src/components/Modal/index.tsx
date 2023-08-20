@@ -1,4 +1,5 @@
-import React, { ReactNode } from 'react';
+'use client';
+import React, { ReactNode, useEffect, useRef } from 'react';
 
 import * as S from './styles';
 
@@ -23,15 +24,71 @@ export const Modal = ({
   className,
   closeText = 'Fechar'
 }: ComponentProps) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const firstFocusableElRef = useRef<HTMLElement | undefined>();
+  const lastFocusableElRef = useRef<HTMLElement | undefined>();
   const handleContainerClick = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {
     event.stopPropagation();
   };
+  useEffect(() => {
+    if (isOpen) {
+      const focusableEls = containerRef.current?.querySelectorAll(
+        'a[href]:not([disabled]), button:not([disabled]), textarea:not([disabled]), input[type="text"]:not([disabled]), input[type="radio"]:not([disabled]), input[type="checkbox"]:not([disabled]), select:not([disabled])'
+      ) as NodeListOf<HTMLElement>;
+      if (!focusableEls || focusableEls.length === 0) {
+        return;
+      }
+      firstFocusableElRef.current = focusableEls[0];
+      lastFocusableElRef.current = focusableEls[focusableEls.length - 1];
+      let wasPressed = false;
+      const handleKeyDown = (event: KeyboardEvent) => {
+        const isTabPressed = event.key === 'Tab';
+
+        if (!isTabPressed && !wasPressed) {
+          event.preventDefault;
+          wasPressed = true;
+          console.log(wasPressed);
+        } else {
+          return;
+        }
+
+        if (
+          event.shiftKey &&
+          firstFocusableElRef.current &&
+          document.activeElement === firstFocusableElRef.current
+        ) {
+          lastFocusableElRef.current?.focus();
+          event.preventDefault();
+        } else if (
+          !event.shiftKey &&
+          lastFocusableElRef.current &&
+          document.activeElement === lastFocusableElRef.current
+        ) {
+          firstFocusableElRef.current?.focus();
+          event.preventDefault();
+        } else if (
+          firstFocusableElRef.current &&
+          !containerRef.current?.contains(document.activeElement) &&
+          lastFocusableElRef.current !== undefined
+        ) {
+          lastFocusableElRef.current.focus();
+          event.preventDefault();
+        }
+      };
+      window.addEventListener('keydown', handleKeyDown);
+
+      return () => {
+        window.removeEventListener('keydown', handleKeyDown);
+      };
+    }
+  }, [isOpen]);
   if (isOpen) {
     return (
       <S.Overlay onClick={closeModalArea}>
         <S.Container
+          ref={containerRef}
           width={width}
           height={height}
           className={className}

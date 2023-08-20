@@ -14,10 +14,12 @@ export const ButtonContainer = styled.div`
   flex-direction: column;
 `;
 
-export const ErrorSpan = styled.span`
+export const Error = styled.div`
   color: red;
   font-size: 12px;
   padding-left: 15px;
+  padding-right: 15px;
+  width: 360px;
 `;
 
 export const LinkContainer = styled.div`

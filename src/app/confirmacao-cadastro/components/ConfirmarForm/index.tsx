@@ -12,10 +12,7 @@ export default function ConfirmarForm() {
   const [codigoVerificacao, setCodigoVerificacao] = useState('');
 
   const router = useRouter();
-  const returnHome = (event) => {
-    event.preventDefault();
-    router.push('home');
-  };
+
   const handleCodigoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCodigoVerificacao(event.target.value);
   };
@@ -48,6 +45,11 @@ export default function ConfirmarForm() {
     }
   };
 
+  const handleCancelClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    router.push('/home');
+  };
+
   return (
     <S.Container>
       <S.Cima>
@@ -68,7 +70,7 @@ export default function ConfirmarForm() {
         onChange={handleCodigoChange}
       />
       <S.ButtonsContainer>
-        <S.CancelButton onClick={returnHome}>Cancelar</S.CancelButton>
+        <S.CancelButton onClick={handleCancelClick}>Cancelar</S.CancelButton>
         <S.ConfirmButton
           onClick={(event: React.MouseEvent<HTMLButtonElement>) => {
             handleConfirmarClick(event);
