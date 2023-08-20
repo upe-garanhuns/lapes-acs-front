@@ -176,7 +176,7 @@ export default function Home() {
                           id={item.id}
                           initialDate={
                             item.data == null
-                              ? 'Sem data'
+                              ? 'Aguardando envio'
                               : moment(item.data).format('DD/MM/YYYY')
                           }
                           hours={item.quantidadeDeHoras}
