@@ -51,8 +51,10 @@ export default function RegistePageTest({ params }: idProps) {
     setErrorSelectedAtividade(selectedAtividade === '0');
     setErrorTitulo(titulo === '');
     setErrorDataInicial(dataInicial === '');
-    setErrorDataFinal(dataFinal === '');
-    setErrorHoras(parseInt(horas) < 1 || horas === '');
+    setErrorDataFinal(dataFinal === '' || dataInicial > dataFinal);
+    setErrorHoras(
+      parseInt(horas) < 1 || horas === '' || parseInt(horas) > 5000
+    );
   };
 
   const request = useCallback(async () => {
@@ -188,7 +190,10 @@ export default function RegistePageTest({ params }: idProps) {
     setErrorTitulo(titulo === '');
     setErrorDataInicial(dataInicial === '');
     setErrorDataFinal(dataFinal === '');
-    setErrorHoras(parseInt(horas) < 1 || horas === '');
+    setErrorDataFinal(dataInicial > dataFinal);
+    setErrorHoras(
+      parseInt(horas) < 1 || horas === '' || parseInt(horas) > 5000
+    );
 
     const isValidInputs =
       !errorSelectedAtividade &&
@@ -199,6 +204,10 @@ export default function RegistePageTest({ params }: idProps) {
 
     if (isValidInputs) {
       registerCertificate();
+    }
+
+    if (errorDataFinal) {
+      errorToast('Selecione uma data final posterior a data inicial.');
     }
   };
 
@@ -301,7 +310,7 @@ export default function RegistePageTest({ params }: idProps) {
                 min={minDate}
               />
               {errorDataFinal ? (
-                <S.ErrorSpan>*Selecione uma data</S.ErrorSpan>
+                <S.ErrorSpan>*Selecione uma data válida</S.ErrorSpan>
               ) : (
                 <></>
               )}
@@ -317,6 +326,7 @@ export default function RegistePageTest({ params }: idProps) {
                 onChange={handleChangeHoras}
                 value={horas}
                 disabled={isReadyToSent}
+                max={5000}
               />
               {errorHoras ? (
                 <S.ErrorSpan>*Entrada inválida</S.ErrorSpan>

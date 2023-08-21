@@ -7,7 +7,7 @@ export interface PageValue {
 
 export interface RequestPagination {
   id: number;
-  dataDaSolicitacao: Date;
+  data: Date;
   quantidadeDeHoras: number;
   status: string;
 }

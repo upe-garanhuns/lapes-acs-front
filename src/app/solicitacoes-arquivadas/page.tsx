@@ -23,6 +23,7 @@ export default function SolicitacoesArquivadas() {
     const archiveRequest = async () => {
       const requestResponse = await getArchived(token);
       setRequestList(requestResponse);
+      console.log(requestResponse);
     };
     setArchive(true);
     archiveRequest();
@@ -61,7 +62,9 @@ export default function SolicitacoesArquivadas() {
                 <RequestList
                   status={item.requisicaoStatus}
                   id={item.id}
-                  initialDate={moment(item.data).format('DD/MM/YYYY')}
+                  initialDate={moment(item.dataDeSubmissao).format(
+                    'DD/MM/YYYY'
+                  )}
                   hours={item.quantidadeDeHoras}
                   key={item.id}
                   token={token}
