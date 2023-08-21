@@ -83,6 +83,7 @@ export const FileList = styled.ul`
   padding: 0;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 `;
 
 export const FileItem = styled.li`
@@ -141,4 +142,13 @@ export const NextButton = styled.button`
   cursor: pointer;
   margin-right: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+`;
+
+export const SizeWarning = styled.p`
+  font-size: 15px;
+  font-weight: bold;
+  color: #ff0000;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-align: center;
 `;

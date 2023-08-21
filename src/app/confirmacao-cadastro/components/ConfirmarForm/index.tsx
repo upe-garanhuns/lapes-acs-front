@@ -27,18 +27,15 @@ export default function ConfirmarForm() {
         // Caso o código de verificação não esteja presente no cookie, trate o erro
         throw new Error('Código de verificação não encontrado no cookie.');
       }
-      await verificarCodigo(codigoVerificacao, token)
-        .then((res) => {
-          if (res.status == 200) {
-            sucessToast('Usuário cadastrado com sucesso!');
-            router.push('/home'); // Redireciona o usuário para a página /home
-            return;
-          }
-        })
-        .catch((error) => {
+      await verificarCodigo(codigoVerificacao, token).then((res) => {
+        if (res.status == 200) {
+          sucessToast('Usuário cadastrado com sucesso!');
+          router.push('/home'); // Redireciona o usuário para a página /home
+          return;
+        } else if (res.status == 406) {
           errorToast('Código incorreto, verifique e confirme novamente!');
-          console.log(error);
-        });
+        }
+      });
     } catch (error) {
       console.error(error);
       alert(
@@ -46,6 +43,11 @@ export default function ConfirmarForm() {
       );
       throw error;
     }
+  };
+
+  const handleCancelClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    router.push('/home');
   };
 
   return (
@@ -68,7 +70,7 @@ export default function ConfirmarForm() {
         onChange={handleCodigoChange}
       />
       <S.ButtonsContainer>
-        <S.CancelButton>Cancelar</S.CancelButton>
+        <S.CancelButton onClick={handleCancelClick}>Cancelar</S.CancelButton>
         <S.ConfirmButton
           onClick={(event: React.MouseEvent<HTMLButtonElement>) => {
             handleConfirmarClick(event);

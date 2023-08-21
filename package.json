@@ -24,6 +24,8 @@
     "next": "^13.4.5",
     "pdfjs-dist": "^3.9.179",
     "phosphor-icons": "^1.4.2",
+    "next": "13.4.5",
+    "primereact": "^9.6.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-input-mask": "^2.0.4",

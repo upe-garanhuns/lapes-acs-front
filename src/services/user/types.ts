@@ -5,7 +5,12 @@ export interface UserInformation {
   telefone: string;
   email: string;
   perfis: Array<string>;
-  curso: object;
+  curso: CourseInfo;
   periodo: string;
   verificado: boolean;
+}
+
+export interface CourseInfo {
+  id: number;
+  nome: string;
 }
