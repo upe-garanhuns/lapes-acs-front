@@ -302,7 +302,7 @@ export function Register({ close }: ComponentProps) {
         errorNumber == true
       ) {
         await createUser(signUpData);
-        sucessToast('Acesse o e-mail cadastrado para verificar a sua conta!');
+        sucessToast('Cadastro realizado com sucesso! Realize o login');
       } else {
         warnToast('Preencha todos os campos corretamente para cadastrar!');
       }
