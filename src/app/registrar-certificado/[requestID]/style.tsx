@@ -169,7 +169,6 @@ export const ButtonsContainerCertificates = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-bottom: 6rem;
   max-width: 300px;
   position: absolute;
   bottom: 0;
