@@ -303,10 +303,10 @@ export function Register({ close }: ComponentProps) {
       ) {
         await createUser(signUpData);
         sucessToast('Cadastro realizado com sucesso! Realize o login');
+        close();
       } else {
         warnToast('Preencha todos os campos corretamente para cadastrar!');
       }
-      close();
     } catch (error) {
       errorToast('Houve algum erro ao tentar se cadastrar!');
       console.log(error);
