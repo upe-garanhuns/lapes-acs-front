@@ -86,6 +86,8 @@ export function Register({ close }: ComponentProps) {
     setUserUf,
     userStreet,
     setUserStreet,
+    userComplement,
+    setUserComplement,
     userRegistry,
     setUserRegistry
   } = useSetInput();
@@ -197,6 +199,11 @@ export function Register({ close }: ComponentProps) {
     setVisibility(!visibility);
   };
 
+  const handleChangeComplement = (e: { target: { value: string } }) => {
+    const { value } = e.target;
+    setUserComplement(value);
+  };
+
   //chamada da api do cep - jamu
   const fetchCep = async (cep: string): Promise<void> => {
     await fetchWrapper<Endereco>(`api/endereco/${cep}`)
@@ -257,7 +264,8 @@ export function Register({ close }: ComponentProps) {
     cidade: userCity,
     numero: parseInt(userNumber),
     cursoId: parseInt(userCourse),
-    uf: userUf
+    uf: userUf,
+    complemento: userComplement
   };
 
   //função disparda quando botão cadastrar é acionado - jamu
@@ -572,6 +580,13 @@ export function Register({ close }: ComponentProps) {
               {!errorNumber && (
                 <S.ErroMessage>*Insira um número valido</S.ErroMessage>
               )}
+            </S.InsideDiv>
+            <S.InsideDiv $col="span 3 / span 2">
+              <S.RegisterInput
+                label="Complemento:"
+                placeholder="Ex: Apartamento 10"
+                onChange={handleChangeComplement}
+              />
             </S.InsideDiv>
           </S.InputDiv>
         </S.Div>

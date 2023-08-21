@@ -13,4 +13,5 @@ export interface CreateUser {
   numero: number;
   cursoId: number;
   uf: string;
+  complemento?: string;
 }
