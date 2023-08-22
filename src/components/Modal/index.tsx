@@ -54,7 +54,7 @@ export const Modal = ({
           firstFocusableElRef.current &&
           document.activeElement === firstFocusableElRef.current
         ) {
-          lastFocusableElRef.current?.focus();
+          firstFocusableElRef.current?.focus();
           event.preventDefault();
         } else if (
           !event.shiftKey &&
