@@ -2,7 +2,7 @@ import { fetchWrapperTest } from '../apiTest';
 
 export const exibirPDF = async (
   token: string, // Recebe o token como parâmetro
-  idCertificado: string
+  idCertificado: number
 ) => {
   const response = await fetchWrapperTest(
     `api/certificado/${idCertificado}/pdf`,

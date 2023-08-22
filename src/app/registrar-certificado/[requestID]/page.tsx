@@ -360,9 +360,7 @@ export default function RegistePageTest({ params }: idProps) {
       <S.ContainerPdf>
         {isPdfViewerVisible && certificateData.length > 0 && (
           <S.ContainerPdf>
-            <PdfViewer
-              pdfId={certificateData[certificateIndex]?.id.toString()}
-            />
+            <PdfViewer pdfId={certificateData[certificateIndex]?.id} />
           </S.ContainerPdf>
         )}
 
