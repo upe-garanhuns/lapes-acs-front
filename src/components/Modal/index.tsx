@@ -51,10 +51,11 @@ export const Modal = ({
         }
         if (
           event.shiftKey &&
+          isTabPressed &&
           firstFocusableElRef.current &&
           document.activeElement === firstFocusableElRef.current
         ) {
-          lastFocusableElRef.current?.focus();
+          firstFocusableElRef.current?.focus();
           event.preventDefault();
         } else if (
           !event.shiftKey &&
