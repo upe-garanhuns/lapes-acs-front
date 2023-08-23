@@ -24,7 +24,7 @@ export const Container = styled.aside<navOpen>`
     ${({ isOpen }) =>
       isOpen &&
       ` box-shadow: 0 25px 50px 12px rgb(0 0 0 / 0.25); 
-        top: 14vh
+        top: 14vh;
     `};
 
   @media screen and (max-width: 767px) {
