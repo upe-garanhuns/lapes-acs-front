@@ -82,6 +82,11 @@ export const PerfilIcon = styled.span`
   justify-content: center;
   align-items: center;
   padding: 0.8em;
+  transition: transform 0.3s ease-in-out;
+  cursor: pointer;
+  &:hover {
+    transform: scale(1.1);
+  }
 `;
 
 export const PerfilDivInside = styled.div<navOpen>`
@@ -169,7 +174,7 @@ export const navBarLink = styled(ActiveLink)`
 `;
 
 export const PLink = styled.p`
-  margin: 0;
+  margin: 0.3rem;
 `;
 
 export const LogOutDiv = styled.div`

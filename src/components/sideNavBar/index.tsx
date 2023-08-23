@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { toast } from 'react-toastify';
 
 import { getUserInformation } from '../../services/user';
@@ -16,6 +16,24 @@ export default function SideNavBar() {
   const router = useRouter();
   const pathName = usePathname();
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const componentRef = useRef(null);
+
+  useEffect(() => {
+    const handleOutsideClick = (event: MouseEvent) => {
+      if (
+        componentRef.current &&
+        !componentRef.current.contains(event.target)
+      ) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleOutsideClick);
+
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick);
+    };
+  }, []);
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const [userInfo, setUserInfo] = useState<UserInformation>();
 
@@ -58,6 +76,7 @@ export default function SideNavBar() {
 
   function handleLogOut() {
     Cookies.remove('token');
+    setIsOpen(false);
     toast.error('Sua sessão expirou!', {
       position: 'top-right',
       autoClose: 5000,
@@ -72,7 +91,7 @@ export default function SideNavBar() {
   }
 
   return (
-    <S.Container isOpen={isOpen} isMobile={isMobile}>
+    <S.Container isOpen={isOpen} ref={componentRef} isMobile={isMobile}>
       <S.PerfilDiv>
         {!isOpen ? (
           <S.PerfilDivInside isOpen={isOpen} isMobile={isMobile}>
@@ -116,7 +135,7 @@ export default function SideNavBar() {
               <S.LiInsideDiv isOpen={isOpen} isMobile={isMobile}>
                 <S.navBarLink href="/">
                   <Bell size={24} />
-                  <S.PLink>notificação</S.PLink>
+                  <S.PLink>Notificação</S.PLink>
                 </S.navBarLink>
               </S.LiInsideDiv>
             )}

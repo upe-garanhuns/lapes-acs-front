@@ -2,13 +2,12 @@
 import { useRouter } from 'next/navigation';
 import React, { useCallback, useEffect, useState } from 'react';
 
-import { errorToast } from '../../../../functions/errorToast';
-import { sucessToast } from '../../../../functions/sucessToast';
-import { warnToast } from '../../../../functions/warnToast';
-import { deleteCertificate } from '../../../../services/deleteCertificate';
-import { newCertificate } from '../../../../services/newCertificate';
-import { getRequest } from '../../../../services/request';
-import { Certificate } from '../../../../services/request/types';
+import { errorToast } from '../../../../../functions/errorToast';
+import { sucessToast } from '../../../../../functions/sucessToast';
+import { deleteCertificate } from '../../../../../services/deleteCertificate';
+import { newCertificate } from '../../../../../services/newCertificate';
+import { getRequest } from '../../../../../services/request';
+import { Certificate } from '../../../../../services/request/types';
 import * as S from './style';
 
 import { XCircle, FileText, FilePlus } from '@phosphor-icons/react';
@@ -52,18 +51,11 @@ export const NewRequest = ({
 
     const files = event.target.files;
     if (files) {
+      console.log(files);
       for (let index = 0; index < files.length; index++) {
         if (fileRegex.test(files[index].name)) {
           if (files[index].size < mb) {
-            if (
-              !uploadedFiles.some(
-                (prevFile) => prevFile.name === files[index].name
-              )
-            ) {
-              setUploadedFiles((prevFiles) => [...prevFiles, files[index]]);
-            } else {
-              warnToast('Este arquivo já foi enviado');
-            }
+            setUploadedFiles((prevFiles) => [...prevFiles, files[index]]);
           } else {
             errorToast('Só é possível enviar arquivos com menos de 1mb');
           }
@@ -131,19 +123,12 @@ export const NewRequest = ({
     const fileRegex = /^.+\.pdf$/;
     const maxFileSize = 1048576;
 
-    if (files && files.length > 0) {
+    if (files) {
+      console.log(files);
       for (let index = 0; index < files.length; index++) {
         if (fileRegex.test(files[index].name)) {
           if (files[index].size < maxFileSize) {
-            if (
-              !uploadedFiles.some(
-                (prevFile) => prevFile.name === files[index].name
-              )
-            ) {
-              setUploadedFiles((prevFiles) => [...prevFiles, files[index]]);
-            } else {
-              warnToast('Este arquivo já foi enviado');
-            }
+            setUploadedFiles((prevFiles) => [...prevFiles, files[index]]);
           } else {
             errorToast('Só é possível enviar arquivos com menos de 1mb');
           }
@@ -174,7 +159,6 @@ export const NewRequest = ({
           id="selecao-arquivo"
           type="file"
           onChange={handleFileUpload}
-          value={''}
           multiple
         />
       </S.FileInputContainer>
@@ -202,9 +186,7 @@ export const NewRequest = ({
           ))}
         </S.FileList>
       </S.FileListContainer>
-      <S.SizeWarning>
-        Somente arquivos em formato PDFs são aceitos. Limite de tamanho: 1MB.
-      </S.SizeWarning>
+
       <S.ButtonsContainer>
         <S.CancelButton onClick={cancelRequest}>Cancelar</S.CancelButton>
         <S.NextButton onClick={handleNext}>Próximo</S.NextButton>

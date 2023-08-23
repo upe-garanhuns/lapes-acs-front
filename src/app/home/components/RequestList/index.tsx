@@ -3,7 +3,8 @@ import React, { useState } from 'react';
 import ArchiveModal from '../../../../components/ArchiveDraft/ArchiveModal';
 import DeleteDraftModal from '../../../../components/DeleteDraft/DeleteDraftModal';
 import ViewRequestModal from '../../../../components/ViewRequest/ViewRequestModal';
-import { NewRequest } from '../NewRequest';
+import { NewRequest } from '../NewRequest/NewRequestContent';
+import { NewRequestModal } from '../NewRequest/NewRequestModal';
 import * as S from './styles';
 
 import {
@@ -38,20 +39,11 @@ export const RequestList: React.FC<ComponentProps> = ({
   reloadRequestDelete,
   reloadRequestArchive
 }) => {
-  const [isOpen, setIsOpen] = useState(false);
-
   isDraft = false;
   if (status === 'RASCUNHO') {
     isDraft = true;
   }
 
-  function openNewRequestModal() {
-    setIsOpen(true);
-  }
-
-  function closeNewRequestModal() {
-    setIsOpen(false);
-  }
   const iconSize = 24;
   let statusDescription = '';
   status === 'ACEITO'
@@ -65,21 +57,6 @@ export const RequestList: React.FC<ComponentProps> = ({
     : (statusDescription = 'Sem status');
   return (
     <div>
-      <S.NewRequestModal
-        closeModalArea={closeNewRequestModal}
-        isOpen={isOpen}
-        closeModal={closeNewRequestModal}
-        // eslint-disable-next-line react/no-children-prop
-        children={
-          <NewRequest
-            cancelRequest={closeNewRequestModal}
-            requestId={id}
-            token={token}
-            isNewRequest={false}
-          />
-        }
-        closeText={<XCircle size={32} color="#FF0000" />}
-      ></S.NewRequestModal>
       <S.Card cardcolor={isDraft}>
         <S.StatusIcon>
           {isDraft ? (
@@ -112,9 +89,7 @@ export const RequestList: React.FC<ComponentProps> = ({
         </S.Content>
         <S.IconsContainer>
           {isDraft ? (
-            <S.ActionIcon>
-              <PencilSimpleLine size={iconSize} onClick={openNewRequestModal} />
-            </S.ActionIcon>
+            <NewRequestModal token={token} id={id} />
           ) : (
             <ViewRequestModal id={id} token={token} />
           )}
