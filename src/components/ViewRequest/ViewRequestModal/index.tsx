@@ -21,14 +21,14 @@ export default function ViewRequestModal(props: ViewRequestModalProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [certificateData, setCertificateData] = useState<ViewRequestProps>({
     id: 0,
-    data: new Date(),
+    dataDeSubmissao: new Date(),
     requisicaoStatus: '',
     observacao: '',
     certificados: []
   });
   const fetchData = async () => {
     try {
-      const response = await getRequest(id, token); // colocar o link do end-point aqui
+      const response = await getRequest(id, token);
       return response;
     } catch (error) {
       toast.error('Sua sessão expirou!', {

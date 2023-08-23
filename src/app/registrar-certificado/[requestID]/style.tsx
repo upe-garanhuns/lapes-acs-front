@@ -97,7 +97,7 @@ export const CertificatesContainer = styled.div`
   position: fixed;
   right: 0;
   top: 0;
-  bottom: 0;
+  bottom: 84px;
 
   /* Estilo do container */
   display: flex;
@@ -191,4 +191,8 @@ export const ErrorSpan = styled.span`
   font-size: 10px;
   margin-top: 6px;
   margin-left: 5px;
+`;
+
+export const ContainerPdf = styled.div`
+  display: flex;
 `;

@@ -13,14 +13,15 @@ import moment from 'moment';
 
 export type ViewRequestProps = {
   id?: number;
-  data?: Date;
+  dataDeSubmissao?: Date;
   requisicaoStatus?: string;
   observacao?: string;
   certificados?: Array<Certificate>;
 };
 
 export default function ViewRequestContent(props: ViewRequestProps) {
-  const { id, data, requisicaoStatus, observacao, certificados } = props;
+  const { id, dataDeSubmissao, requisicaoStatus, observacao, certificados } =
+    props;
   const [currentPage, setCurrentPage] = useState(1);
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
@@ -56,7 +57,9 @@ export default function ViewRequestContent(props: ViewRequestProps) {
           </S.Content>
           <S.Content>
             <S.Description>Data da Solicitação:</S.Description>
-            <S.RequestDate>{moment(data).format('DD/MM/YYYY')}</S.RequestDate>
+            <S.RequestDate>
+              {moment(dataDeSubmissao).format('DD/MM/YYYY')}
+            </S.RequestDate>
           </S.Content>
           <S.Content>
             <S.Description>Quantidade de horas:</S.Description>
