@@ -6,7 +6,7 @@ export default function Load() {
   return (
     <S.Container>
       <S.Div>
-        <S.Message>Carregando</S.Message>
+        <S.Message>Carregando conteudo</S.Message>
       </S.Div>
       <S.Div>
         <S.Ball1 />
