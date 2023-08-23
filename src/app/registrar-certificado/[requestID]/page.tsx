@@ -15,7 +15,7 @@ import PdfViewer from '../PDFViewer/PDFViewer';
 import { getMaxDate } from './functions/getMaxDate';
 import * as S from './style';
 
-import { Check } from '@phosphor-icons/react';
+import { Check, DownloadSimple } from '@phosphor-icons/react';
 import Cookies from 'js-cookie';
 interface idProps {
   params: { requestID: string };
@@ -244,118 +244,113 @@ export default function RegistePageTest({ params }: idProps) {
     <S.Container>
       <S.Title>Etapa 2 de 3 - Preencher formulário</S.Title>
       <S.FormContainer>
-        <S.InputArea>
+        <S.InputGroup>
+          <S.Label>Titulo:</S.Label>
+          <S.Input
+            type="text"
+            onChange={handleChangeTitulo}
+            value={titulo}
+            disabled={isReadyToSent}
+            required
+          />
+          {errorTitulo ? (
+            <S.ErrorSpan>*Digite um título</S.ErrorSpan>
+          ) : (
+            <S.InvisibleBox />
+          )}
+        </S.InputGroup>
+        <S.InputContainer>
           <S.InputGroup>
-            <S.Label>Titulo:</S.Label>
-            <S.Input
-              type="text"
-              onChange={handleChangeTitulo}
-              value={titulo}
+            <S.Label>Data inicial:</S.Label>
+            <S.DateInput
+              type="date"
+              onChange={handleChangeDataInicial}
+              value={dataInicial}
               disabled={isReadyToSent}
-              required
+              max={getMaxDate()}
             />
-            {errorTitulo ? <S.ErrorSpan>*Digite um título</S.ErrorSpan> : <></>}
-          </S.InputGroup>
-
-          <S.InputGroup>
-            <S.Label>Eixo de ensino:</S.Label>
-            <S.Input type="text" disabled value={selectedEixo} />
-          </S.InputGroup>
-
-          <S.InputGroup>
-            <S.Label>Atividade:</S.Label>
-            <S.Select
-              value={selectedAtividade}
-              onChange={handleAtividadeChange}
-              disabled={isReadyToSent}
-            >
-              <option value="0">Selecione</option>
-              {activitiesData.map((item) => (
-                <option value={item.id} key={item.id}>
-                  {item.descricao}
-                </option>
-              ))}
-            </S.Select>
-            {errorSelectedAtividade ? (
-              <S.ErrorSpan>*Selecione uma opção</S.ErrorSpan>
+            {errorDataInicial ? (
+              <S.ErrorSpan>*Selecione uma data</S.ErrorSpan>
             ) : (
-              <></>
+              <S.InvisibleBox />
             )}
           </S.InputGroup>
-        </S.InputArea>
 
-        <S.InputArea>
-          <S.InputContainer>
-            <S.InputGroup>
-              <S.Label>Data inicial:</S.Label>
-              <S.Input
-                type="date"
-                onChange={handleChangeDataInicial}
-                value={dataInicial}
-                disabled={isReadyToSent}
-                max={getMaxDate()}
-              />
-              {errorDataInicial ? (
-                <S.ErrorSpan>*Selecione uma data</S.ErrorSpan>
-              ) : (
-                <></>
-              )}
-            </S.InputGroup>
-
-            <S.InputGroup>
-              <S.Label>Data final:</S.Label>
-              <S.Input
-                type="date"
-                onChange={handleChangeDataFinal}
-                value={dataFinal}
-                disabled={isReadyToSent}
-                max={getMaxDate()}
-                min={minDate}
-              />
-              {errorDataFinal ? (
-                <S.ErrorSpan>*Selecione uma data válida</S.ErrorSpan>
-              ) : (
-                <></>
-              )}
-            </S.InputGroup>
-          </S.InputContainer>
-
-          <S.InputContainer>
-            <S.InputGroup>
-              <S.Label>Quantidade de horas:</S.Label>
-              <S.Input
-                type="number"
-                min={1}
-                onChange={handleChangeHoras}
-                value={horas}
-                disabled={isReadyToSent}
-                max={5000}
-              />
-              {errorHoras ? (
-                <S.ErrorSpan>*Entrada inválida</S.ErrorSpan>
-              ) : (
-                <></>
-              )}
-            </S.InputGroup>
-          </S.InputContainer>
-
-          {!isReadyToSent ? (
-            <S.ButtonsContainer>
-              <S.SaveButton onClick={verifyInputs}>
-                Salvar certificado
-              </S.SaveButton>
-              {/* <S.ViewButton onClick={() => setIsPdfViewerVisible(true)}>
-                Visualizar certificado
-              </S.ViewButton> */}
-            </S.ButtonsContainer>
+          <S.InputGroup>
+            <S.Label>Data final:</S.Label>
+            <S.DateInput
+              type="date"
+              onChange={handleChangeDataFinal}
+              value={dataFinal}
+              disabled={isReadyToSent}
+              max={getMaxDate()}
+              min={minDate}
+            />
+            {errorDataFinal ? (
+              <S.ErrorSpan>*Selecione uma data</S.ErrorSpan>
+            ) : (
+              <S.InvisibleBox />
+            )}
+          </S.InputGroup>
+        </S.InputContainer>
+        <S.InputGroup>
+          <S.Label>Atividade:</S.Label>
+          <S.Select
+            value={selectedAtividade}
+            onChange={handleAtividadeChange}
+            disabled={isReadyToSent}
+          >
+            <option value="0">Selecione</option>
+            {activitiesData.map((item) => (
+              <option value={item.id} key={item.id}>
+                {item.descricao}
+              </option>
+            ))}
+          </S.Select>
+          {errorSelectedAtividade ? (
+            <S.ErrorSpan>*Selecione uma opção</S.ErrorSpan>
           ) : (
-            <S.ButtonsContainer>
-              <S.EditButton onClick={handleEditButton}>
-                Editar Certificados
-              </S.EditButton>
-            </S.ButtonsContainer>
+            <S.InvisibleBox />
           )}
-        </S.InputArea>
+        </S.InputGroup>
+        <S.InputContainer>
+          <S.InputGroup>
+            <S.Label>Quantidade de horas:</S.Label>
+            <S.Input
+              type="number"
+              min={1}
+              onChange={handleChangeHoras}
+              value={horas}
+              disabled={isReadyToSent}
+            />
+            {errorHoras ? (
+              <S.ErrorSpan>*Entrada inválida</S.ErrorSpan>
+            ) : (
+              <S.InvisibleBox />
+            )}
+          </S.InputGroup>
+        </S.InputContainer>
+        <S.InputGroup>
+          <S.Label>Eixo de ensino:</S.Label>
+          <S.Input type="text" disabled value={selectedEixo} />
+        </S.InputGroup>
+
+        {!isReadyToSent ? (
+          <S.ButtonsContainer>
+            <S.SaveButton onClick={verifyInputs}>
+              <S.SaveIcon>
+                <DownloadSimple size={24} />
+              </S.SaveIcon>
+              Salvar este certificado
+            </S.SaveButton>
+          </S.ButtonsContainer>
+        ) : (
+          <S.ButtonsContainer>
+            <S.SaveButton onClick={handleEditButton}>
+              Editar Certificados
+            </S.SaveButton>
+          </S.ButtonsContainer>
+        )}
       </S.FormContainer>
       <S.ContainerPdf>
         {certificateData.length > 0 && (

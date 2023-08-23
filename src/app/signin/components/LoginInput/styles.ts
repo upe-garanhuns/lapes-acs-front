@@ -13,6 +13,10 @@ export const Input = styled.input`
   &::placeholder {
     color: ${colors.grey[400]};
   }
+  &::-ms-reveal,
+  &::-ms-clear {
+    display: none;
+  }
 `;
 
 export const Label = styled.label``;
