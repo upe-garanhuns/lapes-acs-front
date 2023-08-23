@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 interface navOpen {
   isOpen: boolean;
+  isMobile: boolean;
 }
 
 export const Container = styled.aside<navOpen>`
@@ -19,11 +20,22 @@ export const Container = styled.aside<navOpen>`
   display: flex;
   flex-direction: column;
   position: absolute;
-
-  ${({ isOpen }) =>
-    isOpen &&
-    ` box-shadow: 0 25px 50px 12px rgb(0 0 0 / 0.25); 
+  top: 14vh
+    ${({ isOpen }) =>
+      isOpen &&
+      ` box-shadow: 0 25px 50px 12px rgb(0 0 0 / 0.25); 
+        top: 14vh
     `};
+
+  @media screen and (max-width: 767px) {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+  }
+
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+  }
 `;
 
 export const Line = styled.hr<navOpen>`
@@ -33,6 +45,20 @@ export const Line = styled.hr<navOpen>`
 `;
 
 export const Div = styled.div``;
+
+export const UlDiv = styled.div<navOpen>`
+  display: flex;
+
+  @media screen and (max-width: 767px) {
+    ${({ isOpen }) =>
+      !isOpen &&
+      ` display: none; 
+    `};
+  }
+
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+  }
+`;
 
 export const BlankDiv = styled.div`
   height: 20vh;
@@ -56,14 +82,30 @@ export const PerfilIcon = styled.span`
   justify-content: center;
   align-items: center;
   padding: 0.8em;
+  transition: transform 0.3s ease-in-out;
+  cursor: pointer;
+  &:hover {
+    transform: scale(1.1);
+  }
 `;
 
-export const PerfilDivInside = styled.div`
+export const PerfilDivInside = styled.div<navOpen>`
   width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   gap: 12px;
+
+  @media screen and (max-width: 767px) {
+    ${({ isOpen }) =>
+      isOpen &&
+      `
+      align-items:center; 
+    `};
+  }
+
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+  }
 `;
 
 export const ItemsCounter = styled.p`
@@ -74,10 +116,23 @@ export const ItemsCounter = styled.p`
 export const UlItems = styled.ul`
   width: 100%;
   justify-content: center;
+  @media screen and (max-width: 767px) {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 export const LiItems = styled.li`
   width: 100%;
+  @media screen and (max-width: 767px) {
+    display: flex;
+    justify-content: center;
+  }
+
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+  }
 `;
 
 export const LiInsideDiv = styled.div<navOpen>`
@@ -119,5 +174,28 @@ export const navBarLink = styled(ActiveLink)`
 `;
 
 export const PLink = styled.p`
-  margin: 0;
+  margin: 0.3rem;
+`;
+
+export const LogOutDiv = styled.div`
+  @media screen and (max-width: 767px) {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+  }
+`;
+
+export const UserInformation = styled.p`
+  width: 100px;
+  word-wrap: break-word;
+`;
+
+export const UserInfoDiv = styled.div`
+  padding: 0.2em;
+  display: flex;
+  flex-direction: column;
+  gap: 4;
 `;

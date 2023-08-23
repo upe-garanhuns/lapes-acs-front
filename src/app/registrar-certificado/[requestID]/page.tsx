@@ -11,12 +11,12 @@ import { createCertificate } from '../../../services/registerCertificate';
 import { CreateCertificate } from '../../../services/registerCertificate/types';
 import { getRequest } from '../../../services/request';
 import { Certificate } from '../../../services/request/types';
+import PdfViewer from '../PDFViewer/PDFViewer';
 import { getMaxDate } from './functions/getMaxDate';
 import * as S from './style';
 
 import { Check, DownloadSimple } from '@phosphor-icons/react';
 import Cookies from 'js-cookie';
-
 interface idProps {
   params: { requestID: string };
 }
@@ -41,6 +41,8 @@ export default function RegistePageTest({ params }: idProps) {
   const [minDate, setMinDate] = useState<string>('');
   const [certificateIndex, setCertificateIndex] = useState(0);
   const [isReadyToSent, setIsReadyToSent] = useState(false);
+  // const [isPdfViewerVisible, setIsPdfViewerVisible] = useState(false);
+
   const router = useRouter();
 
   function delay(time: number) {
@@ -51,8 +53,10 @@ export default function RegistePageTest({ params }: idProps) {
     setErrorSelectedAtividade(selectedAtividade === '0');
     setErrorTitulo(titulo === '');
     setErrorDataInicial(dataInicial === '');
-    setErrorDataFinal(dataFinal === '');
-    setErrorHoras(parseInt(horas) < 1 || horas === '');
+    setErrorDataFinal(dataFinal === '' || dataInicial > dataFinal);
+    setErrorHoras(
+      parseInt(horas) < 1 || horas === '' || parseInt(horas) > 5000
+    );
   };
 
   const request = useCallback(async () => {
@@ -188,7 +192,10 @@ export default function RegistePageTest({ params }: idProps) {
     setErrorTitulo(titulo === '');
     setErrorDataInicial(dataInicial === '');
     setErrorDataFinal(dataFinal === '');
-    setErrorHoras(parseInt(horas) < 1 || horas === '');
+    setErrorDataFinal(dataInicial > dataFinal);
+    setErrorHoras(
+      parseInt(horas) < 1 || horas === '' || parseInt(horas) > 5000
+    );
 
     const isValidInputs =
       !errorSelectedAtividade &&
@@ -199,6 +206,10 @@ export default function RegistePageTest({ params }: idProps) {
 
     if (isValidInputs) {
       registerCertificate();
+    }
+
+    if (errorDataFinal) {
+      errorToast('Selecione uma data final posterior a data inicial.');
     }
   };
 
@@ -218,6 +229,7 @@ export default function RegistePageTest({ params }: idProps) {
       setSelectedEixo('');
       setMinDate('');
       setCertificateIndex(certificateIndex + 1);
+      // setIsPdfViewerVisible(false); // Definir como falso após salvar o certificado
       if (certificateData.length == certificateIndex + 1) {
         setIsReadyToSent(true);
       }
@@ -340,7 +352,15 @@ export default function RegistePageTest({ params }: idProps) {
           </S.ButtonsContainer>
         )}
       </S.FormContainer>
+      <S.ContainerPdf>
+        {certificateData.length > 0 && (
+          <S.ContainerPdf>
+            <PdfViewer pdfId={certificateData[certificateIndex]?.id} />
+          </S.ContainerPdf>
+        )}
 
+        {/* pdfId={certificateData[certificateIndex]?.id.toString()} */}
+      </S.ContainerPdf>
       <S.CertificatesContainer>
         <S.TitleAnexados>Anexados</S.TitleAnexados>
         <S.ContainerCertificates>

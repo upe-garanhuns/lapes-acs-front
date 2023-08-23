@@ -2,12 +2,12 @@
 import { useRouter } from 'next/navigation';
 import React, { useCallback, useEffect, useState } from 'react';
 
-import { errorToast } from '../../../../functions/errorToast';
-import { sucessToast } from '../../../../functions/sucessToast';
-import { deleteCertificate } from '../../../../services/deleteCertificate';
-import { newCertificate } from '../../../../services/newCertificate';
-import { getRequest } from '../../../../services/request';
-import { Certificate } from '../../../../services/request/types';
+import { errorToast } from '../../../../../functions/errorToast';
+import { sucessToast } from '../../../../../functions/sucessToast';
+import { deleteCertificate } from '../../../../../services/deleteCertificate';
+import { newCertificate } from '../../../../../services/newCertificate';
+import { getRequest } from '../../../../../services/request';
+import { Certificate } from '../../../../../services/request/types';
 import * as S from './style';
 
 import { XCircle, FileText, FilePlus } from '@phosphor-icons/react';
