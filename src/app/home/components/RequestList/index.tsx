@@ -93,7 +93,13 @@ export const RequestList: React.FC<ComponentProps> = ({
           ) : (
             <ViewRequestModal id={id} token={token} />
           )}
-          {!isDraft ? (
+          {isDraft ? (
+            <DeleteDraftModal
+              token={token}
+              id={id}
+              updateRequestsDelete={reloadRequestDelete}
+            ></DeleteDraftModal>
+          ) : status === 'ACEITO' || status === 'NEGADO' ? (
             <ArchiveModal
               type={type}
               token={token}
@@ -101,11 +107,7 @@ export const RequestList: React.FC<ComponentProps> = ({
               updateRequestsArchive={reloadRequestArchive}
             ></ArchiveModal>
           ) : (
-            <DeleteDraftModal
-              token={token}
-              id={id}
-              updateRequestsDelete={reloadRequestDelete}
-            ></DeleteDraftModal>
+            <></>
           )}
         </S.IconsContainer>
       </S.Card>
