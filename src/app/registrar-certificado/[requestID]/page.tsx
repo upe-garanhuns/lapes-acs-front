@@ -42,6 +42,7 @@ export default function RegistePageTest({ params }: idProps) {
   const [certificateIndex, setCertificateIndex] = useState(0);
   const [isReadyToSent, setIsReadyToSent] = useState(false);
   // const [isPdfViewerVisible, setIsPdfViewerVisible] = useState(false);
+  const [isLoadingCertificates, setIsLoadingCertificates] = useState(false);
 
   const router = useRouter();
 
@@ -61,9 +62,12 @@ export default function RegistePageTest({ params }: idProps) {
 
   const request = useCallback(async () => {
     try {
+      setIsLoadingCertificates(true);
       const requestResponse = await getRequest(requestId, token);
       setCertificateData(requestResponse.certificados ?? []);
+      setIsLoadingCertificates(false);
     } catch (error) {
+      setIsLoadingCertificates(false);
       console.log(error);
       errorToast('Requisição não encontrada');
       router.push('/home');
@@ -364,16 +368,20 @@ export default function RegistePageTest({ params }: idProps) {
       <S.CertificatesContainer>
         <S.TitleAnexados>Anexados</S.TitleAnexados>
         <S.ContainerCertificates>
-          {certificateData.map((item, index) => (
-            <S.CertificateItem
-              key={item.id}
-              color={certificateIndex == index ? '#4B629C' : '#253555'}
-            >
-              {`Certificado ${item.id}`}
-              &nbsp;
-              {certificateIndex > index ? <Check /> : <></>}
-            </S.CertificateItem>
-          ))}
+          {isLoadingCertificates ? (
+            <S.CertificateItem>Carregando...</S.CertificateItem>
+          ) : (
+            certificateData.map((item, index) => (
+              <S.CertificateItem
+                key={item.id}
+                color={certificateIndex === index ? '#4B629C' : '#253555'}
+              >
+                {`Certificado ${item.id}`}
+                &nbsp;
+                {certificateIndex > index ? <Check /> : <></>}
+              </S.CertificateItem>
+            ))
+          )}
         </S.ContainerCertificates>
         <S.ButtonsContainerCertificates>
           <S.Button onClick={() => router.push('/home')}>Voltar</S.Button>
