@@ -16,7 +16,7 @@ export default function SideNavBar() {
   const router = useRouter();
   const pathName = usePathname();
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const componentRef = useRef(null);
+  const componentRef = useRef<any>(null);
 
   useEffect(() => {
     const handleOutsideClick = (event: MouseEvent) => {
@@ -43,7 +43,6 @@ export default function SideNavBar() {
     const userInfo = async () => {
       const userResponse = await getUserInformation(token);
       setUserInfo(userResponse);
-      console.log(userResponse);
     };
     const checkIsMobile = () => {
       setIsMobile(window.matchMedia('(max-width: 767px)').matches);

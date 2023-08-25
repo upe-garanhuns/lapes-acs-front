@@ -1,6 +1,6 @@
 import { fetchWrapperTest } from '../apiTest';
 
-export const downloadPDF = async (token: string, idRequisicao: string) => {
+export const downloadPDF = async (token: string, idRequisicao: number) => {
   try {
     const response = await fetchWrapperTest(
       `api/requisicao/${idRequisicao}/pdf`,

@@ -44,7 +44,7 @@ export default function ViewRequestContent(props: ViewRequestProps) {
   const endIndex = startIndex + pageSize;
   const certificates = !certificados ? [] : certificados;
   const displayedItems = certificates.slice(startIndex, endIndex);
-  const token = Cookies.get('token');
+  const token = Cookies.get('token') || '';
 
   const handleDownloadPDF = async () => {
     try {
