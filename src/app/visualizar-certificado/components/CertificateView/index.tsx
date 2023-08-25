@@ -86,10 +86,10 @@ export const CertificateView = ({
           label="Salvar certificado"
           startAdornment={<DownloadSimple size={24} />}
         />
-        <S.ViewCertificate
+        {/* <S.ViewCertificate
           label="Visualizar Certificado"
           startAdornment={<File size={24} />}
-        />
+        /> */}
       </S.ButtonDiv>
     </S.Container>
   );
