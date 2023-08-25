@@ -2,10 +2,6 @@ import { exibirPDF } from '../../../services/PDF/index'; // Importe a função
 
 import Cookies from 'js-cookie';
 
-interface pdfProps {
-  pdfId?: number;
-}
-
 const downloadPDF = async (pdfId: number) => {
   try {
     const token = Cookies.get('token') || '';

@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import ArchiveModal from '../../../../components/ArchiveDraft/ArchiveModal';
 import DeleteDraftModal from '../../../../components/DeleteDraft/DeleteDraftModal';
 import ViewRequestModal from '../../../../components/ViewRequest/ViewRequestModal';
-import { NewRequest } from '../NewRequest/NewRequestContent';
 import { NewRequestModal } from '../NewRequest/NewRequestModal';
 import * as S from './styles';
 
@@ -11,9 +10,7 @@ import {
   NotePencil,
   Clock,
   WarningCircle,
-  CheckCircle,
-  PencilSimpleLine,
-  XCircle
+  CheckCircle
 } from '@phosphor-icons/react';
 
 export type ComponentProps = {
