@@ -10,11 +10,13 @@ import { Printer } from '@phosphor-icons/react';
 interface SideViewInterface {
   certificate: Array<Certificate> | undefined;
   onCertificateClick: (id: number) => void;
+  dowloadPfd: number;
 }
 
 export const SideCertificateView = ({
   certificate,
-  onCertificateClick
+  onCertificateClick,
+  dowloadPfd
 }: SideViewInterface) => {
   const router = useRouter();
   const [certificates, setCertificates] = useState<Array<Certificate>>([]);
@@ -41,7 +43,7 @@ export const SideCertificateView = ({
 
   const handleDownloadClick = () => {
     // Call the downloadPDF function with the desired PDF ID
-    Downloadcertificado(4); // Replace 123 with the actual PDF ID
+    Downloadcertificado(dowloadPfd); // Replace 123 with the actual PDF ID
   };
   return (
     <S.Container>

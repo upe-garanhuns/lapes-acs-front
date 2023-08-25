@@ -5,7 +5,7 @@ import { getCertificateInterface } from '../../../../services/certificateData/ty
 import { DataText } from './components/DataText';
 import * as S from './styles';
 
-import { DownloadSimple, File } from '@phosphor-icons/react';
+//import { DownloadSimple } from '@phosphor-icons/react';
 import moment from 'moment';
 
 interface CertificateViewInterface {
@@ -80,17 +80,17 @@ export const CertificateView = ({
           </S.DataRow>
         </S.DataDiv>
       )}
-
+      {/*
       <S.ButtonDiv>
         <S.DownloadCertificate
           label="Salvar certificado"
           startAdornment={<DownloadSimple size={24} />}
         />
-        {/* <S.ViewCertificate
+         <S.ViewCertificate
           label="Visualizar Certificado"
           startAdornment={<File size={24} />}
-        /> */}
-      </S.ButtonDiv>
+        /> 
+      </S.ButtonDiv>*/}
     </S.Container>
   );
 };

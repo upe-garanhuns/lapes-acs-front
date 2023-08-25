@@ -53,6 +53,7 @@ export default function VisualizarCertificado({ params }: idProps) {
           <SideCertificateView
             certificate={selectId.certificados}
             onCertificateClick={handleCertificateClick}
+            dowloadPfd={certificateId}
           />
         )}
       </S.ContentDiv>
