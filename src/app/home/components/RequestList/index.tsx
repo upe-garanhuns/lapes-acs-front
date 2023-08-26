@@ -1,32 +1,22 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import ArchiveModal from '../../../../components/ArchiveDraft/ArchiveModal';
 import DeleteDraftModal from '../../../../components/DeleteDraft/DeleteDraftModal';
 import ViewRequestModal from '../../../../components/ViewRequest/ViewRequestModal';
-import { NewRequest } from '../NewRequest/NewRequestContent';
 import { NewRequestModal } from '../NewRequest/NewRequestModal';
+import {
+  RequestCardInfo,
+  DeleteOrArchive,
+  ComponentProps
+} from './interface/types';
 import * as S from './styles';
 
 import {
   NotePencil,
   Clock,
   WarningCircle,
-  CheckCircle,
-  PencilSimpleLine,
-  XCircle
+  CheckCircle
 } from '@phosphor-icons/react';
-
-export type ComponentProps = {
-  status: string;
-  id: number;
-  initialDate: string;
-  hours: number;
-  token: string;
-  isDraft: boolean;
-  type: boolean;
-  reloadRequestDelete: () => void;
-  reloadRequestArchive: () => void;
-};
 
 export const RequestList: React.FC<ComponentProps> = ({
   token,
@@ -34,15 +24,13 @@ export const RequestList: React.FC<ComponentProps> = ({
   id,
   initialDate,
   hours,
-  isDraft,
   type,
   reloadRequestDelete,
   reloadRequestArchive
 }) => {
   const iconSize = 24;
-  isDraft = status === 'RASCUNHO';
   // Objeto para armazenar as informações da aparência do card de acordo com o status
-  const requestCardInfoObj = {
+  const requestCardInfoObj: Record<string, RequestCardInfo> = {
     RASCUNHO: {
       icon: <NotePencil size={iconSize} />,
       description: 'Rascunho',
@@ -75,7 +63,7 @@ export const RequestList: React.FC<ComponentProps> = ({
     }
   };
   // Objeto que determina se o card terá o botão de deletar ou arquivar ou nenhum dos dois
-  const deleteOrArchiveObj = {
+  const deleteOrArchiveObj: DeleteOrArchive = {
     delete: (
       <DeleteDraftModal
         token={token}
@@ -94,11 +82,11 @@ export const RequestList: React.FC<ComponentProps> = ({
     none: <></>
   };
 
-  const requestCardInfo = requestCardInfoObj[status] || 'Sem status';
+  const requestCardInfo = requestCardInfoObj[status];
   const deleteOrArchive = deleteOrArchiveObj[requestCardInfo.deleteOrArchive];
   return (
     <div>
-      <S.Card cardcolor={isDraft}>
+      <S.Card cardcolor={status}>
         <S.StatusIcon>{requestCardInfo.icon}</S.StatusIcon>
         <S.Content>
           <S.Title>Status:</S.Title>

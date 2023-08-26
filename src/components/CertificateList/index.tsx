@@ -1,20 +1,10 @@
 import { useRouter } from 'next/navigation';
 import React from 'react';
 
+import { ComponentProps, CertificateStatus } from './interface/types';
 import * as S from './styles';
 
 import { Eye } from '@phosphor-icons/react';
-
-export type ComponentProps = {
-  statusCertificado: string | undefined;
-  titulo: string;
-  hours: number | undefined;
-  eixoAtividade: string;
-  atividade: string;
-  requestId: number | undefined;
-  certificateId: number | undefined;
-};
-
 export const CertificateList: React.FC<ComponentProps> = ({
   eixoAtividade,
   statusCertificado,
@@ -26,7 +16,7 @@ export const CertificateList: React.FC<ComponentProps> = ({
   const router = useRouter();
   const iconSize = 24;
 
-  const certificateStatusObject = {
+  const certificateStatusObject: CertificateStatus = {
     DEFERIDO: 'Concluído',
     ENCAMINHADO_COORDENACAO: 'Em análise',
     ENCAMINHADO_COMISSAO: 'Em análise',

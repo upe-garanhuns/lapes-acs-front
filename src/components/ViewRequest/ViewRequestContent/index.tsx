@@ -3,35 +3,28 @@
 import React, { useState } from 'react';
 
 import { sumRequestHours } from '../../../app/home/functions/sumRequestHours';
-import { Certificate } from '../../../services/request/types';
 import { CertificateList } from '../../CertificateList';
 import { Pagination } from '../../Pagination';
+import { ViewRequestProps, StatusCheckInterface } from './interface/types';
 import * as S from './styles';
 
 import { Printer } from '@phosphor-icons/react';
 import moment from 'moment';
 
-export type ViewRequestProps = {
-  id?: number;
-  dataDeSubmissao?: Date;
-  requisicaoStatus?: string;
-  observacao?: string;
-  certificados?: Array<Certificate>;
-};
-
 export default function ViewRequestContent(props: ViewRequestProps) {
+  const iconSize = 24;
   const { id, dataDeSubmissao, requisicaoStatus, observacao, certificados } =
     props;
   const [currentPage, setCurrentPage] = useState(1);
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
-  const iconSize = 24;
-  const statusCheckObject = {
+  const statusCheckObject: StatusCheckInterface = {
     ACEITO: 'Aceito',
     TRANSITO: 'Em análise',
     NEGADO: 'Indeferido'
   };
+
   const statusDescription = statusCheckObject[requisicaoStatus];
 
   const pageSize = 3;

@@ -35,7 +35,7 @@ export const NewRequest = ({
       const requestResponse = await getRequest(requestId, token);
       setCertificateData(requestResponse.certificados ?? []);
     } catch (error) {
-      errorToast(error);
+      errorToast('Ocorreu um erro! Tente novamente mais tarde');
     }
   }, [requestId, token]);
 

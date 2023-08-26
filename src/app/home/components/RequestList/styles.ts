@@ -3,14 +3,16 @@ import { colors } from '../../../../styles/colors';
 
 import styled from 'styled-components';
 
-export const Card = styled.div<{ cardcolor: boolean }>`
+export const Card = styled.div<{ cardcolor: string }>`
   display: grid;
   grid-template-columns: 0.1fr 0.5fr 1fr 0.5fr 0.5fr 70px;
   gap: 0.3rem;
   justify-content: center;
   align-items: center;
   background-color: ${({ cardcolor }) =>
-    cardcolor ? colors.figmaColors[50] : colors.figmaColors[100]};
+    cardcolor === 'RASCUNHO'
+      ? colors.figmaColors[50]
+      : colors.figmaColors[100]};
   border-radius: 20px;
   margin-top: 1.5rem;
   margin-bottom: 1rem;
