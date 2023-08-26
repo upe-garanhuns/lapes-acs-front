@@ -1,3 +1,5 @@
+import { errorToast } from '../../../functions/errorToast';
+import { sucessToast } from '../../../functions/sucessToast';
 import { deleteRequest } from '../../../services/request';
 import * as S from './styles';
 export type DeleteRequestProps = {
@@ -8,15 +10,16 @@ export type DeleteRequestProps = {
   onSuccess: () => void;
 };
 export function DeleteDraftButton(props: DeleteRequestProps) {
-  const { id, token, closeModal, failureWarning } = props;
+  const { id, token, closeModal } = props;
   const HandleDelete = async () => {
     try {
       await deleteRequest(id, token);
       props.onSuccess();
       closeModal();
+      sucessToast('Rascunho excluído com sucesso!');
     } catch (error) {
       console.log(error);
-      failureWarning();
+      errorToast('Ocorreu um erro ao excluir o rascunho');
     }
   };
 

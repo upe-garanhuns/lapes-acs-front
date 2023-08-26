@@ -4,16 +4,18 @@ import { Modal } from '../../Modal';
 import styled from 'styled-components';
 export const ModalContainer = styled(Modal)`
   border-radius: 15px;
-  height: 90vh;
+  height: 75%;
   overflow: auto;
   width: fit-content;
   padding-top: 15px;
+  padding-right: 4rem;
+  padding-left: 4rem;
   justify-content: center;
   display: flex;
   background-color: #e4e4e4;
   border: #253555 1px solid;
   @media (max-width: 426px) {
-    width: 90vw;
+    width: 70%;
   }
 `;
 

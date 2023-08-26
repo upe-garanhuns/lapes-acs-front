@@ -164,7 +164,7 @@ export default function Home() {
                     onClick={openNewRequestModal}
                   />
                   <S.InputRequestDiv>
-                    <S.RegisterInput placeholder="Pesquisar" />
+                    <S.SearchInput placeholder="Pesquisar" />
                     <S.IconButton>
                       <Funnel size={28} weight="fill" />
                     </S.IconButton>

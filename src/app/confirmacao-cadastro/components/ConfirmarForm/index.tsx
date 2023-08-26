@@ -28,19 +28,15 @@ export default function ConfirmarForm() {
         throw new Error('Código de verificação não encontrado no cookie.');
       }
       await verificarCodigo(codigoVerificacao, token).then((res) => {
-        if (res.status == 200) {
-          sucessToast('Usuário cadastrado com sucesso!');
-          router.push('/home'); // Redireciona o usuário para a página /home
-          return;
-        } else if (res.status == 406) {
-          errorToast('Código incorreto, verifique e confirme novamente!');
+        if (res.status === 200) {
+          sucessToast('Cadastro confirmado com sucesso!');
+          router.push('/home');
+        } else {
+          errorToast('Código de verificação inválido.');
         }
       });
     } catch (error) {
       console.error(error);
-      alert(
-        'Erro ao verificar o código de ativação. Tente novamente mais tarde.'
-      );
       throw error;
     }
   };

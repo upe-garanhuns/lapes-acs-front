@@ -12,9 +12,10 @@ export const Card = styled.div<{ cardcolor: boolean }>`
   background-color: ${({ cardcolor }) =>
     cardcolor ? colors.figmaColors[50] : colors.figmaColors[100]};
   border-radius: 20px;
-  margin-top: 1rem;
+  margin-top: 1.5rem;
   margin-bottom: 1rem;
   padding: 7px;
+  box-shadow: 0px 9px 15px -3px rgba(0, 0, 0, 0.1);
 
   @media (max-width: 850px) {
     grid-template-columns: repeat(2, minmax(150px, 1fr));

@@ -39,41 +39,70 @@ export const RequestList: React.FC<ComponentProps> = ({
   reloadRequestDelete,
   reloadRequestArchive
 }) => {
-  isDraft = false;
-  if (status === 'RASCUNHO') {
-    isDraft = true;
-  }
-
   const iconSize = 24;
-  let statusDescription = '';
-  status === 'ACEITO'
-    ? (statusDescription = 'Concluído')
-    : status === 'TRANSITO'
-    ? (statusDescription = 'Em análise')
-    : status === 'NEGADO'
-    ? (statusDescription = 'Indeferido')
-    : status === 'RASCUNHO'
-    ? (statusDescription = 'Rascunho')
-    : (statusDescription = 'Sem status');
+  isDraft = status === 'RASCUNHO';
+  // Objeto para armazenar as informações da aparência do card de acordo com o status
+  const requestCardInfoObj = {
+    RASCUNHO: {
+      icon: <NotePencil size={iconSize} />,
+      description: 'Rascunho',
+      viewOrEdit: <NewRequestModal token={token} id={id} />,
+      deleteOrArchive: 'delete'
+    },
+    ACEITO: {
+      icon: <CheckCircle size={iconSize} />,
+      description: 'Concluído',
+      viewOrEdit: <ViewRequestModal id={id} token={token} />,
+      deleteOrArchive: 'archive'
+    },
+    TRANSITO: {
+      icon: <Clock size={iconSize} />,
+      description: 'Em análise',
+      viewOrEdit: <ViewRequestModal id={id} token={token} />,
+      deleteOrArchive: 'none'
+    },
+    NEGADO: {
+      icon: <WarningCircle size={iconSize} />,
+      description: 'Indeferido',
+      viewOrEdit: <ViewRequestModal id={id} token={token} />,
+      deleteOrArchive: 'archive'
+    },
+    PROBLEMA: {
+      icon: <WarningCircle size={iconSize} />,
+      description: 'Problema',
+      viewOrEdit: <></>,
+      deleteOrArchive: 'none'
+    }
+  };
+  // Objeto que determina se o card terá o botão de deletar ou arquivar ou nenhum dos dois
+  const deleteOrArchiveObj = {
+    delete: (
+      <DeleteDraftModal
+        token={token}
+        id={id}
+        updateRequestsDelete={reloadRequestDelete}
+      />
+    ),
+    archive: (
+      <ArchiveModal
+        token={token}
+        id={id}
+        type={type}
+        updateRequestsArchive={reloadRequestArchive}
+      />
+    ),
+    none: <></>
+  };
+
+  const requestCardInfo = requestCardInfoObj[status] || 'Sem status';
+  const deleteOrArchive = deleteOrArchiveObj[requestCardInfo.deleteOrArchive];
   return (
     <div>
       <S.Card cardcolor={isDraft}>
-        <S.StatusIcon>
-          {isDraft ? (
-            <NotePencil size={iconSize} />
-          ) : status === 'DEFERIDO' ? (
-            <CheckCircle size={iconSize} />
-          ) : status === 'ENCAMINHADO_COORDENACAO' ? (
-            <Clock size={iconSize} />
-          ) : status === 'ENCAMINHADO_COMISSAO' ? (
-            <Clock size={iconSize} />
-          ) : (
-            <WarningCircle size={iconSize} />
-          )}
-        </S.StatusIcon>
+        <S.StatusIcon>{requestCardInfo.icon}</S.StatusIcon>
         <S.Content>
           <S.Title>Status:</S.Title>
-          <S.Text>{statusDescription}</S.Text>
+          <S.Text>{requestCardInfo.description}</S.Text>
         </S.Content>
         <S.Content>
           <S.Title>ID:</S.Title>
@@ -88,25 +117,8 @@ export const RequestList: React.FC<ComponentProps> = ({
           <S.Text>{hours} horas</S.Text>
         </S.Content>
         <S.IconsContainer>
-          {isDraft ? (
-            <NewRequestModal token={token} id={id} />
-          ) : (
-            <ViewRequestModal id={id} token={token} />
-          )}
-          {!isDraft ? (
-            <ArchiveModal
-              type={type}
-              token={token}
-              id={id}
-              updateRequestsArchive={reloadRequestArchive}
-            ></ArchiveModal>
-          ) : (
-            <DeleteDraftModal
-              token={token}
-              id={id}
-              updateRequestsDelete={reloadRequestDelete}
-            ></DeleteDraftModal>
-          )}
+          {requestCardInfo.viewOrEdit}
+          {deleteOrArchive}
         </S.IconsContainer>
       </S.Card>
     </div>
