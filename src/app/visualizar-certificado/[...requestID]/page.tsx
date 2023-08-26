@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 
 import { getRequest } from '../../../services/request';
 import { UserRequest } from '../../../services/request/types';
+import PDFViewer from '../../registrar-certificado/PDFViewer/PDFViewer';
 import { CertificateView } from '../components/CertificateView';
 import { SideCertificateView } from '../components/SideCertificateView';
 import * as S from './styles';
@@ -46,12 +47,13 @@ export default function VisualizarCertificado({ params }: idProps) {
               requestId={requestIdSelect}
             />
           )}
-          <S.Div>preview</S.Div>
+          <PDFViewer pdfId={certificateId} />
         </S.PrincipalDiv>
         {selectId && (
           <SideCertificateView
             certificate={selectId.certificados}
             onCertificateClick={handleCertificateClick}
+            dowloadPfd={certificateId}
           />
         )}
       </S.ContentDiv>

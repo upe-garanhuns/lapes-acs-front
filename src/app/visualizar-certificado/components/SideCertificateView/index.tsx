@@ -2,6 +2,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 import { Certificate } from '../../../../services/request/types';
+import Downloadcertificado from '../../../registrar-certificado/PDFViewer/Downloadcertificado';
 import * as S from './styles';
 
 import { Printer } from '@phosphor-icons/react';
@@ -9,11 +10,13 @@ import { Printer } from '@phosphor-icons/react';
 interface SideViewInterface {
   certificate: Array<Certificate> | undefined;
   onCertificateClick: (id: number) => void;
+  dowloadPfd: number;
 }
 
 export const SideCertificateView = ({
   certificate,
-  onCertificateClick
+  onCertificateClick,
+  dowloadPfd
 }: SideViewInterface) => {
   const router = useRouter();
   const [certificates, setCertificates] = useState<Array<Certificate>>([]);
@@ -38,6 +41,10 @@ export const SideCertificateView = ({
     }
   };
 
+  const handleDownloadClick = () => {
+    // Call the downloadPDF function with the desired PDF ID
+    Downloadcertificado(dowloadPfd); // Replace 123 with the actual PDF ID
+  };
   return (
     <S.Container>
       <S.Content>
@@ -65,6 +72,7 @@ export const SideCertificateView = ({
           <S.Printer
             label="Imprimir Solicitacao"
             startAdornment={<Printer size={20} />}
+            onClick={handleDownloadClick}
           />
 
           <S.Back label="Voltar" onClick={backHomeScreen} />

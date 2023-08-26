@@ -3,12 +3,15 @@
 import React, { useState } from 'react';
 
 import { sumRequestHours } from '../../../app/home/functions/sumRequestHours';
+import { downloadPDF } from '../../../services/downloadRequest';
+import { Certificate } from '../../../services/request/types';
 import { CertificateList } from '../../CertificateList';
 import { Pagination } from '../../Pagination';
 import { ViewRequestProps, StatusCheckInterface } from './interface/types';
 import * as S from './styles';
 
 import { Printer } from '@phosphor-icons/react';
+import Cookies from 'js-cookie';
 import moment from 'moment';
 
 export default function ViewRequestContent(props: ViewRequestProps) {
@@ -32,6 +35,30 @@ export default function ViewRequestContent(props: ViewRequestProps) {
   const endIndex = startIndex + pageSize;
   const certificates = !certificados ? [] : certificados;
   const displayedItems = certificates.slice(startIndex, endIndex);
+  const token = Cookies.get('token') || '';
+
+  const handleDownloadPDF = async () => {
+    try {
+      if (id) {
+        const response = await downloadPDF(token, id);
+        if (response) {
+          const blob = await response.blob();
+          const url = URL.createObjectURL(blob);
+
+          const link = document.createElement('a');
+          link.href = url;
+          link.download = `documento.pdf`;
+          link.click();
+
+          URL.revokeObjectURL(url);
+        } else {
+          console.error('Erro ao baixar o PDF');
+        }
+      }
+    } catch (error) {
+      console.error('Erro ao baixar o PDF:', error);
+    }
+  };
   return (
     <div>
       <S.Container>
@@ -91,7 +118,7 @@ export default function ViewRequestContent(props: ViewRequestProps) {
           currentPage={currentPage}
           pageSize={pageSize}
         />
-        <S.PrintIcon>
+        <S.PrintIcon onClick={handleDownloadPDF}>
           <Printer size={iconSize} />
         </S.PrintIcon>
       </S.Container>
