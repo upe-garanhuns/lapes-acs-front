@@ -16,5 +16,5 @@ export interface Certificate {
   dataFinal: Date;
   atividade: string;
   eixoAtividade: string;
-  statusCertificado?: string;
+  statusCertificado: string;
 }

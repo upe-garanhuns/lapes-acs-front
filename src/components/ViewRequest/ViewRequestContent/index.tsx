@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 
 import { sumRequestHours } from '../../../app/home/functions/sumRequestHours';
 import { downloadPDF } from '../../../services/downloadRequest';
-import { Certificate } from '../../../services/request/types';
 import { CertificateList } from '../../CertificateList';
 import { Pagination } from '../../Pagination';
 import { ViewRequestProps, StatusCheckInterface } from './interface/types';
@@ -28,7 +27,8 @@ export default function ViewRequestContent(props: ViewRequestProps) {
     NEGADO: 'Indeferido'
   };
 
-  const statusDescription = statusCheckObject[requisicaoStatus];
+  const statusDescription =
+    statusCheckObject[requisicaoStatus || 'defaultStatus'];
 
   const pageSize = 3;
   const startIndex = (currentPage - 1) * pageSize;
