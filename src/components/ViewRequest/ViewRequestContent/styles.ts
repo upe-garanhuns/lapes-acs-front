@@ -78,7 +78,7 @@ export const StatusCircle = styled.div<CircleProps>`
     switch (props.status) {
       case 'Aceito':
         return '#228B22';
-      case 'Indeferido  ':
+      case 'Indeferido':
         return '#D00909';
       case 'Em análise':
         return '#FFC700';
