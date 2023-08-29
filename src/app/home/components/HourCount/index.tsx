@@ -33,29 +33,27 @@ const HourCount: React.FC<ComponentProps> = ({
   const ensWidth = `${(ensHours / maxHours) * 100}%`;
 
   return (
-    <div>
-      <S.Component>
-        <S.Container>
-          <S.MinhasHorasString>Minhas Horas: </S.MinhasHorasString>
-          <S.GesBar>Ges: {gesHours}h</S.GesBar>
-          <S.ExtBar>Ext: {extHours}h</S.ExtBar>
-          <S.PesBar>Pes: {pesHours}h</S.PesBar>
-          <S.EnsBar>Ens: {ensHours}h</S.EnsBar>
-        </S.Container>
-        <S.TotalBarComponent>
-          <S.TotalHoursDatas>
-            <S.TotalString>Total:</S.TotalString>
-            <S.TotalBarLine>{totalHours}/180</S.TotalBarLine>
-          </S.TotalHoursDatas>
-          <S.TotalBarBackgroundColor>
-            <S.TotalBarGes width={gesWidth} />
-            <S.TotalBarExt width={extWidth} />
-            <S.TotalBarPes width={pesWidth} />
-            <S.TotalBarEns width={ensWidth} />
-          </S.TotalBarBackgroundColor>
-        </S.TotalBarComponent>
-      </S.Component>
-    </div>
+    <S.Component>
+      <S.Container>
+        <S.MinhasHorasString>Minhas Horas: </S.MinhasHorasString>
+        <S.Bar>Ges: {gesHours}h</S.Bar>
+        <S.Bar>Ext: {extHours}h</S.Bar>
+        <S.Bar>Pes: {pesHours}h</S.Bar>
+        <S.Bar>Ens: {ensHours}h</S.Bar>
+      </S.Container>
+      <S.TotalBarComponent>
+        <S.TotalHoursDatas>
+          <S.TotalString>Total:</S.TotalString>
+          <S.TotalBarLine>{totalHours}/180</S.TotalBarLine>
+        </S.TotalHoursDatas>
+        <S.TotalBarBackgroundColor>
+          <S.TotalBarGes width={gesWidth} />
+          <S.TotalBarExt width={extWidth} />
+          <S.TotalBarPes width={pesWidth} />
+          <S.TotalBarEns width={ensWidth} />
+        </S.TotalBarBackgroundColor>
+      </S.TotalBarComponent>
+    </S.Component>
   );
 };
 

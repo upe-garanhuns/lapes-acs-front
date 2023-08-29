@@ -3,8 +3,17 @@ import styled from 'styled-components';
 export const Component = styled.div`
   border-radius: 8px;
   padding: 10px;
+  display: flex;
+  flex-direction: column;
 
   flex-wrap: nowrap;
+  @media screen and (max-width: 767px) {
+    flex-direction: row;
+    gap: 10;
+  }
+
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+  }
 `;
 
 export const Name = styled.p`
@@ -37,9 +46,18 @@ export const MinhasHorasString = styled.span`
 export const Container = styled.div`
   display: flex;
   flex-wrap: nowrap;
+
+  @media screen and (max-width: 767px) {
+    flex-direction: column;
+    align-items: center;
+    gap: 10;
+  }
+
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+  }
 `;
 
-export const GesBar = styled.p`
+export const Bar = styled.p`
   display: inline-block;
   margin-right: 10%;
   border-bottom: 4px solid;
@@ -49,46 +67,28 @@ export const GesBar = styled.p`
   white-space: nowrap;
   font-size: 15px;
   border-radius: 3px 3px 3px 3px;
-`;
+  @media screen and (max-width: 767px) {
+    width: 40%;
+  }
 
-export const ExtBar = styled.p`
-  display: inline-block;
-  margin-right: 10%;
-  border-bottom: 4px solid;
-  color: #ec2026;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: regular;
-  font-size: 15px;
-  white-space: nowrap;
-  border-radius: 3px 3px 3px 3px;
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+  }
 `;
+//color: #ec2026;
+//color: #d8f793;
+//color: #3b0086;
 
-export const PesBar = styled.p`
-  display: inline-block;
-  margin-right: 10%;
-  border-bottom: 4px solid;
-  color: #d8f793;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: regular;
-  font-size: 15px;
-  white-space: nowrap;
-  border-radius: 3px 3px 3px 3px;
-`;
-
-export const EnsBar = styled.p`
-  display: inline-block;
-  margin-right: 10%;
-  border-bottom: 4px solid;
-  color: #3b0086;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: regular;
-  font-size: 15px;
-  white-space: nowrap;
-  border-radius: 3px 3px 3px 3px;
-`;
 export const TotalHoursDatas = styled.div`
   display: flex;
   align-items: center;
+  @media screen and (max-width: 767px) {
+    flex-direction: column;
+    align-items: center;
+    gap: 10;
+  }
+
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+  }
 `;
 
 export const TotalString = styled.p`
@@ -111,6 +111,14 @@ export const TotalBarBorde = styled.p`
   max-height: 50%;
   display: flex;
   align-items: center;
+  @media screen and (max-width: 767px) {
+    flex-direction: column;
+    align-items: center;
+    gap: 10;
+  }
+
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+  }
 `;
 
 export const TotalBarLine = styled.span`
@@ -118,6 +126,7 @@ export const TotalBarLine = styled.span`
 `;
 
 export const TotalBarBackgroundColor = styled.div`
+  display: flex;
   background-color: #ffffff;
   height: 20px;
   border-radius: 10px;
@@ -125,6 +134,14 @@ export const TotalBarBackgroundColor = styled.div`
   margin-bottom: 15px;
   max-width: 95%;
   margin-left: 35px;
+  @media screen and (max-width: 767px) {
+    flex-direction: column;
+    align-items: center;
+    gap: 10;
+  }
+
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+  }
 `;
 
 interface TotalBarProps {
