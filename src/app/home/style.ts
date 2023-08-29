@@ -11,6 +11,13 @@ export const Container = styled.div`
   width: 100vw;
   height: 100vh;
   background: #f1efef;
+  @media screen and (max-width: 767px) {
+    height: max-content;
+  }
+
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+    height: max-content;
+  }
 `;
 
 export const NavDiv = styled.div``;
@@ -97,6 +104,7 @@ export const RequestDiv = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 0.5em;
   }
 
   @media screen and (min-width: 768px) and (max-width: 1023px) {
@@ -146,7 +154,14 @@ export const NewRequestButton = styled(Button)`
   border-radius: 32px;
   width: 15vw;
   height: 6vh;
-  font-size: 16px;
+  font-size: 1em;
+  @media screen and (max-width: 767px) {
+    font-size: 0.8em;
+    width: 20vw;
+  }
+
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+  }
 `;
 
 export const RegisterInput = styled(Input)`
@@ -160,6 +175,12 @@ export const RegisterInput = styled(Input)`
     color: #544d4f;
     padding-left: 0.2em;
     margin-top: 0.2em;
+  }
+  @media screen and (max-width: 767px) {
+    width: 30vw;
+  }
+
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
   }
 `;
 
