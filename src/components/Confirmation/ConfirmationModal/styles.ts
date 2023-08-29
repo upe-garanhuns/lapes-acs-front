@@ -1,9 +1,15 @@
 import { Modal } from '../../Modal';
 
 import styled from 'styled-components';
+
+export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
 export const ModalContainer = styled(Modal)`
-  width: 70vw;
-  height: 70vh;
+  width: 80vw;
+  height: 80vh;
   border-radius: 0.9375rem;
   overflow: auto;
   justify-content: center;

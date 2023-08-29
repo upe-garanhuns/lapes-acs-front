@@ -62,21 +62,12 @@ export function ConfirmationPagination({ requestId }: ComponentProps) {
         <S.Title> Confirmação de envio da Solicitação: {requestId}</S.Title>
       </S.titleContainer>
 
-      <S.Centered>
-        <Pagination
-          onPageChange={handlePageChange}
-          totalCount={certificateData.length}
-          currentPage={currentPage}
-          pageSize={pageSize}
-        />
-      </S.Centered>
-
       <CertificateList>
-        {displayedItems.map((item, index) => (
+        {certificateData.map((item, index) => (
           <CertificateCard
             key={index}
             eixo={item.eixoAtividade}
-            activity={item.atividade}
+            activity={`${item.atividade.slice(0, 20)}...`}
             dInicial={moment(item.dataInicial).format('DD/MM/YYYY')}
             dFinal={moment(item.dataFinal).format('DD/MM/YYYY')}
             hours={item.cargaHoraria.toString()}

@@ -7,7 +7,7 @@ export const Container = styled.div`
   justify-content: space-between;
   padding: 1em;
   border-radius: 12px;
-  gap: 15;
+  gap: 25;
   background: #ededed;
   border: 1px solid #000;
   margin-top: 10px;
@@ -16,6 +16,8 @@ export const Container = styled.div`
 export const Content = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
+  width: 20%;
 `;
 
 export const Title = styled.p`
