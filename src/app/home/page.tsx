@@ -6,8 +6,10 @@ import { useEffect, useState } from 'react';
 //import { request } from '../../services/request';
 //import { UserRequest } from '../../services/request/types';
 
+import FilterRequests from '../../components/FilterRequests';
 import { errorToast } from '../../functions/errorToast';
 import { sucessToast } from '../../functions/sucessToast';
+import { filterRequestsByEixo } from '../../services/filterRequestsByEixo'; // Importe o serviço
 import { newRequest } from '../../services/newRequest';
 import { pagination } from '../../services/pagination';
 import { PageValue } from '../../services/pagination/types';
@@ -34,6 +36,7 @@ export default function Home() {
   const [userInfo, setUserInfo] = useState<UserInformation>();
   const [reloadEffect, setReloadEffect] = useState<number>(0);
   const [archive, setArchive] = useState<boolean>(false);
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
 
   const token = Cookies.get('token') || '';
 
@@ -104,6 +107,17 @@ export default function Home() {
     router.push('/confirmacao-cadastro');
   };
 
+  const toggleFilter = () => {
+    setIsFilterOpen(!isFilterOpen);
+  };
+
+  const handleFilterClick = async (eixo) => {
+    const filteredData = await filterRequestsByEixo(token, 1, 0, 3, eixo);
+    if (filteredData) {
+      console.log('Dados filtrados:', filteredData);
+    }
+  };
+
   return (
     <S.Container>
       <S.ContentDiv>
@@ -165,8 +179,14 @@ export default function Home() {
                   />
                   <S.InputRequestDiv>
                     <S.RegisterInput placeholder="Pesquisar" />
+
+                    <FilterRequests
+                      isOpen={isFilterOpen}
+                      onFilterClick={handleFilterClick}
+                    />
+
                     <S.IconButton>
-                      <Funnel size={28} weight="fill" />
+                      <Funnel onClick={toggleFilter} size={28} weight="fill" />
                     </S.IconButton>
                   </S.InputRequestDiv>
                 </S.NewRequestDiv>
