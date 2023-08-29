@@ -19,23 +19,23 @@ export const CertificateCard = ({
     <S.Container>
       <S.Content>
         <S.Title>Eixo:</S.Title>
-        <S.TextContent></S.TextContent>
+        <S.TextContent>{eixo}</S.TextContent>
       </S.Content>
       <S.Content>
         <S.Title>Atividade:</S.Title>
-        <S.TextContent></S.TextContent>
+        <S.TextContent>{activity}</S.TextContent>
       </S.Content>
       <S.Content>
         <S.Title>Data inicial:</S.Title>
-        <S.TextContent></S.TextContent>
+        <S.TextContent>{dInicial}</S.TextContent>
       </S.Content>
       <S.Content>
         <S.Title>Data final:</S.Title>
-        <S.TextContent></S.TextContent>
+        <S.TextContent>{dFinal}</S.TextContent>
       </S.Content>
       <S.Content>
         <S.Title>Quantidade de horas:</S.Title>
-        <S.TextContent></S.TextContent>
+        <S.TextContent>{hours}</S.TextContent>
       </S.Content>
     </S.Container>
   );

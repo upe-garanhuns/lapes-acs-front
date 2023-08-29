@@ -6,11 +6,13 @@ import { errorToast } from '../../../functions/errorToast';
 import { sucessToast } from '../../../functions/sucessToast';
 import { getRequest, submitRequest } from '../../../services/request';
 import { Certificate } from '../../../services/request/types';
+import { CertificateCard } from '../../CertificateCard';
 import { ConfirmationContent } from '../ConfirmationContent';
 import { Pagination } from '../ConfirmationRequestPagination';
 import * as S from './styles';
 
 import Cookies from 'js-cookie';
+import moment from 'moment';
 
 type ComponentProps = {
   requestId: number;
@@ -66,8 +68,16 @@ export function ConfirmationPagination({ requestId }: ComponentProps) {
         />
       </S.Centered>
       {displayedItems.map((item, index) => (
-        <ConfirmationContent key={index} {...item} />
+        <CertificateCard
+          key={index}
+          eixo={item.eixoAtividade}
+          activity={item.atividade}
+          dInicial={moment(item.dataInicial).format('DD/MM/YYYY')}
+          dFinal={moment(item.dataFinal).format('DD/MM/YYYY')}
+          hours={item.cargaHoraria.toString()}
+        />
       ))}
+
       <S.Centered>
         <S.Buttons>
           <S.CancelConfirmButton buttonColor={false}>
