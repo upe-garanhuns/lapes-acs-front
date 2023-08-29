@@ -10,6 +10,7 @@ export const Container = styled.div`
   gap: 15;
   background: #ededed;
   border: 1px solid #000;
+  margin-top: 10px;
 `;
 
 export const Content = styled.div`

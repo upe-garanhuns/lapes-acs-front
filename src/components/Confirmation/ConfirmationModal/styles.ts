@@ -10,6 +10,7 @@ export const ModalContainer = styled(Modal)`
   display: flex;
   background-color: #e4e4e4;
   border: #253555 0.0625rem solid;
+  margin-top: 0;
   @media (max-width: 880px) {
     width: 90vw;
     height: 90vh;

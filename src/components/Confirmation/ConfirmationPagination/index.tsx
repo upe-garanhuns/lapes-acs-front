@@ -7,7 +7,6 @@ import { sucessToast } from '../../../functions/sucessToast';
 import { getRequest, submitRequest } from '../../../services/request';
 import { Certificate } from '../../../services/request/types';
 import { CertificateCard } from '../../CertificateCard';
-import { ConfirmationContent } from '../ConfirmationContent';
 import { Pagination } from '../ConfirmationRequestPagination';
 import * as S from './styles';
 
