@@ -56,9 +56,12 @@ export function ConfirmationPagination({ requestId }: ComponentProps) {
   }
 
   return (
-    <div>
-      <S.StepConfirmation>Etapa 3 de 3 - Confirmação</S.StepConfirmation>
-      <S.Title> Confirmação de envio da Solicitação: {requestId}</S.Title>
+    <S.Container>
+      <S.titleContainer>
+        <S.StepConfirmation>Etapa 3 de 3 - Confirmação</S.StepConfirmation>
+        <S.Title> Confirmação de envio da Solicitação: {requestId}</S.Title>
+      </S.titleContainer>
+
       <S.Centered>
         <Pagination
           onPageChange={handlePageChange}
@@ -88,6 +91,6 @@ export function ConfirmationPagination({ requestId }: ComponentProps) {
           </S.CancelConfirmButton>
         </S.Buttons>
       </S.Centered>
-    </div>
+    </S.Container>
   );
 }
