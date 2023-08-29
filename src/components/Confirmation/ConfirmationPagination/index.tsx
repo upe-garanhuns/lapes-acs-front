@@ -7,6 +7,7 @@ import { sucessToast } from '../../../functions/sucessToast';
 import { getRequest, submitRequest } from '../../../services/request';
 import { Certificate } from '../../../services/request/types';
 import { CertificateCard } from '../../CertificateCard';
+import { CertificateList } from '../../CertificateCard/Style';
 import { Pagination } from '../ConfirmationRequestPagination';
 import * as S from './styles';
 
@@ -69,16 +70,19 @@ export function ConfirmationPagination({ requestId }: ComponentProps) {
           pageSize={pageSize}
         />
       </S.Centered>
-      {displayedItems.map((item, index) => (
-        <CertificateCard
-          key={index}
-          eixo={item.eixoAtividade}
-          activity={item.atividade}
-          dInicial={moment(item.dataInicial).format('DD/MM/YYYY')}
-          dFinal={moment(item.dataFinal).format('DD/MM/YYYY')}
-          hours={item.cargaHoraria.toString()}
-        />
-      ))}
+
+      <CertificateList>
+        {displayedItems.map((item, index) => (
+          <CertificateCard
+            key={index}
+            eixo={item.eixoAtividade}
+            activity={item.atividade}
+            dInicial={moment(item.dataInicial).format('DD/MM/YYYY')}
+            dFinal={moment(item.dataFinal).format('DD/MM/YYYY')}
+            hours={item.cargaHoraria.toString()}
+          />
+        ))}
+      </CertificateList>
 
       <S.Centered>
         <S.Buttons>

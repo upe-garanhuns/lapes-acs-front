@@ -23,3 +23,11 @@ export const Title = styled.p`
 `;
 
 export const TextContent = styled.p``;
+
+export const CertificateList = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+`;
