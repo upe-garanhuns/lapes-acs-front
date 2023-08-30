@@ -39,17 +39,15 @@ export const ButtonEnviar = styled.button`
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 `;
 
-export const Input = styled.input`
-  max-width: 200px;
+export const OtpInputField = styled.input`
+  width: 40px;
   height: 40px;
-  border-radius: 40px;
-  border: 1px solid #ccc;
-  padding: 20px;
-  background-color: #ebeced;
+  font-size: 30px;
   text-align: center;
-  color: #8e8a8a;
-  font-size: 15pt;
-  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.3);
+  margin: 0 5px;
+  border: 2px solid #ccc;
+  border-radius: 15px;
+  outline: none;
 `;
 
 export const ButtonsContainer = styled.div`

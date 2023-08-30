@@ -1,5 +1,6 @@
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
+import OtpInput from 'react-otp-input';
 
 import { errorToast } from '../../../../functions/errorToast';
 import { sucessToast } from '../../../../functions/sucessToast';
@@ -13,8 +14,8 @@ export default function ConfirmarForm() {
 
   const router = useRouter();
 
-  const handleCodigoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setCodigoVerificacao(event.target.value);
+  const handleCodigoChange = (otp: string) => {
+    setCodigoVerificacao(otp);
   };
   const token = Cookies.get('token'); // Obtém o código de verificação do cookie "token"
 
@@ -62,12 +63,12 @@ export default function ConfirmarForm() {
         </S.Paragraph>
         <S.ButtonEnviar>Enviar novamente</S.ButtonEnviar>
       </S.Cima>
-      <S.Input
-        type="text"
-        max="9999"
-        placeholder="0 - 0 - 0 - 0 "
+      <OtpInput
         value={codigoVerificacao}
         onChange={handleCodigoChange}
+        numInputs={10}
+        inputStyle={{ width: '50px', height: '50px' }}
+        renderInput={(props) => <S.OtpInputField {...props} />}
       />
       <S.ButtonsContainer>
         <S.CancelButton onClick={handleCancelClick}>Cancelar</S.CancelButton>
