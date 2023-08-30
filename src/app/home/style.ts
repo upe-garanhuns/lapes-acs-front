@@ -8,9 +8,16 @@ import styled from 'styled-components';
 export const Container = styled.div`
   display: flex;
   flex-direction: row;
-  width: 100%;
+  width: 100vw;
   height: 100vh;
   background: #f1efef;
+  @media screen and (max-width: 767px) {
+    height: max-content;
+  }
+
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+    height: max-content;
+  }
 `;
 
 export const NavDiv = styled.div``;
@@ -18,21 +25,57 @@ export const NavDiv = styled.div``;
 export const ContentDiv = styled.div`
   width: 90%;
   margin-left: 100px;
+  @media screen and (max-width: 767px) {
+    width: 100vw;
+    margin: 0;
+  }
+
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+  }
 `;
 
 export const TitleDiv = styled.div`
   width: 100%;
+  @media screen and (max-width: 767px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+  }
 `;
 
 export const Div = styled.div``;
-export const Text = styled.p``;
+export const Text = styled.p`
+  @media screen and (max-width: 767px) {
+    font-size: 1em;
+  }
 
-export const H2Title = styled.h2``;
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+  }
+`;
+
+export const H2Title = styled.h2`
+  @media screen and (max-width: 767px) {
+    font-size: 1em;
+  }
+
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+  }
+`;
 
 export const H3Title = styled.h3``;
 
 export const UserName = styled.h1`
   color: #1c3c78;
+  @media screen and (max-width: 767px) {
+    font-size: 1em;
+  }
+
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+  }
 `;
 
 export const Line = styled.hr`
@@ -57,6 +100,15 @@ export const RequestDiv = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  @media screen and (max-width: 767px) {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5em;
+  }
+
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+  }
 `;
 
 export const IconButton = styled.span`
@@ -72,6 +124,12 @@ export const IconButton = styled.span`
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  @media screen and (max-width: 767px) {
+    width: 20%;
+  }
+
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+  }
 `;
 
 export const NewRequestDiv = styled.div`
@@ -96,7 +154,14 @@ export const NewRequestButton = styled(Button)`
   border-radius: 32px;
   width: 15vw;
   height: 6vh;
-  font-size: 16px;
+  font-size: 1em;
+  @media screen and (max-width: 767px) {
+    font-size: 0.8em;
+    width: 20vw;
+  }
+
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+  }
 `;
 
 export const RegisterInput = styled(Input)`
@@ -110,6 +175,12 @@ export const RegisterInput = styled(Input)`
     color: #544d4f;
     padding-left: 0.2em;
     margin-top: 0.2em;
+  }
+  @media screen and (max-width: 767px) {
+    width: 30vw;
+  }
+
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
   }
 `;
 
