@@ -6,8 +6,10 @@ import { useEffect, useState } from 'react';
 //import { request } from '../../services/request';
 //import { UserRequest } from '../../services/request/types';
 
+import FilterRequests from '../../components/FilterRequests';
 import { errorToast } from '../../functions/errorToast';
 import { sucessToast } from '../../functions/sucessToast';
+import { filterRequestsByEixo } from '../../services/filterRequestsByEixo'; // Importe o serviço
 import { newRequest } from '../../services/newRequest';
 import { pagination } from '../../services/pagination';
 import { PageValue } from '../../services/pagination/types';
@@ -24,6 +26,15 @@ import { FileText, Funnel, XCircle } from '@phosphor-icons/react';
 import Cookies from 'js-cookie';
 import moment from 'moment';
 
+interface FilteredRequests {
+  requisicoes: Array<{
+    status: string;
+    id: number;
+    data: string | null;
+    quantidadeDeHoras: number;
+  }>;
+}
+
 export default function Home() {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
@@ -34,6 +45,9 @@ export default function Home() {
   const [userInfo, setUserInfo] = useState<UserInformation>();
   const [reloadEffect, setReloadEffect] = useState<number>(0);
   const [archive, setArchive] = useState<boolean>(false);
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [filteredRequests, setFilteredRequests] =
+    useState<FilteredRequests | null>(null); // Estado para armazenar as solicitações filtradas
 
   const token = Cookies.get('token') || '';
 
@@ -104,6 +118,30 @@ export default function Home() {
     router.push('/confirmacao-cadastro');
   };
 
+  const toggleFilter = () => {
+    setIsFilterOpen(!isFilterOpen);
+  };
+
+  const handleFilterClick = async (eixo: string) => {
+    try {
+      if (userInfo) {
+        // Verifique se userInfo não é undefined
+        const filteredData = await filterRequestsByEixo(
+          token,
+          userInfo.id,
+          0,
+          3,
+          eixo
+        );
+        if (filteredData) {
+          setFilteredRequests(filteredData);
+        }
+      }
+    } catch (error) {
+      console.error('Erro ao filtrar as solicitações:', error);
+    }
+  };
+  console.log(filteredRequests);
   return (
     <S.Container>
       <S.ContentDiv>
@@ -165,15 +203,40 @@ export default function Home() {
                   />
                   <S.InputRequestDiv>
                     <S.RegisterInput placeholder="Pesquisar" />
+
+                    <FilterRequests
+                      isOpen={isFilterOpen}
+                      onFilterClick={handleFilterClick}
+                    />
+
                     <S.IconButton>
-                      <Funnel size={28} weight="fill" />
+                      <Funnel onClick={toggleFilter} size={28} weight="fill" />
                     </S.IconButton>
                   </S.InputRequestDiv>
                 </S.NewRequestDiv>
 
                 <S.Div>
                   <S.Div>
-                    {requestsPag && requestsPag.totalPaginas > 0 ? (
+                    {filteredRequests ? (
+                      filteredRequests.requisicoes.map((item) => (
+                        <RequestList
+                          status={item.status}
+                          id={item.id}
+                          initialDate={
+                            item.data == null
+                              ? 'Aguardando envio'
+                              : moment(item.data).format('DD/MM/YYYY')
+                          }
+                          hours={item.quantidadeDeHoras}
+                          key={item.id}
+                          token={token}
+                          isDraft={false}
+                          reloadRequestDelete={reloadPag}
+                          reloadRequestArchive={reloadPag}
+                          type={archive}
+                        />
+                      ))
+                    ) : requestsPag && requestsPag.totalPaginas > 0 ? (
                       <>
                         {requestsPag.requisicoes.map((item) => (
                           <RequestList
@@ -198,6 +261,7 @@ export default function Home() {
                       <S.H3Title>Nenhuma solicitação registrada...</S.H3Title>
                     )}
                   </S.Div>
+
                   <S.Div>
                     {requestsPag && requestsPag.totalPaginas > 1 ? (
                       <S.PaginationDiv>
