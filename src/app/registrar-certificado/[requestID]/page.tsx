@@ -55,7 +55,9 @@ export default function RegistePageTest({ params }: idProps) {
     setErrorSelectedAtividade(selectedAtividade === '0');
     setErrorTitulo(titulo === '');
     setErrorDataInicial(
-      dataInicial === '' || getMaxDate() < dataInicial || dataInicial < minDate
+      dataInicial === '' ||
+        getMaxDate() < dataInicial ||
+        dataInicial < initialDate
     );
     setErrorDataFinal(
       dataFinal === '' || dataInicial > dataFinal || dataFinal > getMaxDate()
