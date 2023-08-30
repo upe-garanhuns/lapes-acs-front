@@ -8,7 +8,6 @@ import { getRequest, submitRequest } from '../../../services/request';
 import { Certificate } from '../../../services/request/types';
 import { CertificateCard } from '../../CertificateCard';
 import { CertificateList } from '../../CertificateCard/Style';
-import { Pagination } from '../ConfirmationRequestPagination';
 import * as S from './styles';
 
 import Cookies from 'js-cookie';
@@ -21,7 +20,7 @@ type ComponentProps = {
 export function ConfirmationPagination({ requestId }: ComponentProps) {
   const router = useRouter();
   const token = Cookies.get('token') ?? '';
-  const [currentPage, setCurrentPage] = useState(1);
+
   const [certificateData, setCertificateData] = useState<Certificate[]>([]);
 
   useEffect(() => {
@@ -41,19 +40,6 @@ export function ConfirmationPagination({ requestId }: ComponentProps) {
       errorToast('Ocorreu um erro! Tente novamente mais tarde!');
     }
   };
-
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page);
-  };
-
-  const pageSize = 1;
-  const startIndex = (currentPage - 1) * pageSize;
-  const endIndex = startIndex + pageSize;
-  let displayedItems: Certificate[] = [];
-
-  if (certificateData != undefined) {
-    displayedItems = certificateData.slice(startIndex, endIndex);
-  }
 
   return (
     <S.Container>
