@@ -4,41 +4,32 @@ import React, { useState } from 'react';
 
 import { sumRequestHours } from '../../../app/home/functions/sumRequestHours';
 import { downloadPDF } from '../../../services/downloadRequest';
-import { Certificate } from '../../../services/request/types';
 import { CertificateList } from '../../CertificateList';
 import { Pagination } from '../../Pagination';
+import { ViewRequestProps, StatusCheckInterface } from './interface/types';
 import * as S from './styles';
 
 import { Printer } from '@phosphor-icons/react';
 import Cookies from 'js-cookie';
 import moment from 'moment';
 
-export type ViewRequestProps = {
-  id?: number;
-  dataDeSubmissao?: Date;
-  requisicaoStatus?: string;
-  observacao?: string;
-  certificados?: Array<Certificate>;
-};
-
 export default function ViewRequestContent(props: ViewRequestProps) {
+  const iconSize = 24;
   const { id, dataDeSubmissao, requisicaoStatus, observacao, certificados } =
     props;
   const [currentPage, setCurrentPage] = useState(1);
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
-  const iconSize = 24;
-  let statusDescription = '';
-  requisicaoStatus === 'ACEITO'
-    ? (statusDescription = 'Concluído')
-    : requisicaoStatus === 'TRANSITO'
-    ? (statusDescription = 'Em análise')
-    : requisicaoStatus === 'NEGADO'
-    ? (statusDescription = 'Indeferido')
-    : requisicaoStatus === 'RASCUNHO'
-    ? (statusDescription = 'Rascunho')
-    : (statusDescription = 'Sem status');
+  const statusCheckObject: StatusCheckInterface = {
+    ACEITO: 'Aceito',
+    TRANSITO: 'Em análise',
+    NEGADO: 'Indeferido'
+  };
+
+  const statusDescription =
+    statusCheckObject[requisicaoStatus || 'defaultStatus'];
+
   const pageSize = 3;
   const startIndex = (currentPage - 1) * pageSize;
   const endIndex = startIndex + pageSize;
@@ -73,32 +64,36 @@ export default function ViewRequestContent(props: ViewRequestProps) {
       <S.Container>
         <S.RequestTitle>Solicitação {id}</S.RequestTitle>
         <S.Division />
-        <S.GridContainer>
-          <S.Content>
-            <S.Description>Status: </S.Description>
-            <S.Status>
-              <S.StatusCircle status={statusDescription}></S.StatusCircle>
-              {statusDescription}
-            </S.Status>
-          </S.Content>
-          <S.Content>
-            <S.Description>Data da Solicitação:</S.Description>
-            <S.RequestDate>
-              {moment(dataDeSubmissao).format('DD/MM/YYYY')}
-            </S.RequestDate>
-          </S.Content>
-          <S.Content>
-            <S.Description>Quantidade de horas:</S.Description>
-            <S.RowAligner>
-              <S.HoursAmount>
-                {certificados !== undefined
-                  ? sumRequestHours(certificados)
-                  : null}
-              </S.HoursAmount>
-              <S.HoursName>hora(s)</S.HoursName>
-            </S.RowAligner>
-          </S.Content>
-        </S.GridContainer>
+        <S.CenterContent>
+          <S.GridContainer>
+            <S.Content>
+              <S.Description>Status: </S.Description>
+              <S.Status>
+                <S.StatusCircle status={statusDescription}></S.StatusCircle>
+                {statusDescription}
+              </S.Status>
+            </S.Content>
+            <S.Content>
+              <S.Description>Data da Solicitação:</S.Description>
+
+              <S.RequestDate>
+                {moment(dataDeSubmissao).format('DD/MM/YYYY')}
+              </S.RequestDate>
+            </S.Content>
+
+            <S.Content>
+              <S.Description>Quantidade de horas:</S.Description>
+              <S.RowAligner>
+                <S.HoursAmount>
+                  {certificados !== undefined
+                    ? sumRequestHours(certificados)
+                    : null}
+                </S.HoursAmount>
+                <S.HoursName>hora(s)</S.HoursName>
+              </S.RowAligner>
+            </S.Content>
+          </S.GridContainer>
+        </S.CenterContent>
         <S.Description>Observações do Coordenador:</S.Description>
         <S.CoordObservation>
           {observacao === null ? 'Sem observações na solicitação' : observacao}

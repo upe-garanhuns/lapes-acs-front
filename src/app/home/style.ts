@@ -85,11 +85,12 @@ export const Line = styled.hr`
 `;
 
 export const FunctionContainer = styled.div`
-  background: #fff;
+  background: #f3f3f3;
   padding: 2vw;
   border-radius: 12px;
-  max-width: 90%;
+  max-width: 95%;
   margin: 0 auto;
+  box-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.1);
 `;
 
 export const RequestDiv = styled.div`
@@ -224,17 +225,16 @@ export const VerifyBut = styled.button`
   font-weight: bold;
   text-decoration: underline;
 `;
-
-export const FilterButton = styled.button`
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-
-  &:hover {
-    background-color: #0056b3;
+export const SearchInput = styled(Input)`
+  border-radius: 30px;
+  background: #d9d9d9;
+  height: 3rem;
+  box-shadow: inset 0 4px 4px 0 rgb(0 0 0 / 0.15);
+  padding: 0 0.5rem;
+  &::placeholder {
+    font-size: 16px;
+    color: #544d4f;
+    padding-left: 0.2em;
+    margin-top: 0.2em;
   }
 `;

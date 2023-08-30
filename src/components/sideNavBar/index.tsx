@@ -16,13 +16,13 @@ export default function SideNavBar() {
   const router = useRouter();
   const pathName = usePathname();
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const componentRef = useRef<any>(null);
+  const componentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleOutsideClick = (event: MouseEvent) => {
       if (
         componentRef.current &&
-        !componentRef.current.contains(event.target)
+        !componentRef.current.contains(event.target as Node)
       ) {
         setIsOpen(false);
       }

@@ -19,10 +19,14 @@ export const Container = styled.div`
   align-items: center;
   gap: 4px;
   padding: 6px 5px;
-
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
+  }
   &:focus-within {
     border-color: ${colors.blue[200]};
-    outline: 1px solid ${colors.blue[100]};
 
     ${Adornment} {
       color: ${colors.blue[200]};
