@@ -1,13 +1,22 @@
 import { Modal } from '../../Modal';
 
 import styled from 'styled-components';
+
+export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
 export const ModalContainer = styled(Modal)`
+  width: 80vw;
+  height: 80vh;
   border-radius: 0.9375rem;
   overflow: auto;
   justify-content: center;
   display: flex;
   background-color: #e4e4e4;
   border: #253555 0.0625rem solid;
+  margin-top: 0;
   @media (max-width: 880px) {
     width: 90vw;
     height: 90vh;

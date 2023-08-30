@@ -6,11 +6,13 @@ import { errorToast } from '../../../functions/errorToast';
 import { sucessToast } from '../../../functions/sucessToast';
 import { getRequest, submitRequest } from '../../../services/request';
 import { Certificate } from '../../../services/request/types';
-import { ConfirmationContent } from '../ConfirmationContent';
+import { CertificateCard } from '../../CertificateCard';
+import { CertificateList } from '../../CertificateCard/Style';
 import { Pagination } from '../ConfirmationRequestPagination';
 import * as S from './styles';
 
 import Cookies from 'js-cookie';
+import moment from 'moment';
 
 type ComponentProps = {
   requestId: number;
@@ -54,20 +56,25 @@ export function ConfirmationPagination({ requestId }: ComponentProps) {
   }
 
   return (
-    <div>
-      <S.StepConfirmation>Etapa 3 de 3 - Confirmação</S.StepConfirmation>
-      <S.Title> Confirmação de envio da Solicitação: {requestId}</S.Title>
-      <S.Centered>
-        <Pagination
-          onPageChange={handlePageChange}
-          totalCount={certificateData.length}
-          currentPage={currentPage}
-          pageSize={pageSize}
-        />
-      </S.Centered>
-      {displayedItems.map((item, index) => (
-        <ConfirmationContent key={index} {...item} />
-      ))}
+    <S.Container>
+      <S.titleContainer>
+        <S.StepConfirmation>Etapa 3 de 3 - Confirmação</S.StepConfirmation>
+        <S.Title> Confirmação de envio da Solicitação: {requestId}</S.Title>
+      </S.titleContainer>
+
+      <CertificateList>
+        {certificateData.map((item, index) => (
+          <CertificateCard
+            key={index}
+            eixo={item.eixoAtividade}
+            activity={`${item.atividade.slice(0, 20)}...`}
+            dInicial={moment(item.dataInicial).format('DD/MM/YYYY')}
+            dFinal={moment(item.dataFinal).format('DD/MM/YYYY')}
+            hours={item.cargaHoraria.toString()}
+          />
+        ))}
+      </CertificateList>
+
       <S.Centered>
         <S.Buttons>
           <S.CancelConfirmButton buttonColor={false}>
@@ -78,6 +85,6 @@ export function ConfirmationPagination({ requestId }: ComponentProps) {
           </S.CancelConfirmButton>
         </S.Buttons>
       </S.Centered>
-    </div>
+    </S.Container>
   );
 }

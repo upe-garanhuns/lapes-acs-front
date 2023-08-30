@@ -358,9 +358,9 @@ export default function RegistePageTest({ params }: idProps) {
       </S.FormContainer>
       <S.ContainerPdf>
         {certificateData.length > 0 && (
-          <S.ContainerPdf>
+          <S.PdfImage>
             <PdfViewer pdfId={certificateData[certificateIndex]?.id} />
-          </S.ContainerPdf>
+          </S.PdfImage>
         )}
 
         {/* pdfId={certificateData[certificateIndex]?.id.toString()} */}

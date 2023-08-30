@@ -3,16 +3,29 @@ import styled from 'styled-components';
 export const StepConfirmation = styled.p`
   color: #1c3c78;
   font-size: 0.875rem;
-  margin: 1rem;
+  margin-top: 1rem;
+`;
+
+export const titleContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const Container = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 export const Title = styled.h2`
   color: #1c3c78;
   font-weight: 400;
-  line-height: 1.5rem;
-  margin: 3.7rem;
-  margin-top: 1.8rem;
-  margin-right: 0rem;
+
   @media (max-width: 1024px) {
     margin-right: 0rem;
     margin-left: 0rem;
