@@ -238,3 +238,16 @@ export const SearchInput = styled(Input)`
     margin-top: 0.2em;
   }
 `;
+
+export const FilterButton = styled.button`
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  &:hover {
+    background-color: #0056b3;
+  }
+`;

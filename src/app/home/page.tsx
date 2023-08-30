@@ -63,7 +63,6 @@ export default function Home() {
         value: 3
       });
       setRequestsPag(paginationResponse);
-      console.log(paginationResponse);
     };
     const userInfo = async () => {
       const userResponse = await getUserInformation(token);
@@ -123,9 +122,9 @@ export default function Home() {
   };
 
   const handleFilterClick = async (eixo: string) => {
+    console.log(eixo);
     try {
       if (userInfo) {
-        // Verifique se userInfo não é undefined
         const filteredData = await filterRequestsByEixo(
           token,
           userInfo.id,
@@ -134,9 +133,11 @@ export default function Home() {
           eixo
         );
         if (filteredData) {
+          console.log(filteredData);
           setFilteredRequests(filteredData);
         }
       }
+      // Verifique se userInfo não é undefined
     } catch (error) {
       console.error('Erro ao filtrar as solicitações:', error);
     }

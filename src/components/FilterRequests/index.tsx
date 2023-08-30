@@ -18,16 +18,16 @@ const FilterRequests: React.FC<FilterRequestsProps> = ({
   return isOpen ? (
     <S.FilterContainer>
       <S.FilterTitle>Filtro</S.FilterTitle>
-      <S.FilterOption onClick={() => handleFilterClick('Extensão')}>
+      <S.FilterOption onClick={() => handleFilterClick('EXTENSAO')}>
         Extensão
       </S.FilterOption>
-      <S.FilterOption onClick={() => handleFilterClick('Pesquisa')}>
+      <S.FilterOption onClick={() => handleFilterClick('PESQUISA')}>
         Pesquisa
       </S.FilterOption>
-      <S.FilterOption onClick={() => handleFilterClick('Ensino')}>
+      <S.FilterOption onClick={() => handleFilterClick('ENSINO')}>
         Ensino
       </S.FilterOption>
-      <S.FilterOption onClick={() => handleFilterClick('Gestão')}>
+      <S.FilterOption onClick={() => handleFilterClick('GESTAO')}>
         Gestão
       </S.FilterOption>
     </S.FilterContainer>
