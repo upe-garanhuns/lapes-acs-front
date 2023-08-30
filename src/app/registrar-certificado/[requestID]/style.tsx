@@ -212,4 +212,10 @@ export const InvisibleBox = styled.span`
 
 export const ContainerPdf = styled.div`
   display: flex;
+  margin-top: 3rem;
+  height: 1000px;
+`;
+
+export const PdfImage = styled.div`
+  display: flex;
 `;
