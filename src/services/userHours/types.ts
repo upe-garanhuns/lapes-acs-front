@@ -4,4 +4,8 @@ export interface UserHours {
   horasEnsino: number;
   horasPesquisa: number;
   horasTotaisCurso: number;
+  horasExtensaoPercentual: string;
+  horasGestaoPercentual: string;
+  horasEnsinoPercentual: string;
+  horasPesquisaPercentual: string;
 }
