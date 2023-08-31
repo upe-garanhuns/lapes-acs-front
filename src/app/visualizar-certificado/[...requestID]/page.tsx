@@ -26,7 +26,10 @@ export default function VisualizarCertificado({ params }: idProps) {
   useEffect(() => {
     setRequestIdSelect(parseInt(params.requestID));
     const requestIdFetch = async () => {
-      const requestResponse = await getRequest(requestIdSelect, token);
+      const requestResponse = await getRequest(
+        parseInt(params.requestID),
+        token
+      );
       setSelectId(requestResponse);
     };
     requestIdFetch();
