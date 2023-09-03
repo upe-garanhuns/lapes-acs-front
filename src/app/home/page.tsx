@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 //import { UserRequest } from '../../services/request/types';
 
 import FilterRequests from '../../components/FilterRequests';
+import { PaginationComp } from '../../components/PaginationComp';
 import { errorToast } from '../../functions/errorToast';
 import { sucessToast } from '../../functions/sucessToast';
 import { filterRequestsByEixo } from '../../services/filterRequestsByEixo'; // Importe o serviço
@@ -122,7 +123,6 @@ export default function Home() {
   };
 
   const handleFilterClick = async (eixo: string) => {
-    console.log(eixo);
     try {
       if (userInfo) {
         const filteredData = await filterRequestsByEixo(
@@ -203,8 +203,10 @@ export default function Home() {
                 <S.RequestDiv>
                   <S.H2Title>Solicitações em Andamento</S.H2Title>
                   <S.IconButton>
-                    <FileText size={24} weight="bold" />
-                    <S.Text>Barema</S.Text>
+                    <S.BaremaLink href={'http://www.upe.br/garanhuns/Barema'}>
+                      <FileText size={24} weight="bold" />
+                      <S.Text>Barema</S.Text>
+                    </S.BaremaLink>
                   </S.IconButton>
                 </S.RequestDiv>
                 <S.NewRequestDiv>
@@ -213,7 +215,7 @@ export default function Home() {
                     onClick={openNewRequestModal}
                   />
                   <S.InputRequestDiv>
-                    <S.RegisterInput placeholder="Pesquisar" />
+                    {/*<S.RegisterInput placeholder="Pesquisar" />*/}
 
                     <FilterRequests
                       isOpen={isFilterOpen}
@@ -275,38 +277,14 @@ export default function Home() {
 
                   <S.Div>
                     {requestsPag && requestsPag.totalPaginas > 1 ? (
-                      <S.PaginationDiv>
-                        <S.Div>
-                          <S.LeftArrow
-                            size={24}
-                            color="#6060ff"
-                            onClick={handlePageChangeBack}
-                          />
-                        </S.Div>
-
-                        <S.Div>
-                          <S.CurrentPageNumber>
-                            <S.PageNumber>
-                              {requestsPag.paginaAtual + 1}
-                            </S.PageNumber>
-                          </S.CurrentPageNumber>
-                        </S.Div>
-                        <S.Div>/</S.Div>
-                        <S.Div>
-                          <S.CurrentPageNumber>
-                            <S.PageNumber>
-                              {requestsPag.totalPaginas}
-                            </S.PageNumber>
-                          </S.CurrentPageNumber>
-                        </S.Div>
-                        <S.Div>
-                          <S.RightArrow
-                            size={24}
-                            color="#5555ff"
-                            onClick={handlePageChangeNext}
-                          />
-                        </S.Div>
-                      </S.PaginationDiv>
+                      <>
+                        <PaginationComp
+                          handlePageChangeBack={handlePageChangeBack}
+                          handlePageChangeNext={handlePageChangeNext}
+                          allPage={requestsPag.totalPaginas}
+                          page={requestsPag.paginaAtual + 1}
+                        />
+                      </>
                     ) : (
                       <S.Div></S.Div>
                     )}

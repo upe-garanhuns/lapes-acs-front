@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 import Button from '../../components/Button';
 import { Input } from '../../components/Input';
 import { Modal } from '../../components/Modal';
@@ -250,4 +252,9 @@ export const FilterButton = styled.button`
   &:hover {
     background-color: #0056b3;
   }
+`;
+
+export const BaremaLink = styled(Link)`
+  display: flex;
+  flex-direction: row;
 `;
