@@ -49,14 +49,16 @@ export default function SideNavBar() {
     };
 
     checkIsMobile();
-    userInfo();
+    if (pathName !== '/signin') {
+      userInfo();
+    }
 
     window.addEventListener('resize', checkIsMobile);
 
     return () => {
       window.removeEventListener('resize', checkIsMobile);
     };
-  }, [token]);
+  }, [token, pathName]);
 
   if (
     pathName === '/signin' ||
