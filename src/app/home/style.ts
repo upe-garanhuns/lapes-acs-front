@@ -1,5 +1,3 @@
-import Link from 'next/link';
-
 import Button from '../../components/Button';
 import { Input } from '../../components/Input';
 import { Modal } from '../../components/Modal';
@@ -23,6 +21,27 @@ export const Container = styled.div`
 `;
 
 export const NavDiv = styled.div``;
+
+export const IconButton = styled.span`
+  background: #d9d9d9;
+  width: max-content;
+  color: #1c3c78;
+  padding: 0.3em;
+  border-radius: 12px;
+  align-items: center;
+  box-shadow: 0 2px 2px 3px rgb(180 180 180 / 0.75);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  @media screen and (max-width: 767px) {
+    width: 20%;
+  }
+
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+  }
+`;
 
 export const ContentDiv = styled.div`
   width: 90%;
@@ -49,8 +68,9 @@ export const TitleDiv = styled.div`
   }
 `;
 
-export const Div = styled.div``;
-export const Text = styled.p`
+export const UserName = styled.h1`
+  color: #1c3c78;
+  font-size: 1.75em;
   @media screen and (max-width: 767px) {
     font-size: 1em;
   }
@@ -59,7 +79,15 @@ export const Text = styled.p`
   }
 `;
 
+export const Div = styled.div``;
+export const Line = styled.hr`
+  border: none;
+  border-top: 1px solid #1c3c78;
+  width: 100%;
+`;
+
 export const H2Title = styled.h2`
+  font-size: 1.25em;
   @media screen and (max-width: 767px) {
     font-size: 1em;
   }
@@ -69,22 +97,6 @@ export const H2Title = styled.h2`
 `;
 
 export const H3Title = styled.h3``;
-
-export const UserName = styled.h1`
-  color: #1c3c78;
-  @media screen and (max-width: 767px) {
-    font-size: 1em;
-  }
-
-  @media screen and (min-width: 768px) and (max-width: 1023px) {
-  }
-`;
-
-export const Line = styled.hr`
-  border: none;
-  border-top: 1px solid #1c3c78;
-  width: 100%;
-`;
 
 export const FunctionContainer = styled.div`
   background: #f3f3f3;
@@ -108,27 +120,6 @@ export const RequestDiv = styled.div`
     justify-content: center;
     align-items: center;
     padding: 0.5em;
-  }
-
-  @media screen and (min-width: 768px) and (max-width: 1023px) {
-  }
-`;
-
-export const IconButton = styled.span`
-  background: #d9d9d9;
-  width: max-content;
-  color: #1c3c78;
-  padding: 0.3em;
-  border-radius: 12px;
-  align-items: center;
-  box-shadow: 0 2px 2px 3px rgb(180 180 180 / 0.75);
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  @media screen and (max-width: 767px) {
-    width: 20%;
   }
 
   @media screen and (min-width: 768px) and (max-width: 1023px) {
@@ -252,9 +243,4 @@ export const FilterButton = styled.button`
   &:hover {
     background-color: #0056b3;
   }
-`;
-
-export const BaremaLink = styled(Link)`
-  display: flex;
-  flex-direction: row;
 `;

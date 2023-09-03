@@ -18,12 +18,13 @@ import { getUserInformation } from '../../services/user';
 import { UserInformation } from '../../services/user/types';
 import { getUserHours } from '../../services/userHours';
 import { UserHours } from '../../services/userHours/types';
+import { Barema } from './components/Barema';
 import HourCount from './components/HourCount';
 import { NewRequest } from './components/NewRequest/NewRequestContent';
 import { RequestList } from './components/RequestList';
 import * as S from './style';
 
-import { FileText, Funnel, XCircle } from '@phosphor-icons/react';
+import { Funnel, XCircle } from '@phosphor-icons/react';
 import Cookies from 'js-cookie';
 import moment from 'moment';
 
@@ -203,10 +204,7 @@ export default function Home() {
                 <S.RequestDiv>
                   <S.H2Title>Solicitações em Andamento</S.H2Title>
                   <S.IconButton>
-                    <S.BaremaLink href={'http://www.upe.br/garanhuns/Barema'}>
-                      <FileText size={24} weight="bold" />
-                      <S.Text>Barema</S.Text>
-                    </S.BaremaLink>
+                    <Barema />
                   </S.IconButton>
                 </S.RequestDiv>
                 <S.NewRequestDiv>
