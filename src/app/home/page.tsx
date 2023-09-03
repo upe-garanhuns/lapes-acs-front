@@ -142,7 +142,7 @@ export default function Home() {
       console.error('Erro ao filtrar as solicitações:', error);
     }
   };
-  console.log(filteredRequests);
+
   return (
     <S.Container>
       <S.ContentDiv>
