@@ -36,7 +36,6 @@ export const IconButton = styled.span`
   align-items: center;
   cursor: pointer;
   @media screen and (max-width: 767px) {
-    width: 20%;
   }
 
   @media screen and (min-width: 768px) and (max-width: 1023px) {
