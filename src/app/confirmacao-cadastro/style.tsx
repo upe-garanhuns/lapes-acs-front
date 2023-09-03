@@ -20,5 +20,6 @@ export const GridArea = styled.div`
     align-items: center;
 
     justify-items: center;
+    height: 100vh;
   }
 `;

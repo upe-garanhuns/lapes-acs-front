@@ -65,6 +65,7 @@ export default function ConfirmarForm() {
         numInputs={10}
         inputStyle={{ width: '50px', height: '50px' }}
         renderInput={(props) => <S.OtpInputField {...props} />}
+        containerStyle={'flex-direction: column'}
       />
       <S.ButtonsContainer>
         <S.CancelButton onClick={handleCancelClick}>Cancelar</S.CancelButton>
