@@ -100,7 +100,7 @@ export const H3Title = styled.h3``;
 
 export const FunctionContainer = styled.div`
   background: #f3f3f3;
-  padding: 2vw;
+  padding: 1vw;
   border-radius: 12px;
   max-width: 95%;
   margin: 0 auto;
@@ -146,7 +146,7 @@ export const NewRequestButton = styled(Button)`
   color: #fff;
 
   border-radius: 32px;
-  width: 15vw;
+  width: 12vw;
   height: 6vh;
   font-size: 1em;
   @media screen and (max-width: 767px) {
