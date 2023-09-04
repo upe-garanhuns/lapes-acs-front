@@ -89,6 +89,31 @@ export default function Home() {
     }
   };
 
+  const handleFilterClick = async (eixo: string) => {
+    try {
+      if (userInfo) {
+        const filteredData = await filterRequestsByEixo(
+          token,
+          userInfo.id,
+          0,
+          3,
+          eixo
+        );
+        if (filteredData) {
+          console.log(filteredData);
+          setFilteredRequests(filteredData);
+        }
+      }
+      // Verifique se userInfo não é undefined
+    } catch (error) {
+      console.error('Erro ao filtrar as solicitações:', error);
+    }
+  };
+
+  const toggleFilter = () => {
+    setIsFilterOpen(!isFilterOpen);
+  };
+
   function openNewRequestModal() {
     fetchRequest();
   }
@@ -117,31 +142,6 @@ export default function Home() {
 
   const confirmationScreen = () => {
     router.push('/confirmacao-cadastro');
-  };
-
-  const toggleFilter = () => {
-    setIsFilterOpen(!isFilterOpen);
-  };
-
-  const handleFilterClick = async (eixo: string) => {
-    try {
-      if (userInfo) {
-        const filteredData = await filterRequestsByEixo(
-          token,
-          userInfo.id,
-          0,
-          3,
-          eixo
-        );
-        if (filteredData) {
-          console.log(filteredData);
-          setFilteredRequests(filteredData);
-        }
-      }
-      // Verifique se userInfo não é undefined
-    } catch (error) {
-      console.error('Erro ao filtrar as solicitações:', error);
-    }
   };
 
   return (
