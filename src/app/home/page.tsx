@@ -22,7 +22,12 @@ import { NewRequest } from './components/NewRequest/NewRequestContent';
 import { RequestList } from './components/RequestList';
 import * as S from './style';
 
-import { FileText, Funnel, XCircle } from '@phosphor-icons/react';
+import {
+  FileText,
+  Funnel,
+  MagnifyingGlass,
+  XCircle
+} from '@phosphor-icons/react';
 import Cookies from 'js-cookie';
 import moment from 'moment';
 
@@ -122,7 +127,6 @@ export default function Home() {
   };
 
   const handleFilterClick = async (eixo: string) => {
-    console.log(eixo);
     try {
       if (userInfo) {
         const filteredData = await filterRequestsByEixo(
@@ -132,9 +136,10 @@ export default function Home() {
           3,
           eixo
         );
-        if (filteredData) {
-          console.log(filteredData);
+        if (filteredData && eixo !== 'TODOS') {
           setFilteredRequests(filteredData);
+        } else {
+          setFilteredRequests(null);
         }
       }
       // Verifique se userInfo não é undefined
@@ -142,7 +147,6 @@ export default function Home() {
       console.error('Erro ao filtrar as solicitações:', error);
     }
   };
-  console.log(filteredRequests);
   return (
     <S.Container>
       <S.ContentDiv>
@@ -213,16 +217,21 @@ export default function Home() {
                     onClick={openNewRequestModal}
                   />
                   <S.InputRequestDiv>
-                    <S.RegisterInput placeholder="Pesquisar" />
+                    <S.SearchInputContainer>
+                      <S.SearchInput placeholder="Pesquisar" />
+                      <S.SearchInputButton>
+                        <MagnifyingGlass size={24} />
+                      </S.SearchInputButton>
+                    </S.SearchInputContainer>
 
                     <FilterRequests
                       isOpen={isFilterOpen}
                       onFilterClick={handleFilterClick}
                     />
 
-                    <S.IconButton>
+                    <S.FilterButton>
                       <Funnel onClick={toggleFilter} size={28} weight="fill" />
-                    </S.IconButton>
+                    </S.FilterButton>
                   </S.InputRequestDiv>
                 </S.NewRequestDiv>
 

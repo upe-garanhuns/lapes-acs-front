@@ -57,7 +57,7 @@ const HourCount: React.FC<ComponentProps> = ({
         <S.MinhasHorasString>Minhas Horas: </S.MinhasHorasString>
         <S.Bar color="#00798c">Ges: {gesHours}h</S.Bar>
         <S.Bar color="#ec2026">Ext: {extHours}h</S.Bar>
-        <S.Bar color="#d8f793">Pes: {pesHours}h</S.Bar>
+        <S.Bar color="#004D00">Pes: {pesHours}h</S.Bar>
         <S.Bar color="#3b0086">Ens: {ensHours}h</S.Bar>
       </S.Container>
       <S.TotalBarComponent>
@@ -68,6 +68,7 @@ const HourCount: React.FC<ComponentProps> = ({
           </S.TotalBarLine>
         </S.TotalHoursDatas>
         <S.TotalBarBackgroundColor>
+
           <S.TotalBar
             width={gesHoursWidth}
             color="#00798c"
@@ -80,7 +81,7 @@ const HourCount: React.FC<ComponentProps> = ({
           />
           <S.TotalBar
             width={pesHoursWidth}
-            color="#d8f793"
+            color="#004D00"
             radius={borderRadiusPes}
           />
           <S.TotalBar
