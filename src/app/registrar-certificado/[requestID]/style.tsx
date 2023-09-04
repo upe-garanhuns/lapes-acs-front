@@ -135,6 +135,10 @@ export const CertificatesContainer = styled.div`
   min-width: 11.5rem;
   overflow-y: auto;
   background-color: #d9d9d9;
+
+  @media (max-width: 650px) {
+    height: 100vh;
+  }
 `;
 
 export const TitleAnexados = styled.h2`

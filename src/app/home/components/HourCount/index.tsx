@@ -7,10 +7,19 @@ export type ComponentProps = {
   extHours: number;
   pesHours: number;
   ensHours: number;
+  maxHours: number;
+  gesHoursWidth: string;
+  ensHoursWidth: string;
+  pesHoursWidth: string;
+  extHoursWidth: string;
 };
 
-const calculateTotalHours = (data: ComponentProps) => {
-  const { gesHours, extHours, pesHours, ensHours } = data;
+const calculateTotalHours = (
+  gesHours: number,
+  extHours: number,
+  pesHours: number,
+  ensHours: number
+) => {
   return gesHours + extHours + pesHours + ensHours;
 };
 
@@ -18,19 +27,29 @@ const HourCount: React.FC<ComponentProps> = ({
   gesHours,
   extHours,
   pesHours,
-  ensHours
+  ensHours,
+  maxHours,
+  gesHoursWidth,
+  ensHoursWidth,
+  pesHoursWidth,
+  extHoursWidth
 }) => {
-  const maxHours = 180;
-  const totalHours: number = calculateTotalHours({
+  const totalHours: number = calculateTotalHours(
     gesHours,
     extHours,
     pesHours,
     ensHours
-  });
-  const gesWidth = `${(gesHours / maxHours) * 100}%`;
-  const extWidth = `${(extHours / maxHours) * 100}%`;
-  const pesWidth = `${(pesHours / maxHours) * 100}%`;
-  const ensWidth = `${(ensHours / maxHours) * 100}%`;
+  );
+  //verificando tamanho de cada barrinha para definir o formato correto:
+  const borderRadiusExt = gesHoursWidth == '0%' ? '10px 0px 0px 10px' : '0px';
+  const borderRadiusPes =
+    gesHoursWidth == '0%' && extHoursWidth == '0%'
+      ? '10px 0px 0px 10px'
+      : '0px';
+  const borderRadiusEns =
+    gesHoursWidth == '0%' && extHoursWidth == '0%' && pesHoursWidth == '0%'
+      ? '10px'
+      : '0px 10px 10px 0px';
 
   return (
     <S.Component>
@@ -44,13 +63,32 @@ const HourCount: React.FC<ComponentProps> = ({
       <S.TotalBarComponent>
         <S.TotalHoursDatas>
           <S.TotalString>Total:</S.TotalString>
-          <S.TotalBarLine>{totalHours}/180</S.TotalBarLine>
+          <S.TotalBarLine>
+            {totalHours}/{maxHours}
+          </S.TotalBarLine>
         </S.TotalHoursDatas>
         <S.TotalBarBackgroundColor>
-          <S.TotalBar width={gesWidth} color="#00798c" />
-          <S.TotalBar width={extWidth} color="#ec2026" />
-          <S.TotalBar width={pesWidth} color="#004D00" />
-          <S.TotalBar width={ensWidth} color="#3b0086" />
+
+          <S.TotalBar
+            width={gesHoursWidth}
+            color="#00798c"
+            radius="10px 0px 0px 10px"
+          />
+          <S.TotalBar
+            width={extHoursWidth}
+            color="#ec2026"
+            radius={borderRadiusExt}
+          />
+          <S.TotalBar
+            width={pesHoursWidth}
+            color="#004D00"
+            radius={borderRadiusPes}
+          />
+          <S.TotalBar
+            width={ensHoursWidth}
+            color="#3b0086"
+            radius={borderRadiusEns}
+          />
         </S.TotalBarBackgroundColor>
       </S.TotalBarComponent>
     </S.Component>

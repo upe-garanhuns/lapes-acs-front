@@ -3,6 +3,7 @@ import styled from 'styled-components';
 interface TotalBarProps {
   width: string;
   color: string;
+  radius: string;
 }
 
 interface colorType {
@@ -60,8 +61,8 @@ export const MinhasHorasString = styled.span`
 export const Bar = styled.p<colorType>`
   display: inline-block;
   margin-right: 10%;
-  border-bottom: 4px solid;
-  color: ${(props) => props.color};
+  border-bottom: 4px solid ${(props) => props.color};
+  color: '#000';
   font-family: 'Montserrat', sans-serif;
   font-weight: regular;
   white-space: nowrap;
@@ -115,13 +116,14 @@ export const TotalBarLine = styled.span`
 
 export const TotalBarBackgroundColor = styled.div`
   display: flex;
+  flex-direction: row;
   background-color: #ffffff;
   height: 20px;
   border-radius: 10px;
   display: flex;
   margin-bottom: 15px;
   flex-direction: row;
-  justify-content: center;
+  justify-content: flex-start;
   @media screen and (max-width: 767px) {
   }
 
@@ -132,5 +134,5 @@ export const TotalBarBackgroundColor = styled.div`
 export const TotalBar = styled.div<TotalBarProps>`
   background-color: ${(props) => props.color};
   width: ${(props) => props.width};
-  border-radius: 10px 0 0 10px;
+  border-radius: ${(props) => props.radius};
 `;

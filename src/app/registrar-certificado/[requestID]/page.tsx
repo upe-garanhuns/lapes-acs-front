@@ -43,6 +43,7 @@ export default function RegistePageTest({ params }: idProps) {
   const [isReadyToSent, setIsReadyToSent] = useState(false);
   // const [isPdfViewerVisible, setIsPdfViewerVisible] = useState(false);
   const [isLoadingCertificates, setIsLoadingCertificates] = useState(false);
+  const initialDate = '2015-01-01';
 
   const router = useRouter();
 
@@ -53,8 +54,14 @@ export default function RegistePageTest({ params }: idProps) {
   const isValidInputTest = () => {
     setErrorSelectedAtividade(selectedAtividade === '0');
     setErrorTitulo(titulo === '');
-    setErrorDataInicial(dataInicial === '');
-    setErrorDataFinal(dataFinal === '' || dataInicial > dataFinal);
+    setErrorDataInicial(
+      dataInicial === '' ||
+        getMaxDate() < dataInicial ||
+        dataInicial < initialDate
+    );
+    setErrorDataFinal(
+      dataFinal === '' || dataInicial > dataFinal || dataFinal > getMaxDate()
+    );
     setErrorHoras(
       parseInt(horas) < 1 || horas === '' || parseInt(horas) > 5000
     );
@@ -272,9 +279,10 @@ export default function RegistePageTest({ params }: idProps) {
               value={dataInicial}
               disabled={isReadyToSent}
               max={getMaxDate()}
+              min={initialDate}
             />
             {errorDataInicial ? (
-              <S.ErrorSpan>*Selecione uma data</S.ErrorSpan>
+              <S.ErrorSpan>*Selecione uma data válida</S.ErrorSpan>
             ) : (
               <S.InvisibleBox />
             )}
@@ -291,7 +299,7 @@ export default function RegistePageTest({ params }: idProps) {
               min={minDate}
             />
             {errorDataFinal ? (
-              <S.ErrorSpan>*Selecione uma data</S.ErrorSpan>
+              <S.ErrorSpan>*Selecione uma data válida</S.ErrorSpan>
             ) : (
               <S.InvisibleBox />
             )}

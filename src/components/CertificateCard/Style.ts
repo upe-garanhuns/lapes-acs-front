@@ -1,5 +1,13 @@
 import styled from 'styled-components';
 
+export const CertificateList = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+`;
+
 export const Container = styled.div`
   width: 90%;
   display: flex;
@@ -11,6 +19,10 @@ export const Container = styled.div`
   background: #ededed;
   border: 1px solid #000;
   margin-top: 10px;
+
+  @media (max-width: 768px) {
+    flex-direction: column; /* Altere para coluna em dispositivos móveis */
+  }
 `;
 
 export const Content = styled.div`
@@ -18,6 +30,7 @@ export const Content = styled.div`
   flex-direction: column;
   align-items: flex-start;
   width: 20%;
+  margin-bottom: 10px; /* Espaçamento inferior entre os elementos */
 `;
 
 export const Title = styled.p`
@@ -25,11 +38,3 @@ export const Title = styled.p`
 `;
 
 export const TextContent = styled.p``;
-
-export const CertificateList = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-`;

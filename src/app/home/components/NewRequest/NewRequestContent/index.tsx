@@ -86,11 +86,11 @@ export const NewRequest = ({
     }
   };
 
-  const handleNext = () => {
+  const handleNext = async () => {
     if (uploadedFiles.length > 0 || certificateData.length > 0) {
       try {
         if (requestId != undefined) {
-          fetchCertificate(token, requestId);
+          await fetchCertificate(token, requestId);
           router.push(`/registrar-certificado/${requestId}`);
         }
       } catch (error) {

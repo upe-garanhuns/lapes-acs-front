@@ -183,6 +183,11 @@ export default function Home() {
                     extHours={hours.horasExtensao}
                     pesHours={hours.horasPesquisa}
                     ensHours={hours.horasEnsino}
+                    ensHoursWidth={hours.horasEnsinoPercentual}
+                    extHoursWidth={hours.horasExtensaoPercentual}
+                    gesHoursWidth={hours.horasGestaoPercentual}
+                    maxHours={hours.horasTotaisCurso}
+                    pesHoursWidth={hours.horasPesquisaPercentual}
                   />
                 ) : (
                   <HourCount
@@ -190,6 +195,11 @@ export default function Home() {
                     extHours={0}
                     pesHours={0}
                     ensHours={0}
+                    ensHoursWidth="0%"
+                    extHoursWidth="0%"
+                    gesHoursWidth="0%"
+                    maxHours={0}
+                    pesHoursWidth="0%"
                   />
                 )}
               </S.Div>
