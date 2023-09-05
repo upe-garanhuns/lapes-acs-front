@@ -18,6 +18,8 @@ export default function SideNavBar() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const [userInfo, setUserInfo] = useState<UserInformation>();
+  const [isEditProfileModalOpen, setIsEditProfileModalOpen] = useState<boolean>(false);
+
 
   const token = Cookies.get('token') || '';
 
@@ -54,6 +56,14 @@ export default function SideNavBar() {
     } else {
       setIsOpen(false);
     }
+  };
+
+  const handleOpenEditProfileModal = () => {
+    setIsEditProfileModalOpen(true);
+  };
+
+  const handleCloseEditProfileModal = () => {
+    setIsEditProfileModalOpen(false);
   };
 
   function handleLogOut() {
@@ -140,6 +150,12 @@ export default function SideNavBar() {
                 </S.navBarLink>
               </S.LiInsideDiv>
             )}
+            <S.LiInsideDiv isOpen={isOpen} isMobile={isMobile}>
+              <S.navBarLink href="/perfil-usuario">
+                <User size={24} />
+                <S.PLink>Editar Perfil</S.PLink>
+              </S.navBarLink>
+            </S.LiInsideDiv>
           </S.LiItems>
         </S.UlItems>
       </S.UlDiv>
