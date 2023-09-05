@@ -24,7 +24,7 @@ import { NewRequest } from './components/NewRequest/NewRequestContent';
 import { RequestList } from './components/RequestList';
 import * as S from './style';
 
-import { Funnel, XCircle } from '@phosphor-icons/react';
+import { Funnel, MagnifyingGlass, XCircle } from '@phosphor-icons/react';
 import Cookies from 'js-cookie';
 import moment from 'moment';
 
@@ -144,6 +144,31 @@ export default function Home() {
     router.push('/confirmacao-cadastro');
   };
 
+  const toggleFilter = () => {
+    setIsFilterOpen(!isFilterOpen);
+  };
+
+  const handleFilterClick = async (eixo: string) => {
+    try {
+      if (userInfo) {
+        const filteredData = await filterRequestsByEixo(
+          token,
+          userInfo.id,
+          0,
+          3,
+          eixo
+        );
+        if (filteredData && eixo !== 'TODOS') {
+          setFilteredRequests(filteredData);
+        } else {
+          setFilteredRequests(null);
+        }
+      }
+      // Verifique se userInfo não é undefined
+    } catch (error) {
+      console.error('Erro ao filtrar as solicitações:', error);
+    }
+  };
   return (
     <S.Container>
       <S.ContentDiv>
@@ -213,16 +238,21 @@ export default function Home() {
                     onClick={openNewRequestModal}
                   />
                   <S.InputRequestDiv>
-                    {/*<S.RegisterInput placeholder="Pesquisar" />*/}
+                    <S.SearchInputContainer>
+                      <S.SearchInput placeholder="Pesquisar" />
+                      <S.SearchInputButton>
+                        <MagnifyingGlass size={24} />
+                      </S.SearchInputButton>
+                    </S.SearchInputContainer>
 
                     <FilterRequests
                       isOpen={isFilterOpen}
                       onFilterClick={handleFilterClick}
                     />
 
-                    <S.IconButton>
+                    <S.FilterButton>
                       <Funnel onClick={toggleFilter} size={28} weight="fill" />
-                    </S.IconButton>
+                    </S.FilterButton>
                   </S.InputRequestDiv>
                 </S.NewRequestDiv>
 

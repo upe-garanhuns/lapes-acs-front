@@ -77,9 +77,11 @@ export const Bar = styled.p<colorType>`
 
 export const TotalBarComponent = styled.div`
   margin: 5px;
-  border-radius: 25px;
+  border-radius: 999px;
   background: #d9d9d9;
-  padding: 0.5em;
+  padding: 0.2em;
+  padding-right: 1.5rem;
+  padding-left: 1.5rem;
   width: 75vw;
   @media screen and (max-width: 767px) {
   }
@@ -102,9 +104,13 @@ export const TotalHoursDatas = styled.div`
   }
 `;
 
-export const TotalString = styled.p``;
+export const TotalString = styled.p`
+  margin-left: 1.2rem;
+`;
 
-export const TotalBarLine = styled.span``;
+export const TotalBarLine = styled.span`
+  margin-right: 1.2rem;
+`;
 
 export const TotalBarBackgroundColor = styled.div`
   display: flex;
