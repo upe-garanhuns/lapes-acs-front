@@ -16,7 +16,8 @@ export const TextContainer = styled.div`
   width: 100%;
   background-color: #1a2d57;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-
+  flex-direction: column;
+  gap: 1em;
   @media (max-width: 768px) {
     display: none;
   }
