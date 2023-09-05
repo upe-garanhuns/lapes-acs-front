@@ -68,7 +68,6 @@ const HourCount: React.FC<ComponentProps> = ({
           </S.TotalBarLine>
         </S.TotalHoursDatas>
         <S.TotalBarBackgroundColor>
-
           <S.TotalBar
             width={gesHoursWidth}
             color="#00798c"
