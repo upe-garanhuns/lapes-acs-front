@@ -22,26 +22,6 @@ export const Container = styled.div`
 
 export const NavDiv = styled.div``;
 
-export const IconButton = styled.span`
-  background: #d9d9d9;
-  width: max-content;
-  color: #1c3c78;
-  padding: 0.3em;
-  border-radius: 12px;
-  align-items: center;
-  box-shadow: 0 2px 2px 3px rgb(180 180 180 / 0.75);
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  @media screen and (max-width: 767px) {
-  }
-
-  @media screen and (min-width: 768px) and (max-width: 1023px) {
-  }
-`;
-
 export const ContentDiv = styled.div`
   width: 90%;
   margin-left: 100px;
@@ -172,8 +152,8 @@ export const NewRequestButton = styled(Button)`
   color: #fff;
   border-radius: 32px;
   border: none;
-  width: 15rem;
-  height: 3rem;
+  width: 12rem;
+  height: 2.5rem;
   font-size: 1em;
   font-weight: bold;
   transition: 0.3s;
@@ -276,7 +256,6 @@ export const SearchInputContainer = styled.div`
   }
 `;
 export const SearchInputButton = styled.button`
-  background: #transparent;
   border: none;
   cursor: pointer;
   svg {
