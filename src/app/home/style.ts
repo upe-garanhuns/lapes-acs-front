@@ -47,8 +47,9 @@ export const TitleDiv = styled.div`
   }
 `;
 
-export const Div = styled.div``;
-export const Text = styled.p`
+export const UserName = styled.h1`
+  color: #1c3c78;
+  font-size: 1.75em;
   @media screen and (max-width: 767px) {
     font-size: 1em;
   }
@@ -57,7 +58,15 @@ export const Text = styled.p`
   }
 `;
 
+export const Div = styled.div``;
+export const Line = styled.hr`
+  border: none;
+  border-top: 1px solid #1c3c78;
+  width: 100%;
+`;
+
 export const H2Title = styled.h2`
+  font-size: 1.25em;
   @media screen and (max-width: 767px) {
     font-size: 1em;
   }
@@ -68,25 +77,9 @@ export const H2Title = styled.h2`
 
 export const H3Title = styled.h3``;
 
-export const UserName = styled.h1`
-  color: #1c3c78;
-  @media screen and (max-width: 767px) {
-    font-size: 1em;
-  }
-
-  @media screen and (min-width: 768px) and (max-width: 1023px) {
-  }
-`;
-
-export const Line = styled.hr`
-  border: none;
-  border-top: 1px solid #1c3c78;
-  width: 100%;
-`;
-
 export const FunctionContainer = styled.div`
   background: #f3f3f3;
-  padding: 2vw;
+  padding: 1vw;
   border-radius: 12px;
   max-width: 95%;
   margin: 0 auto;
@@ -159,8 +152,8 @@ export const NewRequestButton = styled(Button)`
   color: #fff;
   border-radius: 32px;
   border: none;
-  width: 15rem;
-  height: 3rem;
+  width: 12rem;
+  height: 2.5rem;
   font-size: 1em;
   font-weight: bold;
   transition: 0.3s;
@@ -263,7 +256,6 @@ export const SearchInputContainer = styled.div`
   }
 `;
 export const SearchInputButton = styled.button`
-  background: #transparent;
   border: none;
   cursor: pointer;
   svg {

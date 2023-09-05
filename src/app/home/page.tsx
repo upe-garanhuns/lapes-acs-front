@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 //import { UserRequest } from '../../services/request/types';
 
 import FilterRequests from '../../components/FilterRequests';
+import { PaginationComp } from '../../components/PaginationComp';
 import { errorToast } from '../../functions/errorToast';
 import { sucessToast } from '../../functions/sucessToast';
 import { filterRequestsByEixo } from '../../services/filterRequestsByEixo'; // Importe o serviço
@@ -17,17 +18,14 @@ import { getUserInformation } from '../../services/user';
 import { UserInformation } from '../../services/user/types';
 import { getUserHours } from '../../services/userHours';
 import { UserHours } from '../../services/userHours/types';
+import { Barema } from './components/Barema';
 import HourCount from './components/HourCount';
 import { NewRequest } from './components/NewRequest/NewRequestContent';
 import { RequestList } from './components/RequestList';
 import * as S from './style';
 
-import {
-  FileText,
-  Funnel,
-  MagnifyingGlass,
-  XCircle
-} from '@phosphor-icons/react';
+import { Funnel, XCircle } from '@phosphor-icons/react';
+//MagnifyingGlass
 import Cookies from 'js-cookie';
 import moment from 'moment';
 
@@ -92,6 +90,31 @@ export default function Home() {
     }
   };
 
+  const handleFilterClick = async (eixo: string) => {
+    try {
+      if (userInfo) {
+        const filteredData = await filterRequestsByEixo(
+          token,
+          userInfo.id,
+          0,
+          3,
+          eixo
+        );
+        if (filteredData) {
+          console.log(filteredData);
+          setFilteredRequests(filteredData);
+        }
+      }
+      // Verifique se userInfo não é undefined
+    } catch (error) {
+      console.error('Erro ao filtrar as solicitações:', error);
+    }
+  };
+
+  const toggleFilter = () => {
+    setIsFilterOpen(!isFilterOpen);
+  };
+
   function openNewRequestModal() {
     fetchRequest();
   }
@@ -122,31 +145,6 @@ export default function Home() {
     router.push('/confirmacao-cadastro');
   };
 
-  const toggleFilter = () => {
-    setIsFilterOpen(!isFilterOpen);
-  };
-
-  const handleFilterClick = async (eixo: string) => {
-    try {
-      if (userInfo) {
-        const filteredData = await filterRequestsByEixo(
-          token,
-          userInfo.id,
-          0,
-          3,
-          eixo
-        );
-        if (filteredData && eixo !== 'TODOS') {
-          setFilteredRequests(filteredData);
-        } else {
-          setFilteredRequests(null);
-        }
-      }
-      // Verifique se userInfo não é undefined
-    } catch (error) {
-      console.error('Erro ao filtrar as solicitações:', error);
-    }
-  };
   return (
     <S.Container>
       <S.ContentDiv>
@@ -207,8 +205,7 @@ export default function Home() {
                 <S.RequestDiv>
                   <S.H2Title>Solicitações em Andamento</S.H2Title>
                   <S.IconButton>
-                    <FileText size={24} weight="bold" />
-                    <S.Text>Barema</S.Text>
+                    <Barema />
                   </S.IconButton>
                 </S.RequestDiv>
                 <S.NewRequestDiv>
@@ -217,12 +214,12 @@ export default function Home() {
                     onClick={openNewRequestModal}
                   />
                   <S.InputRequestDiv>
-                    <S.SearchInputContainer>
+                    {/* <S.SearchInputContainer>
                       <S.SearchInput placeholder="Pesquisar" />
                       <S.SearchInputButton>
                         <MagnifyingGlass size={24} />
                       </S.SearchInputButton>
-                    </S.SearchInputContainer>
+                    </S.SearchInputContainer>*/}
 
                     <FilterRequests
                       isOpen={isFilterOpen}
@@ -284,38 +281,14 @@ export default function Home() {
 
                   <S.Div>
                     {requestsPag && requestsPag.totalPaginas > 1 ? (
-                      <S.PaginationDiv>
-                        <S.Div>
-                          <S.LeftArrow
-                            size={24}
-                            color="#6060ff"
-                            onClick={handlePageChangeBack}
-                          />
-                        </S.Div>
-
-                        <S.Div>
-                          <S.CurrentPageNumber>
-                            <S.PageNumber>
-                              {requestsPag.paginaAtual + 1}
-                            </S.PageNumber>
-                          </S.CurrentPageNumber>
-                        </S.Div>
-                        <S.Div>/</S.Div>
-                        <S.Div>
-                          <S.CurrentPageNumber>
-                            <S.PageNumber>
-                              {requestsPag.totalPaginas}
-                            </S.PageNumber>
-                          </S.CurrentPageNumber>
-                        </S.Div>
-                        <S.Div>
-                          <S.RightArrow
-                            size={24}
-                            color="#5555ff"
-                            onClick={handlePageChangeNext}
-                          />
-                        </S.Div>
-                      </S.PaginationDiv>
+                      <>
+                        <PaginationComp
+                          handlePageChangeBack={handlePageChangeBack}
+                          handlePageChangeNext={handlePageChangeNext}
+                          allPage={requestsPag.totalPaginas}
+                          page={requestsPag.paginaAtual + 1}
+                        />
+                      </>
                     ) : (
                       <S.Div></S.Div>
                     )}

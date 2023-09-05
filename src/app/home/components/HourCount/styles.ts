@@ -15,9 +15,7 @@ export const Component = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  align-content: center;
-  flex-wrap: wrap;
-  padding: 15px;
+  padding: 4px;
   @media screen and (max-width: 767px) {
     flex-direction: column;
     justify-content: center;
@@ -48,7 +46,7 @@ export const MinhasHorasString = styled.span`
 
   font-family: 'Montserrat', sans-serif;
   font-weight: bold;
-  font-size: 25px;
+  font-size: 1.5em;
   white-space: nowrap;
   @media screen and (max-width: 767px) {
     font-size: 1em;

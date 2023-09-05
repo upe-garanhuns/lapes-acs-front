@@ -1,6 +1,6 @@
 'use client';
 import { useRouter } from 'next/navigation';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect } from 'react';
 
 import ConfirmationModal from '../../../components/Confirmation/ConfirmationModal';
 import { errorToast } from '../../../functions/errorToast';
@@ -10,9 +10,12 @@ import { Activity } from '../../../services/activity/types';
 import { createCertificate } from '../../../services/registerCertificate';
 import { CreateCertificate } from '../../../services/registerCertificate/types';
 import { getRequest } from '../../../services/request';
-import { Certificate } from '../../../services/request/types';
 import PdfViewer from '../PDFViewer/PDFViewer';
+import { delay } from './functions/delay/delay';
 import { getMaxDate } from './functions/getMaxDate';
+import { useCertificate } from './hooks/useCertficate';
+import { useConfigs } from './hooks/useConfigs';
+import { useErros } from './hooks/useErros';
 import * as S from './style';
 
 import { Check, DownloadSimple } from '@phosphor-icons/react';
@@ -24,32 +27,52 @@ interface idProps {
 export default function RegistePageTest({ params }: idProps) {
   const token = Cookies.get('token') ?? '';
   const requestId = parseInt(params.requestID);
-  const [selectedEixo, setSelectedEixo] = useState('');
-  const [errorSelectedAtividade, setErrorSelectedAtividade] =
-    useState<boolean>(true);
-  const [errorTitulo, setErrorTitulo] = useState<boolean>(true);
-  const [errorDataInicial, setErrorDataInicial] = useState<boolean>(true);
-  const [errorDataFinal, setErrorDataFinal] = useState<boolean>(true);
-  const [errorHoras, setErrorHoras] = useState<boolean>(false);
-  const [certificateData, setCertificateData] = useState<Certificate[]>([]);
-  const [activitiesData, setActivitiesData] = useState<Activity[]>([]);
-  const [selectedAtividade, setSelectedAtividade] = useState<string>('0');
-  const [titulo, setTitulo] = useState('');
-  const [horas, setHoras] = useState<string>('1');
-  const [dataInicial, setDataInicial] = useState('');
-  const [dataFinal, setDataFinal] = useState('');
-  const [minDate, setMinDate] = useState<string>('');
-  const [certificateIndex, setCertificateIndex] = useState(0);
-  const [isReadyToSent, setIsReadyToSent] = useState(false);
-  // const [isPdfViewerVisible, setIsPdfViewerVisible] = useState(false);
-  const [isLoadingCertificates, setIsLoadingCertificates] = useState(false);
   const initialDate = '2015-01-01';
-
   const router = useRouter();
 
-  function delay(time: number) {
-    return new Promise((resolve) => setTimeout(resolve, time));
-  }
+  const {
+    certificateData,
+    setCertificateData,
+    activitiesData,
+    setActivitiesData,
+    minDate,
+    setMinDate,
+    certificateIndex,
+    setCertificateIndex,
+    isReadyToSent,
+    setIsReadyToSent,
+    //isPdfViewerVisible, setIsPdfViewerVisible
+    isLoadingCertificates,
+    setIsLoadingCertificates
+  } = useConfigs();
+
+  const {
+    errorSelectedAtividade,
+    setErrorSelectedAtividade,
+    errorTitulo,
+    setErrorTitulo,
+    errorDataInicial,
+    setErrorDataInicial,
+    errorDataFinal,
+    setErrorDataFinal,
+    errorHoras,
+    setErrorHoras
+  } = useErros();
+
+  const {
+    selectedAtividade,
+    setSelectedAtividade,
+    titulo,
+    setTitulo,
+    horas,
+    setHoras,
+    dataInicial,
+    setDataInicial,
+    dataFinal,
+    setDataFinal,
+    selectedEixo,
+    setSelectedEixo
+  } = useCertificate();
 
   const isValidInputTest = () => {
     setErrorSelectedAtividade(selectedAtividade === '0');
@@ -79,7 +102,7 @@ export default function RegistePageTest({ params }: idProps) {
       errorToast('Requisição não encontrada');
       router.push('/home');
     }
-  }, [requestId, router, token]);
+  }, [requestId, router, setCertificateData, setIsLoadingCertificates, token]);
 
   useEffect(() => {
     const activity = async () => {
@@ -97,7 +120,7 @@ export default function RegistePageTest({ params }: idProps) {
 
     request();
     activity();
-  }, [request, requestId, router, token]);
+  }, [request, requestId, router, setActivitiesData, token]);
 
   useEffect(() => {
     setDataInicial(
@@ -128,7 +151,16 @@ export default function RegistePageTest({ params }: idProps) {
     setSelectedAtividade(
       selectedAxis?.id != null ? String(selectedAxis?.id) : '0'
     );
-  }, [activitiesData, certificateData, certificateIndex]);
+  }, [
+    activitiesData,
+    certificateData,
+    certificateIndex,
+    setDataFinal,
+    setDataInicial,
+    setHoras,
+    setSelectedAtividade,
+    setTitulo
+  ]);
 
   delay(5).then(() => isValidInputTest());
 
