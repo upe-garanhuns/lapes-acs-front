@@ -50,7 +50,9 @@ export default function VisualizarCertificado({ params }: idProps) {
               requestId={requestIdSelect}
             />
           )}
-          <PDFViewer pdfId={certificateId} />
+          <S.PDFDiv>
+            <PDFViewer pdfId={certificateId} />
+          </S.PDFDiv>
         </S.PrincipalDiv>
         {selectId && (
           <SideCertificateView

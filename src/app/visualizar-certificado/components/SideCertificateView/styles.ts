@@ -6,19 +6,24 @@ interface CertificateSelectProps {
 }
 
 export const Container = styled.div`
-  background: #d9d9d9;
-  height: 80vh;
+  padding-top: 1rem;
+  position: fixed;
+  right: 0;
+  top: 0;
+  bottom: 84px;
   display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  align-items: flex-end;
+  flex-direction: column;
+  align-items: center;
+  max-width: 16rem;
+  min-width: 11.5rem;
+  overflow-y: auto;
+  background-color: #d9d9d9;
 `;
 
 export const Content = styled.div`
-  height: 85%;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 `;
 
 export const TitleDiv = styled.div`
@@ -29,6 +34,7 @@ export const Title = styled.p`
   color: #253555;
   font-size: 1rem;
   font-weight: bold;
+  text-align: center;
 `;
 
 export const Line = styled.hr`
@@ -37,6 +43,13 @@ export const Line = styled.hr`
   width: 100%;
 `;
 export const ListDiv = styled.div``;
+
+export const Div = styled.div`
+  height: 85%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
 
 export const CertificateSelect = styled.div<CertificateSelectProps>`
   background-color: ${(props) => (props.selected ? '#e74c3c' : '#253555')};

@@ -12,6 +12,7 @@ export const Container = styled.div`
 
 export const DataRow = styled.div`
   display: flex;
+  flex-wrap: wrap;
   flex-direction: row;
   justify-content: space-between;
   margin: 8px 0px 8px 0px;
@@ -21,6 +22,7 @@ export const DataDiv = styled.div`
   width: 50%;
   display: flex;
   flex-direction: column;
+  margin-bottom: 1.5rem;
 `;
 
 export const RequestDiv = styled.div`

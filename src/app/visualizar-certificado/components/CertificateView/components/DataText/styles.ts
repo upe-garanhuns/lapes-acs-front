@@ -3,8 +3,10 @@ import styled from 'styled-components';
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
   justify-content: flex-start;
   width: max-content;
+  margin: 3px;
 `;
 
 export const Title = styled.p`

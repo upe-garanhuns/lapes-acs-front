@@ -52,31 +52,33 @@ export const SideCertificateView = ({
           <S.Title>Anexados:</S.Title>
           <S.Line />
         </S.TitleDiv>
-        <S.ListDiv>
-          {certificates &&
-            certificates.map((certificado, index) => {
-              if (certificado.id !== undefined) {
-                return (
-                  <S.CertificateSelect
-                    key={index}
-                    onClick={() => handleCertificateSelect(certificado.id)}
-                    selected={selectedCertificate === certificado.id}
-                  >
-                    <S.Label>{`Certificado ${certificado.id}`}</S.Label>
-                  </S.CertificateSelect>
-                );
-              }
-            })}
-        </S.ListDiv>
-        <S.ButtonDiv>
-          <S.Printer
-            label="Imprimir Solicitacao"
-            startAdornment={<Printer size={20} />}
-            onClick={handleDownloadClick}
-          />
+        <S.Div>
+          <S.ListDiv>
+            {certificates &&
+              certificates.map((certificado, index) => {
+                if (certificado.id !== undefined) {
+                  return (
+                    <S.CertificateSelect
+                      key={index}
+                      onClick={() => handleCertificateSelect(certificado.id)}
+                      selected={selectedCertificate === certificado.id}
+                    >
+                      <S.Label>{`Certificado ${certificado.id}`}</S.Label>
+                    </S.CertificateSelect>
+                  );
+                }
+              })}
+          </S.ListDiv>
+          <S.ButtonDiv>
+            <S.Printer
+              label="Imprimir Solicitacao"
+              startAdornment={<Printer size={20} />}
+              onClick={handleDownloadClick}
+            />
 
-          <S.Back label="Voltar" onClick={backHomeScreen} />
-        </S.ButtonDiv>
+            <S.Back label="Voltar" onClick={backHomeScreen} />
+          </S.ButtonDiv>
+        </S.Div>
       </S.Content>
     </S.Container>
   );
