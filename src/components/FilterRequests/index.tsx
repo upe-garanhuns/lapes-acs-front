@@ -1,6 +1,6 @@
 'use client';
 import * as React from 'react';
-import { useRef, useEffect } from 'react';
+import { useRef } from 'react';
 
 import * as S from './styles'; // Importe seus estilos
 
