@@ -173,10 +173,15 @@ export function Register({ close }: ComponentProps) {
 
   const handleChangeNumber = (e: { target: { value: string } }) => {
     const { value } = e.target;
-    setUserNumber(value);
-    setErrorNumber(checkNumber(parseInt(value)));
-  };
 
+    // Verifique se o valor é composto apenas por números
+    if (/^[0-9]+$/.test(value)) {
+      setUserNumber(value);
+      setErrorNumber(true);
+    } else {
+      setErrorNumber(false);
+    }
+  };
   const handleChangeRegistry = (e: { target: { value: string } }) => {
     const { value } = e.target;
     setUserRegistry(value);
