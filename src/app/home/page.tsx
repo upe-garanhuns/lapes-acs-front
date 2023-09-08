@@ -90,22 +90,26 @@ export default function Home() {
     }
   };
 
-  const handleFilterClick = async (eixo: string) => {
+  const handleFilterClick = async (eixo: string | null) => {
     try {
       if (userInfo) {
-        const filteredData = await filterRequestsByEixo(
-          token,
-          userInfo.id,
-          0,
-          3,
-          eixo
-        );
-        if (filteredData) {
-          console.log(filteredData);
-          setFilteredRequests(filteredData);
+        if (eixo === null) { // Se eixo for nulo, limpa o filtro
+          setFilteredRequests(null); 
+        } else {
+          const filteredData = await filterRequestsByEixo(
+            token,
+            userInfo.id,
+            0,
+            3,
+            eixo
+          );
+          if (filteredData) {
+            console.log(filteredData);
+            setFilteredRequests(filteredData);
+          }
         }
       }
-      // Verifique se userInfo não é undefined
+      // Verificando se userInfo não é undefined
     } catch (error) {
       console.error('Erro ao filtrar as solicitações:', error);
     }
