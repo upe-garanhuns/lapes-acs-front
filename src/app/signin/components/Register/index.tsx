@@ -227,15 +227,17 @@ export function Register({ close }: ComponentProps) {
 
   //chamada da api do cep - jamu
   const fetchCep = async (cep: string): Promise<void> => {
-    await fetchWrapper<Endereco>(`api/endereco/${cep}`)
-      .then((data) => {
-        console.log(data);
-        checkCity(data.cidade);
-        checkBlock(data.bairro);
-        checkStreet(data.rua);
-        checkUf(data.uf);
-      })
-      .catch((err) => console.log(err));
+    try {
+      const data = await fetchWrapper<Endereco>(`api/endereco/${cep}`);
+      console.log(data);
+      checkCity(data.cidade);
+      checkBlock(data.bairro);
+      checkStreet(data.rua);
+      checkUf(data.uf);
+    } catch (err) {
+      console.log(err);
+      setErrorCep(false); // Define errorCep como false em caso de erro
+    }
   };
 
   //Funções de check da resposta da api do cep para cada campo - jamu
