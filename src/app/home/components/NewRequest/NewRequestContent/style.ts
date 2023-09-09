@@ -182,6 +182,18 @@ export const NextButton = styled.button`
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 `;
 
+export const LoadingDiv = styled.div`
+  color: #ffffff;
+  background-color: #253555;
+  width: 156px;
+  font-size: 16px;
+  border-radius: 20px;
+  padding: 10px 20px;
+  border: none;
+  margin-right: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+`;
+
 export const SizeWarning = styled.p`
   font-size: 13px;
   font-weight: 500;
