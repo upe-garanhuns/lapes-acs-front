@@ -24,9 +24,6 @@ export const ForgetPassForm = () => {
     }
   };
 
-  console.log(email);
-  console.log(emailError);
-
   return (
     <S.Container>
       <S.Content>

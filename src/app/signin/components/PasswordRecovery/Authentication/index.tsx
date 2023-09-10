@@ -1,6 +1,5 @@
 import { useRouter } from 'next/navigation';
 import React from 'react';
-import { useState } from 'react';
 
 import { authenticateUser } from '../../../../../services/request';
 import * as S from './styles';
