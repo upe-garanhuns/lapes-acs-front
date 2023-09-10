@@ -11,6 +11,7 @@ import { checkPassWord } from '../../functions/checkPassword';
 import { ForgetPassForm } from '../forgetPassword';
 import LoginButton from '../LoginButton';
 import { LoginInput } from '../LoginInput';
+import PasswordRequestModal from '../PasswordRecovery/Request/Modal/index';
 import { Register } from '../Register';
 import { useSetData } from './hooks/useSetData';
 import { useSetValid } from './hooks/useSetValid';
