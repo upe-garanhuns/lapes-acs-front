@@ -5,7 +5,11 @@ import { sendRecovey } from '../../../../services/recovery';
 import { checkEmail } from './functions/checkEmail';
 import * as S from './styles';
 
-export const ForgetPassForm = () => {
+interface ForgetPassWordInterface {
+  closeModal: () => void;
+}
+
+export const ForgetPassForm = ({ closeModal }: ForgetPassWordInterface) => {
   const [email, setEmail] = useState<string>('');
   const [emailError, setEmailError] = useState<boolean>(true);
   const [messageEmptyError, setMessageEmptyError] = useState<boolean>(false);
@@ -25,13 +29,13 @@ export const ForgetPassForm = () => {
       setEmailError(checkEmail(email));
     }
     if (emailError === true && messageEmptyError === false) {
-      console.log('ok');
       try {
         await sendRecovey(email).then((res) => {
           if (res.status === 204) {
             sucessToast(
               `Email de verificação enviado com sucesso!, verifique o email ${email}`
             );
+            closePassModal(e);
           }
         });
       } catch (error) {
@@ -39,6 +43,11 @@ export const ForgetPassForm = () => {
         throw error;
       }
     }
+  };
+
+  const closePassModal = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    closeModal();
   };
 
   return (
@@ -75,7 +84,13 @@ export const ForgetPassForm = () => {
           >
             Recuperar senha
           </S.Button>
-          <S.Button color="#1c3c78" background="#fff">
+          <S.Button
+            color="#1c3c78"
+            background="#fff"
+            onClick={(e: React.MouseEvent<HTMLButtonElement>) =>
+              closePassModal(e)
+            }
+          >
             Voltar
           </S.Button>
         </S.ButtonDiv>

@@ -11,7 +11,6 @@ import { checkPassWord } from '../../functions/checkPassword';
 import { ForgetPassForm } from '../forgetPassword';
 import LoginButton from '../LoginButton';
 import { LoginInput } from '../LoginInput';
-import PasswordRequestModal from '../PasswordRecovery/Request/Modal/index';
 import { Register } from '../Register';
 import { useSetData } from './hooks/useSetData';
 import { useSetValid } from './hooks/useSetValid';
@@ -183,7 +182,7 @@ export default function LoginForm() {
         isOpen={OpenPass}
         closeModal={passClose}
         // eslint-disable-next-line react/no-children-prop
-        children={<ForgetPassForm />}
+        children={<ForgetPassForm closeModal={passClose} />}
         closeText={<XCircle size={32} />}
       ></S.ModalPassContainer>
     </S.Container>

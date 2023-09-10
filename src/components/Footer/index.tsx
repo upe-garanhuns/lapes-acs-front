@@ -5,7 +5,11 @@ import * as S from './styles';
 
 export default function Footer() {
   const pathName = usePathname();
-  if (pathName === '/signin' || pathName === '/confirmacao-cadastro')
+  if (
+    pathName === '/signin' ||
+    pathName === '/confirmacao-cadastro' ||
+    pathName === '/account/reset/'
+  )
     return null;
   return (
     <S.Container>
