@@ -35,7 +35,7 @@ export const InputContainer = styled.div`
   flex-direction: column;
 `;
 
-export const PasswordRecovery = styled.a`
+export const PasswordRecovery = styled.button`
   font-weight: 300;
   font-size: 12px;
 `;
