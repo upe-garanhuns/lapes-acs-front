@@ -52,6 +52,12 @@ export const InputRequest = styled(Input)`
   }
 `;
 
+export const ErrorMessage = styled.p`
+  color: red;
+  font-size: 0.8em;
+  padding: 0.5em;
+`;
+
 export const ReCAPTCHADiv = styled.div``;
 
 export const ButtonDiv = styled.div`
