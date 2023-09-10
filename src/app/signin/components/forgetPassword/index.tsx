@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import { sucessToast } from '../../../../functions/sucessToast';
+import { sendRecovey } from '../../../../services/recovery';
 import { checkEmail } from './functions/checkEmail';
 import * as S from './styles';
 
@@ -13,7 +15,7 @@ export const ForgetPassForm = () => {
     setEmail(value);
   };
 
-  const submitPassRecovery = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const submitPassRecovery = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     if (email == '') {
       setMessageEmptyError(true);
@@ -21,6 +23,21 @@ export const ForgetPassForm = () => {
     } else {
       setMessageEmptyError(false);
       setEmailError(checkEmail(email));
+    }
+    if (emailError === true && messageEmptyError === false) {
+      console.log('ok');
+      try {
+        await sendRecovey(email).then((res) => {
+          if (res.status === 204) {
+            sucessToast(
+              `Email de verificação enviado com sucesso!, verifique o email ${email}`
+            );
+          }
+        });
+      } catch (error) {
+        console.error(error);
+        throw error;
+      }
     }
   };
 
@@ -36,10 +53,10 @@ export const ForgetPassForm = () => {
         </S.InfoDiv>
         <S.InputDiv>
           <S.InputRequest placeholder="Email:" onChange={handleChangeEmail} />
-          {emailError == false ? (
-            <S.ErrorMessage>*Digite um email de dominio da upe</S.ErrorMessage>
-          ) : (
+          {!emailError == false ? (
             <></>
+          ) : (
+            <S.ErrorMessage>*Digite um email de dominio da upe</S.ErrorMessage>
           )}
           {!messageEmptyError == false ? (
             <S.ErrorMessage>*Campo não pode ser vazio</S.ErrorMessage>
