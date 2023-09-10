@@ -13,9 +13,18 @@ export const ForgetPassForm = () => {
             Digite seu e-mail e você receberá um link para alterar sua senha
           </S.SubTitle>
         </S.InfoDiv>
-        <S.InfoDiv></S.InfoDiv>
+        <S.InputDiv>
+          <S.InputRequest placeholder="Email:" />
+        </S.InputDiv>
         <S.ReCAPTCHADiv></S.ReCAPTCHADiv>
-        <S.ButtonDiv></S.ButtonDiv>
+        <S.ButtonDiv>
+          <S.Button color="#fff" background="#1c3c78">
+            Recuperar senha
+          </S.Button>
+          <S.Button color="#1c3c78" background="#fff">
+            Voltar
+          </S.Button>
+        </S.ButtonDiv>
       </S.Content>
     </S.Container>
   );
