@@ -16,7 +16,7 @@ export const ForgetPassForm = () => {
         <S.InputDiv>
           <S.InputRequest placeholder="Email:" />
         </S.InputDiv>
-        <S.ReCAPTCHADiv></S.ReCAPTCHADiv>
+        {/* <S.ReCAPTCHADiv></S.ReCAPTCHADiv> */}
         <S.ButtonDiv>
           <S.Button color="#fff" background="#1c3c78">
             Recuperar senha

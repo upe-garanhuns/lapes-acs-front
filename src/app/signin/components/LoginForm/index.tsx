@@ -177,14 +177,14 @@ export default function LoginForm() {
           ></S.ModalContainer>
         </S.LinkContainer>
       </S.ButtonContainer>
-      <S.ModalContainer
+      <S.ModalPassContainer
         closeModalArea={passClose}
         isOpen={OpenPass}
         closeModal={passClose}
         // eslint-disable-next-line react/no-children-prop
         children={<ForgetPassForm />}
         closeText={<XCircle size={32} />}
-      ></S.ModalContainer>
+      ></S.ModalPassContainer>
     </S.Container>
   );
 }

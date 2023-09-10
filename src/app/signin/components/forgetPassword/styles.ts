@@ -9,10 +9,18 @@ interface colorType {
 
 export const Container = styled.div`
   width: 100%;
+  height: 100%;
   padding: 2em;
 `;
 
-export const Content = styled.div``;
+export const Content = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  justify-content: space-between;
+`;
 
 export const InfoDiv = styled.div``;
 

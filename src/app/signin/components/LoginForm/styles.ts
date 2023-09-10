@@ -53,3 +53,9 @@ export const ModalContainer = styled(Modal)`
   height: 90%;
   overflow: auto;
 `;
+
+export const ModalPassContainer = styled(Modal)`
+  border-radius: 12px;
+  height: 40%;
+  overflow: auto;
+`;
