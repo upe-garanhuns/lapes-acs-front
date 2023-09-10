@@ -29,7 +29,7 @@ export const NewRequest = ({
   const [certificateData, setCertificateData] = useState<Certificate[]>([]);
   const router = useRouter();
   const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
-  const [certifacatesId, setCertificatesId] = useState([]);
+  const [certifacatesId, setCertificatesId] = useState<number[]>([]);
   const [isCertificateLoading, setIsCertificateLoading] = useState(false);
 
   const request = useCallback(async () => {
@@ -54,27 +54,29 @@ export const NewRequest = ({
     const mb = 1048576; //1mb
 
     const files = event.target.files;
-    if (files.length < 2) {
+    if (files != null && files.length < 2) {
       if (fileRegex.test(files[0].name)) {
         if (files[0].size < mb) {
-          try {
-            setIsCertificateLoading(true);
-            setUploadedFiles((prevFiles) => [...prevFiles, files[0]]);
-            const addCertificate = await newCertificate(
-              token,
-              requestId,
-              files[0]
-            );
-            setCertificatesId((prevFiles) => [...prevFiles, addCertificate]);
-            setIsCertificateLoading(false);
-          } catch (error) {
-            setIsCertificateLoading(false);
-            setUploadedFiles((prevFiles) => {
-              const updatedFiles = [...prevFiles];
-              updatedFiles.pop();
-              return updatedFiles;
-            });
-            warnToast(`${error.mensagem}`);
+          if (requestId != undefined) {
+            try {
+              setIsCertificateLoading(true);
+              setUploadedFiles((prevFiles) => [...prevFiles, files[0]]);
+              const addCertificate = await newCertificate(
+                token,
+                requestId,
+                files[0]
+              );
+              setCertificatesId((prevFiles) => [...prevFiles, addCertificate]);
+              setIsCertificateLoading(false);
+            } catch (error) {
+              setIsCertificateLoading(false);
+              setUploadedFiles((prevFiles) => {
+                const updatedFiles = [...prevFiles];
+                updatedFiles.pop();
+                return updatedFiles;
+              });
+              warnToast(`${(error as { mensagem: string }).mensagem}`);
+            }
           }
         } else {
           errorToast('Só é possível enviar arquivos com menos de 1mb');
@@ -152,27 +154,29 @@ export const NewRequest = ({
     const fileRegex = /^.+\.pdf$/;
     const maxFileSize = 1048576;
 
-    if (files.length < 2) {
+    if (files != null && files.length < 2) {
       if (fileRegex.test(files[0].name)) {
         if (files[0].size < maxFileSize) {
-          try {
-            setIsCertificateLoading(true);
-            setUploadedFiles((prevFiles) => [...prevFiles, files[0]]);
-            const addCertificate = await newCertificate(
-              token,
-              requestId,
-              files[0]
-            );
-            setCertificatesId((prevFiles) => [...prevFiles, addCertificate]);
-            setIsCertificateLoading(false);
-          } catch (error) {
-            setIsCertificateLoading(false);
-            setUploadedFiles((prevFiles) => {
-              const updatedFiles = [...prevFiles];
-              updatedFiles.pop();
-              return updatedFiles;
-            });
-            warnToast(`${error.mensagem}`);
+          if (requestId != undefined) {
+            try {
+              setIsCertificateLoading(true);
+              setUploadedFiles((prevFiles) => [...prevFiles, files[0]]);
+              const addCertificate = await newCertificate(
+                token,
+                requestId,
+                files[0]
+              );
+              setCertificatesId((prevFiles) => [...prevFiles, addCertificate]);
+              setIsCertificateLoading(false);
+            } catch (error) {
+              setIsCertificateLoading(false);
+              setUploadedFiles((prevFiles) => {
+                const updatedFiles = [...prevFiles];
+                updatedFiles.pop();
+                return updatedFiles;
+              });
+              warnToast(`${(error as { mensagem: string }).mensagem}`);
+            }
           }
         } else {
           errorToast('Só é possível enviar arquivos com menos de 1mb');
