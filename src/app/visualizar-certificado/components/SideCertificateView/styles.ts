@@ -45,7 +45,7 @@ export const Line = styled.hr`
 export const ListDiv = styled.div``;
 
 export const Div = styled.div`
-  height: 85%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

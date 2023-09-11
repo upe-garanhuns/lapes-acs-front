@@ -4,7 +4,6 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100vh;
   background-color: #f1efef;
 `;
 
@@ -178,6 +177,7 @@ export const ButtonsContainerCertificates = styled.div`
   bottom: 0;
   width: 100%;
   margin-top: 20px;
+  margin-bottom: 20px;
 `;
 
 export const Button = styled.button`
@@ -217,7 +217,7 @@ export const InvisibleBox = styled.span`
 export const ContainerPdf = styled.div`
   display: flex;
   margin-top: 3rem;
-  height: 1000px;
+  margin-bottom: 100px;
 `;
 
 export const PdfImage = styled.div`
