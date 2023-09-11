@@ -6,6 +6,11 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  @media (max-width: 768px) {
+    padding: 8px;
+  }
 `;
 
 export const CloseButton = styled.button`
@@ -44,6 +49,10 @@ export const Subtitle = styled.h3`
   gap: 8px;
 
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+
+  @media (max-width: 768px) {
+    padding: 8px;
+  }
 `;
 
 export const FileInputContainer = styled.div`
@@ -51,6 +60,11 @@ export const FileInputContainer = styled.div`
   justify-content: center;
   align-items: center;
   margin-bottom: 10px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 10px;
+  }
 `;
 
 export const FileInputLabel = styled.label`
@@ -66,6 +80,12 @@ export const FileInputLabel = styled.label`
   justify-content: center;
   align-items: center;
   cursor: pointer;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    height: auto;
+    padding: 20px;
+  }
 `;
 
 export const FileInput = styled.input`
@@ -76,6 +96,10 @@ export const FileListContainer = styled.div`
   max-height: 150px;
   overflow-y: auto;
   margin-bottom: 10px;
+
+  @media (max-width: 768px) {
+    max-height: 200px;
+  }
 `;
 
 export const FileList = styled.ul`
@@ -83,7 +107,11 @@ export const FileList = styled.ul`
   padding: 0;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 10px;
+  }
 `;
 
 export const FileItem = styled.li`
@@ -96,6 +124,10 @@ export const FileItem = styled.li`
   border-radius: 20px;
   height: 40px;
   gap: 10px;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 export const FileName = styled.span`
@@ -116,6 +148,12 @@ export const ButtonsContainer = styled.div`
   justify-content: center;
   margin-top: 20px;
   margin-bottom: 20px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
 `;
 
 export const CancelButton = styled.button`
@@ -144,9 +182,21 @@ export const NextButton = styled.button`
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 `;
 
+export const LoadingDiv = styled.div`
+  color: #ffffff;
+  background-color: #253555;
+  width: 156px;
+  font-size: 16px;
+  border-radius: 20px;
+  padding: 10px 20px;
+  border: none;
+  margin-right: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+`;
+
 export const SizeWarning = styled.p`
-  font-size: 15px;
-  font-weight: bold;
+  font-size: 13px;
+  font-weight: 500;
   color: #ff0000;
   margin-top: 10px;
   margin-bottom: 10px;

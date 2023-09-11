@@ -23,7 +23,6 @@ export default function SolicitacoesArquivadas() {
     const archiveRequest = async () => {
       const requestResponse = await getArchived(token);
       setRequestList(requestResponse);
-      console.log(requestResponse);
     };
     setArchive(true);
     archiveRequest();

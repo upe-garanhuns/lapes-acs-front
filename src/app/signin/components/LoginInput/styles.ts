@@ -13,6 +13,10 @@ export const Input = styled.input`
   &::placeholder {
     color: ${colors.grey[400]};
   }
+  &::-ms-reveal,
+  &::-ms-clear {
+    display: none;
+  }
 `;
 
 export const Label = styled.label``;
@@ -31,7 +35,12 @@ export const Container = styled.div`
   border-radius: 45px;
   box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25) inset;
   padding: 1rem 1rem;
-
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
+  }
   &:focus-within {
     border-color: ${colors.blue[200]};
     outline: 1px solid ${colors.blue[100]};

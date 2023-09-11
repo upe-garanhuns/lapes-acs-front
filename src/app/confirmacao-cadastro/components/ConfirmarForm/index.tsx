@@ -1,9 +1,13 @@
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
+import OtpInput from 'react-otp-input';
 
 import { errorToast } from '../../../../functions/errorToast';
 import { sucessToast } from '../../../../functions/sucessToast';
-import { verificarCodigo } from './../../../../services/verification';
+import {
+  sendVerificationEmail,
+  verificarCodigo
+} from './../../../../services/verification';
 import * as S from './styles';
 
 import Cookies from 'js-cookie';
@@ -13,10 +17,10 @@ export default function ConfirmarForm() {
 
   const router = useRouter();
 
-  const handleCodigoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setCodigoVerificacao(event.target.value);
+  const handleCodigoChange = (otp: string) => {
+    setCodigoVerificacao(otp);
   };
-  const token = Cookies.get('token'); // Obtém o código de verificação do cookie "token"
+  const token = Cookies.get('token') || ''; // Obtém o código de verificação do cookie "token"
 
   const handleConfirmarClick = async (
     event: React.MouseEvent<HTMLButtonElement>
@@ -28,19 +32,15 @@ export default function ConfirmarForm() {
         throw new Error('Código de verificação não encontrado no cookie.');
       }
       await verificarCodigo(codigoVerificacao, token).then((res) => {
-        if (res.status == 200) {
-          sucessToast('Usuário cadastrado com sucesso!');
-          router.push('/home'); // Redireciona o usuário para a página /home
-          return;
-        } else if (res.status == 406) {
-          errorToast('Código incorreto, verifique e confirme novamente!');
+        if (res.status === 200) {
+          sucessToast('Cadastro confirmado com sucesso!');
+          router.push('/home');
+        } else {
+          errorToast('Código de verificação inválido.');
         }
       });
     } catch (error) {
       console.error(error);
-      alert(
-        'Erro ao verificar o código de ativação. Tente novamente mais tarde.'
-      );
       throw error;
     }
   };
@@ -48,6 +48,20 @@ export default function ConfirmarForm() {
   const handleCancelClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     router.push('/home');
+  };
+
+  const reSendEmail = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    try {
+      await sendVerificationEmail(token).then((res) => {
+        if (res.status === 200) {
+          sucessToast('Codigo reinviado novamente');
+        }
+      });
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
   };
 
   return (
@@ -60,14 +74,21 @@ export default function ConfirmarForm() {
           seu e-mail, caso não tenha recebido, aperte no botão de enviar o
           código novamente.
         </S.Paragraph>
-        <S.ButtonEnviar>Enviar novamente</S.ButtonEnviar>
+        <S.ButtonEnviar
+          onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+            reSendEmail(e);
+          }}
+        >
+          Enviar novamente
+        </S.ButtonEnviar>
       </S.Cima>
-      <S.Input
-        type="text"
-        max="9999"
-        placeholder="0 - 0 - 0 - 0 "
+      <OtpInput
         value={codigoVerificacao}
         onChange={handleCodigoChange}
+        numInputs={10}
+        inputStyle={{ width: '50px', height: '50px' }}
+        renderInput={(props) => <S.OtpInputField {...props} />}
+        containerStyle={'flex-direction: column'}
       />
       <S.ButtonsContainer>
         <S.CancelButton onClick={handleCancelClick}>Cancelar</S.CancelButton>

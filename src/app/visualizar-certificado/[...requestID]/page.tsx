@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 
 import { getRequest } from '../../../services/request';
 import { UserRequest } from '../../../services/request/types';
+import PDFViewer from '../../registrar-certificado/PDFViewer/PDFViewer';
 import { CertificateView } from '../components/CertificateView';
 import { SideCertificateView } from '../components/SideCertificateView';
 import * as S from './styles';
@@ -25,7 +26,10 @@ export default function VisualizarCertificado({ params }: idProps) {
   useEffect(() => {
     setRequestIdSelect(parseInt(params.requestID));
     const requestIdFetch = async () => {
-      const requestResponse = await getRequest(requestIdSelect, token);
+      const requestResponse = await getRequest(
+        parseInt(params.requestID),
+        token
+      );
       setSelectId(requestResponse);
     };
     requestIdFetch();
@@ -46,12 +50,15 @@ export default function VisualizarCertificado({ params }: idProps) {
               requestId={requestIdSelect}
             />
           )}
-          <S.Div>preview</S.Div>
+          <S.PDFDiv>
+            <PDFViewer pdfId={certificateId} />
+          </S.PDFDiv>
         </S.PrincipalDiv>
         {selectId && (
           <SideCertificateView
             certificate={selectId.certificados}
             onCertificateClick={handleCertificateClick}
+            dowloadPfd={certificateId}
           />
         )}
       </S.ContentDiv>

@@ -1,9 +1,8 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  padding: 20px;
+  padding: 8%;
   padding-top: 0px;
-  width: fit-content;
 `;
 export const RequestTitle = styled.h1`
   color: #253451;
@@ -39,7 +38,7 @@ export const GridContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 2fr);
   grid-column-gap: 10vw;
-  max-width: 650px;
+  width: 100%;
   @media (max-width: 426px) {
     grid-column-gap: 5vw;
     grid-template-columns: repeat(1, 2fr);
@@ -77,7 +76,7 @@ export const StatusCircle = styled.div<CircleProps>`
   border-radius: 50%;
   background-color: ${(props) => {
     switch (props.status) {
-      case 'Deferido':
+      case 'Aceito':
         return '#228B22';
       case 'Indeferido':
         return '#D00909';
@@ -120,13 +119,12 @@ export const RowAligner = styled.div`
 export const CoordObservation = styled(Status)`
   padding: 10px;
   align-content: flex-start;
-  width: 80vw;
   max-width: 650px;
   height: fit-content;
   min-height: 40px;
   max-height: 100px;
   overflow-y: auto;
-  word-break: break-all;
+  word-break: break-word;
   white-space: pre-wrap;
 `;
 
@@ -150,4 +148,12 @@ export const PrintIcon = styled.div`
   &:hover {
     transform: scale(1.3);
   }
+`;
+
+export const CenterContent = styled.div`
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
 `;

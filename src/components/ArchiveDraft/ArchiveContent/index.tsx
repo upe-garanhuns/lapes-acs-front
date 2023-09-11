@@ -24,9 +24,12 @@ const ArchiveContent: React.FC<ComponentProps> = ({
   const setWarningText = () => {
     setWarninig(true);
   };
+
+  const actionType = type ? 'desarquivar' : 'arquivar';
+
   return (
     <S.Container>
-      <S.Message>Deseja arquivar essa solicitação?</S.Message>
+      <S.Message>Deseja {actionType} essa solicitação?</S.Message>
       <S.Warning>
         {warning ? 'Não foi possível realizar essa ação' : null}
       </S.Warning>

@@ -1,20 +1,10 @@
 import { useRouter } from 'next/navigation';
 import React from 'react';
 
+import { ComponentProps, CertificateStatus } from './interface/types';
 import * as S from './styles';
 
 import { Eye } from '@phosphor-icons/react';
-
-export type ComponentProps = {
-  statusCertificado: string | undefined;
-  titulo: string;
-  hours: number | undefined;
-  eixoAtividade: string;
-  atividade: string;
-  requestId: number | undefined;
-  certificateId: number | undefined;
-};
-
 export const CertificateList: React.FC<ComponentProps> = ({
   eixoAtividade,
   statusCertificado,
@@ -24,17 +14,15 @@ export const CertificateList: React.FC<ComponentProps> = ({
   certificateId
 }) => {
   const router = useRouter();
-  let statusDescription = '';
-  statusCertificado === 'DEFERIDO'
-    ? (statusDescription = 'Concluído')
-    : statusCertificado === 'ENCAMINHADO_COORDENACAO'
-    ? (statusDescription = 'Em análise')
-    : statusCertificado === 'ENCAMINHADO_COMISSAO'
-    ? (statusDescription = 'Em análise')
-    : statusCertificado === 'ENCAMINHADO_ESCOLARIDADE'
-    ? (statusDescription = 'Em análise')
-    : (statusDescription = 'Sem status');
   const iconSize = 24;
+
+  const certificateStatusObject: CertificateStatus = {
+    DEFERIDO: 'Concluído',
+    ENCAMINHADO_COORDENACAO: 'Em análise',
+    ENCAMINHADO_COMISSAO: 'Em análise',
+    ENCAMINHADO_ESCOLARIDADE: 'Em análise'
+  };
+  const statusDescription = certificateStatusObject[statusCertificado];
 
   const nextCertificateScreen = () => {
     router.push(`/visualizar-certificado/${requestId}/${certificateId}`);

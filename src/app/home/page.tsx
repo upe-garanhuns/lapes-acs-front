@@ -6,8 +6,11 @@ import { useEffect, useState } from 'react';
 //import { request } from '../../services/request';
 //import { UserRequest } from '../../services/request/types';
 
+import FilterRequests from '../../components/FilterRequests';
+import { PaginationComp } from '../../components/PaginationComp';
 import { errorToast } from '../../functions/errorToast';
 import { sucessToast } from '../../functions/sucessToast';
+import { filterRequestsByEixo } from '../../services/filterRequestsByEixo'; // Importe o serviço
 import { newRequest } from '../../services/newRequest';
 import { pagination } from '../../services/pagination';
 import { PageValue } from '../../services/pagination/types';
@@ -15,14 +18,25 @@ import { getUserInformation } from '../../services/user';
 import { UserInformation } from '../../services/user/types';
 import { getUserHours } from '../../services/userHours';
 import { UserHours } from '../../services/userHours/types';
+import { Barema } from './components/Barema';
 import HourCount from './components/HourCount';
-import { NewRequest } from './components/NewRequest';
+import { NewRequest } from './components/NewRequest/NewRequestContent';
 import { RequestList } from './components/RequestList';
 import * as S from './style';
 
-import { FileText, Funnel, XCircle } from '@phosphor-icons/react';
+import { Funnel, XCircle } from '@phosphor-icons/react';
+//MagnifyingGlass
 import Cookies from 'js-cookie';
 import moment from 'moment';
+
+interface FilteredRequests {
+  requisicoes: Array<{
+    status: string;
+    id: number;
+    data: string | null;
+    quantidadeDeHoras: number;
+  }>;
+}
 
 export default function Home() {
   const router = useRouter();
@@ -34,6 +48,9 @@ export default function Home() {
   const [userInfo, setUserInfo] = useState<UserInformation>();
   const [reloadEffect, setReloadEffect] = useState<number>(0);
   const [archive, setArchive] = useState<boolean>(false);
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [filteredRequests, setFilteredRequests] =
+    useState<FilteredRequests | null>(null); // Estado para armazenar as solicitações filtradas
 
   const token = Cookies.get('token') || '';
 
@@ -49,7 +66,6 @@ export default function Home() {
         value: 3
       });
       setRequestsPag(paginationResponse);
-      console.log(paginationResponse);
     };
     const userInfo = async () => {
       const userResponse = await getUserInformation(token);
@@ -72,6 +88,35 @@ export default function Home() {
       errorToast('Ocorreu um erro! Só é permitido possuir dois rascunhos');
       setIsOpen(false);
     }
+  };
+
+  const handleFilterClick = async (eixo: string | null) => {
+    try {
+      if (userInfo) {
+        if (eixo === null || eixo === '') {
+          // Se eixo for nulo, limpa o filtro
+          setFilteredRequests(null);
+        } else {
+          const filteredData = await filterRequestsByEixo(
+            token,
+            userInfo.id,
+            0,
+            3,
+            eixo
+          );
+          if (filteredData) {
+            setFilteredRequests(filteredData);
+          }
+        }
+      }
+      // Verificando se userInfo não é undefined
+    } catch (error) {
+      console.error('Erro ao filtrar as solicitações:', error);
+    }
+  };
+
+  const toggleFilter = () => {
+    setIsFilterOpen(!isFilterOpen);
   };
 
   function openNewRequestModal() {
@@ -140,6 +185,11 @@ export default function Home() {
                     extHours={hours.horasExtensao}
                     pesHours={hours.horasPesquisa}
                     ensHours={hours.horasEnsino}
+                    ensHoursWidth={hours.horasEnsinoPercentual}
+                    extHoursWidth={hours.horasExtensaoPercentual}
+                    gesHoursWidth={hours.horasGestaoPercentual}
+                    maxHours={hours.horasTotaisCurso}
+                    pesHoursWidth={hours.horasPesquisaPercentual}
                   />
                 ) : (
                   <HourCount
@@ -147,6 +197,11 @@ export default function Home() {
                     extHours={0}
                     pesHours={0}
                     ensHours={0}
+                    ensHoursWidth="0%"
+                    extHoursWidth="0%"
+                    gesHoursWidth="0%"
+                    maxHours={0}
+                    pesHoursWidth="0%"
                   />
                 )}
               </S.Div>
@@ -154,8 +209,7 @@ export default function Home() {
                 <S.RequestDiv>
                   <S.H2Title>Solicitações em Andamento</S.H2Title>
                   <S.IconButton>
-                    <FileText size={24} weight="bold" />
-                    <S.Text>Barema</S.Text>
+                    <Barema />
                   </S.IconButton>
                 </S.RequestDiv>
                 <S.NewRequestDiv>
@@ -164,16 +218,46 @@ export default function Home() {
                     onClick={openNewRequestModal}
                   />
                   <S.InputRequestDiv>
-                    <S.RegisterInput placeholder="Pesquisar" />
-                    <S.IconButton>
-                      <Funnel size={28} weight="fill" />
-                    </S.IconButton>
+                    {/* <S.SearchInputContainer>
+                      <S.SearchInput placeholder="Pesquisar" />
+                      <S.SearchInputButton>
+                        <MagnifyingGlass size={24} />
+                      </S.SearchInputButton>
+                    </S.SearchInputContainer>*/}
+
+                    <FilterRequests
+                      isOpen={isFilterOpen}
+                      onFilterClick={handleFilterClick}
+                    />
+
+                    <S.FilterButton>
+                      <Funnel onClick={toggleFilter} size={28} weight="fill" />
+                    </S.FilterButton>
                   </S.InputRequestDiv>
                 </S.NewRequestDiv>
 
                 <S.Div>
                   <S.Div>
-                    {requestsPag && requestsPag.totalPaginas > 0 ? (
+                    {filteredRequests ? (
+                      filteredRequests.requisicoes.map((item) => (
+                        <RequestList
+                          status={item.status}
+                          id={item.id}
+                          initialDate={
+                            item.data == null
+                              ? 'Aguardando envio'
+                              : moment(item.data).format('DD/MM/YYYY')
+                          }
+                          hours={item.quantidadeDeHoras}
+                          key={item.id}
+                          token={token}
+                          isDraft={false}
+                          reloadRequestDelete={reloadPag}
+                          reloadRequestArchive={reloadPag}
+                          type={archive}
+                        />
+                      ))
+                    ) : requestsPag && requestsPag.totalPaginas > 0 ? (
                       <>
                         {requestsPag.requisicoes.map((item) => (
                           <RequestList
@@ -198,44 +282,21 @@ export default function Home() {
                       <S.H3Title>Nenhuma solicitação registrada...</S.H3Title>
                     )}
                   </S.Div>
-                  <S.Div>
-                    {requestsPag && requestsPag.totalPaginas > 1 ? (
-                      <S.PaginationDiv>
-                        <S.Div>
-                          <S.LeftArrow
-                            size={24}
-                            color="#6060ff"
-                            onClick={handlePageChangeBack}
-                          />
-                        </S.Div>
 
-                        <S.Div>
-                          <S.CurrentPageNumber>
-                            <S.PageNumber>
-                              {requestsPag.paginaAtual + 1}
-                            </S.PageNumber>
-                          </S.CurrentPageNumber>
-                        </S.Div>
-                        <S.Div>/</S.Div>
-                        <S.Div>
-                          <S.CurrentPageNumber>
-                            <S.PageNumber>
-                              {requestsPag.totalPaginas}
-                            </S.PageNumber>
-                          </S.CurrentPageNumber>
-                        </S.Div>
-                        <S.Div>
-                          <S.RightArrow
-                            size={24}
-                            color="#5555ff"
-                            onClick={handlePageChangeNext}
-                          />
-                        </S.Div>
-                      </S.PaginationDiv>
+                  <S.PaginationDiv>
+                    {requestsPag && requestsPag.totalPaginas > 1 ? (
+                      <>
+                        <PaginationComp
+                          handlePageChangeBack={handlePageChangeBack}
+                          handlePageChangeNext={handlePageChangeNext}
+                          allPage={requestsPag.totalPaginas}
+                          page={requestsPag.paginaAtual + 1}
+                        />
+                      </>
                     ) : (
                       <S.Div></S.Div>
                     )}
-                  </S.Div>
+                  </S.PaginationDiv>
 
                   <S.NewRequestModal
                     closeModalArea={closeNewRequestModal}

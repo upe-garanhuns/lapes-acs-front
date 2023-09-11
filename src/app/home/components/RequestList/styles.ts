@@ -3,17 +3,21 @@ import { colors } from '../../../../styles/colors';
 
 import styled from 'styled-components';
 
-export const Card = styled.div<{ cardcolor: boolean }>`
+export const Card = styled.div<{ cardcolor: string }>`
   display: grid;
   grid-template-columns: 0.1fr 0.5fr 1fr 0.5fr 0.5fr 70px;
-  gap: 5px;
+  gap: 0.3rem;
   justify-content: center;
   align-items: center;
   background-color: ${({ cardcolor }) =>
-    cardcolor ? colors.figmaColors[50] : colors.figmaColors[100]};
+    cardcolor === 'RASCUNHO'
+      ? colors.figmaColors[50]
+      : colors.figmaColors[100]};
   border-radius: 20px;
-  margin: 20px;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
   padding: 7px;
+  box-shadow: 0px 9px 15px -3px rgba(0, 0, 0, 0.1);
 
   @media (max-width: 850px) {
     grid-template-columns: repeat(2, minmax(150px, 1fr));
@@ -44,20 +48,6 @@ export const Text = styled.p`
   white-space: nowrap;
   overflow: hidden;
   font-size: 16px;
-`;
-export const ActionIcon = styled.span`
-  margin-right: 5px;
-
-  cursor: pointer;
-  --icon-color: ${colors.figmaColors[200]};
-
-  svg {
-    color: var(--icon-color);
-  }
-  transition: transform 0.3s ease-in-out;
-  &:hover {
-    transform: scale(1.4);
-  }
 `;
 
 export const IconsContainer = styled.div`

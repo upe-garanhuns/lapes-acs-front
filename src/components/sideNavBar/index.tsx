@@ -2,20 +2,38 @@
 
 import { useRouter } from 'next/navigation';
 import { usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { toast } from 'react-toastify';
 
 import { getUserInformation } from '../../services/user';
 import { UserInformation } from '../../services/user/types';
 import * as S from './style';
 
-import { User, Bell, Power, Archive } from '@phosphor-icons/react';
+import { User, Power, Archive, House, Question } from '@phosphor-icons/react';
 import Cookies from 'js-cookie';
 
 export default function SideNavBar() {
   const router = useRouter();
   const pathName = usePathname();
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const componentRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleOutsideClick = (event: MouseEvent) => {
+      if (
+        componentRef.current &&
+        !componentRef.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleOutsideClick);
+
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick);
+    };
+  }, []);
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const [userInfo, setUserInfo] = useState<UserInformation>();
   const [isEditProfileModalOpen, setIsEditProfileModalOpen] = useState<boolean>(false);
@@ -27,26 +45,30 @@ export default function SideNavBar() {
     const userInfo = async () => {
       const userResponse = await getUserInformation(token);
       setUserInfo(userResponse);
-      console.log(userResponse);
     };
     const checkIsMobile = () => {
       setIsMobile(window.matchMedia('(max-width: 767px)').matches);
     };
 
     checkIsMobile();
-    userInfo();
+    if (pathName !== '/signin') {
+      userInfo();
+    }
 
     window.addEventListener('resize', checkIsMobile);
 
     return () => {
       window.removeEventListener('resize', checkIsMobile);
     };
-  }, [token]);
+  }, [token, pathName]);
+
+  const recoverPasswordRegex = /\/account\/reset\/(.+)/;
 
   if (
     pathName === '/signin' ||
     pathName === '/not-found' ||
-    pathName === '/confirmacao-cadastro'
+    pathName === '/confirmacao-cadastro' ||
+    recoverPasswordRegex.test(pathName)
   )
     return null;
 
@@ -68,6 +90,7 @@ export default function SideNavBar() {
 
   function handleLogOut() {
     Cookies.remove('token');
+    setIsOpen(false);
     toast.error('Sua sessão expirou!', {
       position: 'top-right',
       autoClose: 5000,
@@ -82,7 +105,7 @@ export default function SideNavBar() {
   }
 
   return (
-    <S.Container isOpen={isOpen} isMobile={isMobile}>
+    <S.Container isOpen={isOpen} ref={componentRef} isMobile={isMobile}>
       <S.PerfilDiv>
         {!isOpen ? (
           <S.PerfilDivInside isOpen={isOpen} isMobile={isMobile}>
@@ -118,15 +141,17 @@ export default function SideNavBar() {
               <>
                 {!isMobile && (
                   <S.LiInsideDiv isOpen={isOpen} isMobile={isMobile}>
-                    <Bell size={24} />
+                    <S.navBarLink href="/home">
+                      <House size={24} />
+                    </S.navBarLink>
                   </S.LiInsideDiv>
                 )}
               </>
             ) : (
               <S.LiInsideDiv isOpen={isOpen} isMobile={isMobile}>
-                <S.navBarLink href="/">
-                  <Bell size={24} />
-                  <S.PLink>notificação</S.PLink>
+                <S.navBarLink href="/home">
+                  <House size={24} />
+                  <S.PLink>Home</S.PLink>
                 </S.navBarLink>
               </S.LiInsideDiv>
             )}
@@ -156,6 +181,26 @@ export default function SideNavBar() {
                 <S.PLink>Editar Perfil</S.PLink>
               </S.navBarLink>
             </S.LiInsideDiv>
+          </S.LiItems>
+          <S.LiItems>
+            {!isOpen ? (
+              <S.LiInsideDiv isOpen={isOpen} isMobile={isMobile}>
+                <>
+                  {!isMobile && (
+                    <S.navBarLink href="/duvidas-frequentes">
+                      <Question size={24} />
+                    </S.navBarLink>
+                  )}
+                </>
+              </S.LiInsideDiv>
+            ) : (
+              <S.LiInsideDiv isOpen={isOpen} isMobile={isMobile}>
+                <S.navBarLink href="/duvidas-frequentes">
+                  <Question size={24} />
+                  <S.PLink>Dúvidas</S.PLink>
+                </S.navBarLink>
+              </S.LiInsideDiv>
+            )}
           </S.LiItems>
         </S.UlItems>
       </S.UlDiv>

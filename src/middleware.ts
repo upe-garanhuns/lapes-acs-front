@@ -32,6 +32,7 @@ export const config = {
     '/registrar-certificado/:path*',
     '/confirmacao-cadastro',
     '/visualizar-certificado/:path*',
-    '/perfil-usuario'
+    '/perfil-usuario',
+    '/duvidas-frequentes/:path*'
   ]
 };

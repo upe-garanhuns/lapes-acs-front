@@ -4,7 +4,6 @@ export const Container = styled.div`
   display: flex;
   flex-direction: row;
   width: 100%;
-  height: 100vh;
   background: #f1efef;
 `;
 
@@ -22,3 +21,9 @@ export const PrincipalDiv = styled.div`
   align-items: center;
 `;
 export const Div = styled.div``;
+
+export const PDFDiv = styled.div`
+  display: flex;
+  margin-top: 3rem;
+  height: 600px;
+`;

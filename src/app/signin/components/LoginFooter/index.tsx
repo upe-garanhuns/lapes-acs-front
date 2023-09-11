@@ -8,9 +8,7 @@ export default function LoginFooter() {
       <Image width={252.5} height={111.6} alt="" src={'/logo-pernambuco.png'} />
       <S.TextContainer>
         <div>Contato:&nbsp;</div>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Placerat in egestas
-        erat imperdiet sed. Diam in arcu cursus euismod quis viverra.{' '}
+        Fone: (87) 3761-8227
       </S.TextContainer>
     </S.Footer>
   );

@@ -35,7 +35,7 @@ export const InputContainer = styled.div`
   flex-direction: column;
 `;
 
-export const PasswordRecovery = styled.a`
+export const PasswordRecovery = styled.button`
   font-weight: 300;
   font-size: 12px;
 `;
@@ -51,5 +51,11 @@ export const ModalContainer = styled(Modal)`
   border-bottom-right-radius: 12px;
   border-bottom-left-radius: 4px;
   height: 90%;
+  overflow: auto;
+`;
+
+export const ModalPassContainer = styled(Modal)`
+  border-radius: 12px;
+  height: 40%;
   overflow: auto;
 `;

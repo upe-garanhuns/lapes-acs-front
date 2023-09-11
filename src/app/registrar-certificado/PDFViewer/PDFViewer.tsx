@@ -39,8 +39,10 @@ const PDFViewer = ({ pdfId }: pdfProps) => {
         <iframe
           src={`data:application/pdf;base64,${pdfData}`}
           title="PDF Viewer"
-          width="100%"
+          width="800px"
           height="500px"
+          style={{ border: 'none', borderRadius: 20 }}
+          allowFullScreen
         ></iframe>
       )}
     </div>

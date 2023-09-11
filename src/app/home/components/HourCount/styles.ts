@@ -1,27 +1,45 @@
 import styled from 'styled-components';
 
+interface TotalBarProps {
+  width: string;
+  color: string;
+  radius: string;
+}
+
+interface colorType {
+  color: string;
+}
+
 export const Component = styled.div`
-  border-radius: 8px;
-  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 4px;
+  align-content: center;
+  flex-wrap: wrap;
+  @media screen and (max-width: 767px) {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 
-  flex-wrap: nowrap;
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+  }
 `;
 
-export const Name = styled.p`
-  font-family: 'Montserrat', sans-serif;
-  font-weight: bold;
-  font-size: 32px;
-  color: #1c3c78;
-`;
+export const Container = styled.div`
+  display: flex;
+  flex-direction: row;
 
-export const Hr = styled.hr`
-  border: 1px solid #1c3c78;
-  margin: 20px 0;
-  color: #1c3c78;
-`;
+  @media screen and (max-width: 767px) {
+    flex-direction: column;
+    align-items: center;
+    gap: 20;
+  }
 
-export const SubComponent = styled.div`
-  text-align: match-parent;
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+  }
 `;
 
 export const MinhasHorasString = styled.span`
@@ -30,127 +48,91 @@ export const MinhasHorasString = styled.span`
 
   font-family: 'Montserrat', sans-serif;
   font-weight: bold;
-  font-size: 25px;
+  font-size: 1.5em;
   white-space: nowrap;
+  @media screen and (max-width: 767px) {
+    font-size: 1em;
+  }
+
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+  }
 `;
 
-export const Container = styled.div`
-  display: flex;
-  flex-wrap: nowrap;
-`;
-
-export const GesBar = styled.p`
+export const Bar = styled.p<colorType>`
   display: inline-block;
   margin-right: 10%;
-  border-bottom: 4px solid;
-  color: #00798c;
+  border-bottom: 4px solid ${(props) => props.color};
+  color: '#000';
   font-family: 'Montserrat', sans-serif;
   font-weight: regular;
   white-space: nowrap;
   font-size: 15px;
   border-radius: 3px 3px 3px 3px;
-`;
+  @media screen and (max-width: 767px) {
+    width: 50%;
+    padding: 0.2em;
+  }
 
-export const ExtBar = styled.p`
-  display: inline-block;
-  margin-right: 10%;
-  border-bottom: 4px solid;
-  color: #ec2026;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: regular;
-  font-size: 15px;
-  white-space: nowrap;
-  border-radius: 3px 3px 3px 3px;
-`;
-
-export const PesBar = styled.p`
-  display: inline-block;
-  margin-right: 10%;
-  border-bottom: 4px solid;
-  color: #d8f793;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: regular;
-  font-size: 15px;
-  white-space: nowrap;
-  border-radius: 3px 3px 3px 3px;
-`;
-
-export const EnsBar = styled.p`
-  display: inline-block;
-  margin-right: 10%;
-  border-bottom: 4px solid;
-  color: #3b0086;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: regular;
-  font-size: 15px;
-  white-space: nowrap;
-  border-radius: 3px 3px 3px 3px;
-`;
-export const TotalHoursDatas = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-export const TotalString = styled.p`
-  margin-left: 40px;
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+  }
 `;
 
 export const TotalBarComponent = styled.div`
   margin: 5px;
-  border: 2px solid #d9d9d9;
-  border-radius: 25px;
+  border-radius: 999px;
   background: #d9d9d9;
+  padding: 0.2em;
+  padding-right: 1.5rem;
+  padding-left: 1.5rem;
+  width: 75vw;
+  @media screen and (max-width: 767px) {
+  }
+
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+  }
 `;
 
-export const TotalBarBorde = styled.p`
-  border: 0px;
-  margin-left: 4%;
-  margin-right: 0%;
-  margin-bottom: 0px;
-  border-top: 25px solid;
-  max-height: 50%;
+export const TotalHoursDatas = styled.div`
   display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
+  @media screen and (max-width: 767px) {
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+  }
+`;
+
+export const TotalString = styled.p`
+  margin-left: 1.2rem;
 `;
 
 export const TotalBarLine = styled.span`
-  margin-left: 75%;
+  margin-right: 1.2rem;
 `;
 
 export const TotalBarBackgroundColor = styled.div`
+  display: flex;
+  flex-direction: row;
   background-color: #ffffff;
   height: 20px;
   border-radius: 10px;
   display: flex;
   margin-bottom: 15px;
-  max-width: 95%;
-  margin-left: 35px;
+  flex-direction: row;
+  justify-content: flex-start;
+  @media screen and (max-width: 767px) {
+  }
+
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+  }
 `;
 
-interface TotalBarProps {
-  width: string;
-}
-
-export const TotalBarGes = styled.div<TotalBarProps>`
-  background-color: #00798c;
+export const TotalBar = styled.div<TotalBarProps>`
+  background-color: ${(props) => props.color};
   width: ${(props) => props.width};
-  border-radius: 10px 0 0 10px;
-`;
-
-export const TotalBarExt = styled.div<TotalBarProps>`
-  background-color: #ec2026;
-  width: ${(props) => props.width};
-  border-radius: 0px 0 0 0px;
-`;
-
-export const TotalBarPes = styled.div<TotalBarProps>`
-  background-color: #d8f793;
-  width: ${(props) => props.width};
-  border-radius: 0px 0 0 0px;
-`;
-
-export const TotalBarEns = styled.div<TotalBarProps>`
-  background-color: #3b0086;
-  width: ${(props) => props.width};
-  border-radius: 0px 10px 10px 0px;
+  border-radius: ${(props) => props.radius};
 `;

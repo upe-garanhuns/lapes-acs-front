@@ -16,7 +16,6 @@ import { checkCPF } from './functions/checkCpf';
 import { checkEmail } from './functions/checkEmail';
 import { checkGrade } from './functions/checkGrade';
 import { checkName } from './functions/checkName';
-import { checkNumber } from './functions/checkNumber';
 import { checkPassWord } from './functions/checkPassword';
 import { checkPhone } from './functions/checkPhone';
 import { checkRegistry } from './functions/checkRegistry';
@@ -107,6 +106,8 @@ export function Register({ close }: ComponentProps) {
     setUserUf,
     userStreet,
     setUserStreet,
+    userComplement,
+    setUserComplement,
     userRegistry,
     setUserRegistry
   } = useSetInput();
@@ -171,10 +172,15 @@ export function Register({ close }: ComponentProps) {
 
   const handleChangeNumber = (e: { target: { value: string } }) => {
     const { value } = e.target;
-    setUserNumber(value);
-    setErrorNumber(checkNumber(parseInt(value)));
-  };
 
+    // Verifique se o valor é composto apenas por números
+    if (/^[0-9]+$/.test(value)) {
+      setUserNumber(value);
+      setErrorNumber(true);
+    } else {
+      setErrorNumber(false);
+    }
+  };
   const handleChangeRegistry = (e: { target: { value: string } }) => {
     const { value } = e.target;
     setUserRegistry(value);
@@ -218,17 +224,23 @@ export function Register({ close }: ComponentProps) {
     setVisibility(!visibility);
   };
 
+  const handleChangeComplement = (e: { target: { value: string } }) => {
+    const { value } = e.target;
+    setUserComplement(value);
+  };
+
   //chamada da api do cep - jamu
   const fetchCep = async (cep: string): Promise<void> => {
-    await fetchWrapper<Endereco>(`api/endereco/${cep}`)
-      .then((data) => {
-        console.log(data);
-        checkCity(data.cidade);
-        checkBlock(data.bairro);
-        checkStreet(data.rua);
-        checkUf(data.uf);
-      })
-      .catch((err) => console.log(err));
+    try {
+      const data = await fetchWrapper<Endereco>(`api/endereco/${cep}`);
+      checkCity(data.cidade);
+      checkBlock(data.bairro);
+      checkStreet(data.rua);
+      checkUf(data.uf);
+    } catch (err) {
+      console.log(err);
+      setErrorCep(false); // Define errorCep como false em caso de erro
+    }
   };
 
   //Funções de check da resposta da api do cep para cada campo - jamu
@@ -278,7 +290,8 @@ export function Register({ close }: ComponentProps) {
     cidade: userCity,
     numero: parseInt(userNumber),
     cursoId: parseInt(userCourse),
-    uf: userUf
+    uf: userUf,
+    complemento: userComplement
   };
 
   //função disparda quando botão cadastrar é acionado - jamu
@@ -307,9 +320,13 @@ export function Register({ close }: ComponentProps) {
       } else {
         warnToast('Preencha todos os campos corretamente para cadastrar!');
       }
-    } catch (error) {
-      errorToast('Houve algum erro ao tentar se cadastrar!');
-      console.log(error);
+    } catch (error: any) {
+      if (error.mensagem === 'Os dados a seguir /email já estão cadastrados!') {
+        warnToast('Já existe um usuário com esse email!');
+      } else {
+        errorToast('Houve algum erro ao tentar se cadastrar!');
+        console.log(error);
+      }
     }
   };
 
@@ -530,6 +547,13 @@ export function Register({ close }: ComponentProps) {
               {!errorNumber && (
                 <S.ErroMessage>*Insira um número valido</S.ErroMessage>
               )}
+            </S.InsideDiv>
+            <S.InsideDiv $col="span 3 / span 2">
+              <S.RegisterInput
+                label="Complemento:"
+                placeholder="Ex: Apartamento 10"
+                onChange={handleChangeComplement}
+              />
             </S.InsideDiv>
           </S.InputDiv>
         </S.Div>

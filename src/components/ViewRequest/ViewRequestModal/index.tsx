@@ -5,7 +5,8 @@ import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 
 import { getRequest } from '../../../services/request';
-import ViewRequest, { ViewRequestProps } from '../ViewRequestContent';
+import ViewRequest from '../ViewRequestContent';
+import { ViewRequestProps } from '../ViewRequestContent/interface/types';
 import * as S from './styles';
 
 import { Eye, XCircle } from '@phosphor-icons/react';
@@ -44,21 +45,24 @@ export default function ViewRequestModal(props: ViewRequestModalProps) {
       router.push('/signin');
     }
   };
+
   const closeModal = () => {
     setIsOpen(false);
   };
+
   const openModal = () => {
     setIsOpen(true);
-
     fetchData().then((data) => {
       if (data !== undefined) {
         setCertificateData(data);
       }
     });
   };
+
   const closeModalArea = () => {
     setIsOpen(false);
   };
+
   return (
     <div>
       <S.OpenRequest onClick={openModal}>

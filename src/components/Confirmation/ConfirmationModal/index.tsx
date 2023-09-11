@@ -32,7 +32,7 @@ export default function ConfirmationModal({
     setIsOpen(false);
   };
   return (
-    <div>
+    <S.Container>
       <S.OpenRequest onClick={openModal}>Enviar Solicitação</S.OpenRequest>
       <S.ModalContainer
         isOpen={isOpen}
@@ -42,6 +42,6 @@ export default function ConfirmationModal({
         children={<ConfirmationPagination requestId={requestId} />}
         closeText={<XCircle size={30} color="#FF0000" />}
       ></S.ModalContainer>
-    </div>
+    </S.Container>
   );
 }

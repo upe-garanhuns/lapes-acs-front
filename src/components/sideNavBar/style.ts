@@ -24,6 +24,7 @@ export const Container = styled.aside<navOpen>`
     ${({ isOpen }) =>
       isOpen &&
       ` box-shadow: 0 25px 50px 12px rgb(0 0 0 / 0.25); 
+        top: 14vh;
     `};
 
   @media screen and (max-width: 767px) {
@@ -81,6 +82,11 @@ export const PerfilIcon = styled.span`
   justify-content: center;
   align-items: center;
   padding: 0.8em;
+  transition: transform 0.3s ease-in-out;
+  cursor: pointer;
+  &:hover {
+    transform: scale(1.1);
+  }
 `;
 
 export const PerfilDivInside = styled.div<navOpen>`
@@ -168,7 +174,7 @@ export const navBarLink = styled(ActiveLink)`
 `;
 
 export const PLink = styled.p`
-  margin: 0;
+  margin: 0.3rem;
 `;
 
 export const LogOutDiv = styled.div`

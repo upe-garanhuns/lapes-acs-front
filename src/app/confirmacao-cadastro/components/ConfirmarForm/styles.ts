@@ -1,11 +1,20 @@
+//import OtpInput from 'react-otp-input';
+
 import styled from 'styled-components';
 
 export const Container = styled.form`
-  height: 84%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   gap: 2rem;
   align-items: center;
+  width: 100%;
+  @media screen and (max-width: 767px) {
+    width: 100%;
+  }
+
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+  }
 `;
 
 export const Cima = styled.div`
@@ -15,8 +24,14 @@ export const Cima = styled.div`
 `;
 
 export const Title = styled.h2`
-  font-size: 22pt;
+  font-size: 2em;
   color: #253451;
+  @media screen and (max-width: 767px) {
+    font-size: 1em;
+  }
+
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+  }
 `;
 
 export const Line = styled.div`
@@ -24,10 +39,21 @@ export const Line = styled.div`
   width: 100%;
   background-color: #000;
   margin: 30px 0 30px 0;
+  @media screen and (max-width: 767px) {
+  }
+
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+  }
 `;
 
 export const Paragraph = styled.p`
   font-size: 15pt;
+  @media screen and (max-width: 767px) {
+    font-size: 1em;
+  }
+
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+  }
 `;
 
 export const ButtonEnviar = styled.button`
@@ -39,17 +65,15 @@ export const ButtonEnviar = styled.button`
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 `;
 
-export const Input = styled.input`
-  max-width: 200px;
+export const OtpInputField = styled.input`
+  width: 40px;
   height: 40px;
-  border-radius: 40px;
-  border: 1px solid #ccc;
-  padding: 20px;
-  background-color: #ebeced;
+  font-size: 30px;
   text-align: center;
-  color: #8e8a8a;
-  font-size: 15pt;
-  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.3);
+  margin: 0 5px;
+  border: 2px solid #ccc;
+  border-radius: 15px;
+  outline: none;
 `;
 
 export const ButtonsContainer = styled.div`
@@ -77,3 +101,8 @@ export const ConfirmButton = styled.button`
   border: none;
   cursor: pointer;
 `;
+
+// export const OtpInputs = styled(OtpInput)`
+//   display: flex;
+//   flex-direction: column;
+// `;
