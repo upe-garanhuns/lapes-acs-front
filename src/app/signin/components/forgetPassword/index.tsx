@@ -11,33 +11,37 @@ interface ForgetPassWordInterface {
 
 export const ForgetPassForm = ({ closeModal }: ForgetPassWordInterface) => {
   const [email, setEmail] = useState<string>('');
-  const [emailError, setEmailError] = useState<boolean>(true);
-  const [messageEmptyError, setMessageEmptyError] = useState<boolean>(false);
+  const [emailError, setEmailError] = useState<boolean>(null);
+  const [messageEmptyError, setMessageEmptyError] = useState<boolean>(null);
 
   const handleChangeEmail = (e: { target: { value: string } }) => {
     const { value } = e.target;
     setEmail(value);
   };
 
-  const submitPassRecovery = async (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    if (email == '') {
+  const verifyData = () => {
+    if (email === '') {
       setMessageEmptyError(true);
       setEmailError(true);
     } else {
       setMessageEmptyError(false);
       setEmailError(checkEmail(email));
     }
-    if (emailError === true && messageEmptyError === false) {
+  };
+
+  const submitPassRecovery = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    verifyData();
+
+    if (emailError === false && messageEmptyError === false) {
       try {
-        await sendRecovey(email).then((res) => {
-          if (res.status === 204) {
-            sucessToast(
-              `Email de verificação enviado com sucesso!, verifique o email ${email}`
-            );
-            closePassModal(e);
-          }
-        });
+        const res = await sendRecovey(email);
+        if (res.status === 204) {
+          sucessToast(
+            `Email de verificação enviado com sucesso!, verifique o email ${email}`
+          );
+          closePassModal(e);
+        }
       } catch (error) {
         console.error(error);
         throw error;
