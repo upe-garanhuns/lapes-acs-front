@@ -173,10 +173,15 @@ export function Register({ close }: ComponentProps) {
 
   const handleChangeNumber = (e: { target: { value: string } }) => {
     const { value } = e.target;
-    setUserNumber(value);
-    setErrorNumber(checkNumber(parseInt(value)));
-  };
 
+    // Verifique se o valor é composto apenas por números
+    if (/^[0-9]+$/.test(value)) {
+      setUserNumber(value);
+      setErrorNumber(true);
+    } else {
+      setErrorNumber(false);
+    }
+  };
   const handleChangeRegistry = (e: { target: { value: string } }) => {
     const { value } = e.target;
     setUserRegistry(value);
@@ -227,15 +232,17 @@ export function Register({ close }: ComponentProps) {
 
   //chamada da api do cep - jamu
   const fetchCep = async (cep: string): Promise<void> => {
-    await fetchWrapper<Endereco>(`api/endereco/${cep}`)
-      .then((data) => {
-        console.log(data);
-        checkCity(data.cidade);
-        checkBlock(data.bairro);
-        checkStreet(data.rua);
-        checkUf(data.uf);
-      })
-      .catch((err) => console.log(err));
+    try {
+      const data = await fetchWrapper<Endereco>(`api/endereco/${cep}`);
+      console.log(data);
+      checkCity(data.cidade);
+      checkBlock(data.bairro);
+      checkStreet(data.rua);
+      checkUf(data.uf);
+    } catch (err) {
+      console.log(err);
+      setErrorCep(false); // Define errorCep como false em caso de erro
+    }
   };
 
   //Funções de check da resposta da api do cep para cada campo - jamu
