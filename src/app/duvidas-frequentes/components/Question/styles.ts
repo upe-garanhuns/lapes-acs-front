@@ -23,7 +23,7 @@ export const Question = styled.div`
 
 export const QuestionTitle = styled.h2`
   color: #000;
-  font-size: 20px;
+  font-size: 1em;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
@@ -32,7 +32,7 @@ export const QuestionTitle = styled.h2`
 
 export const QuestionAnswer = styled.p`
   color: #000;
-  font-size: 20px;
+  font-size: 0.8em;
   font-style: normal;
   font-weight: 400;
   line-height: 24px;
