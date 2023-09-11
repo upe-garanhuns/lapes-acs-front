@@ -4,7 +4,10 @@ import OtpInput from 'react-otp-input';
 
 import { errorToast } from '../../../../functions/errorToast';
 import { sucessToast } from '../../../../functions/sucessToast';
-import { verificarCodigo } from './../../../../services/verification';
+import {
+  sendVerificationEmail,
+  verificarCodigo
+} from './../../../../services/verification';
 import * as S from './styles';
 
 import Cookies from 'js-cookie';
@@ -47,6 +50,20 @@ export default function ConfirmarForm() {
     router.push('/home');
   };
 
+  const reSendEmail = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    try {
+      await sendVerificationEmail(token).then((res) => {
+        if (res.status === 200) {
+          sucessToast('Codigo reinviado novamente');
+        }
+      });
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  };
+
   return (
     <S.Container>
       <S.Cima>
@@ -57,7 +74,13 @@ export default function ConfirmarForm() {
           seu e-mail, caso não tenha recebido, aperte no botão de enviar o
           código novamente.
         </S.Paragraph>
-        <S.ButtonEnviar>Enviar novamente</S.ButtonEnviar>
+        <S.ButtonEnviar
+          onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+            reSendEmail(e);
+          }}
+        >
+          Enviar novamente
+        </S.ButtonEnviar>
       </S.Cima>
       <OtpInput
         value={codigoVerificacao}

@@ -63,7 +63,8 @@ export default function SideNavBar() {
   if (
     pathName === '/signin' ||
     pathName === '/not-found' ||
-    pathName === '/confirmacao-cadastro'
+    pathName === '/confirmacao-cadastro' ||
+    pathName === '/account/*'
   )
     return null;
 

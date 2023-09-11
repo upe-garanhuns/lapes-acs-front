@@ -20,3 +20,13 @@ export const verificarCodigo = async (
   // Se a requisição POST for bem-sucedida, o status de resposta será 200
   return response;
 };
+
+export const sendVerificationEmail = async (token: string) => {
+  const response = await fetchWrapperTest(`api/usuario/verificacao/novo`, {
+    method: 'PATCH',
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  });
+  return response;
+};

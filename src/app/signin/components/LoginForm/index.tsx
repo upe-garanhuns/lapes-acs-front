@@ -8,6 +8,7 @@ import { login } from '../../../../services/signIn';
 import { Login } from '../../../../services/signIn/types';
 import { checkEmail } from '../../functions/checkEmail';
 import { checkPassWord } from '../../functions/checkPassword';
+import { ForgetPassForm } from '../forgetPassword';
 import LoginButton from '../LoginButton';
 import { LoginInput } from '../LoginInput';
 import { Register } from '../Register';
@@ -27,6 +28,7 @@ import Cookies from 'js-cookie';
 export default function LoginForm() {
   const router = useRouter();
   const [OpenRegister, setOpenRegister] = useState(false);
+  const [OpenPass, setOpenPass] = useState(false);
   const { email, setEmail, password, setPassword } = useSetData();
   const {
     isPasswordVisible,
@@ -73,6 +75,15 @@ export default function LoginForm() {
 
   function registerClose() {
     setOpenRegister(false);
+  }
+
+  function passOpen(e: React.MouseEvent<HTMLButtonElement>) {
+    e.preventDefault();
+    setOpenPass(true);
+  }
+
+  function passClose() {
+    setOpenPass(false);
   }
 
   async function handleLogin(ev: React.FormEvent<EventTarget>) {
@@ -144,7 +155,11 @@ export default function LoginForm() {
       <S.ButtonContainer>
         <LoginButton label="Entrar" type="submit" />
         <S.LinkContainer>
-          <S.PasswordRecovery>Esqueceu a senha?</S.PasswordRecovery>
+          <S.PasswordRecovery
+            onClick={(e: React.MouseEvent<HTMLButtonElement>) => passOpen(e)}
+          >
+            Esqueceu a senha?
+          </S.PasswordRecovery>
           <S.SignUp
             onClick={(e: React.MouseEvent<HTMLButtonElement>) =>
               registerOpen(e)
@@ -162,6 +177,14 @@ export default function LoginForm() {
           ></S.ModalContainer>
         </S.LinkContainer>
       </S.ButtonContainer>
+      <S.ModalPassContainer
+        closeModalArea={passClose}
+        isOpen={OpenPass}
+        closeModal={passClose}
+        // eslint-disable-next-line react/no-children-prop
+        children={<ForgetPassForm closeModal={passClose} />}
+        closeText={<XCircle size={32} />}
+      ></S.ModalPassContainer>
     </S.Container>
   );
 }
