@@ -49,7 +49,7 @@ const FilterRequests: React.FC<FilterRequestsProps> = ({
       </S.FilterOption>
       <S.FilterOption
         backgroundColor="#FFA500"
-        onClick={() => handleFilterClick(null)} // Quando "Todos" é clicado limpa o filtro
+        onClick={() => handleFilterClick(null || '')} // Quando "Todos" é clicado limpa o filtro
       >
         Todos
       </S.FilterOption>
