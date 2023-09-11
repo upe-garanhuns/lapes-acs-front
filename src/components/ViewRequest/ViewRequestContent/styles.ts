@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  padding: 20px;
+  padding: 10%;
   padding-top: 0px;
 `;
 export const RequestTitle = styled.h1`
@@ -119,13 +119,12 @@ export const RowAligner = styled.div`
 export const CoordObservation = styled(Status)`
   padding: 10px;
   align-content: flex-start;
-  width: 80vw;
   max-width: 650px;
   height: fit-content;
   min-height: 40px;
   max-height: 100px;
   overflow-y: auto;
-  word-break: break-all;
+  word-break: break-word;
   white-space: pre-wrap;
 `;
 
