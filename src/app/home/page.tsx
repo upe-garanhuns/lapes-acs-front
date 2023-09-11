@@ -93,7 +93,7 @@ export default function Home() {
   const handleFilterClick = async (eixo: string | null) => {
     try {
       if (userInfo) {
-        if (eixo === null) {
+        if (eixo === null || eixo === '') {
           // Se eixo for nulo, limpa o filtro
           setFilteredRequests(null);
         } else {
@@ -105,7 +105,6 @@ export default function Home() {
             eixo
           );
           if (filteredData) {
-            console.log(filteredData);
             setFilteredRequests(filteredData);
           }
         }

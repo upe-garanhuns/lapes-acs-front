@@ -233,7 +233,6 @@ export function Register({ close }: ComponentProps) {
   const fetchCep = async (cep: string): Promise<void> => {
     try {
       const data = await fetchWrapper<Endereco>(`api/endereco/${cep}`);
-      console.log(data);
       checkCity(data.cidade);
       checkBlock(data.bairro);
       checkStreet(data.rua);

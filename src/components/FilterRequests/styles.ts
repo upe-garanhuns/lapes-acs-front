@@ -8,8 +8,7 @@ export const FilterContainer = styled.div`
   border: 1px solid #ddd;
   border-radius: 20px;
   transition: 0.3s;
-  position: absolute;
-  margin-top: 15rem;
+  position: relative;
   box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
 `;
 export const DivisionLine = styled.hr`
