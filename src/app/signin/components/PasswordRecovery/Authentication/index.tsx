@@ -7,6 +7,9 @@ import { sendNewPass } from '../../../../../services/passRecovery';
 import { checkPassWord } from './functions/checkPassword';
 import { checkSamePass } from './functions/checkSamePass';
 import * as S from './styles';
+
+import { Eye, EyeSlash, LockSimple } from '@phosphor-icons/react';
+
 export type AuthenticationProps = {
   authCode: string;
 };
@@ -15,6 +18,8 @@ export function Authentication({ authCode }: AuthenticationProps) {
   const [newPassConfirmation, setNewPassConfirmation] = useState<string>('');
   const [passError, setPassError] = useState<boolean>(true);
   const [samePassError, setSamePassError] = useState<boolean>(true);
+  const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
+
   const router = useRouter();
   const handleCancel = () => {
     router.push('/signin');
@@ -53,6 +58,16 @@ export function Authentication({ authCode }: AuthenticationProps) {
     }
   };
 
+  function handlePasswordVisibility() {
+    setIsPasswordVisible(!isPasswordVisible);
+  }
+
+  const iconEye = isPasswordVisible ? (
+    <Eye size={20} onClick={handlePasswordVisibility} />
+  ) : (
+    <EyeSlash size={20} onClick={handlePasswordVisibility} />
+  );
+
   return (
     <S.Container>
       <S.Title>Recuperação de senha</S.Title>
@@ -63,6 +78,8 @@ export function Authentication({ authCode }: AuthenticationProps) {
           <S.InputRequest
             placeholder="Nova Senha:"
             onChange={handleChangePass}
+            type={!isPasswordVisible ? 'password' : 'text'}
+            endAdornment={iconEye}
           />
           {!passError == false ? (
             <></>
@@ -76,6 +93,8 @@ export function Authentication({ authCode }: AuthenticationProps) {
           <S.InputRequest
             placeholder="Confirme nova senha:"
             onChange={handleChangeConfirmPass}
+            type={!isPasswordVisible ? 'password' : 'text'}
+            endAdornment={<LockSimple size={20} />}
           />
           {!samePassError == false ? (
             <></>

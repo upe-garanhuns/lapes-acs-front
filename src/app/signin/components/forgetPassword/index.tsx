@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import { sucessToast } from '../../../../functions/sucessToast';
+import { warnToast } from '../../../../functions/warnToast';
 import { sendRecovey } from '../../../../services/recovery';
 import { checkEmail } from './functions/checkEmail';
 import * as S from './styles';
@@ -12,29 +13,18 @@ interface ForgetPassWordInterface {
 export const ForgetPassForm = ({ closeModal }: ForgetPassWordInterface) => {
   const [email, setEmail] = useState<string>('');
   const [emailError, setEmailError] = useState<boolean>(false);
-  const [messageEmptyError, setMessageEmptyError] = useState<boolean>(false);
 
   const handleChangeEmail = (e: { target: { value: string } }) => {
     const { value } = e.target;
     setEmail(value);
-  };
-
-  const verifyData = () => {
-    if (email === '') {
-      setMessageEmptyError(true);
-      setEmailError(true);
-    } else {
-      setMessageEmptyError(false);
-      setEmailError(checkEmail(email));
-    }
+    setEmailError(checkEmail(email));
   };
 
   const submitPassRecovery = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    verifyData();
 
-    if (emailError === false && messageEmptyError === false) {
-      try {
+    try {
+      if (!emailError == true && email !== '') {
         const res = await sendRecovey(email);
         if (res.status === 204) {
           sucessToast(
@@ -42,10 +32,12 @@ export const ForgetPassForm = ({ closeModal }: ForgetPassWordInterface) => {
           );
           closePassModal(e);
         }
-      } catch (error) {
-        console.error(error);
-        throw error;
+      } else {
+        warnToast('Preencha corretamente o email!');
       }
+    } catch (error) {
+      console.error(error);
+      throw error;
     }
   };
 
@@ -65,16 +57,13 @@ export const ForgetPassForm = ({ closeModal }: ForgetPassWordInterface) => {
           </S.SubTitle>
         </S.InfoDiv>
         <S.InputDiv>
-          <S.InputRequest placeholder="Email:" onChange={handleChangeEmail} />
-          {!emailError == false ? (
-            <></>
-          ) : (
+          <S.InputRequest
+            placeholder="Email:"
+            type="email"
+            onChange={handleChangeEmail}
+          />
+          {emailError && (
             <S.ErrorMessage>*Digite um email de dominio da upe</S.ErrorMessage>
-          )}
-          {!messageEmptyError == false ? (
-            <S.ErrorMessage>*Campo não pode ser vazio</S.ErrorMessage>
-          ) : (
-            <></>
           )}
         </S.InputDiv>
         {/* <S.ReCAPTCHADiv></S.ReCAPTCHADiv> */}
