@@ -20,7 +20,7 @@ export default function ConfirmarForm() {
   const handleCodigoChange = (otp: string) => {
     setCodigoVerificacao(otp);
   };
-  const token = Cookies.get('token'); // Obtém o código de verificação do cookie "token"
+  const token = Cookies.get('token') || ''; // Obtém o código de verificação do cookie "token"
 
   const handleConfirmarClick = async (
     event: React.MouseEvent<HTMLButtonElement>

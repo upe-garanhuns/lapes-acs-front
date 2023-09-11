@@ -11,8 +11,8 @@ interface ForgetPassWordInterface {
 
 export const ForgetPassForm = ({ closeModal }: ForgetPassWordInterface) => {
   const [email, setEmail] = useState<string>('');
-  const [emailError, setEmailError] = useState<boolean>(null);
-  const [messageEmptyError, setMessageEmptyError] = useState<boolean>(null);
+  const [emailError, setEmailError] = useState<boolean>(false);
+  const [messageEmptyError, setMessageEmptyError] = useState<boolean>(false);
 
   const handleChangeEmail = (e: { target: { value: string } }) => {
     const { value } = e.target;
