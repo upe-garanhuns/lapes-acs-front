@@ -1,8 +1,12 @@
 "use client"
 import React, { useEffect, useState } from 'react';
 import { getUserInformation } from '../../services/user';
+import { useRouter } from 'next/navigation';
 import Cookies from 'js-cookie';
 import * as S from './styles';
+
+const router = useRouter();
+
 
 const UserProfile = ({ }) => {
   const [userInfo, setUserInfo] = useState(null);
@@ -87,7 +91,7 @@ const UserProfile = ({ }) => {
         </S.FormContainerAddress>
         <S.ButtonsContainer>
           <S.SaveButton>Salvar</S.SaveButton>
-          <S.Button>Voltar</S.Button>
+          <S.Button onClick={() => router.push('/home')}>Voltar</S.Button>
         </S.ButtonsContainer>
         </S.Container>
   );
