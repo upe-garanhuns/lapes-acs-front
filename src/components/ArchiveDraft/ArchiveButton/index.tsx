@@ -16,7 +16,6 @@ export function ArchiveButton(props: ArchiveRequestProps) {
   const { id, token, closeModal } = props;
 
   const handleArchive = async () => {
-    console.log(props.type);
     try {
       if (props.type == true) {
         await DontArchived(token, id);
