@@ -5,10 +5,13 @@ import * as S from './styles';
 
 export default function Footer() {
   const pathName = usePathname();
+
+  const recoverPasswordRegex = /\/account\/reset\/(.+)/;
   if (
     pathName === '/signin' ||
     pathName === '/confirmacao-cadastro' ||
-    pathName === '/account/reset/'
+    pathName === '/account/reset/' ||
+    recoverPasswordRegex.test(pathName)
   )
     return null;
   return (

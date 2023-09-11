@@ -60,11 +60,13 @@ export default function SideNavBar() {
     };
   }, [token, pathName]);
 
+  const recoverPasswordRegex = /\/account\/reset\/(.+)/;
+
   if (
     pathName === '/signin' ||
     pathName === '/not-found' ||
     pathName === '/confirmacao-cadastro' ||
-    pathName === '/account/*'
+    recoverPasswordRegex.test(pathName)
   )
     return null;
 
