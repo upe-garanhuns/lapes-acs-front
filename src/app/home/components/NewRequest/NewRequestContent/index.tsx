@@ -10,7 +10,7 @@ import { getRequest } from '../../../../../services/request';
 import { Certificate } from '../../../../../services/request/types';
 import * as S from './style';
 
-import { XCircle, FileText, FilePlus } from '@phosphor-icons/react';
+import { XCircle, FilePlus } from '@phosphor-icons/react';
 
 type ComponentProps = {
   cancelRequest: () => void;
@@ -142,14 +142,6 @@ export const NewRequest = ({
   return (
     <S.Container onDragOver={handleDragOver} onDrop={handleDrop}>
       <S.Title>Etapa 1 de 3 - Anexar certificados</S.Title>
-      <S.Subtitle>
-        <FileText
-          size={24}
-          color="#1C3C78
-            "
-        />
-        Barema
-      </S.Subtitle>
       <S.FileInputContainer>
         <S.FileInputLabel htmlFor="selecao-arquivo">
           Arraste aqui o(s) arquivo(s) desejado(s)
