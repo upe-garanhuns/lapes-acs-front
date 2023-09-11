@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  padding: 10%;
+  padding: 8%;
   padding-top: 0px;
 `;
 export const RequestTitle = styled.h1`
