@@ -6,16 +6,16 @@ import { Authentication } from '../../../signin/components/PasswordRecovery/Auth
 import * as S from './styles';
 
 interface tokenProps {
-  params: { passWordToken: string };
+  params: { passToken: string };
 }
 
 export default function SignIn({ params }: tokenProps) {
-  const token = params.passWordToken;
+  const token = params.passToken || '';
   return (
     <S.Container>
       <S.GridArea>
         <LoginInformation />
-        <Authentication authCode={''} id={0} />
+        <Authentication authCode={token} />
       </S.GridArea>
       <LoginFooter />
     </S.Container>

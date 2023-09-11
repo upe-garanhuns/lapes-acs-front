@@ -1,4 +1,4 @@
-import { LoginInput } from '../../LoginInput/index';
+import { Input } from '../../../../../components/Input';
 
 import styled from 'styled-components';
 
@@ -10,11 +10,10 @@ export const Container = styled.div`
   padding: 1rem;
 `;
 export const Title = styled.h1`
-    font-size: 30px;
-    color: #253555;
-    font-weight: 700;
-    margin-left: 20px;
-  }
+  font-size: 30px;
+  color: #253555;
+  font-weight: 700;
+  margin-left: 20px;
 `;
 
 export const Message = styled.h2`
@@ -67,6 +66,7 @@ export const Centered = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
+  gap: 10px;
 `;
 export const ErrorSpan = styled.span`
   color: red;
@@ -82,4 +82,28 @@ export const Row = styled.div`
 export const Column = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
+`;
+
+export const InputDiv = styled.div`
+  width: 50%;
+`;
+
+export const InputRequest = styled(Input)`
+  padding: 1em;
+  border-radius: 12px;
+  border: 1px solid #d9d9d9;
+  color: #1c3c78;
+  &:focus {
+    border: 1px solid #1c3c78;
+  }
+  &::placeholder {
+    color: #d9d9d9;
+  }
+`;
+
+export const ErrorMessage = styled.p`
+  color: red;
+  font-size: 0.8em;
+  padding: 0.5em;
 `;

@@ -1,7 +1,6 @@
 import { fetchWrapperTest } from '../apiTest';
-import { NewPassInterface } from './type';
 
-export const sendNewPass = async ({ token, password }: NewPassInterface) => {
+export const sendNewPass = async (token: string, password: object) => {
   const response = await fetchWrapperTest(`api/usuario/conta/alterar-senha`, {
     method: 'POST',
     body: JSON.stringify(password),
