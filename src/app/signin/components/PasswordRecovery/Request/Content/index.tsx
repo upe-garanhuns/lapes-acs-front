@@ -10,7 +10,6 @@ export default function PasswordRequestContent() {
   const router = useRouter();
   const [email, setEmail] = useState('');
   const [isValidEmail, setIsValidEmail] = useState<boolean>(true);
-  const [warning, setWarning] = useState<boolean>(false);
 
   const validateEmail = (email: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

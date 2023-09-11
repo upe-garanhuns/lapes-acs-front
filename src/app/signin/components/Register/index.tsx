@@ -16,7 +16,6 @@ import { checkCPF } from './functions/checkCpf';
 import { checkEmail } from './functions/checkEmail';
 import { checkGrade } from './functions/checkGrade';
 import { checkName } from './functions/checkName';
-import { checkNumber } from './functions/checkNumber';
 import { checkPassWord } from './functions/checkPassword';
 import { checkPhone } from './functions/checkPhone';
 import { checkRegistry } from './functions/checkRegistry';
@@ -322,8 +321,8 @@ export function Register({ close }: ComponentProps) {
       } else {
         warnToast('Preencha todos os campos corretamente para cadastrar!');
       }
-    } catch (error) {
-      if (error.mensagem == 'Os dados a seguir /email já estão cadastrados!') {
+    } catch (error: any) {
+      if (error.mensagem === 'Os dados a seguir /email já estão cadastrados!') {
         warnToast('Já existe um usuário com esse email!');
       } else {
         errorToast('Houve algum erro ao tentar se cadastrar!');
