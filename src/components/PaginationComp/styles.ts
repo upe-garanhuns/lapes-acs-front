@@ -14,6 +14,8 @@ export const PaginationDiv = styled.div`
   gap: 8px;
   justify-content: flex-end;
   align-items: center;
+  width: 105px;
+  max-width: 105px;
 `;
 
 export const CurrentPageNumber = styled.div``;

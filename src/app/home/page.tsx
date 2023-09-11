@@ -279,7 +279,7 @@ export default function Home() {
                     )}
                   </S.Div>
 
-                  <S.Div>
+                  <S.PaginationDiv>
                     {requestsPag && requestsPag.totalPaginas > 1 ? (
                       <>
                         <PaginationComp
@@ -292,7 +292,7 @@ export default function Home() {
                     ) : (
                       <S.Div></S.Div>
                     )}
-                  </S.Div>
+                  </S.PaginationDiv>
 
                   <S.NewRequestModal
                     closeModalArea={closeNewRequestModal}

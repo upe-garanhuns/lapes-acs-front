@@ -197,7 +197,6 @@ export const NewRequestModal = styled(Modal)`
 export const PaginationDiv = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 8px;
   justify-content: flex-end;
   align-items: center;
 `;
