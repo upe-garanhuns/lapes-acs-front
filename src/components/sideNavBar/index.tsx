@@ -64,7 +64,7 @@ export default function SideNavBar() {
     pathName === '/signin' ||
     pathName === '/not-found' ||
     pathName === '/confirmacao-cadastro' ||
-    pathName === '/account/reset/*'
+    pathName === '/account/*'
   )
     return null;
 
