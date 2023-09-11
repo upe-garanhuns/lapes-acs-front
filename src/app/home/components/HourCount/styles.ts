@@ -16,6 +16,8 @@ export const Component = styled.div`
   justify-content: center;
   align-items: flex-start;
   padding: 4px;
+  align-content: center;
+  flex-wrap: wrap;
   @media screen and (max-width: 767px) {
     flex-direction: column;
     justify-content: center;
