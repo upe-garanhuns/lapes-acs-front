@@ -27,7 +27,7 @@ export const Body = styled.div`
 
 export const Title = styled.h1`
   color: rgba(0, 0, 0, 0.8);
-  font-size: 60px;
+  font-size: 1.5em;
   font-style: normal;
   font-weight: 700;
   align-self: start;

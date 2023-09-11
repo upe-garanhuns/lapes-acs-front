@@ -23,24 +23,36 @@ export default function FrequentQuestions() {
 
   const questions = [
     {
-      question: 'Pergunta Pergunta Pergunta Pergunta Pergunta?',
+      question: 'Como funciona a conexão com o SIG@UPE?',
       answer:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit,sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Egestas erat imperdiet sed euismod. Amet venenatis urna cursus eget nunc scelerisque viverra mauris. Donec adipiscing tristique risus nec feugiat in. In mollis nunc sed id semper risus in. Purus in mollis nunc sed id semper risus.'
+        'Atualmente o Sistema não tem uma conexão direta com o SIG@UPE, ele funciona como um facilitador entre as pessoas envolvidas na avaliação das solicitações, e ao final do processo os detalhes da solicitação são enviados para a escolaridade, que atualiza o SIG@UPE'
     },
     {
-      question: 'Pergunta Pergunta Pergunta Pergunta Pergunta?',
+      question:
+        'Por que minha contagem de horas não está em dia com o SIG@UPE?',
       answer:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit,sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Egestas erat imperdiet sed euismod. Amet venenatis urna cursus eget nunc scelerisque viverra mauris. Donec adipiscing tristique risus nec feugiat in. In mollis nunc sed id semper risus in. Purus in mollis nunc sed id semper risus.'
+        'A escolaridade demora um tempo para registrar as solicitações no sistema, e não tem um prazo definido, depende da demanda de trabalho. Por não ter conexão com o SIG@UPE, solicitações feitas por fora do sistema não são contabilizadas nele.'
     },
     {
-      question: 'Pergunta Pergunta Pergunta Pergunta Pergunta?',
+      question: 'O que é o barema?',
       answer:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit,sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Egestas erat imperdiet sed euismod. Amet venenatis urna cursus eget nunc scelerisque viverra mauris. Donec adipiscing tristique risus nec feugiat in. In mollis nunc sed id semper risus in. Purus in mollis nunc sed id semper risus.'
+        'O barema é um arquivo fornecido pela universidade, com informações sobre eixos de horas extracurriculares que servirá de guia para preenchimento de dados sobre o certificado.'
     },
     {
-      question: 'Pergunta Pergunta Pergunta Pergunta Pergunta?',
+      question: 'Como vou saber o status da solicitação?',
       answer:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit,sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Egestas erat imperdiet sed euismod. Amet venenatis urna cursus eget nunc scelerisque viverra mauris. Donec adipiscing tristique risus nec feugiat in. In mollis nunc sed id semper risus in. Purus in mollis nunc sed id semper risus.'
+        '	Automaticamente, quando o status da solicitação alterar para qualquer um dos outros possíveis status, será enviado um e-mail ao endereço cadastrado com a atualização de seu requerimento.'
+    },
+    {
+      question:
+        'Não tenho minhas informações completas do meu certificado, o que fazer?',
+      answer:
+        '	A requisição do certificado pode ser guardada como rascunho caso tenha informações incompletas do arquivo ou não tenha certeza de algum dado, e queira conferir para depois preencher.'
+    },
+    {
+      question: 'O que acontece se eu arquivar uma solicitação?',
+      answer:
+        '	Essa funcionalidade existe para guardar as solicitações que já chegaram ao status final, na intenção de deixar a tela principal menos poluída, isso não muda o status da solicitação. Você pode encontrar as solicitações arquivadas clicando no ícone de arquivo na barra lateral.'
     }
   ];
 
@@ -73,9 +85,6 @@ export default function FrequentQuestions() {
           <S.Line />
         </S.TitleDiv>
         <S.Title>Dúvidas Frequentes</S.Title>
-        <S.InputRequestDiv>
-          <S.RegisterInput placeholder="Pesquisar" />
-        </S.InputRequestDiv>
         <S.Div>
           {currentQuestions.map((question, index) => (
             <Question
