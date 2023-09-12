@@ -61,7 +61,7 @@ export const UlDiv = styled.div<navOpen>`
 `;
 
 export const BlankDiv = styled.div`
-  height: 20vh;
+  height: 10vh;
 `;
 
 export const PerfilDiv = styled.div`

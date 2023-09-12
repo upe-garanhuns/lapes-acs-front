@@ -36,8 +36,8 @@ export default function SideNavBar() {
   }, []);
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const [userInfo, setUserInfo] = useState<UserInformation>();
-  const [isEditProfileModalOpen, setIsEditProfileModalOpen] = useState<boolean>(false);
-
+  // const [isEditProfileModalOpen, setIsEditProfileModalOpen] =
+  //   useState<boolean>(false);
 
   const token = Cookies.get('token') || '';
 
@@ -80,13 +80,13 @@ export default function SideNavBar() {
     }
   };
 
-  const handleOpenEditProfileModal = () => {
-    setIsEditProfileModalOpen(true);
-  };
+  // const handleOpenEditProfileModal = () => {
+  //   setIsEditProfileModalOpen(true);
+  // };
 
-  const handleCloseEditProfileModal = () => {
-    setIsEditProfileModalOpen(false);
-  };
+  // const handleCloseEditProfileModal = () => {
+  //   setIsEditProfileModalOpen(false);
+  // };
 
   function handleLogOut() {
     Cookies.remove('token');
@@ -175,12 +175,26 @@ export default function SideNavBar() {
                 </S.navBarLink>
               </S.LiInsideDiv>
             )}
-            <S.LiInsideDiv isOpen={isOpen} isMobile={isMobile}>
-              <S.navBarLink href="/perfil-usuario">
-                <User size={24} />
-                <S.PLink>Editar Perfil</S.PLink>
-              </S.navBarLink>
-            </S.LiInsideDiv>
+          </S.LiItems>
+          <S.LiItems>
+            {!isOpen ? (
+              <S.LiInsideDiv isOpen={isOpen} isMobile={isMobile}>
+                <>
+                  {!isMobile && (
+                    <S.navBarLink href="/perfil-usuario">
+                      <User size={24} />
+                    </S.navBarLink>
+                  )}
+                </>
+              </S.LiInsideDiv>
+            ) : (
+              <S.LiInsideDiv isOpen={isOpen} isMobile={isMobile}>
+                <S.navBarLink href="/perfil-usuario">
+                  <User size={24} />
+                  <S.PLink>Editar Perfil</S.PLink>
+                </S.navBarLink>
+              </S.LiInsideDiv>
+            )}
           </S.LiItems>
           <S.LiItems>
             {!isOpen ? (
