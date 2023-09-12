@@ -11,7 +11,7 @@ export const Container = styled.div`
 export const FormContainer = styled.div`
   margin-bottom: 20px;
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
   height: 235px;
   padding: 15px 0px 15px 0px;
 `;
@@ -19,7 +19,7 @@ export const FormContainer = styled.div`
 export const FormContainerAddress = styled.div`
   margin-bottom: 20px;
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
   height: 235px;
   padding: 15px 0px 15px 0px;
 `;
