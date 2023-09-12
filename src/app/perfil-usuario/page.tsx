@@ -3,13 +3,14 @@ import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 
 import { getUserInformation } from '../../services/user';
+import { UserInformation } from '../../services/user/types';
 import * as S from './styles';
 
 import Cookies from 'js-cookie';
 
 const UserProfile = () => {
   const router = useRouter();
-  const [userInfo, setUserInfo] = useState(null);
+  const [userInfo, setUserInfo] = useState<UserInformation>();
   const token = Cookies.get('token') || '';
 
   useEffect(() => {

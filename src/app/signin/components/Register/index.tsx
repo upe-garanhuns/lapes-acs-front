@@ -320,9 +320,12 @@ export function Register({ close }: ComponentProps) {
       } else {
         warnToast('Preencha todos os campos corretamente para cadastrar!');
       }
-    } catch (error: any) {
-      if (error.mensagem === 'Os dados a seguir /email já estão cadastrados!') {
-        warnToast('Já existe um usuário com esse email!');
+    } catch (error) {
+      if (
+        (error as { mensagem: string }).mensagem ===
+        'Os dados a seguir /email já estão cadastrados!'
+      ) {
+        warnToast(`${(error as { mensagem: string }).mensagem}`);
       } else {
         errorToast('Houve algum erro ao tentar se cadastrar!');
         console.log(error);
